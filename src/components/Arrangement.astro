@@ -1,0 +1,167 @@
+---
+/* A concept's arrangement: the same twelve voices, weighted.
+   2 = leading, 1 = active, 0 = supporting. */
+interface Props {
+  weights: number[];
+  leads: string[];
+}
+const { weights, leads } = Astro.props;
+
+const voices = [
+  "Digital ads",
+  "Website",
+  "Phone",
+  "Text",
+  "Email",
+  "Google",
+  "Reviews",
+  "Reservations",
+  "Social",
+  "Private events",
+  "Loyalty",
+  "Guest history",
+];
+---
+
+<figure class="arr">
+  <div class="arr__bars" role="img" aria-label={`Leading voices for this concept: ${leads.join(", ")}. All twelve channels stay connected.`}>
+    {
+      weights.map((w, i) => (
+        <span class={`arr__bar arr__bar--${w}`} style={`--i:${i}`}>
+          <span class="arr__tip" />
+          <span class="arr__name">{voices[i]}</span>
+        </span>
+      ))
+    }
+  </div>
+  <figcaption class="arr__caption">
+    <span class="arr__caplabel">Leading</span>
+    <span class="arr__leads">{leads.join(" · ")}</span>
+  </figcaption>
+</figure>
+
+<style>
+  .arr {
+    margin: 0;
+  }
+
+  .arr__bars {
+    display: flex;
+    align-items: stretch;
+    gap: clamp(0.35rem, 1.1vw, 0.7rem);
+    height: 10.5rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
+    position: relative;
+  }
+
+  .arr__bar {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 2px 2px 0 0;
+  }
+
+  /* the bar body */
+  .arr__bar::before {
+    content: "";
+    display: block;
+    width: 100%;
+    border-radius: 2px 2px 0 0;
+    background: color-mix(in oklab, var(--violet-600) 55%, transparent);
+    height: var(--h, 22%);
+  }
+
+  .arr__bar--0 {
+    --h: 20%;
+  }
+
+  .arr__bar--1 {
+    --h: 46%;
+  }
+
+  .arr__bar--1::before {
+    background: color-mix(in oklab, var(--violet-400) 70%, transparent);
+  }
+
+  .arr__bar--2 {
+    --h: 100%;
+  }
+
+  .arr__bar--2::before {
+    background: var(--mint-400);
+  }
+
+  /* the notehead sitting on a leading voice */
+  .arr__tip {
+    display: none;
+  }
+
+  .arr__bar--2 .arr__tip {
+    display: block;
+    position: absolute;
+    top: -0.75rem;
+    left: 50%;
+    translate: -50% 0;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--mint-300);
+  }
+
+  /* vertical channel names below the axis */
+  .arr__name {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    transform-origin: left top;
+    transform: rotate(90deg);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    color: var(--text-low);
+  }
+
+  .arr__bar--2 .arr__name {
+    color: var(--mint-300);
+    font-weight: 600;
+  }
+
+  .arr__caption {
+    margin-top: 6.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.9rem;
+  }
+
+  .arr__caplabel {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .arr__leads {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+    color: var(--text-hi);
+  }
+
+  @media (max-width: 34rem) {
+    .arr__bars {
+      height: 7.5rem;
+    }
+    .arr__name {
+      font-size: 0.72rem;
+    }
+    .arr__caption {
+      margin-top: 5.5rem;
+    }
+  }
+</style>

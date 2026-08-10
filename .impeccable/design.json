@@ -1,0 +1,637 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-10T21:12:45.870508Z",
+  "title": "Design System: Tempo Chorus",
+  "extensions": {
+    "colorMeta": {
+      "ink-900": {
+        "role": "neutral",
+        "displayName": "Score Ground",
+        "canonical": "#0b0917",
+        "tonalRamp": [
+          "#050409",
+          "#0b0917",
+          "#12102a",
+          "#191634",
+          "#221e42",
+          "#2e2955",
+          "#4a4383",
+          "#8a84c0"
+        ]
+      },
+      "ink-800": {
+        "role": "neutral",
+        "displayName": "Second Stave",
+        "canonical": "#12102a",
+        "tonalRamp": [
+          "#07060f",
+          "#0b0917",
+          "#12102a",
+          "#191634",
+          "#221e42",
+          "#312b5e",
+          "#524a95",
+          "#9a93cf"
+        ]
+      },
+      "ink-700": {
+        "role": "neutral",
+        "displayName": "Stage",
+        "canonical": "#191634",
+        "tonalRamp": [
+          "#0a0817",
+          "#0f0d22",
+          "#141131",
+          "#191634",
+          "#221e42",
+          "#332d63",
+          "#5a52a0",
+          "#a49dd6"
+        ]
+      },
+      "ink-600": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "#221e42",
+        "tonalRamp": [
+          "#0c0a1b",
+          "#131028",
+          "#1a1735",
+          "#221e42",
+          "#2e2955",
+          "#443d7a",
+          "#6e66b2",
+          "#b3ade0"
+        ]
+      },
+      "violet-400": {
+        "role": "primary",
+        "displayName": "Logo Violet",
+        "canonical": "#b19cff",
+        "note": "Lifted verbatim from public/brand/chorus-logo.svg (.st2). Brand fact, not a design choice.",
+        "tonalRamp": [
+          "#1c1240",
+          "#2b1f5c",
+          "#3f2e88",
+          "#5c3fc4",
+          "#7d5ae8",
+          "#9a7cf2",
+          "#b19cff",
+          "#e0d7ff"
+        ]
+      },
+      "violet-500": {
+        "role": "primary",
+        "displayName": "Score Violet",
+        "canonical": "#9a7cf2",
+        "note": "The working shade; almost always consumed inside color-mix(in oklab, …, transparent) at 16-85%.",
+        "tonalRamp": [
+          "#180f36",
+          "#241750",
+          "#372476",
+          "#4f37ab",
+          "#6d4fdb",
+          "#8a68ea",
+          "#9a7cf2",
+          "#d5c7ff"
+        ]
+      },
+      "violet-600": {
+        "role": "primary",
+        "displayName": "Deep Violet",
+        "canonical": "#7d5ae8",
+        "tonalRamp": [
+          "#130c2c",
+          "#1e1244",
+          "#2d1c68",
+          "#412896",
+          "#5c3ec9",
+          "#7d5ae8",
+          "#a288f3",
+          "#dcd0ff"
+        ]
+      },
+      "violet-700": {
+        "role": "primary",
+        "displayName": "Shadow Violet",
+        "canonical": "#5c3fc4",
+        "note": "One use only: the 26% radial wash lighting the top-right of a product-mock stage.",
+        "tonalRamp": [
+          "#0f0824",
+          "#180d38",
+          "#241456",
+          "#341e7d",
+          "#472aa6",
+          "#5c3fc4",
+          "#8468dd",
+          "#c9b9f7"
+        ]
+      },
+      "mint-400": {
+        "role": "secondary",
+        "displayName": "Logo Green",
+        "canonical": "#30c18b",
+        "note": "Lifted verbatim from public/brand/chorus-logo.svg (.st1). Brand fact, not a design choice. Appears on BOTH the hero h1 accent and the primary CTA — settled, user-confirmed.",
+        "tonalRamp": [
+          "#04231a",
+          "#073a2a",
+          "#0c543e",
+          "#137155",
+          "#1c8f6c",
+          "#229a6d",
+          "#30c18b",
+          "#a8ead0"
+        ]
+      },
+      "mint-300": {
+        "role": "secondary",
+        "displayName": "Bright Green",
+        "canonical": "#62d9a9",
+        "note": "The lit variant: resolved TEXT on dark, and button hover. mint-400 is the surface, mint-300 is the type.",
+        "tonalRamp": [
+          "#062a1f",
+          "#0a4332",
+          "#106046",
+          "#188060",
+          "#22a179",
+          "#3fc294",
+          "#62d9a9",
+          "#c3f2df"
+        ]
+      },
+      "amber-400": {
+        "role": "tertiary",
+        "displayName": "Alarm Amber",
+        "canonical": "#f5b544",
+        "note": "The unresolved. Vignette markers, the after-hours pulse, the strike-through, chaos-field strays. Never on an action.",
+        "tonalRamp": [
+          "#2c1d03",
+          "#493105",
+          "#6b4808",
+          "#94640c",
+          "#bd8213",
+          "#e09425",
+          "#f5b544",
+          "#fde3b3"
+        ]
+      },
+      "text-hi": {
+        "role": "neutral",
+        "displayName": "Text High",
+        "canonical": "#f4f2fa",
+        "tonalRamp": [
+          "#1b1830",
+          "#2d2850",
+          "#443d75",
+          "#5f579b",
+          "#847dbc",
+          "#aaa4d5",
+          "#d0cceb",
+          "#f4f2fa"
+        ]
+      },
+      "text-mid": {
+        "role": "neutral",
+        "displayName": "Text Mid",
+        "canonical": "#b8b0d8",
+        "tonalRamp": [
+          "#16122b",
+          "#241d47",
+          "#362c69",
+          "#4d4090",
+          "#6a5cb3",
+          "#8d81c9",
+          "#b8b0d8",
+          "#e5e1f2"
+        ]
+      },
+      "text-low": {
+        "role": "neutral",
+        "displayName": "Text Low",
+        "canonical": "#8e86b0",
+        "tonalRamp": [
+          "#131024",
+          "#1f1b3c",
+          "#2e2857",
+          "#413a78",
+          "#5a5199",
+          "#746bb0",
+          "#8e86b0",
+          "#ccc7de"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The h1 on every page. Bricolage Grotesque 700, tracking -0.045em. The together-hero runs a smaller variant because it shares the viewport with the hero field."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "The .eyeless-h2 utility — the h2 that opens a section beat."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "A features voice name, a concept name, the wide vignette trigger."
+      },
+      "statement": {
+        "displayName": "Statement",
+        "purpose": "Body-length prose promoted into the display face at 600 — the chain coda, the journey thread, a part__line, the Why-Chorus lead. A system move, not an accident."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "The .lede utility under a section headline. text-mid, max 46ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All standing prose. Archivo 400 at line-height 1.6, held to a 44-68ch measure."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase micro-label, 0.09em tracking, text-low. Legal only as simulated product chrome inside a mock, or as a page-level jump label — never above a heading."
+      },
+      "marker": {
+        "displayName": "Marker",
+        "purpose": "The amber vignette timestamp in Archivo italic. The only italic in the system."
+      },
+      "subhead": {
+        "displayName": "Subhead",
+        "purpose": "Page-closing titles and the demo title — one step under Headline."
+      },
+      "subtitle": {
+        "displayName": "Subtitle",
+        "purpose": "A vignette trigger, the Why-Chorus lead, a part--turn line."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "0.875rem support text — footer prose, meta lines, notes, legal."
+      },
+      "ui": {
+        "displayName": "UI",
+        "purpose": "1rem — form labels, list items, buttons, in-product copy."
+      },
+      "nav": {
+        "displayName": "Nav",
+        "purpose": "1.05rem display face at 600 — masthead and footer navigation."
+      },
+      "panelTitle": {
+        "displayName": "Panel title",
+        "purpose": "1.35rem — a guest name or timestamp inside a simulated product panel."
+      },
+      "statValue": {
+        "displayName": "Stat value",
+        "purpose": "2.6rem — the single figure in a mock stat tile."
+      }
+    },
+    "shadows": [
+      {
+        "name": "action-glow",
+        "value": "0 6px 22px -8px color-mix(in oklab, var(--mint-400) 60%, transparent)",
+        "purpose": "Under the primary green button at rest. The only colored shadow in the system."
+      },
+      {
+        "name": "action-glow-hover",
+        "value": "0 12px 30px -10px color-mix(in oklab, var(--mint-400) 70%, transparent)",
+        "purpose": "The same glow opened on hover, paired with translateY(-2px)."
+      },
+      {
+        "name": "surface-seat",
+        "value": "0 22px 44px -26px rgb(0 0 0 / 0.9)",
+        "purpose": "Seats a depicted product panel or stat tile on a mock stage."
+      },
+      {
+        "name": "surface-seat-shallow",
+        "value": "0 18px 38px -24px rgb(0 0 0 / 0.9)",
+        "purpose": "Flow cards in the ad-to-table mock."
+      },
+      {
+        "name": "chip-seat",
+        "value": "0 10px 22px -14px rgb(0 0 0 / 0.9)",
+        "purpose": "Channel chips floating over a stage."
+      },
+      {
+        "name": "form-lift",
+        "value": "0 28px 60px -34px rgb(0 0 0 / 0.85)",
+        "purpose": "The booking card. The deepest seat on the site."
+      },
+      {
+        "name": "halo-ring",
+        "value": "0 0 0 5px color-mix(in oklab, var(--mint-400) 20%, transparent)",
+        "purpose": "A state ring, not an elevation. Green on the final journey node; the amber twin rings the after-hours pulse."
+      },
+      {
+        "name": "focus-ring",
+        "value": "0 0 0 3px color-mix(in oklab, var(--mint-400) 22%, transparent)",
+        "purpose": "Form-field focus, paired with a solid mint-400 border. Elsewhere focus is outline: 3px solid var(--mint-400) with 3px offset."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The only easing token in the system. Every transition and every keyframe uses it."
+      },
+      {
+        "name": "transition-color",
+        "value": "0.2s",
+        "purpose": "Color and border-color state changes on links and fields."
+      },
+      {
+        "name": "transition-surface",
+        "value": "0.25s",
+        "purpose": "Background and transform on buttons."
+      },
+      {
+        "name": "transition-shadow",
+        "value": "0.3s",
+        "purpose": "Shadow opening on button hover."
+      },
+      {
+        "name": "hero-settle",
+        "value": "1.15s, delay calc(160ms + var(--i) * 85ms)",
+        "purpose": "The one authored moment: twelve hero voices arrive scattered/rotated/blurred and stagger into alignment."
+      },
+      {
+        "name": "hero-brace-in",
+        "value": "0.85s at 1.15s, scale 0.4 1 to 1 1 from left",
+        "purpose": "The brace draws across once the voices have landed."
+      },
+      {
+        "name": "hero-link-in",
+        "value": "0.5s at 1.4s",
+        "purpose": "The green link line to the Tempo node fades in."
+      },
+      {
+        "name": "hero-node-in",
+        "value": "0.75s at 1.5s, scale 0.5 to 1",
+        "purpose": "The Tempo mark lands, closing the sequence."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "arrangement",
+        "value": "34rem (max)",
+        "note": "Arrangement chart shortens and its rotated labels drop to 0.62rem."
+      },
+      {
+        "name": "inbox-mock",
+        "value": "40rem (max)",
+        "note": "Inbox mock stacks, connector wires hide, thread rows reflow."
+      },
+      {
+        "name": "masthead",
+        "value": "46rem (max)",
+        "note": "Masthead becomes two rows. No hamburger, no drawer."
+      },
+      {
+        "name": "score-portrait",
+        "value": "56rem (max)",
+        "note": "ConvergenceScore swaps landscape SVG for portrait SVG."
+      },
+      {
+        "name": "features-voice",
+        "value": "60rem",
+        "note": "Above: the voice-name column goes sticky at top 6.5rem. Below: the grid collapses."
+      },
+      {
+        "name": "primary-hinge",
+        "value": "62rem",
+        "note": "The main hinge — hero, Why-Chorus, concept and demo grids collapse; vignette off-beat indents apply only above it."
+      },
+      {
+        "name": "mocks",
+        "value": "66rem (max)",
+        "note": "Product-mock grid goes single column; flow cards stack."
+      },
+      {
+        "name": "journey",
+        "value": "68rem (max)",
+        "note": "Guest journey rotates from a 9-column horizontal timeline to a vertical rail."
+      }
+    ],
+    "notationPrimitives": [
+      {
+        "name": "stave-rule",
+        "value": ".stave-rule — 1px, violet-500 at 55%, fading to transparent at 12% and 88%",
+        "purpose": "A full-width rule that reads as a line of staff, not a divider."
+      },
+      {
+        "name": "bar-line",
+        "value": "2px × clamp(2rem, 4vw, 3.25rem) solid violet-500, absolutely at left 0 / top -1px",
+        "purpose": "Opens every repeated block (.part, .concept). Turns green and taller on a features turn row."
+      },
+      {
+        "name": "notehead",
+        "value": ".notehead — 0.7em × 0.55em, border-radius 50%, rotate(-22deg), currentColor",
+        "purpose": "The only list marker on the site. Green for a resolution, violet for a capability."
+      },
+      {
+        "name": "brace",
+        "value": "border-only box, border-left 0, border-radius 0 14px 14px 0, violet-400 at 70%",
+        "purpose": "The hero accolade clamping twelve voices into one system."
+      },
+      {
+        "name": "spine",
+        "value": "2px vertical gradient rail, violet-600 at 85%, transparent at both ends",
+        "purpose": "Runs the length of the vignette chain; the off-beat indents hang off it."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single action colour on the site — brand green on ink, seated by a green glow.",
+      "html": "<a class=\"ds-btn\" href=\"#demo\">Book a demo</a>",
+      "css": ".ds-btn { --btn-bg: var(--mint-400, #30c18b); --btn-fg: var(--ink-900, #0b0917); display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.95rem 1.6rem; background: var(--btn-bg); color: var(--btn-fg); font-family: var(--font-display, 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif); font-weight: 700; font-size: 1.02rem; letter-spacing: -0.015em; text-decoration: none; border: 0; border-radius: 2px; cursor: pointer; transition: background 0.25s cubic-bezier(0.16,1,0.3,1), transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s cubic-bezier(0.16,1,0.3,1); box-shadow: 0 6px 22px -8px color-mix(in oklab, var(--mint-400, #30c18b) 60%, transparent); } .ds-btn:hover { --btn-bg: var(--mint-300, #62d9a9); transform: translateY(-2px); box-shadow: 0 12px 30px -10px color-mix(in oklab, var(--mint-400, #30c18b) 70%, transparent); } .ds-btn:focus-visible { outline: 3px solid var(--mint-400, #30c18b); outline-offset: 3px; } .ds-btn:active { transform: translateY(0); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action: a violet inset ring that goes solid and fills on hover. Defined in global.css, currently unused on the shipped pages.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#what\">First — what is this?</a>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.95rem 1.6rem; background: transparent; color: var(--text-hi, #f4f2fa); font-family: var(--font-display, 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif); font-weight: 700; font-size: 1.02rem; letter-spacing: -0.015em; text-decoration: none; border: 0; border-radius: 2px; cursor: pointer; box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--violet-400, #b19cff) 45%, transparent); transition: background 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s cubic-bezier(0.16,1,0.3,1); } .ds-btn-ghost:hover { background: color-mix(in oklab, var(--violet-600, #7d5ae8) 22%, transparent); box-shadow: inset 0 0 0 1px var(--violet-400, #b19cff); } .ds-btn-ghost:focus-visible { outline: 3px solid var(--mint-400, #30c18b); outline-offset: 3px; }"
+    },
+    {
+      "name": "Quiet Link",
+      "kind": "custom",
+      "refersTo": "button-ghost",
+      "description": "The tertiary action — display face in violet over a soft rule that solidifies on hover. Used for 'See it working' and the jump lists.",
+      "html": "<a class=\"ds-link-quiet\" href=\"#mocks\">See it working</a>",
+      "css": ".ds-link-quiet { font-family: var(--font-display, 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif); font-weight: 600; font-size: 1rem; color: var(--violet-400, #b19cff); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--violet-400, #b19cff) 45%, transparent); padding-bottom: 2px; transition: color 0.2s cubic-bezier(0.16,1,0.3,1), border-color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-link-quiet:hover { color: var(--text-hi, #f4f2fa); border-bottom-color: var(--text-hi, #f4f2fa); } .ds-link-quiet:focus-visible { outline: 3px solid var(--mint-400, #30c18b); outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Fields recede rather than lift — ink-900 ground inside an ink-700 card, with a green focus ring replacing the native outline.",
+      "html": "<label class=\"ds-field\"><span>Restaurant</span><input type=\"text\" name=\"company_name\" autocomplete=\"organization\" /></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 0.45rem; font-family: var(--font-body, Archivo, ui-sans-serif, system-ui, sans-serif); } .ds-field span { font-size: 0.88rem; font-weight: 600; letter-spacing: 0.02em; color: var(--text-mid, #b8b0d8); } .ds-field input { font: inherit; font-size: 1rem; color: var(--text-hi, #f4f2fa); background: var(--ink-900, #0b0917); border: 1px solid color-mix(in oklab, var(--violet-500, #9a7cf2) 32%, transparent); border-radius: 3px; padding: 0.7rem 0.85rem; transition: border-color 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-field input:hover { border-color: color-mix(in oklab, var(--violet-400, #b19cff) 60%, transparent); } .ds-field input:focus { outline: none; border-color: var(--mint-400, #30c18b); box-shadow: 0 0 0 3px color-mix(in oklab, var(--mint-400, #30c18b) 22%, transparent); }"
+    },
+    {
+      "name": "Masthead Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Sticky blurred bar; links carry a 2px underline that goes violet on hover and brand green on the current page. Below 46rem it becomes two rows rather than a hidden menu.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Primary\"><a href=\"/\" aria-current=\"page\">Overview</a><a href=\"/features\">What it does</a><a href=\"/concepts\">Who it's for</a><a class=\"ds-nav-cta\" href=\"/#demo\">Book a demo</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: clamp(1rem, 2.4vw, 2rem); font-family: var(--font-display, 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif); font-weight: 600; font-size: 1.05rem; background: color-mix(in oklab, var(--ink-900, #0b0917) 88%, transparent); backdrop-filter: blur(14px); border-bottom: 1px solid color-mix(in oklab, var(--violet-500, #9a7cf2) 22%, transparent); padding: 0.85rem 1rem; } .ds-nav a { text-decoration: none; color: var(--text-mid, #b8b0d8); padding-block: 0.3rem; border-bottom: 2px solid transparent; transition: color 0.2s cubic-bezier(0.16,1,0.3,1), border-color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-nav a:hover { color: var(--text-hi, #f4f2fa); border-bottom-color: var(--violet-400, #b19cff); } .ds-nav a[aria-current=\"page\"] { color: var(--text-hi, #f4f2fa); border-bottom-color: var(--mint-400, #30c18b); } .ds-nav a:focus-visible { outline: 3px solid var(--mint-400, #30c18b); outline-offset: 3px; } .ds-nav-cta { margin-left: auto; padding: 0.6rem 1.15rem; background: var(--mint-400, #30c18b); color: var(--ink-900, #0b0917); font-weight: 700; border-bottom: 0; border-radius: 2px; box-shadow: 0 6px 22px -8px color-mix(in oklab, var(--mint-400, #30c18b) 60%, transparent); } .ds-nav-cta:hover { background: var(--mint-300, #62d9a9); color: var(--ink-900, #0b0917); border-bottom-color: transparent; }"
+    },
+    {
+      "name": "Channel Chip",
+      "kind": "chip",
+      "refersTo": "chip-channel",
+      "description": "Names a channel entering a guest record. Static label, no selected state — chips here are not filters.",
+      "html": "<span class=\"ds-chip\">Instagram</span>",
+      "css": ".ds-chip { display: inline-block; background: var(--ink-600, #221e42); border: 1px solid color-mix(in oklab, var(--violet-500, #9a7cf2) 40%, transparent); border-radius: 4px; padding: 0.5rem 0.8rem; font-family: var(--font-display, 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif); font-weight: 600; font-size: 0.86rem; color: var(--text-hi, #f4f2fa); white-space: nowrap; box-shadow: 0 10px 22px -14px rgb(0 0 0 / 0.9); }"
+    },
+    {
+      "name": "Mock Stage",
+      "kind": "card",
+      "refersTo": "card-stage",
+      "description": "The lit frame a product mockup floats in: ink-700 with a violet radial wash from the top right, a violet hairline border, 6px corners.",
+      "html": "<div class=\"ds-stage\"><p>Any authored product mock sits here.</p></div>",
+      "css": ".ds-stage { position: relative; padding: clamp(1.5rem, 3.5vw, 2.5rem); border-radius: 6px; background: radial-gradient(120% 130% at 78% 12%, color-mix(in oklab, var(--violet-700, #5c3fc4) 26%, transparent), transparent 62%), var(--ink-700, #191634); border: 1px solid color-mix(in oklab, var(--violet-500, #9a7cf2) 22%, transparent); overflow: hidden; color: var(--text-mid, #b8b0d8); font-family: var(--font-body, Archivo, ui-sans-serif, system-ui, sans-serif); }"
+    },
+    {
+      "name": "Product Panel",
+      "kind": "card",
+      "refersTo": "card-panel",
+      "description": "The depicted product surface itself — ink-600, violet hairline, a headed block seated by a deep downward shadow. Resolved rows go mint-300.",
+      "html": "<div class=\"ds-panel\"><div class=\"ds-panel-head\"><p class=\"ds-panel-label\">One guest record</p><p class=\"ds-panel-name\">Sarah Chen</p><p class=\"ds-panel-meta\">Since March · 6 visits · usually table 9</p></div><ul class=\"ds-thread\"><li><span class=\"ds-src\">Text</span><p>“Any chance of a table for 4 Friday?”</p></li><li class=\"is-ours\"><span class=\"ds-src\">Chorus</span><p>Friday 7:30 confirmed. Noted GF for the kitchen.</p></li></ul></div>",
+      "css": ".ds-panel { background: var(--ink-600, #221e42); border: 1px solid color-mix(in oklab, var(--violet-500, #9a7cf2) 34%, transparent); border-radius: 5px; box-shadow: 0 22px 44px -26px rgb(0 0 0 / 0.9); font-family: var(--font-body, Archivo, ui-sans-serif, system-ui, sans-serif); } .ds-panel-head { padding: 1.1rem 1.25rem; border-bottom: 1px solid color-mix(in oklab, var(--violet-500, #9a7cf2) 24%, transparent); } .ds-panel-label { margin: 0; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text-low, #8e86b0); } .ds-panel-name { margin: 0.35rem 0 0; font-family: var(--font-display, 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif); font-size: 1.35rem; font-weight: 700; letter-spacing: -0.03em; color: var(--text-hi, #f4f2fa); } .ds-panel-meta { margin: 0.3rem 0 0; font-size: 0.86rem; color: var(--text-mid, #b8b0d8); } .ds-thread { list-style: none; margin: 0; padding: 0.35rem 0 0.5rem; } .ds-thread li { display: grid; grid-template-columns: 5.4rem minmax(0, 1fr); align-items: baseline; gap: 0.6rem; padding: 0.7rem 1.25rem; } .ds-thread p { margin: 0; font-size: 0.95rem; line-height: 1.45; color: var(--text-hi, #f4f2fa); } .ds-src { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--violet-400, #b19cff); } .ds-thread .is-ours .ds-src, .ds-thread .is-ours p { color: var(--mint-300, #62d9a9); }"
+    },
+    {
+      "name": "Notehead List",
+      "kind": "custom",
+      "refersTo": "card-panel",
+      "description": "The only list form in the system: a rotated elliptical notehead instead of a bullet, green when the line reports a resolution, violet when it reports a capability.",
+      "html": "<ul class=\"ds-notelist\"><li><span class=\"ds-notehead ds-notehead--green\"></span><span>Confirmation texted — 11:48 PM</span></li><li><span class=\"ds-notehead\"></span><span>Logs every call against the guest it came from</span></li></ul>",
+      "css": ".ds-notelist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.85rem; max-width: 58ch; font-family: var(--font-body, Archivo, ui-sans-serif, system-ui, sans-serif); font-size: 1rem; line-height: 1.5; color: var(--text-hi, #f4f2fa); } .ds-notelist li { display: flex; align-items: baseline; gap: 0.85rem; } .ds-notehead { width: 0.7em; height: 0.55em; border-radius: 50%; background: currentColor; transform: rotate(-22deg); flex: none; margin-top: 0.55em; color: var(--violet-400, #b19cff); } .ds-notehead--green { color: var(--mint-400, #30c18b); }"
+    },
+    {
+      "name": "Bar-Line Block",
+      "kind": "custom",
+      "refersTo": "card-panel",
+      "description": "The repeated-block wrapper used by every features voice and every concept: a violet hairline across the top, a 2px violet bar line opening it, and the caption sitting BELOW its heading.",
+      "html": "<article class=\"ds-bar\"><h2 class=\"ds-bar-name\">The phone</h2><p class=\"ds-bar-caption\">Where a no-show costs real money</p><p class=\"ds-bar-body\">Calls that come in after close, during service, or while both lines are tied up get answered instead of missed.</p></article>",
+      "css": ".ds-bar { position: relative; padding-block: clamp(2.75rem, 6vw, 4.5rem); border-top: 1px solid color-mix(in oklab, var(--violet-500, #9a7cf2) 24%, transparent); font-family: var(--font-body, Archivo, ui-sans-serif, system-ui, sans-serif); } .ds-bar::before { content: \"\"; position: absolute; left: 0; top: -1px; width: 2px; height: clamp(2rem, 4vw, 3.25rem); background: var(--violet-500, #9a7cf2); } .ds-bar-name { margin: 0; font-family: var(--font-display, 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif); font-weight: 700; font-size: clamp(1.6rem, 1rem + 2.2vw, 2.75rem); line-height: 1.02; letter-spacing: -0.038em; color: var(--text-hi, #f4f2fa); } .ds-bar-caption { margin: 0.7rem 0 0; font-family: var(--font-display, 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif); font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem); font-weight: 600; letter-spacing: -0.025em; color: var(--violet-400, #b19cff); } .ds-bar-body { margin: 1.35rem 0 0; max-width: 58ch; color: var(--text-mid, #b8b0d8); line-height: 1.62; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Night Score",
+    "overview": "The whole system is a sheet of music read in a dark room. The ground is score paper at night — a ladder of near-black navies (#0b0917 up to #221e42) that never lightens into a page. Onto that ground the interface draws the marks a score is made of: hairline stave rules, 2px bar lines opening each block, elliptical noteheads instead of bullets, and one literal brace in the hero that clamps twelve separate voices into a single system. Nothing here is a generic SaaS surface with a musical skin applied; the notation IS the component vocabulary.\n\nColor carries the argument. Violet is the score itself — the rules, the braces, the bar lines, the structure that lets separate parts be read together. Brand green marks what Chorus resolves: the leading voice, the answered call, the confirmed booking, the action the operator should take. Amber marks the unresolved. An operator can read the state of any composition on this site by color alone, without reading a word.\n\nDensity is editorial, not dashboard. Sections are separated by generous vertical rhythm, measures are held short (44-68ch), and the display face is allowed to run genuinely large at the top of each beat. The site refuses two specific things by construction: the feature-icon grid and the claim-without-proof hero. It also refuses photography entirely.",
+    "keyCharacteristics": [
+      "Night score-paper ground: a four-step navy ink ladder, no light mode, no white surfaces.",
+      "Notation as component language: stave rules, bar lines, noteheads, braces, a chain spine.",
+      "Violet structures, green resolves, amber marks what is still open.",
+      "Bricolage Grotesque display over Archivo text; no third face, no icon font, no glyph icons.",
+      "All imagery is authored SVG/CSS. No photography anywhere.",
+      "Exactly one authored motion moment on the entire site."
+    ],
+    "rules": [
+      {
+        "name": "The Brand-Derived Palette Rule",
+        "body": "--violet-400 (#b19cff) and --mint-400 (#30c18b) are not design choices — they are lifted verbatim from the real Tempo Chorus logo at public/brand/chorus-logo.svg, where they exist as .st2 and .st1. They are brand facts and are not freely changeable. Every other violet and green in the system is a derived shade of those two; if the brand asset changes, the ramps change with it, and never the other way around.",
+        "section": "colors"
+      },
+      {
+        "name": "The Resolution Rule",
+        "body": "Violet is the system, green is what the system resolved, amber is what is still open. A color is never chosen for variety. Before adding an accent, name which of those three states it reports.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Green Rule",
+        "body": "Brand green appears on BOTH the hero h1 accent (\"All together now.\") and the primary CTA. This is settled and user-confirmed, not drift, and it is the one deliberate exception to keeping an action color unique to actions. Do not \"fix\" it by desaturating the headline accent or moving the CTA to violet.",
+        "section": "colors"
+      },
+      {
+        "name": "The Hairline Mix Rule",
+        "body": "Structural lines are never a flat token. They are color-mix(in oklab, var(--violet-500) N%, transparent) where N is 16-34% for dividers and borders, 55-85% for lines that must be seen as marks. This is what keeps a dark page from turning into a grid of visible boxes.",
+        "section": "colors"
+      },
+      {
+        "name": "The Caption-Below Rule",
+        "body": "No eyebrow, kicker or uppercase label ever sits above a heading. The subordinate line always lands below its heading as a caption — the vignette marker below its trigger, the concept kicker below its name. This is deliberate and load-bearing; do not \"restore\" the label-above-headline pattern.",
+        "section": "typography"
+      },
+      {
+        "name": "The Optical Tracking Rule",
+        "body": "Tracking tightens as size grows: -0.025em for statement copy, -0.03em for section headings, -0.038 to -0.045em for titles and display, -0.05em at the largest. Base heading tracking is -0.03em in global.css; anything set larger than a section heading must tighten further.",
+        "section": "typography"
+      },
+      {
+        "name": "The Two-Face Rule",
+        "body": "Bricolage for anything that carries emphasis (headings, buttons, nav, chips, statements, channel names, big figures); Archivo for anything that is read as prose. No third family, no monospace, no icon font.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Hidden-Menu Rule",
+        "body": "Below 46rem the masthead becomes two rows — mark and CTA on row one, the full nav as a horizontally scrollable row beneath. There is no hamburger, no drawer, no disclosure. All three pages stay reachable on a phone in one tap.",
+        "section": "layout"
+      },
+      {
+        "name": "The Held-Measure Rule",
+        "body": "Prose never fills its column. Every text block declares a ch measure: 44ch (hero sub), 46ch (lede, demo sub), 48-60ch (body), 54ch/68ch (vignette narrow/wide), 26ch (a promoted part__line on a turn row). If a new block has no max-width in ch, it is unfinished.",
+        "section": "layout"
+      },
+      {
+        "name": "The Shadow-As-Seat Rule",
+        "body": "All shadows are large-blur, large-negative-spread and offset straight down (0 Ypx Bpx -Spx). They seat an object on a surface; they never outline it. A hard, tight or offset-sideways shadow does not belong in this world.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Two-Shadow Ceiling Rule",
+        "body": "A shadow is legal only on (a) the green primary action, or (b) an element that is depicting product UI inside a mock stage. If neither is true, use the ink ladder and a violet hairline instead.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Notehead Rule",
+        "body": "There are no bullet glyphs, no check marks, no icon set. A list item is introduced by a .notehead or by nothing. If a new list needs a marker, it uses .notehead at the color that reports its state.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Hairline-Or-Bar Rule",
+        "body": "A separating line is 1px and violet-mixed into near-invisibility. A line that opens something is 2px, solid violet (or solid green if the thing it opens is a resolution). There is no third line weight.",
+        "section": "shapes"
+      },
+      {
+        "name": "The One Authored Moment Rule",
+        "body": "The site has exactly one authored motion moment: the TogetherField hero settle. Twelve voices arrive scattered, rotated and blurred, stagger into alignment (1.15s each, 160ms + i × 85ms), then the brace draws in from its left edge, the green link fades, and the Tempo node lands. Nothing else on the site animates on scroll — a site-wide scroll-reveal existed and was deliberately removed. Do not reintroduce a global reveal; if a new moment is genuinely needed, it replaces this one rather than joining it.",
+        "section": "components"
+      },
+      {
+        "name": "The Authored Image Rule",
+        "body": "All imagery is SVG or CSS drawn by hand. No photography of any kind: no real Tempo Chorus photography exists, and stock food photography is precisely the anti-reference's failure mode — it would misrepresent a specific property for a category product. A standing constraint, not a temporary state.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do take violet and green from the logo. --violet-400 (#b19cff) and --mint-400 (#30c18b) are brand facts read out of public/brand/chorus-logo.svg. Derive new shades from them; do not re-pick them by eye.",
+      "Do keep green on both the hero headline accent and the primary CTA. It is a settled, user-confirmed decision.",
+      "Do author every image. All imagery on this site is SVG or CSS drawn by hand — the hero field, the mocks, the arrangement charts, the journey rail, the Tempo mark.",
+      "Do open a repeated block with a 2px violet bar line and separate blocks with 1px violet-mixed hairlines.",
+      "Do use .notehead as the only list marker, colored green for a resolution and violet for a capability.",
+      "Do give every prose block an explicit ch measure (44-68ch).",
+      "Do make two-column grids unequal (0.72fr / 1.28fr, 1.15fr / 0.85fr, 0.92fr / 1.08fr) and collapse them at 62rem unless the component has its own documented hinge.",
+      "Do put the subordinate line below its heading, as a caption.",
+      "Do ship every animation with a prefers-reduced-motion resting state and a no-JS resting state.",
+      "Do keep the full nav visible on phones as a second masthead row.",
+      "Do replace the authored demonstration data before this is presented as evidence — the guest names (Sarah Chen), timestamps, thread copy and the \"47 calls answered\" figure in ProductMocks.astro, plus the placeholder booking form, which awaits the real GoHighLevel calendar embed. The footer line \"All guest moments shown on this site are illustrative\" is the current disclosure and must stay until real material lands."
+    ],
+    "donts": [
+      "Don't add photography of any kind. No real Tempo Chorus photography exists, and stock food photography is precisely the anti-reference's failure mode — it would misrepresent a specific property for a category product. This is a standing constraint, not a temporary state.",
+      "Don't add a global scroll-reveal or a second competing motion sequence. One authored moment, not a global reveal.",
+      "Don't put an eyebrow, kicker or uppercase label above a heading anywhere on a page.",
+      "Don't introduce a light theme, a white surface, or a fifth ink step. The ladder is ink-900 / 800 / 700 / 600.",
+      "Don't use amber on an action, or green on anything that is not resolved, complete or the primary path.",
+      "Don't add icons — no icon font, no glyph set, no third-party icon package. The Tempo mark and the notation primitives are the entire pictorial vocabulary.",
+      "Don't add a shadow to anything that is not the green CTA or a depicted product surface inside a mock stage.",
+      "Don't round corners past 6px. The 14px on the hero brace is an accolade shape, not a radius precedent.",
+      "Don't add a third type family, a monospace, or an italic outside the amber vignette marker.",
+      "Don't build a feature-icon grid or a claim-without-proof hero. Both are the explicit refusals this world was built against.",
+      "Don't treat the unused tokens in global.css (--ink-500, --violet-900, --mint-500, --amber-500, --paper, --measure) as sanctioned roles."
+    ]
+  }
+}

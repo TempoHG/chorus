@@ -1,0 +1,259 @@
+---
+import "../styles/global.css";
+import Wordmark from "../components/Wordmark.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  active?: "home" | "features" | "concepts";
+}
+const { title, description, active } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/brand/thg-icon.svg" />
+    <link rel="alternate icon" type="image/png" href="/brand/favicon.png" />
+    <link rel="apple-touch-icon" href="/brand/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <!--
+      THESIS: A restaurant's guest channels drawn as a choral score, many voices braced
+      into one system reading the same measures. Refuses the SaaS feature-icon grid and
+      the "all-in-one platform" claim-without-proof hero.
+      OWN-WORLD: Night score-paper navy ground; violet stave rules, braces and bar lines as
+      the component language; brand green marks what Chorus resolves — the leading voice,
+      the answered moment, the primary action; amber marks the unresolved. Bricolage
+      Grotesque display over Archivo text.
+      STORY: The operator learns in one image that twelve scattered channels become one
+      system, is told plainly what it is not, accumulates belief through concrete guest
+      moments and product surfaces, then books a demo.
+      FIRST VIEWPORT: Headline left over a right-hand field of twelve channel voices that
+      arrive scattered and settle into one braced system joined to the Tempo mark; green
+      action inline beneath the sub.
+      FORM: Vignette-Chain Spine, index 1 of 7, seed key a75a316e.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <div class="shell masthead__inner">
+        <a class="masthead__mark" href="/"><Wordmark height={38} /></a>
+        <nav class="masthead__nav" aria-label="Primary">
+          <a href="/" aria-current={active === "home" ? "page" : undefined}>Overview</a>
+          <a href="/features" aria-current={active === "features" ? "page" : undefined}>What it does</a>
+          <a href="/concepts" aria-current={active === "concepts" ? "page" : undefined}>Who it's for</a>
+          <a class="btn masthead__cta" href="/#demo">Book a demo</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer__inner">
+        <div class="footer__brand">
+          <Wordmark height={34} />
+          <p>
+            A Tempo Hospitality Group product. Built for the people who actually
+            run restaurants.
+          </p>
+        </div>
+        <nav class="footer__nav" aria-label="Footer">
+          <a href="/">Overview</a>
+          <a href="/features">What it does</a>
+          <a href="/concepts">Who it's for</a>
+          <a href="/#demo">Book a demo</a>
+        </nav>
+      </div>
+      <div class="shell footer__base">
+        <p>&copy; {new Date().getFullYear()} Tempo Hospitality Group.</p>
+        <p>All guest moments shown on this site are illustrative.</p>
+      </div>
+    </footer>
+
+  </body>
+</html>
+
+<style>
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--mint-400);
+    color: var(--ink-900);
+    padding: 0.75rem 1.25rem;
+    font-weight: 700;
+    z-index: 100;
+  }
+  .skip:focus {
+    left: 1rem;
+    top: 1rem;
+  }
+
+  .masthead {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in oklab, var(--ink-900) 88%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
+  }
+
+  .masthead__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 0.85rem;
+  }
+
+  .masthead__mark {
+    text-decoration: none;
+    display: inline-flex;
+  }
+
+  .masthead__nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2.4vw, 2rem);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .masthead__nav a {
+    text-decoration: none;
+    color: var(--text-mid);
+    padding-block: 0.3rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+  }
+
+  .masthead__nav a:hover {
+    color: var(--text-hi);
+    border-bottom-color: var(--violet-400);
+  }
+
+  .masthead__nav a[aria-current="page"] {
+    color: var(--text-hi);
+    border-bottom-color: var(--mint-400);
+  }
+
+  .masthead__nav a.masthead__cta {
+    padding: 0.6rem 1.15rem;
+    color: var(--ink-900);
+    border-bottom: 0;
+  }
+
+  .masthead__nav a.masthead__cta:hover {
+    color: var(--ink-900);
+  }
+
+  /* Phones get the whole site, not a hidden menu: the bar becomes two rows. */
+  @media (max-width: 46rem) {
+    .masthead__inner {
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      padding-block: 0.7rem 0;
+    }
+
+    .masthead__nav {
+      order: 3;
+      width: 100%;
+      gap: 1.35rem;
+      border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
+      padding-block: 0.15rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .masthead__nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .masthead__nav a:not(.masthead__cta) {
+      white-space: nowrap;
+      padding-block: 0.55rem;
+    }
+
+    .masthead__nav a.masthead__cta {
+      order: -1;
+      position: absolute;
+      top: 0.7rem;
+      right: var(--gutter);
+      padding: 0.5rem 0.95rem;
+    }
+
+    .masthead__inner {
+      position: relative;
+    }
+  }
+
+  .footer {
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
+    background: var(--ink-800);
+    padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
+    margin-top: clamp(4rem, 9vw, 7rem);
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem 4rem;
+    align-items: flex-start;
+  }
+
+  .footer__brand {
+    flex: 1 1 22rem;
+  }
+
+  .footer__brand p {
+    margin-top: 1.1rem;
+    color: var(--text-mid);
+    max-width: 34ch;
+    font-size: 0.875rem;
+  }
+
+  .footer__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .footer__nav a {
+    color: var(--text-mid);
+    text-decoration: none;
+  }
+
+  .footer__nav a:hover {
+    color: var(--mint-400);
+  }
+
+  .footer__base {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 16%, transparent);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    justify-content: space-between;
+    color: var(--text-low);
+    font-size: 0.875rem;
+  }
+</style>

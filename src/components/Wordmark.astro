@@ -1,0 +1,24 @@
+---
+interface Props {
+  height?: number;
+  class?: string;
+}
+const { height = 40, class: className = "" } = Astro.props;
+---
+
+<img
+  class={`wordmark ${className}`}
+  src="/brand/chorus-logo.svg"
+  alt="Tempo Chorus"
+  width={Math.round((height * 65.18) / 19.81)}
+  height={height}
+  style={`height:${height}px`}
+  decoding="async"
+/>
+
+<style>
+  .wordmark {
+    display: block;
+    width: auto;
+  }
+</style>

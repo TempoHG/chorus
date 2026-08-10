@@ -1,0 +1,1006 @@
+---
+import Base from "../layouts/Base.astro";
+import ChaosField from "../components/ChaosField.astro";
+import TogetherField from "../components/TogetherField.astro";
+import ProductMocks from "../components/ProductMocks.astro";
+
+// Hero variant. "together" opens on the voices arriving into one system;
+// "chaos" opens on the fragmentation, unresolved. Switch here to compare.
+const HERO: "together" | "chaos" = "together";
+
+const vignettes = [
+  {
+    marker: "Two miles away · Tuesday",
+    trigger: "Someone who has never heard of you is deciding where to eat Friday.",
+    response:
+      "Tempo Chorus puts you in front of them, and the moment they click, they stop being an ad click and start being a guest it knows how to follow up with.",
+    weight: "normal",
+  },
+  {
+    marker: "11:47 PM · Tuesday",
+    trigger: "The phone rings twenty minutes after you locked the door.",
+    response:
+      "Tempo Chorus picks up, answers the question about Saturday, holds a table for six, and texts the confirmation before they've put the phone down.",
+    weight: "wide",
+  },
+  {
+    marker: "9:12 AM · Sunday",
+    trigger: "Someone messages your Facebook page asking if you do gluten-free.",
+    response:
+      "Tempo Chorus answers in the same minute, in your words, and drops the conversation into the same place as every call and text.",
+    weight: "normal",
+  },
+  {
+    marker: "Table 14 · 9:40 PM",
+    trigger: "Four people just had the best meal they've had all month.",
+    response:
+      "The next morning Tempo Chorus thanks them and asks for the review — while it's still the best meal they've had all month.",
+    weight: "normal",
+  },
+  {
+    marker: "Last visit · 11 March",
+    trigger: "A regular quietly stopped being a regular. Nobody noticed.",
+    response:
+      "Tempo Chorus noticed. It sends the kind of invitation that sounds like it came from you, because you wrote it once and it has been waiting.",
+    weight: "wide",
+  },
+  {
+    marker: "Inquiry · 40 people, December",
+    trigger: "A private event lead lands while you're on the line.",
+    response:
+      "Tempo Chorus captures it, replies immediately, and keeps politely following up until a human on your side picks it up.",
+    weight: "normal",
+  },
+  {
+    marker: "Friday · 7:00 PM booking",
+    trigger: "A party of eight is about to not show up.",
+    response:
+      "Tempo Chorus reminds them the day before and again that afternoon, and tells you the moment they can't make it — while the table can still be resold.",
+    weight: "normal",
+  },
+];
+
+const journey = [
+  { step: "Sees your ad", note: "Tuesday" },
+  { step: "Reads your site", note: "Website" },
+  { step: "Books a table", note: "Reservation" },
+  { step: "Eats. Loves it.", note: "The visit" },
+  { step: "Gets thanked", note: "Next morning" },
+  { step: "Leaves a review", note: "Day two" },
+  { step: "Hears from you on their birthday", note: "Month four" },
+  { step: "Books the Christmas party", note: "Month nine" },
+  { step: "Is a regular", note: "Ongoing" },
+];
+---
+
+<Base
+  title="Tempo Chorus — every part of your restaurant, finally in time"
+  description="Tempo Chorus connects every way your restaurant talks to guests — phone, text, email, website, reviews, social, reservations and private events — into one system. Book a demo."
+  active="home"
+>
+  {
+    HERO === "together" ? (
+      <section class="hero hero--together">
+        <div class="shell hero__grid">
+          <div class="hero__say">
+            <h1 class="hero__title">
+              Every guest interaction.
+              <span class="hero__accent">All together now.</span>
+            </h1>
+            <p class="hero__sub">
+              <strong>Tempo Chorus is one system for everything your restaurant
+              says to guests.</strong> Your ads, website, phone, texts, email,
+              reviews, reservations and private events — brought into a single
+              coordinated experience, instead of twelve places to look.
+            </p>
+            <div class="hero__actions">
+              <a class="btn" href="#demo">Book a demo</a>
+              <a class="hero__link" href="#mocks">See it working</a>
+            </div>
+          </div>
+          <div class="hero__show">
+            <TogetherField />
+          </div>
+        </div>
+        <div class="hero__floor" />
+      </section>
+    ) : (
+      <section class="hero">
+        <ChaosField />
+        <div class="hero__veil" />
+        <div class="shell hero__inner">
+          <h1 class="hero__title">
+            Software doesn't
+            <br /> grow restaurants.
+            <br />
+            <span class="hero__accent">Systems do.</span>
+          </h1>
+          <p class="hero__sub">
+            Right now your website, your phone, your inbox, your reviews and your
+            reservations don't talk to each other. Tempo Chorus is what happens
+            when they do.
+          </p>
+          <div class="hero__actions">
+            <a class="btn" href="#demo">Book a demo</a>
+            <a class="hero__link" href="#what">First — what is this?</a>
+          </div>
+        </div>
+        <div class="hero__floor" />
+      </section>
+    )
+  }
+
+  <section class="what" id="what">
+    <div class="shell">
+      <h2 class="eyeless-h2 what__head">So what exactly<br /> is Tempo Chorus?</h2>
+
+      <ul class="nots">
+        <li>It is not a website.</li>
+        <li>It is not your POS.</li>
+        <li>It is not a loyalty app.</li>
+      </ul>
+
+      <div class="what__say">
+        <p class="what__body">
+          Tempo Chorus connects <strong>every way your restaurant communicates
+          with guests</strong> into one system. Instead of five apps, five
+          logins, five databases and five places to look, there is one — and
+          every part of it knows what the others just did.
+        </p>
+        <p class="what__body what__body--quiet">
+          Your guest doesn't experience twelve channels. They experience you.
+          This is the software that finally agrees with them.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chain" aria-labelledby="chain-title">
+    <div class="shell">
+      <h2 class="eyeless-h2 chain__title" id="chain-title">
+        Here is what that<br /> actually means.
+      </h2>
+      <p class="lede chain__lede">
+        Not features. Nine hours on a Tuesday.
+      </p>
+    </div>
+
+    <div class="shell chain__list">
+      <div class="chain__spine" aria-hidden="true"></div>
+      {
+        vignettes.map((v, i) => (
+          <article class={`vignette vignette--${v.weight}`}>
+            <h3 class="vignette__trigger">{v.trigger}</h3>
+            <p class="vignette__marker">{v.marker}</p>
+            <div class="vignette__rule" aria-hidden="true"></div>
+            <p class="vignette__response">
+              <span class="notehead" aria-hidden="true" />
+              <span>{v.response}</span>
+            </p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="shell chain__coda">
+      <p>
+        None of those is a big moment. That is exactly the point — they are the
+        small ones, and they are the ones that get dropped.
+      </p>
+    </div>
+  </section>
+
+  <ProductMocks />
+
+  <section class="why" aria-labelledby="why-title">
+    <div class="shell why__inner">
+      <h2 class="why__title" id="why-title">
+        <span class="why__stave" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </span>
+        <span class="why__titletext">Why "Chorus"?</span>
+      </h2>
+      <div class="why__text">
+        <p class="why__lead">
+          Because a chorus is not one singer. It is a lot of voices, and none of
+          them is asked to stop being itself.
+        </p>
+        <p>
+          They just agree on the key, the tempo and the sheet of music. And what
+          comes out is stronger, clearer and more memorable than any one of them
+          could manage alone.
+        </p>
+        <p>
+          Your restaurant already has the voices. The website, the phone, the
+          texts, the reviews, the regulars, the private event calendar, the
+          person who remembers that table nine drinks Malbec. Tempo Chorus is
+          the sheet of music.
+        </p>
+        <p class="why__close">All together now.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="journey" aria-labelledby="journey-title">
+    <div class="shell">
+      <h2 class="eyeless-h2 journey__title" id="journey-title">
+        One guest. Nine months.<br /> One continuous conversation.
+      </h2>
+      <ol class="journey__line">
+        <span class="journey__rule" aria-hidden="true"></span>
+        {
+          journey.map((j, i) => (
+            <li
+              class={`journey__stop journey__stop--${i % 2 === 0 ? "up" : "down"}`}
+              style={`--col:${i + 1}`}
+            >
+              <span class="journey__note" aria-hidden="true" />
+              <span class="journey__step">{j.step}</span>
+              <span class="journey__meta">{j.note}</span>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="journey__thread">
+        Every one of those steps happens whether you have Tempo Chorus or not.
+        The difference is whether anyone was there for them.
+      </p>
+    </div>
+  </section>
+
+  <section class="demo" id="demo" aria-labelledby="demo-title">
+    <div class="shell demo__inner">
+      <div class="demo__pitch">
+        <h2 class="demo__title" id="demo-title">
+          Hear what your restaurant sounds like<br /> when everything works together.
+        </h2>
+        <p class="demo__sub">
+          A personalised walkthrough of Tempo Chorus — not a generic software
+          tour. Tell us how your restaurant runs and we'll show you exactly
+          where it fits.
+        </p>
+        <ul class="demo__points">
+          <li>Around 30 minutes, with someone who has worked in restaurants.</li>
+          <li>Built around your concept, your locations, your service.</li>
+          <li>No obligation, and no pretending your current setup is worse than it is.</li>
+        </ul>
+      </div>
+
+      <div class="demo__form">
+        <!-- PLACEHOLDER: replace this block with the Tempo Chorus GoHighLevel
+             booking-calendar embed. Field names below match a standard GHL form. -->
+        <form class="booking" method="post" action="#" novalidate>
+          <p class="booking__heading">Book your demo</p>
+          <label>
+            <span>Your name</span>
+            <input type="text" name="full_name" autocomplete="name" required />
+          </label>
+          <label>
+            <span>Restaurant</span>
+            <input type="text" name="company_name" autocomplete="organization" required />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label>
+            <span>Phone</span>
+            <input type="tel" name="phone" autocomplete="tel" />
+          </label>
+          <label>
+            <span>How many locations?</span>
+            <select name="locations">
+              <option>One</option>
+              <option>Two to five</option>
+              <option>Six to twenty</option>
+              <option>More than twenty</option>
+            </select>
+          </label>
+          <button class="btn booking__submit" type="submit">Book my demo</button>
+          <p class="booking__note">
+            We'll reply the same day. This form is a placeholder pending the
+            live booking calendar.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------- Hero ---------- */
+
+  .hero {
+    position: relative;
+    min-height: clamp(34rem, 82vh, 52rem);
+    display: flex;
+    align-items: flex-end;
+    padding-block: clamp(5rem, 12vh, 9rem) clamp(3.5rem, 8vh, 6rem);
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .hero__veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      radial-gradient(
+        120% 85% at 22% 88%,
+        color-mix(in oklab, var(--ink-900) 96%, transparent) 0%,
+        color-mix(in oklab, var(--ink-900) 78%, transparent) 42%,
+        transparent 78%
+      ),
+      linear-gradient(180deg, color-mix(in oklab, var(--ink-900) 72%, transparent), transparent 30%);
+  }
+
+  .hero__floor {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    z-index: 3;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--violet-500) 70%, transparent) 20%,
+      color-mix(in oklab, var(--mint-400) 55%, transparent) 55%,
+      color-mix(in oklab, var(--violet-500) 70%, transparent) 80%,
+      transparent
+    );
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ---- Hero variant: the voices arriving together ---- */
+
+  .hero--together {
+    align-items: center;
+    min-height: clamp(32rem, 78vh, 48rem);
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(2.5rem, 6vw, 5.5rem);
+    align-items: center;
+  }
+
+  .hero--together .hero__title {
+    font-size: clamp(2.1rem, 1.4rem + 4.2vw, 4.4rem);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero--together .hero__sub {
+    max-width: 46ch;
+  }
+
+  .hero__sub strong {
+    color: var(--text-hi);
+    font-weight: 600;
+  }
+
+  @media (max-width: 62rem) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+    }
+    .hero--together {
+      align-items: flex-end;
+    }
+    .hero__show {
+      margin-top: 1rem;
+    }
+  }
+
+  .hero__title {
+    font-size: clamp(2.75rem, 1.1rem + 6vw, 5.6rem);
+    letter-spacing: -0.045em;
+  }
+
+  .hero__accent {
+    color: var(--mint-400);
+  }
+
+  .hero__sub {
+    margin-top: 1.6rem;
+    max-width: 44ch;
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+    line-height: 1.5;
+    color: var(--text-mid);
+  }
+
+  .hero__actions {
+    margin-top: 2.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem 2rem;
+  }
+
+  .hero__link {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--violet-400);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in oklab, var(--violet-400) 45%, transparent);
+    padding-bottom: 2px;
+    transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+  }
+
+  .hero__link:hover {
+    color: var(--text-hi);
+    border-bottom-color: var(--text-hi);
+  }
+
+  /* ---------- What ---------- */
+
+  .what {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    background: var(--ink-800);
+  }
+
+  /* The negation carries this section: it is the fastest way an operator
+     learns what category they are not being sold. */
+  .nots {
+    list-style: none;
+    margin: clamp(2.25rem, 5vw, 3.5rem) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15em;
+  }
+
+  .nots li {
+    font-family: var(--font-display);
+    font-size: clamp(2.1rem, 1.4rem + 4.2vw, 4.4rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.042em;
+    color: var(--text-low);
+  }
+
+  .nots li:last-child {
+    color: var(--violet-400);
+  }
+
+  .what__say {
+    margin-top: clamp(2.5rem, 5vw, 3.75rem);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: start;
+  }
+
+  .what__body {
+    max-width: 48ch;
+    color: var(--text-mid);
+  }
+
+  .what__body strong {
+    color: var(--text-hi);
+    font-weight: 600;
+  }
+
+  .what__body--quiet {
+    color: var(--text-low);
+  }
+
+
+  /* ---------- Vignette chain ---------- */
+
+  .chain {
+    padding-block: clamp(5rem, 11vw, 9rem) clamp(3rem, 7vw, 5rem);
+  }
+
+  .chain__lede {
+    margin-top: 1.25rem;
+    color: var(--text-low);
+  }
+
+  .chain__list {
+    position: relative;
+    margin-top: clamp(3.5rem, 8vw, 6rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 7vw, 5.5rem);
+    padding-left: clamp(1.5rem, 4vw, 3.25rem);
+  }
+
+  .chain__spine {
+    position: absolute;
+    left: 0;
+    top: 0.4rem;
+    bottom: 0.4rem;
+    width: 2px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      color-mix(in oklab, var(--violet-600) 85%, transparent) 4%,
+      color-mix(in oklab, var(--violet-600) 85%, transparent) 92%,
+      transparent
+    );
+  }
+
+  .vignette {
+    position: relative;
+    max-width: 54ch;
+    --indent: 0rem;
+    margin-left: var(--indent);
+  }
+
+  .vignette--wide {
+    max-width: 68ch;
+  }
+
+  /* Voices enter at different points in the bar, the way parts do on a score */
+  @media (min-width: 62rem) {
+    .vignette:nth-child(3) {
+      --indent: 7rem;
+    }
+    .vignette:nth-child(4) {
+      --indent: 2.5rem;
+    }
+    .vignette:nth-child(5) {
+      --indent: 11rem;
+    }
+    .vignette:nth-child(6) {
+      --indent: 4.5rem;
+    }
+    .vignette:nth-child(7) {
+      --indent: 14rem;
+    }
+  }
+
+  .vignette::before {
+    content: "";
+    position: absolute;
+    left: calc((var(--indent) + clamp(1.5rem, 4vw, 3.25rem)) * -1);
+    top: 0.85rem;
+    width: calc(var(--indent) + clamp(0.9rem, 2.4vw, 1.9rem));
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--violet-500) 78%, transparent),
+      color-mix(in oklab, var(--violet-500) 40%, transparent)
+    );
+  }
+
+  .vignette__marker {
+    margin-top: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--amber-400);
+  }
+
+  .vignette__trigger {
+    font-size: clamp(1.3rem, 0.95rem + 1.7vw, 2.1rem);
+    letter-spacing: -0.032em;
+    color: var(--text-hi);
+  }
+
+  .vignette--wide .vignette__trigger {
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+  }
+
+  .vignette__rule {
+    margin-top: 1.5rem;
+    height: 1px;
+    width: min(100%, 26rem);
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--violet-500) 60%, transparent),
+      transparent
+    );
+  }
+
+  .vignette__response {
+    margin-top: 1.35rem;
+    display: flex;
+    gap: 0.9rem;
+    color: var(--text-mid);
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.05rem);
+    line-height: 1.62;
+  }
+
+  .vignette__response .notehead {
+    color: var(--mint-400);
+    margin-top: 0.62em;
+  }
+
+  .chain__coda {
+    margin-top: clamp(4rem, 9vw, 6.5rem);
+    padding-top: 2.25rem;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 26%, transparent);
+  }
+
+  .chain__coda p {
+    max-width: 58ch;
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 0.95rem + 1vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.32;
+    letter-spacing: -0.025em;
+    color: var(--text-hi);
+  }
+
+  /* ---------- Why Chorus ---------- */
+
+  .why {
+    position: relative;
+    padding-block: clamp(4rem, 9vw, 7rem);
+    overflow: hidden;
+  }
+
+  /* Title and text sit side by side so the section is not half empty ground. */
+  .why__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  @media (max-width: 62rem) {
+    .why__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .why__title {
+    position: relative;
+    font-size: clamp(2.1rem, 1.4rem + 4.2vw, 4.4rem);
+    letter-spacing: -0.05em;
+    color: var(--violet-400);
+    padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .why__titletext {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Sized off the title box, not the viewport, so the stave still frames the
+     lettering when the title wraps to two lines. */
+  .why__stave {
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    translate: 0 -50%;
+    height: calc(100% - 1.25rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .why__stave span {
+    display: block;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--violet-600) 55%, transparent),
+      color-mix(in oklab, var(--violet-600) 55%, transparent) 82%,
+      transparent
+    );
+  }
+
+  .why__text {
+    max-width: 52ch;
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+    color: var(--text-mid);
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+    line-height: 1.62;
+  }
+
+  .why__lead {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 0.95rem + 1.7vw, 2.1rem);
+    font-weight: 600;
+    line-height: 1.24;
+    letter-spacing: -0.03em;
+    color: var(--text-hi);
+  }
+
+  .why__close {
+    font-family: var(--font-display);
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--mint-400);
+    margin-top: 0.75rem;
+  }
+
+  /* ---------- Guest journey ---------- */
+
+  .journey {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    background: var(--ink-800);
+  }
+
+  .journey__line {
+    list-style: none;
+    margin: clamp(3rem, 7vw, 4.5rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    grid-template-rows: minmax(6rem, auto) 1px minmax(6rem, auto);
+  }
+
+  .journey__rule {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--violet-500) 70%, transparent) 0%,
+      color-mix(in oklab, var(--violet-500) 70%, transparent) 80%,
+      var(--mint-400) 100%
+    );
+  }
+
+  .journey__stop {
+    position: relative;
+    padding-right: 0.9rem;
+    grid-column: var(--col);
+  }
+
+  .journey__stop--up {
+    grid-row: 1;
+    align-self: end;
+    padding-bottom: 1.7rem;
+  }
+
+  .journey__stop--down {
+    grid-row: 3;
+    align-self: start;
+    padding-top: 1.7rem;
+  }
+
+  .journey__note {
+    position: absolute;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--violet-400);
+  }
+
+  .journey__stop--up .journey__note {
+    bottom: -5px;
+  }
+
+  .journey__stop--down .journey__note {
+    top: -5px;
+  }
+
+  .journey__stop::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    width: 1px;
+    height: 1.5rem;
+    background: color-mix(in oklab, var(--violet-500) 50%, transparent);
+  }
+
+  .journey__stop--up::after {
+    bottom: 0;
+  }
+
+  .journey__stop--down::after {
+    top: 0;
+  }
+
+  .journey__stop:last-child .journey__note {
+    background: var(--mint-400);
+    box-shadow: 0 0 0 5px color-mix(in oklab, var(--mint-400) 20%, transparent);
+  }
+
+  .journey__step {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: var(--text-hi);
+  }
+
+  .journey__meta {
+    display: block;
+    margin-top: 0.45rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .journey__stop:last-child .journey__step {
+    color: var(--mint-300);
+  }
+
+  @media (max-width: 68rem) {
+    .journey__line {
+      position: relative;
+      grid-template-columns: 1fr;
+      grid-template-rows: none;
+    }
+    .journey__rule {
+      position: absolute;
+      top: 0.6rem;
+      bottom: 0.6rem;
+      left: 4px;
+      width: 1px;
+      height: auto;
+      background: linear-gradient(
+        180deg,
+        color-mix(in oklab, var(--violet-500) 70%, transparent) 0%,
+        color-mix(in oklab, var(--violet-500) 70%, transparent) 80%,
+        var(--mint-400) 100%
+      );
+    }
+    .journey__stop--up,
+    .journey__stop--down {
+      grid-column: 1;
+      grid-row: auto;
+      align-self: auto;
+      padding: 0.8rem 0 0.8rem 2rem;
+    }
+    .journey__stop::after {
+      display: none;
+    }
+    .journey__stop--up .journey__note,
+    .journey__stop--down .journey__note {
+      top: 1rem;
+      bottom: auto;
+    }
+    .journey__meta {
+      margin-top: 0.2rem;
+    }
+  }
+
+  .journey__thread {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    max-width: 56ch;
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 0.95rem + 1vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.34;
+    letter-spacing: -0.025em;
+    color: var(--text-hi);
+  }
+
+  /* ---------- Demo ---------- */
+
+  .demo {
+    padding-block: clamp(5rem, 11vw, 8.5rem);
+    scroll-margin-top: 5rem;
+  }
+
+  .demo__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .demo__title {
+    font-size: clamp(2.1rem, 1.1rem + 3.2vw, 3.5rem);
+    letter-spacing: -0.04em;
+  }
+
+  .demo__sub {
+    margin-top: 1.5rem;
+    max-width: 46ch;
+    color: var(--text-mid);
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+  }
+
+  .demo__points {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    color: var(--text-mid);
+  }
+
+  .demo__points li {
+    display: flex;
+    gap: 0.85rem;
+    align-items: baseline;
+  }
+
+  .demo__points li::before {
+    content: "";
+    flex: none;
+    width: 0.7rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--violet-400);
+    transform: rotate(-22deg) translateY(-0.1em);
+  }
+
+  .booking {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    background: var(--ink-700);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
+    border-radius: 4px;
+    box-shadow: 0 28px 60px -34px rgb(0 0 0 / 0.85);
+  }
+
+  .booking__heading {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-hi);
+    margin-bottom: 0.35rem;
+  }
+
+  .booking label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .booking label span {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-mid);
+  }
+
+  .booking input,
+  .booking select {
+    font: inherit;
+    font-size: 1rem;
+    color: var(--text-hi);
+    background: var(--ink-900);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 32%, transparent);
+    border-radius: 3px;
+    padding: 0.7rem 0.85rem;
+    transition: border-color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+  }
+
+  .booking input:hover,
+  .booking select:hover {
+    border-color: color-mix(in oklab, var(--violet-400) 60%, transparent);
+  }
+
+  .booking input:focus,
+  .booking select:focus {
+    outline: none;
+    border-color: var(--mint-400);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--mint-400) 22%, transparent);
+  }
+
+  .booking__submit {
+    margin-top: 0.6rem;
+    justify-content: center;
+  }
+
+  .booking__note {
+    font-size: 0.875rem;
+    color: var(--text-low);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 62rem) {
+    .demo__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

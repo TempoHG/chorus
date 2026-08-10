@@ -1,0 +1,368 @@
+---
+import Base from "../layouts/Base.astro";
+import Arrangement from "../components/Arrangement.astro";
+
+/* Weights are ordered: ads, website, phone, text, email, google, reviews,
+   reservations, social, private events, loyalty, guest history.
+   2 = leading, 1 = active, 0 = supporting. */
+const concepts = [
+  {
+    id: "independent",
+    name: "The independent",
+    kicker: "One room, one owner, no marketing department",
+    problem:
+      "You are the marketing department, the reservations desk and the person who answers the phone at 11 PM — usually while doing something else. Nothing gets dropped on purpose. It gets dropped because there were three of you and one of you.",
+    moments: [
+      "The call during service gets answered anyway, and you get the message written down.",
+      "Every guest who has ever eaten with you is in one list that belongs to you.",
+      "The review request goes out the next morning without anyone remembering to send it.",
+    ],
+    weights: [1, 2, 2, 2, 1, 2, 2, 1, 1, 0, 1, 1],
+    leads: ["Website", "Phone", "Text", "Google", "Reviews"],
+  },
+  {
+    id: "multi-location",
+    name: "The multi-location group",
+    kicker: "Four rooms that should feel like four rooms",
+    problem:
+      "Head office wants consistency. Each location wants to stay itself. Right now you get neither — you get four different inboxes, four different guest lists, and a marketing calendar that only exists in one manager's head.",
+    moments: [
+      "One system, one guest list, but every location keeps its own voice and its own numbers.",
+      "A campaign built once, sent per location, reported per location.",
+      "You can finally see which room is actually winning and why.",
+    ],
+    weights: [2, 2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 2],
+    leads: ["Digital ads", "Email", "Reviews", "Guest history"],
+  },
+  {
+    id: "fine-dining",
+    name: "Fine dining",
+    kicker: "Where a no-show costs real money",
+    problem:
+      "Your covers are finite and expensive. A four-top that doesn't turn up on Saturday isn't an inconvenience, it's the night's margin. And the thing that makes guests come back isn't the reminder — it's being remembered.",
+    moments: [
+      "Staged reminders before the booking, and a heads-up the moment someone can't make it.",
+      "Allergies, anniversaries and the wine they had last time, attached to the guest — not to a manager's memory.",
+      "Private event inquiries answered the same day, then followed up until a human takes over.",
+    ],
+    weights: [0, 2, 2, 2, 1, 1, 2, 2, 0, 2, 0, 2],
+    leads: ["Reservations", "Private events", "Guest history", "Reviews"],
+  },
+  {
+    id: "fast-casual",
+    name: "Fast casual",
+    kicker: "Volume, dayparts, and thin margins per head",
+    problem:
+      "You don't have reservations to manage. You have frequency to grow. The difference between a good month and a bad one is whether the same people came back three times or once — and nobody is doing anything to make that happen.",
+    moments: [
+      "Lunch-daypart pushes to the people who actually come at lunch, not to everyone.",
+      "Loyalty that tracks to a real guest record, so an offer means something.",
+      "Win-backs for the regular who quietly stopped being one.",
+    ],
+    weights: [2, 1, 0, 2, 2, 1, 2, 0, 1, 0, 2, 1],
+    leads: ["Digital ads", "Text", "Email", "Reviews", "Loyalty"],
+  },
+  {
+    id: "bar-brewery",
+    name: "Bars & breweries",
+    kicker: "Events, taprooms, and a late-night audience",
+    problem:
+      "Half your business is the calendar — the quiz night, the release, the function upstairs. The other half is people deciding at 8 PM where to go. Both live on social, and social is the channel nobody has time to sit on.",
+    moments: [
+      "Instagram and Facebook messages land in the same inbox as everything else, and get answered.",
+      "Event announcements to the people who came to the last one.",
+      "Function and party inquiries captured with the date, the headcount and a reply already sent.",
+    ],
+    weights: [1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1, 1],
+    leads: ["Text", "Social", "Private events"],
+  },
+  {
+    id: "cafe",
+    name: "Cafés & coffee",
+    kicker: "A business built entirely on habit",
+    problem:
+      "Your economics are repeat visits, and repeat visits are a habit. You will never out-market a competitor on a single visit — you win by being the one they don't think about choosing.",
+    moments: [
+      "Regulars recognised as regulars, with rewards that arrive without being asked for.",
+      "The morning-rush message that goes to people within walking distance.",
+      "A quiet nudge to the customer who used to come every Tuesday and hasn't in a month.",
+    ],
+    weights: [1, 1, 0, 2, 1, 1, 2, 0, 1, 0, 2, 2],
+    leads: ["Text", "Reviews", "Loyalty", "Guest history"],
+  },
+  {
+    id: "pizza-delivery",
+    name: "Pizza & delivery",
+    kicker: "High frequency, high competition, thin loyalty",
+    problem:
+      "Your guests order from you and two other places, and whoever is in front of them on Friday at six wins. The order history you're sitting on is the most valuable thing you own, and right now it's doing nothing.",
+    moments: [
+      "Game-day and Friday sends to the people who order on those days.",
+      "Win-backs triggered by an order gap, not by a calendar.",
+      "Ads that put you in front of the household two streets over, and track whether they ordered.",
+    ],
+    weights: [2, 2, 2, 2, 1, 1, 1, 0, 1, 0, 2, 2],
+    leads: ["Digital ads", "Website", "Phone", "Text", "Loyalty", "Guest history"],
+  },
+  {
+    id: "events-venue",
+    name: "Private events & catering",
+    kicker: "Few inquiries, each one worth a week of covers",
+    problem:
+      "A party of forty in December is worth more than most of a normal week. These inquiries arrive by email, by form, by DM and by phone — and the one thing that loses them is a slow reply, which is exactly what happens when everyone is on the floor.",
+    moments: [
+      "Every inquiry captured with the date, headcount and budget, from whichever channel it arrived on.",
+      "An immediate acknowledgement, then staged follow-up until someone on your side picks it up.",
+      "One screen showing every live event still in play, and who owes whom an answer.",
+    ],
+    weights: [2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 0, 2],
+    leads: ["Private events", "Email", "Phone", "Digital ads", "Guest history"],
+  },
+];
+---
+
+<Base
+  title="Who Tempo Chorus is for — every restaurant, arranged differently"
+  description="Fine dining, fast casual, multi-location groups, cafés, bars, pizza and private event venues — how Tempo Chorus is arranged for each kind of restaurant."
+  active="concepts"
+>
+  <section class="lead">
+    <div class="shell">
+      <h1 class="lead__title">
+        Same chorus.<br /> <span class="lead__accent">Different arrangement.</span>
+      </h1>
+      <p class="lead__sub">
+        Every restaurant has the same twelve voices. What changes is which ones
+        carry the melody. A fine dining room lives or dies on reservations and
+        memory; a café lives on habit; an events venue lives on answering fast.
+        Below is how Chorus is arranged for each.
+      </p>
+      <div class="lead__jump">
+        <p>Find yours</p>
+        <ul>
+          {concepts.map((c) => <li><a href={`#${c.id}`}>{c.name}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="concepts">
+    <div class="shell">
+      {
+        concepts.map((c, i) => (
+          <article class={`concept ${i % 2 === 1 ? "concept--flip" : ""}`} id={c.id}>
+            <div class="concept__say">
+              <h2 class="concept__name">{c.name}</h2>
+              <p class="concept__kicker">{c.kicker}</p>
+              <p class="concept__problem">{c.problem}</p>
+              <ul class="concept__moments">
+                {c.moments.map((m) => (
+                  <li>
+                    <span class="notehead" aria-hidden="true" />
+                    {m}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="concept__show">
+              <Arrangement weights={c.weights} leads={c.leads} />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+
+  <section class="close">
+    <div class="shell close__inner">
+      <h2 class="close__title">
+        Yours isn't on the list?<br />
+        It is still the same twelve voices.
+      </h2>
+      <p class="close__sub">
+        Ghost kitchens, food halls, hotel restaurants, food trucks, breweries
+        with three taprooms and a festival schedule — the arrangement changes,
+        the system doesn't. Tell us how your room actually runs and we'll show
+        you the arrangement for it.
+      </p>
+      <a class="btn" href="/#demo">Book a demo</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lead {
+    padding-block: clamp(4rem, 10vw, 7.5rem) clamp(3rem, 7vw, 5rem);
+  }
+
+  .lead__title {
+    font-size: clamp(2.75rem, 1.1rem + 6vw, 5.6rem);
+    letter-spacing: -0.045em;
+  }
+
+  .lead__accent {
+    color: var(--mint-400);
+  }
+
+  .lead__sub {
+    margin-top: 1.75rem;
+    max-width: 58ch;
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+    line-height: 1.5;
+    color: var(--text-mid);
+  }
+
+  .lead__jump {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-top: 1.75rem;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 26%, transparent);
+  }
+
+  .lead__jump p {
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .lead__jump ul {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.6rem;
+  }
+
+  .lead__jump a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--violet-400);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+  }
+
+  .lead__jump a:hover {
+    color: var(--text-hi);
+    border-bottom-color: var(--mint-400);
+  }
+
+  .concepts {
+    background: var(--ink-800);
+    padding-block: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .concept {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+    padding-block: clamp(3rem, 7vw, 5rem);
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
+    scroll-margin-top: 5.5rem;
+  }
+
+  .concept:first-child {
+    border-top: 0;
+  }
+
+  /* Bar line, as on the features page and the homepage chain. */
+  .concept {
+    position: relative;
+  }
+
+  .concept::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 2px;
+    height: clamp(2rem, 4vw, 3.25rem);
+    background: var(--violet-500);
+  }
+
+  .concept:first-child::before {
+    display: none;
+  }
+
+  .concept--flip .concept__say {
+    order: 2;
+  }
+
+  .concept__name {
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.04em;
+    color: var(--text-hi);
+  }
+
+  .concept__kicker {
+    margin-top: 0.7rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: var(--violet-400);
+  }
+
+  .concept__problem {
+    margin-top: 1.35rem;
+    max-width: 58ch;
+    color: var(--text-mid);
+    line-height: 1.62;
+  }
+
+  .concept__moments {
+    list-style: none;
+    margin: 1.85rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    max-width: 58ch;
+  }
+
+  .concept__moments li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    color: var(--text-hi);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .concept__moments .notehead {
+    color: var(--violet-400);
+    margin-top: 0.55em;
+  }
+
+  @media (max-width: 62rem) {
+    .concept {
+      grid-template-columns: 1fr;
+    }
+    .concept--flip .concept__say {
+      order: 0;
+    }
+  }
+
+  .close {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .close__title {
+    font-size: clamp(2.1rem, 1.1rem + 3.2vw, 3.5rem);
+    letter-spacing: -0.04em;
+  }
+
+  .close__sub {
+    margin-top: 1.6rem;
+    max-width: 60ch;
+    color: var(--text-mid);
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+  }
+
+  .close__inner .btn {
+    margin-top: 2.4rem;
+  }
+</style>

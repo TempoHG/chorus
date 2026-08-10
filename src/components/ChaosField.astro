@@ -1,0 +1,158 @@
+---
+/* Eleven voices, none of them in time with each other.
+   Positions are hand-set so the field reads as genuinely unaligned
+   rather than as a grid with jitter applied. */
+const voices = [
+  { label: "Your website", x: 4, y: 8, size: 2.4, rot: -3, dim: 0.62, w: 20 },
+  { label: "The phone", x: 58, y: 4, size: 3.1, rot: 2, dim: 0.9, w: 15 },
+  { label: "Facebook", x: 28, y: 19, size: 1.9, rot: -6, dim: 0.45, w: 13 },
+  { label: "Text messages", x: 70, y: 24, size: 2.7, rot: 4, dim: 0.75, w: 22 },
+  { label: "Google", x: 8, y: 33, size: 2.2, rot: 5, dim: 0.5, w: 11 },
+  { label: "Reviews", x: 46, y: 39, size: 3.4, rot: -2, dim: 0.85, w: 14 },
+  { label: "Reservations", x: 75, y: 52, size: 2.5, rot: -5, dim: 0.66, w: 19 },
+  { label: "Email", x: 20, y: 57, size: 2.9, rot: 3, dim: 0.72, w: 10 },
+  { label: "Private events", x: 52, y: 68, size: 2.1, rot: 6, dim: 0.5, w: 21 },
+  { label: "Instagram", x: 3, y: 76, size: 2.6, rot: -4, dim: 0.6, w: 15 },
+  { label: "Gift cards", x: 72, y: 82, size: 2.3, rot: 3, dim: 0.55, w: 14 },
+  { label: "Digital ads", x: 36, y: 8, size: 2.4, rot: 4, dim: 0.58, w: 16 },
+];
+
+const strays = [
+  { label: "missed call · 11:47 pm", x: 34, y: 30, rot: -7 },
+  { label: "no reply since tues", x: 62, y: 62, rot: 5 },
+  { label: "review · 2 wks unanswered", x: 12, y: 47, rot: 4 },
+  { label: "event inquiry · unread", x: 44, y: 88, rot: -3 },
+];
+---
+
+<div class="chaos" aria-hidden="true">
+  {
+    voices.map((v, i) => (
+      <span
+        class="chaos__voice"
+        style={`--x:${v.x}%; --y:${v.y}%; --s:${v.size}; --r:${v.rot}deg; --o:${v.dim}; --w:${v.w}ch; --d:${i * 70}ms`}
+      >
+        <span class="chaos__word">{v.label}</span>
+        <span class="chaos__stub" />
+      </span>
+    ))
+  }
+  {
+    strays.map((s, i) => (
+      <span class="chaos__stray" style={`--x:${s.x}%; --y:${s.y}%; --r:${s.rot}deg; --d:${600 + i * 130}ms`}>
+        {s.label}
+      </span>
+    ))
+  }
+</div>
+
+<style>
+  .chaos {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    font-family: var(--font-display);
+  }
+
+  .chaos__voice {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    display: flex;
+    flex-direction: column;
+    gap: 0.34em;
+    transform: rotate(var(--r));
+    transform-origin: left center;
+    opacity: var(--o);
+    white-space: nowrap;
+  }
+
+  .chaos__word {
+    font-size: calc(var(--s) * 1vw + 0.35rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    color: color-mix(in oklab, var(--violet-400) 78%, var(--ink-900));
+  }
+
+  /* a stub of stave that starts nowhere and ends nowhere */
+  .chaos__stub {
+    display: block;
+    width: var(--w);
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--violet-500) 60%, transparent) 30%,
+      color-mix(in oklab, var(--violet-500) 60%, transparent) 70%,
+      transparent
+    );
+  }
+
+  .chaos__stray {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    transform: rotate(var(--r));
+    transform-origin: left center;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    color: color-mix(in oklab, var(--amber-400) 82%, transparent);
+    white-space: nowrap;
+    padding-left: 1.1rem;
+  }
+
+  .chaos__stray::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0.55rem;
+    height: 0.55rem;
+    margin-top: -0.275rem;
+    border-radius: 50%;
+    background: var(--amber-400);
+    opacity: 0.85;
+  }
+
+  :global(.js) .chaos__voice,
+  :global(.js) .chaos__stray {
+    opacity: 0;
+    animation: chaos-in 1.1s var(--ease-out) forwards;
+    animation-delay: var(--d);
+  }
+
+  :global(.js) .chaos__voice {
+    --end-o: var(--o);
+  }
+
+  @keyframes chaos-in {
+    from {
+      opacity: 0;
+      filter: blur(6px);
+    }
+    to {
+      opacity: var(--end-o, 0.8);
+      filter: blur(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .chaos__voice,
+    :global(.js) .chaos__stray {
+      animation: none;
+      opacity: var(--end-o, 0.8);
+    }
+  }
+
+  @media (max-width: 60rem) {
+    .chaos__word {
+      font-size: calc(var(--s) * 1.5vw + 0.3rem);
+    }
+    .chaos__stray {
+      font-size: 0.875rem;
+    }
+  }
+</style>

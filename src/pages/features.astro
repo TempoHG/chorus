@@ -1,0 +1,424 @@
+---
+import Base from "../layouts/Base.astro";
+
+const parts = [
+  {
+    voice: "Digital ad management",
+    line: "Your ads stop being money you can't trace.",
+    detail:
+      "Google, Facebook and Instagram campaigns run and managed for you — and, more importantly, wired into the same system as everything else. When someone clicks an ad on Tuesday and books a table on Friday, Chorus knows those were the same person.",
+    does: [
+      "Google, Facebook and Instagram campaigns built and managed",
+      "Landing pages that capture instead of just clicking through",
+      "Every lead lands in the same guest record as everyone else",
+      "Spend reported against bookings and inquiries, not just clicks",
+    ],
+  },
+  {
+    voice: "The phone",
+    line: "Nobody hears a busy signal, and nobody hears nothing at all.",
+    detail:
+      "Calls that come in after close, during service, or while both lines are tied up get answered instead of missed. The caller gets a real answer about hours, parking, the corkage, Saturday. You get the whole conversation written down.",
+    does: [
+      "Answers after hours and when the line is busy",
+      "Takes reservations and event inquiries by phone",
+      "Logs every call against the guest it came from",
+      "Texts back anyone who hung up before you got there",
+    ],
+  },
+  {
+    voice: "Text messages",
+    line: "The channel your guests actually read.",
+    detail:
+      "One number for confirmations, reminders, waitlist updates, offers and plain conversation — so a guest texting you about Friday doesn't land somewhere different from a guest texting you about their gift card.",
+    does: [
+      "Two-way texting from one shared number",
+      "Reservation confirmations and reminders",
+      "Waitlist and table-ready notifications",
+      "Send to just the people it applies to, not the whole list",
+    ],
+  },
+  {
+    voice: "Email",
+    line: "Marketing that goes out even on the weeks nobody has time.",
+    detail:
+      "Newsletters, seasonal menus, event announcements and the quiet automatic ones — the thank-you, the birthday, the we-haven't-seen-you-in-a-while — running off the same guest list as everything else.",
+    does: [
+      "Designed sends to everyone, or only to the people it suits",
+      "Automatic thank-you, birthday and win-back emails",
+      "Event and seasonal campaigns scheduled ahead",
+      "Open and click reporting per send",
+    ],
+  },
+  {
+    voice: "Reviews",
+    line: "Asked for at the right moment, answered before Monday.",
+    detail:
+      "The gap between a great meal and a review request is the whole game. Chorus closes it automatically, then puts every new review from every platform in one place so replies actually happen.",
+    does: [
+      "Automatic review requests after a visit",
+      "Google and Facebook reviews in one inbox",
+      "Reply without leaving the system",
+      "Alerts when something needs a human quickly",
+    ],
+  },
+  {
+    voice: "Social messages",
+    line: "Instagram and Facebook DMs stop being a separate job.",
+    detail:
+      "Messages from your social accounts arrive in the same inbox as calls, texts and emails — attached to the same guest record, answerable by the same person, without anyone logging into anything.",
+    does: [
+      "Facebook and Instagram messages in the shared inbox",
+      "Replies to comments and mentions",
+      "The same guest history behind every conversation",
+    ],
+  },
+  {
+    voice: "Your website",
+    line: "A site that captures instead of just displaying.",
+    detail:
+      "Menus, hours, story, booking — plus the chat widget, the private events form and the landing pages behind your ads, all feeding the same guest list rather than three different spreadsheets.",
+    does: [
+      "Website and landing pages",
+      "Chat widget that becomes a text conversation",
+      "Private event and contact forms",
+      "Everything captured into one guest record",
+    ],
+  },
+  {
+    voice: "Reservations & waitlist",
+    line: "Fewer no-shows, without anyone making the calls.",
+    detail:
+      "Bookings come in from the site, the phone and social, and every one gets confirmed and reminded on the schedule you set. When someone cancels, you find out while the table can still be resold.",
+    does: [
+      "Bookings from web, phone and social",
+      "Confirmations and staged reminders",
+      "Cancellation and no-show alerts",
+      "Waitlist and table-ready messaging",
+    ],
+  },
+  {
+    voice: "Private events",
+    line: "The highest-value inquiries, followed up like they matter.",
+    detail:
+      "A party of forty in December is worth more than most of a week. Chorus captures the inquiry, replies immediately, and keeps following up on a schedule until someone on your side takes it over.",
+    does: [
+      "Inquiry capture from every channel",
+      "Immediate acknowledgement, then staged follow-up",
+      "One screen showing every inquiry still in play",
+      "Handover to a real person at the right moment",
+    ],
+  },
+  {
+    voice: "Gift cards & loyalty",
+    line: "Reasons to come back, tracked to the guest.",
+    detail:
+      "Offers, rewards and gift cards attached to the same guest record as everything else — so the person who redeems a birthday offer is recognisably the same person who left you a five-star review in March.",
+    does: [
+      "Offer and reward campaigns",
+      "Redemption tracked to the guest",
+      "Groups built from what guests actually did — how often, how much, how long ago",
+    ],
+  },
+  {
+    voice: "Guest history",
+    line: "The part you can never rebuild if you lose it.",
+    detail:
+      "Every call, text, email, booking, review, offer and visit against one name. This is the asset — it belongs to you, it gets more valuable every service, and it is what makes all of the above sound like it came from someone who knows them.",
+    does: [
+      "One record per guest across every channel",
+      "Visit, spend and contact history",
+      "Reach the right people, so nothing you send reads like a mailshot",
+      "Exportable, because it is your list",
+    ],
+  },
+  {
+    voice: "Round-the-clock answering",
+    line: "The part that works the hours you don't.",
+    detail:
+      "Chorus answers in your voice, using your menu, your policies and your hours — on the phone, in chat, over text and in social messages. It hands over to a human the moment a human is what's needed.",
+    does: [
+      "Answers questions from your own information",
+      "Books, captures and confirms without supervision",
+      "Escalates anything it shouldn't handle alone",
+      "Works overnight, on Sundays, and during the rush",
+    ],
+  },
+];
+---
+
+<Base
+  title="What Tempo Chorus does — every channel, one system"
+  description="Ads, phone, text, email, reviews, social, website, reservations, private events, loyalty and guest history — what each part of Tempo Chorus does for a restaurant, in plain language."
+  active="features"
+>
+  <section class="lead">
+    <div class="shell">
+      <h1 class="lead__title">
+        Twelve voices.<br /> One sheet of music.
+      </h1>
+      <p class="lead__sub">
+        Every part below already exists in your restaurant in some form — a
+        phone that rings, an inbox nobody opens, a review that sat there for two
+        weeks. This is what each one becomes when they are all in the same
+        system.
+      </p>
+      <div class="lead__jump">
+        <p>Jump to</p>
+        <ul>
+          {
+            parts.map((p) => (
+              <li>
+                <a href={`#${p.voice.toLowerCase().replace(/[^a-z]+/g, "-")}`}>{p.voice}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="parts">
+    <div class="shell">
+      {
+        parts.map((p, i) => (
+          <article
+            class={`part ${(i + 1) % 4 === 0 ? "part--turn" : ""}`}
+            id={p.voice.toLowerCase().replace(/[^a-z]+/g, "-")}
+          >
+            <div class="part__voice">
+              <h2 class="part__name">{p.voice}</h2>
+            </div>
+            <div class="part__body">
+              <p class="part__line">{p.line}</p>
+              <p class="part__detail">{p.detail}</p>
+              <ul class="part__does">
+                {p.does.map((d) => (
+                  <li>
+                    <span class="notehead" aria-hidden="true" />
+                    {d}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+
+  <section class="close">
+    <div class="shell close__inner">
+      <h2 class="close__title">
+        Read as a list, it is twelve things.<br />
+        Used for a week, it is one.
+      </h2>
+      <p class="close__sub">
+        The point was never the length of this page. It is that a guest who
+        calls, texts, books, eats, reviews and comes back is one person having
+        one relationship with you — and now your software agrees.
+      </p>
+      <a class="btn" href="/#demo">Book a demo</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lead {
+    padding-block: clamp(4rem, 10vw, 7.5rem) clamp(3rem, 7vw, 5rem);
+  }
+
+  .lead__title {
+    font-size: clamp(2.75rem, 1.1rem + 6vw, 5.6rem);
+    letter-spacing: -0.045em;
+  }
+
+  .lead__sub {
+    margin-top: 1.75rem;
+    max-width: 54ch;
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+    line-height: 1.5;
+    color: var(--text-mid);
+  }
+
+  .lead__jump {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-top: 1.75rem;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 26%, transparent);
+  }
+
+  .lead__jump p {
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .lead__jump ul {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.6rem;
+  }
+
+  .lead__jump a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--violet-400);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+  }
+
+  .lead__jump a:hover {
+    color: var(--text-hi);
+    border-bottom-color: var(--mint-400);
+  }
+
+  .parts {
+    background: var(--ink-800);
+    padding-block: clamp(3rem, 7vw, 5rem);
+  }
+
+  .part {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    padding-block: clamp(2.75rem, 6vw, 4.5rem);
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
+    scroll-margin-top: 5.5rem;
+  }
+
+  /* The name column stops being an empty margin: it holds the sticky label
+     while its own block is being read. */
+  @media (min-width: 60rem) {
+    .part__voice {
+      position: sticky;
+      top: 6.5rem;
+      align-self: start;
+    }
+  }
+
+  /* Every fourth voice takes the full measure, so twelve rows are not one row
+     twelve times. */
+  .part--turn {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+  }
+
+  .part--turn .part__voice {
+    position: static;
+  }
+
+  .part--turn .part__name {
+    font-size: clamp(2.1rem, 1.4rem + 4.2vw, 4.4rem);
+  }
+
+  .part--turn .part__line {
+    max-width: 26ch;
+    font-size: clamp(1.3rem, 0.95rem + 1.7vw, 2.1rem);
+  }
+
+  .part--turn .part__detail {
+    max-width: 64ch;
+  }
+
+  .part:first-child {
+    border-top: 0;
+  }
+
+  .part__name {
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+    color: var(--text-hi);
+  }
+
+  .part__line {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 0.95rem + 1vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.28;
+    letter-spacing: -0.03em;
+    color: var(--text-hi);
+    max-width: 36ch;
+  }
+
+  .part__detail {
+    margin-top: 1.15rem;
+    max-width: 60ch;
+    color: var(--text-mid);
+  }
+
+  .part__does {
+    list-style: none;
+    margin: 1.85rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 0.75rem 2rem;
+  }
+
+  .part__does li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    color: var(--text-hi);
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .part__does .notehead {
+    color: var(--violet-400);
+    transform: rotate(-22deg) translateY(-0.1em);
+  }
+
+  /* A bar line opens each voice, the way it divides measures on a score. */
+  .part {
+    position: relative;
+  }
+
+  .part::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 2px;
+    height: clamp(2rem, 4vw, 3.25rem);
+    background: var(--violet-500);
+  }
+
+  .part--turn::before {
+    background: var(--mint-400);
+    height: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  @media (max-width: 60rem) {
+    .part {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .close {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .close__title {
+    font-size: clamp(2.1rem, 1.1rem + 3.2vw, 3.5rem);
+    letter-spacing: -0.04em;
+  }
+
+  .close__sub {
+    margin-top: 1.6rem;
+    max-width: 56ch;
+    color: var(--text-mid);
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+  }
+
+  .close__inner .btn {
+    margin-top: 2.4rem;
+  }
+</style>

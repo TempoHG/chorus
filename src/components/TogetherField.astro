@@ -1,0 +1,231 @@
+---
+import TempoMark from "./TempoMark.astro";
+
+/* The twelve voices arrive scattered and out of time, then settle into one
+   braced system. Each voice's resting place is its real layout position; the
+   scatter is a transform applied on top, so the whole arrival is compositor-safe. */
+const voices = [
+  { label: "Digital ads", dx: "-38vw", dy: "-9rem", rot: "-7deg" },
+  { label: "Your website", dx: "22vw", dy: "-12rem", rot: "5deg" },
+  { label: "The phone", dx: "-26vw", dy: "8rem", rot: "4deg" },
+  { label: "Text messages", dx: "30vw", dy: "-4rem", rot: "-6deg" },
+  { label: "Email", dx: "-44vw", dy: "6rem", rot: "6deg" },
+  { label: "Google", dx: "18vw", dy: "11rem", rot: "-4deg" },
+  { label: "Reviews", dx: "-20vw", dy: "-14rem", rot: "7deg" },
+  { label: "Reservations", dx: "34vw", dy: "5rem", rot: "-5deg" },
+  { label: "Social messages", dx: "-32vw", dy: "13rem", rot: "3deg" },
+  { label: "Private events", dx: "26vw", dy: "-8rem", rot: "6deg" },
+  { label: "Gift cards & loyalty", dx: "-16vw", dy: "15rem", rot: "-3deg" },
+  { label: "Guest history", dx: "20vw", dy: "-16rem", rot: "4deg" },
+];
+---
+
+<div class="together">
+  <ol class="together__voices">
+    {
+      voices.map((v, i) => (
+        <li
+          class="voice"
+          style={`--dx:${v.dx}; --dy:${v.dy}; --rot:${v.rot}; --i:${i}`}
+        >
+          <span class="voice__name">{v.label}</span>
+          <span class="voice__rule" aria-hidden="true" />
+        </li>
+      ))
+    }
+  </ol>
+
+  <span class="together__brace" aria-hidden="true"></span>
+  <span class="together__link" aria-hidden="true"></span>
+
+  <span class="together__node" aria-hidden="true">
+    <span class="together__halo"></span>
+    <span class="together__core">
+      <TempoMark class="together__spark" />
+    </span>
+  </span>
+</div>
+
+<style>
+  .together {
+    --node: clamp(2.4rem, 5.2vw, 4.2rem);
+    --link: clamp(1rem, 2.4vw, 2rem);
+    --brace: clamp(0.7rem, 1.6vw, 1.25rem);
+    position: relative;
+    padding-right: calc(var(--node) + var(--link) + var(--brace));
+  }
+
+  .together__voices {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.3rem, 0.9vw, 0.65rem);
+  }
+
+  .voice {
+    display: grid;
+    grid-template-columns: minmax(0, auto) minmax(2rem, 1fr);
+    align-items: center;
+    gap: clamp(0.7rem, 2vw, 1.25rem);
+  }
+
+  .voice__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.05rem);
+    letter-spacing: -0.025em;
+    color: var(--text-hi);
+    white-space: nowrap;
+  }
+
+  .voice__rule {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--violet-500) 30%, transparent),
+      color-mix(in oklab, var(--violet-500) 80%, transparent)
+    );
+  }
+
+  /* the brace that makes eleven parts one system */
+  .together__brace {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: calc(var(--node) + var(--link));
+    width: var(--brace);
+    border: 1px solid color-mix(in oklab, var(--violet-400) 70%, transparent);
+    border-left: 0;
+    border-radius: 0 14px 14px 0;
+  }
+
+  .together__link {
+    position: absolute;
+    top: 50%;
+    right: var(--node);
+    width: var(--link);
+    height: 1px;
+    background: var(--mint-400);
+  }
+
+  .together__node {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    translate: 0 -50%;
+    width: var(--node);
+    height: var(--node);
+    display: grid;
+    place-items: center;
+  }
+
+  .together__halo {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: color-mix(in oklab, var(--mint-400) 14%, transparent);
+    border: 1px solid color-mix(in oklab, var(--mint-400) 42%, transparent);
+  }
+
+  .together__core {
+    position: relative;
+    width: 68%;
+    height: 68%;
+    border-radius: 50%;
+    background: var(--mint-400);
+    display: grid;
+    place-items: center;
+  }
+
+  .together__spark {
+    width: 74%;
+    height: 74%;
+    color: var(--ink-900);
+  }
+
+  /* ---- The arrival ---- */
+
+  :global(.js) .voice,
+  :global(.js) .together__brace,
+  :global(.js) .together__link,
+  :global(.js) .together__node {
+    opacity: 0;
+  }
+
+  :global(.js) .voice {
+    translate: var(--dx) var(--dy);
+    rotate: var(--rot);
+    animation: settle 1.15s var(--ease-out) forwards;
+    animation-delay: calc(160ms + var(--i) * 85ms);
+  }
+
+  :global(.js) .together__brace {
+    animation: brace-in 0.85s var(--ease-out) 1.15s forwards;
+    transform-origin: left center;
+  }
+
+  :global(.js) .together__link {
+    animation: fade-in 0.5s var(--ease-out) 1.4s forwards;
+  }
+
+  :global(.js) .together__node {
+    animation: node-in 0.75s var(--ease-out) 1.5s forwards;
+  }
+
+  @keyframes settle {
+    from {
+      opacity: 0;
+      translate: var(--dx) var(--dy);
+      rotate: var(--rot);
+      filter: blur(5px);
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+      rotate: 0deg;
+      filter: blur(0);
+    }
+  }
+
+  @keyframes brace-in {
+    from {
+      opacity: 0;
+      scale: 0.4 1;
+    }
+    to {
+      opacity: 1;
+      scale: 1 1;
+    }
+  }
+
+  @keyframes fade-in {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes node-in {
+    from {
+      opacity: 0;
+      scale: 0.5;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .voice,
+    :global(.js) .together__brace,
+    :global(.js) .together__link,
+    :global(.js) .together__node {
+      opacity: 1;
+      translate: none;
+      rotate: none;
+      animation: none;
+    }
+  }
+</style>
