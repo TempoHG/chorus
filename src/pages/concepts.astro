@@ -129,13 +129,20 @@ const concepts = [
   <section class="lead">
     <div class="shell">
       <h1 class="lead__title">
-        Same chorus.<br /> <span class="lead__accent">Different arrangement.</span>
+        Built for the way<br />
+        <span class="lead__accent">your restaurant operates.</span>
       </h1>
+      <p class="lead__sub">No two restaurants grow the same way.</p>
       <p class="lead__sub">
-        Every restaurant has the same twelve voices. What changes is which ones
-        carry the melody. A fine dining room lives or dies on reservations and
-        memory; a café lives on habit; an events venue lives on answering fast.
-        Below is how Chorus is arranged for each.
+        A neighborhood café has different priorities than a steakhouse. A
+        multi-unit quick-service brand operates differently than an
+        event-driven restaurant. What drives success for one may not matter as
+        much for another.
+      </p>
+      <p class="lead__sub">
+        Tempo Chorus adapts to the way you do business—bringing together the
+        tools, automations, and guest experiences that matter most to your
+        restaurant.
       </p>
       <div class="lead__jump">
         <p>Find yours</p>
@@ -210,6 +217,11 @@ const concepts = [
     font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
     line-height: 1.5;
     color: var(--text-mid);
+  }
+
+  /* Subsequent paragraphs sit closer, so the hero reads as one statement. */
+  .lead__sub + .lead__sub {
+    margin-top: 1rem;
   }
 
   .lead__jump {

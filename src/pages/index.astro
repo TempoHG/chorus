@@ -204,26 +204,24 @@ const journey = [
   <section class="why" aria-labelledby="why-title">
     <div class="shell why__inner">
       <h2 class="why__title" id="why-title">
-        <span class="why__stave" aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span>
-        </span>
         <span class="why__titletext">Why "Chorus"?</span>
       </h2>
       <div class="why__text">
         <p class="why__lead">
-          Because a chorus is not one singer. It is a lot of voices, and none of
-          them is asked to stop being itself.
+          A chorus is where individual parts come together to create something
+          stronger than they could on their own.
+        </p>
+        <p>Restaurants work the same way.</p>
+        <p>
+          Your website, guest communications, reviews, marketing, online
+          ordering, private events, and customer relationships all play an
+          important role. But when they're disconnected, opportunities are
+          missed and the guest experience suffers.
         </p>
         <p>
-          They just agree on the key, the tempo and the sheet of music. And what
-          comes out is stronger, clearer and more memorable than any one of them
-          could manage alone.
-        </p>
-        <p>
-          Your restaurant already has the voices. The website, the phone, the
-          texts, the reviews, the regulars, the private event calendar, the
-          person who remembers that table nine drinks Malbec. Tempo Chorus is
-          the sheet of music.
+          Tempo Chorus brings every interaction together into one connected
+          system—so your restaurant delivers a more consistent experience,
+          builds stronger guest relationships, and grows with less effort.
         </p>
         <p class="why__close">All together now.</p>
       </div>
@@ -637,7 +635,7 @@ const journey = [
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(2rem, 6vw, 5rem);
-    align-items: center;
+    align-items: start;
   }
 
   @media (max-width: 62rem) {
@@ -651,38 +649,6 @@ const journey = [
     font-size: clamp(2.1rem, 1.4rem + 4.2vw, 4.4rem);
     letter-spacing: -0.05em;
     color: var(--violet-400);
-    padding-block: clamp(1.5rem, 3vw, 2.5rem);
-  }
-
-  .why__titletext {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Sized off the title box, not the viewport, so the stave still frames the
-     lettering when the title wraps to two lines. */
-  .why__stave {
-    position: absolute;
-    inset-inline: 0;
-    top: 50%;
-    translate: 0 -50%;
-    height: calc(100% - 1.25rem);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .why__stave span {
-    display: block;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--violet-600) 55%, transparent),
-      color-mix(in oklab, var(--violet-600) 55%, transparent) 82%,
-      transparent
-    );
   }
 
   .why__text {

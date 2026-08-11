@@ -155,13 +155,20 @@ const parts = [
   <section class="lead">
     <div class="shell">
       <h1 class="lead__title">
-        Twelve voices.<br /> One sheet of music.
+        Every part of your restaurant already exists.<br />
+        <span class="lead__accent">Tempo Chorus simply brings it all together.</span>
       </h1>
       <p class="lead__sub">
-        Every part below already exists in your restaurant in some form — a
-        phone that rings, an inbox nobody opens, a review that sat there for two
-        weeks. This is what each one becomes when they are all in the same
-        system.
+        Your website. Your phone. Your guest database. Your marketing. Your
+        reviews. Your private events. Every conversation. Every guest.
+      </p>
+      <p class="lead__sub">
+        Individually, they're just pieces of your business.
+      </p>
+      <p class="lead__sub">
+        Connected, they become a system that helps you deliver a better guest
+        experience, build stronger relationships, and create more repeat
+        business.
       </p>
       <div class="lead__jump">
         <p>Jump to</p>
@@ -233,12 +240,22 @@ const parts = [
     letter-spacing: -0.045em;
   }
 
+  .lead__accent {
+    color: var(--mint-400);
+  }
+
   .lead__sub {
     margin-top: 1.75rem;
     max-width: 54ch;
     font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
     line-height: 1.5;
     color: var(--text-mid);
+  }
+
+  /* Subsequent paragraphs in the hero sit closer than the first, so the block
+     reads as one statement rather than three separate ledes. */
+  .lead__sub + .lead__sub {
+    margin-top: 1rem;
   }
 
   .lead__jump {
