@@ -288,7 +288,6 @@ A dark, high-chroma pair — one violet, one green — lifted directly from the 
 | `34rem` (max) | Arrangement chart shortens from 10.5rem to 7.5rem and its rotated labels stay at 0.72rem. |
 | `40rem` (max) | Inbox mock stacks; the connector `wires` SVG is hidden; thread rows reflow to two columns. |
 | `46rem` (max) | Masthead becomes two rows — see **The No-Hidden-Menu Rule**. |
-| `56rem` (max) | ConvergenceScore swaps its landscape SVG for the portrait SVG. |
 | `60rem` (min/max) | Features voice grid collapses to one column; above it, the voice-name column becomes `position: sticky; top: 6.5rem`. Also the chaos-hero type ramp. |
 | `62rem` (min/max) | The primary layout hinge: hero, "Why Chorus?", concept and demo grids all collapse to one column. Above it, vignettes take their staggered indents. |
 | `66rem` (max) | Product-mock grid goes single-column and the ad-to-table flow cards stack vertically. |
@@ -381,11 +380,8 @@ Twelve labeled voices stacked as `name / hairline-rule` rows, clamped on the rig
 
 ### Signature: Arrangement (the concepts chart)
 
-The same twelve voices as a weighted bar chart with three states: supporting (`--h: 20%`, violet-600 at 55%), active (`46%`, violet-400 at 70%), leading (`100%`, solid `--mint-400` with a `--mint-300` notehead floating 0.75rem above the cap). Channel names are rotated 90° below the axis at 0.68rem. The whole chart is a single `role="img"` with a written `aria-label` naming the leading voices — the bars are decoration over an accessible sentence.
+The same twelve voices as a weighted bar chart with three states: supporting (`--h: 20%`, violet-600 at 55%), active (`46%`, violet-400 at 70%), leading (`100%`, solid `--mint-400` with a `--mint-300` notehead floating 0.75rem above the cap). Channel names are rotated 90° below the axis at 0.72rem. The whole chart is a single `role="img"` with a written `aria-label` naming the leading voices — the bars are decoration over an accessible sentence.
 
-### Signature: ConvergenceScore (built, available, not shipped)
-
-A complete component that draws all twelve channels as labeled paths curving into one green node, with a landscape SVG (1180×560) and a portrait SVG (420×690) that swap at 56rem, a proper `<title>`/`<desc>` pair, a stroke-dash draw-in staggered at 85ms per voice, and a caption pairing a `--amber-400` strike-through ("Twelve places to look.") against a `--mint-400` resolution ("One conversation."). **It is currently imported by nothing.** Treat it as available inventory, not as shipped design; if it is ever mounted, it becomes a second authored motion moment and the choice under **The One Authored Moment Rule** must be made explicitly.
 
 ### Alternate: ChaosField (reachable, not default)
 

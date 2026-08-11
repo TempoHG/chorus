@@ -22,3 +22,13 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Impeccable session artifacts
+.impeccable/hook.cache.json
+.impeccable/questions/
+.impeccable/config.local.json
+
+# Design tooling (not part of the deployed site)
+.agents/
+.claude/
+.astro/
