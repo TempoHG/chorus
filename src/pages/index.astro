@@ -8,6 +8,10 @@ import ProductMocks from "../components/ProductMocks.astro";
 // "chaos" opens on the fragmentation, unresolved. Switch here to compare.
 const HERO: "together" | "chaos" = "together";
 
+// GoHighLevel booking calendar. The widget's own look is set in GHL
+// (Calendars → Customise), not here — this page only frames it.
+const CALENDAR_ID = "I5Q7FwuP2H7GVLaL1Cai";
+
 const vignettes = [
   {
     marker: "Two miles away · Tuesday",
@@ -267,44 +271,29 @@ const journey = [
       </div>
 
       <div class="demo__form">
-        <!-- PLACEHOLDER: replace this block with the Tempo Chorus GoHighLevel
-             booking-calendar embed. Field names below match a standard GHL form. -->
-        <form class="booking" method="post" action="#" novalidate>
-          <p class="booking__heading">Book your demo</p>
-          <label>
-            <span>Your name</span>
-            <input type="text" name="full_name" autocomplete="name" required />
-          </label>
-          <label>
-            <span>Restaurant</span>
-            <input type="text" name="company_name" autocomplete="organization" required />
-          </label>
-          <label>
-            <span>Email</span>
-            <input type="email" name="email" autocomplete="email" required />
-          </label>
-          <label>
-            <span>Phone</span>
-            <input type="tel" name="phone" autocomplete="tel" />
-          </label>
-          <label>
-            <span>How many locations?</span>
-            <select name="locations">
-              <option>One</option>
-              <option>Two to five</option>
-              <option>Six to twenty</option>
-              <option>More than twenty</option>
-            </select>
-          </label>
-          <button class="btn booking__submit" type="submit">Book my demo</button>
+        <div class="booking">
+          <p class="booking__heading">Pick a time</p>
+          <div class="booking__widget">
+            <iframe
+              src={`https://api.leadconnectorhq.com/widget/booking/${CALENDAR_ID}`}
+              title="Book a Tempo Chorus demo"
+              loading="lazy"
+              scrolling="no"
+              id={CALENDAR_ID}
+            ></iframe>
+          </div>
           <p class="booking__note">
-            We'll reply the same day. This form is a placeholder pending the
-            live booking calendar.
+            Around 30 minutes. You'll get a confirmation by email and a reminder
+            the day before — sent, as it happens, by Chorus.
           </p>
-        </form>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- GoHighLevel's resize script: lets the booking iframe report its own
+       height so the panel grows with the widget instead of scrolling. -->
+  <script is:inline src="https://link.msgsndr.com/js/form_embed.js"></script>
 </Base>
 
 <style>
@@ -950,46 +939,22 @@ const journey = [
     margin-bottom: 0.35rem;
   }
 
-  .booking label {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-  }
-
-  .booking label span {
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    color: var(--text-mid);
-  }
-
-  .booking input,
-  .booking select {
-    font: inherit;
-    font-size: 1rem;
-    color: var(--text-hi);
-    background: var(--ink-900);
-    border: 1px solid color-mix(in oklab, var(--violet-500) 32%, transparent);
+  /* The GHL widget renders its own interface inside the iframe and cannot be
+     restyled from here. Rather than fight it, the panel gives it a light,
+     deliberate inset that reads as an embedded tool. Its colours and fonts are
+     set in GoHighLevel under Calendars -> Customise. */
+  .booking__widget {
+    background: var(--paper);
     border-radius: 3px;
-    padding: 0.7rem 0.85rem;
-    transition: border-color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+    overflow: hidden;
+    min-height: 44rem;
   }
 
-  .booking input:hover,
-  .booking select:hover {
-    border-color: color-mix(in oklab, var(--violet-400) 60%, transparent);
-  }
-
-  .booking input:focus,
-  .booking select:focus {
-    outline: none;
-    border-color: var(--mint-400);
-    box-shadow: 0 0 0 3px color-mix(in oklab, var(--mint-400) 22%, transparent);
-  }
-
-  .booking__submit {
-    margin-top: 0.6rem;
-    justify-content: center;
+  .booking__widget iframe {
+    display: block;
+    width: 100%;
+    min-height: 44rem;
+    border: 0;
   }
 
   .booking__note {
