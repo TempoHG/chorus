@@ -948,8 +948,13 @@ const journey = [
      restyled from here. Rather than fight it, the panel gives it a light,
      deliberate inset that reads as an embedded tool. Its colours and fonts are
      set in GoHighLevel under Calendars -> Customise. */
+  /* Transparent, so whatever the widget paints is the only background there is.
+     While GHL's calendar background is white this reads as a light card on the
+     dark panel; set backgroundColor to --ink-700 in GHL (Calendars → Customise)
+     and the seam disappears entirely. Keeping this dark also removes the white
+     flash that showed before the iframe finished loading. */
   .booking__widget {
-    background: var(--paper);
+    background: transparent;
     border-radius: 3px;
     overflow: hidden;
     min-height: 44rem;
