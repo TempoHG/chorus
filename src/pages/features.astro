@@ -217,13 +217,20 @@ const parts = [
   <section class="close">
     <div class="shell close__inner">
       <h2 class="close__title">
-        Read as a list, it is twelve things.<br />
-        Used for a week, it is one.
+        Many interactions.<br />
+        <span class="close__accent">One relationship.</span>
       </h2>
       <p class="close__sub">
-        The point was never the length of this page. It is that a guest who
-        calls, texts, books, eats, reviews and comes back is one person having
-        one relationship with you — and now your software agrees.
+        Every call, reservation, review, text message, and return visit belongs
+        to the same guest.
+      </p>
+      <p class="close__sub">
+        Tempo Chorus keeps every conversation connected, so nothing gets lost
+        and every interaction builds on the last.
+      </p>
+      <p class="close__statement">
+        Because your guests experience one restaurant.<br />
+        Your technology should too.
       </p>
       <a class="btn" href="/#demo">Book a demo</a>
     </div>
@@ -428,11 +435,33 @@ const parts = [
     letter-spacing: -0.04em;
   }
 
+  /* Green marks the resolution, which is what this line is. */
+  .close__accent {
+    color: var(--mint-400);
+  }
+
   .close__sub {
     margin-top: 1.6rem;
     max-width: 56ch;
     color: var(--text-mid);
     font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+  }
+
+  .close__sub + .close__sub {
+    margin-top: 1rem;
+  }
+
+  /* The last two lines are the argument, not supporting copy — promoted into
+     the display face so the page ends on a statement rather than a paragraph. */
+  .close__statement {
+    margin-top: clamp(2rem, 4vw, 2.75rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 0.95rem + 1.7vw, 2.1rem);
+    font-weight: 600;
+    line-height: 1.24;
+    letter-spacing: -0.03em;
+    color: var(--text-hi);
+    max-width: 44ch;
   }
 
   .close__inner .btn {
