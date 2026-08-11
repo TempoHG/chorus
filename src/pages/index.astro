@@ -8,9 +8,14 @@ import ProductMocks from "../components/ProductMocks.astro";
 // "chaos" opens on the fragmentation, unresolved. Switch here to compare.
 const HERO: "together" | "chaos" = "together";
 
-// GoHighLevel booking calendar. The widget's own look is set in GHL
-// (Calendars → Customise), not here — this page only frames it.
+// GoHighLevel booking calendar, served from the Tempo whitelabel domain — NOT
+// api.leadconnectorhq.com, which does not serve this calendar. WIDGET_ID is the
+// id GHL's form_embed.js looks for when it posts the resize message back, so it
+// must stay exactly as GHL generated it. The widget's own look is set in GHL
+// (Calendars → Customise), not here; this page only frames it.
+const GHL_DOMAIN = "https://links.tempohg.com";
 const CALENDAR_ID = "I5Q7FwuP2H7GVLaL1Cai";
+const WIDGET_ID = "yVHkwu10vymju35mIkBW_1786414705061";
 
 const vignettes = [
   {
@@ -275,11 +280,11 @@ const journey = [
           <p class="booking__heading">Pick a time</p>
           <div class="booking__widget">
             <iframe
-              src={`https://api.leadconnectorhq.com/widget/booking/${CALENDAR_ID}`}
+              src={`${GHL_DOMAIN}/widget/booking/${CALENDAR_ID}`}
               title="Book a Tempo Chorus demo"
-              loading="lazy"
+              allow="payment"
               scrolling="no"
-              id={CALENDAR_ID}
+              id={WIDGET_ID}
             ></iframe>
           </div>
           <p class="booking__note">
@@ -293,7 +298,7 @@ const journey = [
 
   <!-- GoHighLevel's resize script: lets the booking iframe report its own
        height so the panel grows with the widget instead of scrolling. -->
-  <script is:inline src="https://link.msgsndr.com/js/form_embed.js"></script>
+  <script is:inline src={`${GHL_DOMAIN}/js/form_embed.js`}></script>
 </Base>
 
 <style>
