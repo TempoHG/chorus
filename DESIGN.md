@@ -344,9 +344,9 @@ Corners are near-square: **2px** (buttons, focus-visible), **3px** (form fields)
 - **Mobile (≤46rem):** two rows — see **The No-Hidden-Menu Rule**.
 - **Footer:** `--ink-800` above a 24% violet hairline, wordmark plus prose, a vertical nav in the display face that goes green on hover, a base row carrying the copyright and the illustrative-content disclosure.
 
-### Signature: TogetherField (the hero)
+### Signature: PhoneField (the hero)
 
-Channel labels stacked as `name / hairline-rule` rows, each joined by a thin flow line to a circular green node containing the Tempo mark — a convergence, not a brace. Each label's resting place is its true layout position; the scatter (`--dx` in `vw`, `--dy` in `rem`, `--rot` in degrees) is a transform applied on top, so the arrival is compositor-safe.
+Channel labels stacked as `name / hairline-rule` rows, each joined by a thin flow line that converges on a circular green node — badged right at the seam of a stylized phone showing a restaurant menu screen (name, rating, category tabs, dish rows with a color-swatch stand-in for a photo), whose content auto-scrolls in a seamless loop. The node's core is sized generously (80% of its halo, a 58% mark) so the Tempo mark reads clearly rather than looking swallowed by whitespace. Each label's resting place is its true layout position; the scatter (`--dx` in `vw`, `--dy` in `rem`, `--rot` in degrees) is a transform applied on top, so the arrival is compositor-safe. Strand endpoints extend slightly past the node's near edge (not stopping exactly at the boundary) so the convergence reads as solid even before the arrival animation settles. Below `36rem` the phone grows rather than shrinks — dish names and prices stay legible — while the channel list and node compress to make room.
 
 ### Signature: Authored UI mockups (ProductMocks / FeatureArt)
 

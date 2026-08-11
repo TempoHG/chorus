@@ -1,0 +1,510 @@
+---
+import TempoMark from "./TempoMark.astro";
+
+/* MOCKUP — hero concept #3. The original convergence mechanic (8 channels,
+   flow lines, one node) now lands directly into a stylized phone showing a
+   restaurant menu screen, Tempo mark badged right at the seam — narrower
+   overall than the original spread, and unmistakably a restaurant product.
+   The menu screen is authored UI (color swatches, not photography) to keep
+   the site's standing no-photography rule; swap for real dish photos later
+   if that rule gets revisited for this surface. Screen content auto-scrolls
+   in a seamless loop (rendered twice, translated by exactly -50%). */
+const voices = [
+  { label: "Website", dx: "-30vw", dy: "-7rem", rot: "-6deg" },
+  { label: "Phone", dx: "18vw", dy: "-10rem", rot: "5deg" },
+  { label: "Text", dx: "-20vw", dy: "6rem", rot: "4deg" },
+  { label: "Email", dx: "24vw", dy: "-3rem", rot: "-5deg" },
+  { label: "Social", dx: "-34vw", dy: "5rem", rot: "5deg" },
+  { label: "Reviews", dx: "14vw", dy: "9rem", rot: "-4deg" },
+  { label: "Events", dx: "-16vw", dy: "-11rem", rot: "6deg" },
+  { label: "Guests", dx: "20vw", dy: "-6rem", rot: "-4deg" },
+];
+
+const dishes = [
+  { name: "Charred Octopus", price: "$19", tag: "Chef's pick", tone: "violet" },
+  { name: "Burrata & Peach", price: "$16", tag: null, tone: "amber" },
+  { name: "Braised Short Rib", price: "$32", tag: null, tone: "mint" },
+  { name: "Wild Mushroom Risotto", price: "$24", tag: null, tone: "violet" },
+  { name: "Roasted Half Chicken", price: "$27", tag: "Popular", tone: "amber" },
+  { name: "Olive Oil Cake", price: "$11", tag: null, tone: "mint" },
+];
+---
+
+<div class="merge">
+  <div class="merge__list">
+    <ol class="merge__voices">
+      {
+        voices.map((v, i) => (
+          <li
+            class="mvoice"
+            style={`--dx:${v.dx}; --dy:${v.dy}; --rot:${v.rot}; --i:${i}`}
+          >
+            <span class="mvoice__name">{v.label}</span>
+            <span class="mvoice__rule" aria-hidden="true" />
+          </li>
+        ))
+      }
+    </ol>
+
+    <svg class="merge__flow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      {
+        voices.map((v, i) => {
+          // Must match the true center of each flex row, not a naive even
+          // split — the row gap is a real fraction of row height (k), so
+          // true centers space out wider than 1/n or the curve visibly
+          // kinks against the straight rule where they meet on the left.
+          const n = voices.length;
+          const k = 0.625; // gap / row-height, measured against the built row rhythm
+          const y = ((0.5 + i * (1 + k)) / (n + (n - 1) * k)) * 100;
+          return (
+            <path
+              class="merge__strand"
+              d={`M0 ${y.toFixed(2)} C 45 ${y.toFixed(2)}, 85 50, 130 50`}
+              style={`--i:${i}`}
+            />
+          );
+        })
+      }
+    </svg>
+  </div>
+
+  <span class="merge__node" aria-hidden="true">
+    <span class="merge__halo" />
+    <span class="merge__core">
+      <TempoMark class="merge__spark" />
+    </span>
+  </span>
+
+  <div class="phone">
+    <div class="phone__screen">
+      <div class="menu-scroll">
+        <div class="menu-scroll__track">
+          {
+            [0, 1].map(() => (
+              <div class="menu">
+                <div class="menu__head">
+                  <p class="menu__name">Rosewood Kitchen</p>
+                  <p class="menu__meta">4.8 &#9733; &middot; Open now</p>
+                </div>
+                <div class="menu__tabs">
+                  <span class="menu__tab is-active">Mains</span>
+                  <span class="menu__tab">Starters</span>
+                  <span class="menu__tab">Drinks</span>
+                  <span class="menu__tab">Dessert</span>
+                </div>
+                <ul class="menu__list">
+                  {dishes.map((d) => (
+                    <li class="dish">
+                      <span class={`dish__swatch dish__swatch--${d.tone}`} aria-hidden="true" />
+                      <span class="dish__info">
+                        <span class="dish__name">{d.name}</span>
+                        {d.tag && <span class="dish__tag">{d.tag}</span>}
+                      </span>
+                      <span class="dish__price">{d.price}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <span class="phone__notch" aria-hidden="true" />
+  </div>
+</div>
+
+<style>
+  .merge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+
+  /* ---- the converging list ---- */
+
+  .merge__list {
+    position: relative;
+    flex: 1 1 12rem;
+    max-width: 13.5rem;
+    padding-right: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .merge__voices {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.55rem, 1.4vw, 0.95rem);
+  }
+
+  .mvoice {
+    display: grid;
+    grid-template-columns: minmax(0, auto) minmax(1rem, 1fr);
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .mvoice__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(0.85rem, 0.8rem + 0.3vw, 0.95rem);
+    letter-spacing: -0.02em;
+    color: var(--text-hi);
+    white-space: nowrap;
+  }
+
+  .mvoice__rule {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--violet-500) 30%, transparent),
+      color-mix(in oklab, var(--violet-500) 80%, transparent)
+    );
+  }
+
+  .merge__flow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: clamp(2.5rem, 5vw, 3.5rem);
+    height: 100%;
+    overflow: visible;
+  }
+
+  .merge__strand {
+    fill: none;
+    stroke: color-mix(in oklab, var(--violet-400) 65%, transparent);
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+  }
+
+  /* ---- the node, bridging list and phone ---- */
+
+  .merge__node {
+    position: relative;
+    flex: none;
+    width: clamp(2.6rem, 4vw, 3.4rem);
+    height: clamp(2.6rem, 4vw, 3.4rem);
+    margin-right: clamp(-1.6rem, -2.4vw, -1.2rem);
+    z-index: 2;
+    display: grid;
+    place-items: center;
+  }
+
+  .merge__halo {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: color-mix(in oklab, var(--mint-400) 14%, transparent);
+    border: 2px solid color-mix(in oklab, var(--mint-500) 65%, var(--ink-900));
+  }
+
+  .merge__core {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background: var(--mint-400);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 10px 24px -10px color-mix(in oklab, var(--mint-400) 60%, transparent);
+  }
+
+  .merge__spark {
+    width: 58%;
+    height: 58%;
+    color: var(--ink-900);
+  }
+
+  /* ---- the phone ---- */
+
+  .phone {
+    position: relative;
+    flex: none;
+    width: clamp(11.5rem, 15vw, 14rem);
+    aspect-ratio: 9 / 19.5;
+    background: var(--ink-800);
+    border: 2px solid color-mix(in oklab, var(--violet-500) 45%, transparent);
+    border-radius: 2rem;
+    padding: 0.55rem;
+    box-shadow: 0 30px 60px -28px rgb(0 0 0 / 0.9);
+  }
+
+  .phone__screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--ink-900);
+    border-radius: 1.5rem;
+    overflow: hidden;
+  }
+
+  .phone__notch {
+    position: absolute;
+    top: 0.55rem;
+    left: 50%;
+    translate: -50% 0;
+    width: 34%;
+    height: 0.8rem;
+    background: var(--ink-800);
+    border-radius: 0 0 0.6rem 0.6rem;
+    z-index: 2;
+  }
+
+  .menu-scroll {
+    position: absolute;
+    inset: 0;
+    padding-top: 1.4rem;
+  }
+
+  .menu-scroll__track {
+    animation: scroll-loop 16s linear infinite;
+  }
+
+  .menu {
+    padding: 0.75rem 0.75rem 0;
+  }
+
+  .menu__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: -0.02em;
+    color: var(--text-hi);
+  }
+
+  .menu__meta {
+    margin-top: 0.15rem;
+    font-size: 0.58rem;
+    color: var(--text-low);
+  }
+
+  .menu__tabs {
+    margin-top: 0.6rem;
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .menu__tab {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.56rem;
+    padding: 0.24rem 0.5rem;
+    border-radius: 999px;
+    color: var(--text-mid);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 35%, transparent);
+  }
+
+  .menu__tab.is-active {
+    color: var(--ink-900);
+    background: var(--mint-400);
+    border-color: transparent;
+  }
+
+  .menu__list {
+    list-style: none;
+    margin: 0.65rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .dish {
+    display: grid;
+    grid-template-columns: 1.9rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dish__swatch {
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 0.45rem;
+    flex: none;
+  }
+
+  .dish__swatch--violet {
+    background: linear-gradient(150deg, var(--violet-600), var(--violet-400));
+  }
+
+  .dish__swatch--amber {
+    background: linear-gradient(150deg, var(--amber-500), var(--amber-400));
+  }
+
+  .dish__swatch--mint {
+    background: linear-gradient(150deg, var(--mint-500), var(--mint-400));
+  }
+
+  .dish__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.12rem;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .dish__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.66rem;
+    color: var(--text-hi);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dish__tag {
+    font-size: 0.54rem;
+    color: var(--mint-300);
+  }
+
+  .dish__price {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.66rem;
+    color: var(--text-mid);
+  }
+
+  @keyframes scroll-loop {
+    from {
+      translate: 0 0;
+    }
+    to {
+      translate: 0 -50%;
+    }
+  }
+
+  /* ---- arrival, matching the site's other hero variants ---- */
+
+  :global(.js) .mvoice,
+  :global(.js) .merge__strand,
+  :global(.js) .merge__node {
+    opacity: 0;
+  }
+
+  :global(.js) .mvoice {
+    translate: var(--dx) var(--dy);
+    rotate: var(--rot);
+    animation: settle 1.15s var(--ease-out) forwards;
+    animation-delay: calc(160ms + var(--i) * 85ms);
+  }
+
+  :global(.js) .merge__strand {
+    animation: strand-fade 0.6s var(--ease-out) forwards;
+    animation-delay: calc(1.05s + var(--i) * 60ms);
+  }
+
+  :global(.js) .merge__node {
+    animation: node-in 0.75s var(--ease-out) 1.55s forwards;
+  }
+
+  @keyframes settle {
+    from {
+      opacity: 0;
+      translate: var(--dx) var(--dy);
+      rotate: var(--rot);
+      filter: blur(5px);
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+      rotate: 0deg;
+      filter: blur(0);
+    }
+  }
+
+  @keyframes strand-fade {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes node-in {
+    from {
+      opacity: 0;
+      scale: 0.5;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-scroll__track {
+      animation: none;
+    }
+    :global(.js) .mvoice,
+    :global(.js) .merge__strand,
+    :global(.js) .merge__node {
+      opacity: 1;
+      translate: none;
+      rotate: none;
+      animation: none;
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .merge {
+      gap: 0;
+    }
+    .merge__list {
+      flex-basis: 4.75rem;
+      max-width: 5rem;
+      padding-right: 0.9rem;
+    }
+    .mvoice__name {
+      font-size: 0.62rem;
+    }
+    .merge__flow {
+      width: 0.9rem;
+    }
+    .merge__node {
+      width: 1.9rem;
+      height: 1.9rem;
+      margin-right: -0.75rem;
+    }
+    /* The phone gets bigger, not smaller, on mobile — there's plenty of
+       vertical room to scroll, and the menu screen needs to stay legible
+       rather than shrinking to an unreadable thumbnail. */
+    .phone {
+      width: 10rem;
+      border-radius: 1.5rem;
+      padding: 0.5rem;
+    }
+    .phone__screen {
+      border-radius: 1.05rem;
+    }
+    .menu__name {
+      font-size: 0.85rem;
+    }
+    .menu__meta {
+      font-size: 0.66rem;
+    }
+    .menu__tab {
+      font-size: 0.62rem;
+      padding: 0.26rem 0.55rem;
+    }
+    .dish {
+      grid-template-columns: 2.05rem minmax(0, 1fr) auto;
+      gap: 0.55rem;
+    }
+    .dish__name {
+      font-size: 0.72rem;
+    }
+    .dish__price {
+      font-size: 0.72rem;
+    }
+    .dish__tag {
+      font-size: 0.6rem;
+    }
+    .dish__swatch {
+      width: 2.05rem;
+      height: 2.05rem;
+    }
+  }
+</style>
