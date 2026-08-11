@@ -115,26 +115,28 @@ svg {
   max-width: 46ch;
 }
 
-/* ---- The score: shared notation primitives ---- */
+/* ---- Shared connective primitives ---- */
 
-.stave-rule {
+/* A plain hairline divider — used between sections, list rows and cards. */
+.hairline {
   height: 1px;
   width: 100%;
   background: linear-gradient(
     90deg,
     transparent,
-    color-mix(in oklab, var(--violet-500) 55%, transparent) 12%,
-    color-mix(in oklab, var(--violet-500) 55%, transparent) 88%,
+    color-mix(in oklab, var(--violet-500) 45%, transparent) 12%,
+    color-mix(in oklab, var(--violet-500) 45%, transparent) 88%,
     transparent
   );
 }
 
-.notehead {
-  width: 0.7em;
-  height: 0.55em;
+/* The list marker used everywhere a bullet is needed. Plain and small on
+   purpose — no rotation, no notation reference. */
+.dot {
+  width: 0.42em;
+  height: 0.42em;
   border-radius: 50%;
   background: currentColor;
-  transform: rotate(-22deg);
   flex: none;
 }
 
@@ -185,4 +187,44 @@ svg {
   --btn-bg: color-mix(in oklab, var(--violet-600) 22%, transparent);
   --btn-fg: var(--text-hi);
   box-shadow: inset 0 0 0 1px var(--violet-400);
+}
+
+/* ---- Scroll reveal: one small entrance, never a repeating effect ---- */
+/* [data-reveal]: its direct children stagger in via --i. [data-reveal-solo]:
+   the element itself fades in as one block. Both no-op without JS or with
+   reduced motion — see the observer script in Base.astro. */
+
+.js [data-reveal] > * {
+  opacity: 0;
+  translate: 0 14px;
+}
+
+.js [data-reveal].is-in > * {
+  animation: reveal-in 0.6s var(--ease-out) forwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+.js [data-reveal-solo] {
+  opacity: 0;
+  translate: 0 14px;
+}
+
+.js [data-reveal-solo].is-in {
+  animation: reveal-in 0.6s var(--ease-out) forwards;
+}
+
+@keyframes reveal-in {
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] > *,
+  .js [data-reveal-solo] {
+    opacity: 1;
+    translate: none;
+    animation: none;
+  }
 }

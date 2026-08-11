@@ -5,7 +5,7 @@ import Wordmark from "../components/Wordmark.astro";
 interface Props {
   title: string;
   description: string;
-  active?: "home" | "features" | "concepts";
+  active?: "home" | "features" | "concepts" | "pricing";
 }
 const { title, description, active } = Astro.props;
 ---
@@ -28,20 +28,23 @@ const { title, description, active } = Astro.props;
   </head>
   <body>
     <!--
-      THESIS: A restaurant's guest channels drawn as a choral score, many voices braced
-      into one system reading the same measures. Refuses the SaaS feature-icon grid and
-      the "all-in-one platform" claim-without-proof hero.
-      OWN-WORLD: Night score-paper navy ground; violet stave rules, braces and bar lines as
-      the component language; brand green marks what Chorus resolves — the leading voice,
-      the answered moment, the primary action; amber marks the unresolved. Bricolage
-      Grotesque display over Archivo text.
-      STORY: The operator learns in one image that twelve scattered channels become one
-      system, is told plainly what it is not, accumulates belief through concrete guest
-      moments and product surfaces, then books a demo.
-      FIRST VIEWPORT: Headline left over a right-hand field of twelve channel voices that
-      arrive scattered and settle into one braced system joined to the Tempo mark; green
+      THESIS: A restaurant's scattered guest channels visibly flow together into one
+      platform. Refuses the SaaS feature-icon grid, the "all-in-one platform"
+      claim-without-proof hero, and (per the client brief) literal musical notation.
+      OWN-WORLD: Night navy ground; violet hairlines and flow-line connectors as the
+      component language; brand green marks what Chorus resolves — the answered moment,
+      the confirmed booking, the primary action; amber marks the unresolved. Authored
+      UI-mockup panels (inbox, calendar, reviews, service) are the primary proof system.
+      Bricolage Grotesque display over Archivo text.
+      STORY: The operator learns in one image that scattered channels become one
+      platform, sees the four jobs it does (Get Found, Stay Connected, Bring Guests
+      Back, Save Time), accumulates belief through concrete guest moments and Restaurant
+      Systems, understands pricing in seconds, then books a demo.
+      FIRST VIEWPORT: Headline left over a right-hand field of channel labels that arrive
+      scattered and settle, each joined by a thin flow line to the Tempo node; green
       action inline beneath the sub.
-      FORM: Vignette-Chain Spine, index 1 of 7, seed key a75a316e.
+      FORM: Brief-pinned redesign, retiring the prior Vignette-Chain Spine (seed key
+      a75a316e) notation system per Tempo_Chorus_Website_Design_Brief_for_Claude.docx.
       FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
     -->
     <a class="skip" href="#main">Skip to content</a>
@@ -53,6 +56,7 @@ const { title, description, active } = Astro.props;
           <a href="/" aria-current={active === "home" ? "page" : undefined}>Overview</a>
           <a href="/features" aria-current={active === "features" ? "page" : undefined}>What it does</a>
           <a href="/concepts" aria-current={active === "concepts" ? "page" : undefined}>Who it's for</a>
+          <a href="/pricing" aria-current={active === "pricing" ? "page" : undefined}>Pricing</a>
           <a class="btn masthead__cta" href="/#demo">Book a demo</a>
         </nav>
       </div>
@@ -75,6 +79,7 @@ const { title, description, active } = Astro.props;
           <a href="/">Overview</a>
           <a href="/features">What it does</a>
           <a href="/concepts">Who it's for</a>
+          <a href="/pricing">Pricing</a>
           <a href="/#demo">Book a demo</a>
         </nav>
       </div>
@@ -88,6 +93,67 @@ const { title, description, active } = Astro.props;
       </div>
     </footer>
 
+    <script>
+      // Restrained scroll reveal: each [data-reveal]'s children (and each
+      // [data-reveal-solo] itself) fade + lift in once, the first time they
+      // enter view. No-ops entirely under reduced motion or without JS —
+      // the CSS only hides them once the `.js` class is present.
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const revealTargets = document.querySelectorAll(
+        "[data-reveal], [data-reveal-solo]",
+      );
+
+      if (reduceMotion || !("IntersectionObserver" in window)) {
+        revealTargets.forEach((el) => el.classList.add("is-in"));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-in");
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.25, rootMargin: "0px 0px -10% 0px" },
+        );
+        revealTargets.forEach((el) => io.observe(el));
+      }
+
+      // A single authored stat count-up (e.g. "calls answered after close").
+      const counters = document.querySelectorAll("[data-count-to]");
+      if (!counters.length) {
+        // no-op
+      } else if (reduceMotion) {
+        counters.forEach((el) => {
+          el.textContent = el.getAttribute("data-count-to") ?? el.textContent;
+        });
+      } else {
+        const countIo = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              const el = entry.target;
+              countIo.unobserve(el);
+              const to = parseInt(el.getAttribute("data-count-to") || "0", 10);
+              const duration = 900;
+              const start = performance.now();
+              const tick = (now) => {
+                const p = Math.min(1, (now - start) / duration);
+                const eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = String(Math.round(to * eased));
+                if (p < 1) requestAnimationFrame(tick);
+              };
+              requestAnimationFrame(tick);
+            }
+          },
+          { threshold: 0.6 },
+        );
+        counters.forEach((el) => countIo.observe(el));
+      }
+    </script>
   </body>
 </html>
 

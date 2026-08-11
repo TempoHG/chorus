@@ -1,0 +1,897 @@
+---
+import TempoMark from "./TempoMark.astro";
+
+/* The site's shared library of authored UI-mockup panels — restaurant
+   surfaces shown doing their job, not stock photography and not literal
+   musical notation. Every name, figure and timestamp below is authored
+   demonstration material, not a real customer record — the footer labels
+   it, and PRODUCT.md lists it for replacement with real screens. Used on
+   the homepage (a handful of these, as general proof) and on the features
+   page (one per capability category). Each panel gets a small, restrained
+   entrance the first time it scrolls into view — see the reveal script in
+   Base.astro. */
+interface Props {
+  kind: "calendar" | "reviews" | "reservations" | "inbox" | "afterhours" | "attribution";
+}
+const { kind } = Astro.props;
+
+/* --- Get Found: a month of guest communication --- */
+const channels = [
+  { name: "Email", tone: "violet" },
+  { name: "Text", tone: "green" },
+  { name: "Social", tone: "lilac" },
+  { name: "Ads", tone: "amber" },
+];
+const month: Record<number, { label: string; time: string; tone: string }[]> = {
+  3: [{ label: "New menu email", time: "9:00", tone: "violet" }],
+  4: [{ label: "Lunch special", time: "11:00", tone: "green" }],
+  5: [{ label: "Instagram post", time: "12:00", tone: "lilac" }],
+  6: [{ label: "Weekend push", time: "17:00", tone: "amber" }],
+  9: [{ label: "Behind the pass", time: "14:00", tone: "lilac" }],
+  10: [{ label: "Win-back send", time: "9:00", tone: "violet" }],
+  12: [{ label: "Table reminder", time: "16:00", tone: "green" }],
+  13: [{ label: "Local promotion", time: "8:00", tone: "amber" }],
+  17: [{ label: "Review request", time: "10:00", tone: "green" }],
+  19: [{ label: "Private events", time: "13:00", tone: "violet" }],
+  20: [{ label: "Friday push", time: "16:00", tone: "green" }],
+  24: [{ label: "Regulars offer", time: "9:00", tone: "violet" }],
+  26: [{ label: "Half-term", time: "11:00", tone: "lilac" }],
+};
+
+/* --- Bring Guests Back: the review queue --- */
+const reviews = [
+  {
+    source: "Google",
+    stars: 5,
+    quote: "The carbonara is the best I have had outside Rome.",
+    who: "Marta L.",
+    state: "replied",
+    when: "Replied in 40 min",
+  },
+  {
+    source: "Facebook",
+    stars: 5,
+    quote: "Booked for eight and they remembered the birthday.",
+    who: "Dan R.",
+    state: "replied",
+    when: "Replied in 2 hrs",
+  },
+  {
+    source: "Google",
+    stars: 3,
+    quote: "Food was excellent. Waited 25 minutes for the check.",
+    who: "Priya S.",
+    state: "needs-human",
+    when: "Flagged for you",
+  },
+];
+
+/* --- Save Time: a service, running itself --- */
+const service = [
+  { time: "18:00", party: "Party of 2", note: "Confirmed", state: "ok" },
+  { time: "18:30", party: "Party of 4", note: "Reminded yesterday", state: "ok" },
+  { time: "19:00", party: "Party of 8", note: "Cancelled 16:12 — table released", state: "alert" },
+  { time: "19:30", party: "Party of 6", note: "Confirmed · allergy noted", state: "ok" },
+  { time: "20:00", party: "Party of 2", note: "Waitlist promoted", state: "new" },
+];
+
+/* --- Stay Connected: one guest, every channel --- */
+const thread = [
+  { src: "Instagram", text: "Do you do anything gluten-free?", time: "Sun 9:12", ours: false },
+  { src: "Text", text: "Any chance of a table for 4 Friday?", time: "Wed 16:40", ours: false },
+  { src: "Chorus", text: "Friday 7:30 confirmed. Noted GF for the kitchen.", time: "Wed 16:40", ours: true },
+];
+
+/* --- Save Time: the after-hours call --- */
+const steps = [
+  "Chorus answers on the second ring",
+  "“Table for six, Saturday, around 7:30”",
+  "Held against the floor plan",
+];
+
+/* --- Get Found: an ad, followed all the way to the table --- */
+const flow = [
+  { label: "Tuesday", title: "Sees your ad", meta: "Instagram · 2 miles away", done: false },
+  { label: "Tuesday", title: "Lands on your page", meta: "Menu · Book a table", done: false },
+  { label: "Friday", title: "Sits down", meta: "Party of 2 · 8:00 PM", done: true },
+];
+---
+
+<figure class="art">
+  {
+    kind === "calendar" && (
+      <div class="art__stage" data-reveal-solo>
+        <div class="art__head">
+          <p class="art__title">February</p>
+          <ul class="chips">
+            {channels.map((c) => (
+              <li class={`chip chip--${c.tone}`}>{c.name}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="cal">
+          {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
+            <p class="cal__dow">{d}</p>
+          ))}
+          {
+            Array.from({ length: 28 }, (_, i) => i + 1).map((day) => (
+              <div class="cal__day">
+                <span class="cal__num">{day}</span>
+                {(month[day] ?? []).map((e) => (
+                  <span class={`cal__entry cal__entry--${e.tone}`}>
+                    <span class="cal__label">{e.label}</span>
+                    <span class="cal__time">{e.time}</span>
+                  </span>
+                ))}
+              </div>
+            ))
+          }
+        </div>
+        <p class="art__sum">One sitting to approve · four channels · a month of guest contact</p>
+      </div>
+    )
+  }
+
+  {
+    kind === "reviews" && (
+      <div class="art__stage">
+        <div class="art__head">
+          <p class="art__title">Reviews</p>
+          <p class="art__meta">Every platform, one queue</p>
+        </div>
+        <ul class="rev" data-reveal>
+          {reviews.map((r, i) => (
+            <li class={`rev__row rev__row--${r.state}`} style={`--i:${i}`}>
+              <div class="rev__top">
+                <span class="rev__src">{r.source}</span>
+                <span class="rev__stars" aria-label={`${r.stars} out of 5`}>
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <span class={`star ${i < r.stars ? "is-lit" : ""}`} aria-hidden="true" />
+                  ))}
+                </span>
+                <span class="rev__who">{r.who}</span>
+              </div>
+              <p class="rev__quote">“{r.quote}”</p>
+              <p class="rev__state">{r.when}</p>
+            </li>
+          ))}
+        </ul>
+        <p class="art__sum">Asked automatically · answered by a human when it matters</p>
+      </div>
+    )
+  }
+
+  {
+    kind === "reservations" && (
+      <div class="art__stage">
+        <div class="art__head">
+          <p class="art__title">Friday service</p>
+          <p class="art__pill"><span class="art__dot" aria-hidden="true" />Live</p>
+        </div>
+        <ul class="svc" data-reveal>
+          {service.map((s, i) => (
+            <li class={`svc__row svc__row--${s.state}`} style={`--i:${i}`}>
+              <span class="svc__time">{s.time}</span>
+              <span class="svc__party">{s.party}</span>
+              <span class="svc__note">{s.note}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="art__sum">3 reminders sent · 1 table resold · nobody made a call</p>
+      </div>
+    )
+  }
+
+  {
+    kind === "inbox" && (
+      <div class="art__stage art__stage--inbox">
+        <div class="chips chips--stack" aria-hidden="true">
+          <span class="chip">Instagram</span>
+          <span class="chip">Text</span>
+          <span class="chip">Phone</span>
+        </div>
+
+        <svg class="wires" viewBox="0 0 90 210" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 26 H46 C64 26 62 105 82 105" />
+          <path d="M0 105 H82" />
+          <path d="M0 184 H46 C64 184 62 105 82 105" />
+        </svg>
+
+        <div class="panel">
+          <div class="panel__head">
+            <p class="art__meta">One guest record</p>
+            <p class="panel__name">Sarah Chen</p>
+            <p class="rev__state" style="color: var(--text-mid)">Since March · 6 visits · usually table 9</p>
+          </div>
+          <ul class="thread" data-reveal>
+            {thread.map((t, i) => (
+              <li class={t.ours ? "is-ours" : ""} style={`--i:${i}`}>
+                <span class="thread__src">{t.src}</span>
+                <p>“{t.text}”</p>
+                <span class="thread__time">{t.time}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    kind === "afterhours" && (
+      <div class="art__stage art__stage--night">
+        <div class="panel panel--call">
+          <div class="panel__head panel__head--row">
+            <span class="pulse" aria-hidden="true" />
+            <div>
+              <p class="art__meta">Incoming · after close</p>
+              <p class="panel__name panel__name--sm">11:47 PM, Tuesday</p>
+            </div>
+          </div>
+          <ol class="steps" data-reveal>
+            {steps.map((s, i) => (
+              <li style={`--i:${i}`}>
+                <span class="steps__dot" aria-hidden="true" />
+                {s}
+              </li>
+            ))}
+            <li class="is-done" style={`--i:${steps.length}`}>
+              <span class="steps__dot" aria-hidden="true" />
+              Confirmation texted — 11:48 PM
+            </li>
+          </ol>
+        </div>
+
+        <div class="tile" data-reveal-solo>
+          <p class="art__label">Calls answered after close</p>
+          <p class="tile__value" data-count-to="47">0</p>
+          <p class="rev__state" style="color: var(--text-mid)">this month · 0 missed</p>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    kind === "attribution" && (
+      <div class="art__stage art__stage--ads">
+        <div class="flowcards" data-reveal>
+          {flow.map((f, i) => (
+            <>
+              <div class={`fcard ${f.done ? "fcard--done" : ""}`} style={`--i:${i * 2}`}>
+                <p class="art__label">{f.label}</p>
+                <p class="fcard__title">{f.title}</p>
+                <p class="rev__state" style="color: var(--text-mid)">{f.meta}</p>
+              </div>
+              {i < flow.length - 1 && <span class="flowline" style={`--i:${i * 2 + 1}`} aria-hidden="true" />}
+            </>
+          ))}
+        </div>
+
+        <div class="attrib">
+          <div class="attrib__mark" aria-hidden="true">
+            <TempoMark class="attrib__spark" />
+          </div>
+          <p class="art__sum" style="margin:0;padding:0;border:0;max-width:60ch;font-size:1rem;color:var(--text-hi)">
+            Chorus knows those were the same person — so the spend has a table
+            attached to it, not a click.
+          </p>
+        </div>
+      </div>
+    )
+  }
+</figure>
+
+<style>
+  .art {
+    margin: 0;
+  }
+
+  .art__stage {
+    position: relative;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border-radius: 6px;
+    background:
+      radial-gradient(
+        120% 130% at 82% 8%,
+        color-mix(in oklab, var(--violet-700) 24%, transparent),
+        transparent 60%
+      ),
+      var(--ink-700);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
+    overflow: hidden;
+  }
+
+  .art__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.1rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--violet-500) 26%, transparent);
+  }
+
+  .art__title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-hi);
+  }
+
+  .art__meta {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .art__label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .art__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mint-300);
+    border: 1px solid color-mix(in oklab, var(--mint-400) 45%, transparent);
+    border-radius: 999px;
+    padding: 0.22rem 0.6rem 0.22rem 0.5rem;
+  }
+
+  .art__dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--mint-400);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--mint-400) 22%, transparent);
+  }
+
+  .art__sum {
+    margin-top: 1.1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
+    font-size: 0.875rem;
+    color: var(--text-mid);
+  }
+
+  /* ---- channel chips ---- */
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .chips--stack {
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.9rem;
+    z-index: 1;
+  }
+
+  .chip {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.24rem 0.55rem;
+    border-radius: 2px;
+    border: 1px solid currentColor;
+    background: var(--ink-600);
+    color: var(--text-hi);
+    white-space: nowrap;
+  }
+
+  .chips--stack .chip {
+    box-shadow: 0 10px 22px -14px rgb(0 0 0 / 0.9);
+    border-color: color-mix(in oklab, var(--violet-500) 40%, transparent);
+  }
+
+  .chip--violet,
+  .cal__entry--violet {
+    color: var(--violet-400);
+  }
+  .chip--green,
+  .cal__entry--green {
+    color: var(--mint-300);
+  }
+  .chip--lilac,
+  .cal__entry--lilac {
+    color: #cbb8ff;
+  }
+  .chip--amber,
+  .cal__entry--amber {
+    color: var(--amber-400);
+  }
+
+  /* ---- calendar ---- */
+
+  .cal {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 1px;
+    background: color-mix(in oklab, var(--violet-500) 16%, transparent);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 16%, transparent);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .cal__dow {
+    background: var(--ink-600);
+    padding: 0.4rem 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .cal__day {
+    background: var(--ink-800);
+    min-height: 4.4rem;
+    padding: 0.35rem 0.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .cal__num {
+    font-size: 0.72rem;
+    color: var(--text-low);
+  }
+
+  .cal__entry {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+    padding: 0.22rem 0.35rem;
+    border-radius: 2px;
+    border-left: 1px solid currentColor;
+    background: color-mix(in oklab, currentColor 14%, transparent);
+  }
+
+  .cal__label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text-hi);
+  }
+
+  .cal__time {
+    font-size: 0.72rem;
+    color: var(--text-low);
+  }
+
+  /* ---- reviews ---- */
+
+  .rev {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .rev__row {
+    padding: 0.9rem 1rem;
+    background: var(--ink-600);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 26%, transparent);
+    border-radius: 4px;
+  }
+
+  .rev__row--needs-human {
+    border-color: color-mix(in oklab, var(--amber-400) 55%, transparent);
+  }
+
+  .rev__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.8rem;
+  }
+
+  .rev__src {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--violet-400);
+  }
+
+  .rev__stars {
+    display: inline-flex;
+    gap: 0.15rem;
+  }
+
+  .star {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 1px;
+    rotate: 45deg;
+    background: color-mix(in oklab, var(--text-low) 45%, transparent);
+  }
+
+  .star.is-lit {
+    background: var(--amber-400);
+  }
+
+  .rev__who {
+    font-size: 0.875rem;
+    color: var(--text-low);
+    margin-left: auto;
+  }
+
+  .rev__quote {
+    margin-top: 0.55rem;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: var(--text-hi);
+  }
+
+  .rev__state {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--mint-300);
+  }
+
+  .rev__row--needs-human .rev__state {
+    color: var(--amber-400);
+  }
+
+  /* ---- service rail ---- */
+
+  .svc {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .svc__row {
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, auto) minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+    padding: 0.8rem 0 0.8rem 0.9rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--violet-500) 18%, transparent);
+    border-left: 2px solid color-mix(in oklab, var(--violet-500) 55%, transparent);
+  }
+
+  .svc__row:last-child {
+    border-bottom: 0;
+  }
+
+  .svc__row--alert {
+    border-left-color: var(--amber-400);
+  }
+
+  .svc__row--new {
+    border-left-color: var(--mint-400);
+  }
+
+  .svc__time {
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font-display);
+    color: var(--text-hi);
+  }
+
+  .svc__party {
+    font-size: 1rem;
+    color: var(--text-hi);
+  }
+
+  .svc__note {
+    font-size: 0.875rem;
+    color: var(--text-mid);
+  }
+
+  .svc__row--alert .svc__note {
+    color: var(--amber-400);
+  }
+
+  .svc__row--new .svc__note {
+    color: var(--mint-300);
+  }
+
+  /* ---- inbox ---- */
+
+  .art__stage--inbox {
+    display: grid;
+    grid-template-columns: minmax(0, auto) minmax(2rem, 3.5rem) minmax(0, 1fr);
+    align-items: center;
+    align-content: center;
+    gap: 0;
+  }
+
+  .wires {
+    width: 100%;
+    height: 100%;
+    max-height: 13rem;
+    fill: none;
+    stroke: color-mix(in oklab, var(--violet-400) 65%, transparent);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .panel {
+    position: relative;
+    background: var(--ink-600);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 34%, transparent);
+    border-radius: 5px;
+    box-shadow: 0 22px 44px -26px rgb(0 0 0 / 0.9);
+  }
+
+  .panel__head {
+    padding: 1.1rem 1.25rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
+  }
+
+  .panel__head--row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .panel__name {
+    margin-top: 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-hi);
+  }
+
+  .panel__name--sm {
+    font-size: 1.05rem;
+  }
+
+  .thread {
+    list-style: none;
+    margin: 0;
+    padding: 0.35rem 0 0.5rem;
+  }
+
+  .thread li {
+    display: grid;
+    grid-template-columns: 5.4rem minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.7rem 1.25rem;
+  }
+
+  .thread__src {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--violet-400);
+  }
+
+  .thread li p {
+    font-size: 1rem;
+    line-height: 1.45;
+    color: var(--text-hi);
+  }
+
+  .thread__time {
+    font-size: 0.875rem;
+    color: var(--text-low);
+    white-space: nowrap;
+  }
+
+  .thread .is-ours .thread__src,
+  .thread .is-ours p {
+    color: var(--mint-300);
+  }
+
+  /* ---- after hours ---- */
+
+  .art__stage--night {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-content: center;
+    gap: 1.25rem;
+  }
+
+  .pulse {
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 50%;
+    background: var(--amber-400);
+    box-shadow: 0 0 0 5px color-mix(in oklab, var(--amber-400) 20%, transparent);
+    flex: none;
+  }
+
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 1rem 1.25rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .steps li {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--text-mid);
+  }
+
+  .steps__dot {
+    flex: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--violet-400);
+    translate: 0 -0.15em;
+  }
+
+  .steps .is-done {
+    color: var(--mint-300);
+    font-weight: 600;
+  }
+
+  .steps .is-done .steps__dot {
+    background: var(--mint-400);
+  }
+
+  .tile {
+    background: var(--ink-600);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 34%, transparent);
+    border-radius: 5px;
+    padding: 1.1rem 1.25rem;
+    box-shadow: 0 22px 44px -26px rgb(0 0 0 / 0.9);
+  }
+
+  .tile__value {
+    margin-top: 0.2rem;
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--mint-300);
+  }
+
+  /* ---- ad to table ---- */
+
+  .art__stage--ads {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .flowcards {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0;
+  }
+
+  .fcard {
+    background: var(--ink-600);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 34%, transparent);
+    border-radius: 5px;
+    padding: 1rem 1.15rem;
+    box-shadow: 0 18px 38px -24px rgb(0 0 0 / 0.9);
+  }
+
+  .fcard--done {
+    border-color: color-mix(in oklab, var(--mint-400) 55%, transparent);
+  }
+
+  .fcard__title {
+    margin-top: 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    color: var(--text-hi);
+  }
+
+  .fcard--done .fcard__title {
+    color: var(--mint-300);
+  }
+
+  .flowline {
+    height: 1px;
+    background: color-mix(in oklab, var(--violet-400) 60%, transparent);
+    min-width: 1.25rem;
+  }
+
+  .attrib {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
+  }
+
+  .attrib__mark {
+    flex: none;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    background: var(--mint-400);
+    display: grid;
+    place-items: center;
+  }
+
+  .attrib__spark {
+    width: 46%;
+    height: 46%;
+    color: var(--ink-900);
+  }
+
+  /* ---- responsive ---- */
+
+  @media (max-width: 46rem) {
+    .cal__day {
+      min-height: 3.2rem;
+    }
+    .cal__label,
+    .cal__time {
+      display: none;
+    }
+    .cal__entry {
+      height: 0.4rem;
+      padding: 0;
+      background: currentColor;
+    }
+    .svc__row {
+      grid-template-columns: 4.5rem minmax(0, 1fr);
+    }
+    .svc__note {
+      grid-column: 1 / -1;
+    }
+    .art__stage--inbox {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+    }
+    .chips--stack {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .wires {
+      display: none;
+    }
+    .thread li {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.3rem 0.6rem;
+    }
+    .thread__src {
+      grid-column: 1 / -1;
+    }
+    .flowcards {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+    .flowline {
+      width: 1px;
+      height: 1.5rem;
+      min-width: 0;
+      margin-left: 1.25rem;
+    }
+  }
+</style>

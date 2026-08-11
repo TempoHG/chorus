@@ -1,10 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import Arrangement from "../components/Arrangement.astro";
 
-/* Weights are ordered: ads, website, phone, text, email, google, reviews,
-   reservations, social, private events, loyalty, guest history.
-   2 = leading, 1 = active, 0 = supporting. */
 const concepts = [
   {
     id: "independent",
@@ -17,7 +13,6 @@ const concepts = [
       "Every guest who has ever eaten with you is in one list that belongs to you.",
       "The review request goes out the next morning without anyone remembering to send it.",
     ],
-    weights: [1, 2, 2, 2, 1, 2, 2, 1, 1, 0, 1, 1],
     leads: ["Website", "Phone", "Text", "Google", "Reviews"],
   },
   {
@@ -31,7 +26,6 @@ const concepts = [
       "A campaign built once, sent per location, reported per location.",
       "You can finally see which room is actually winning and why.",
     ],
-    weights: [2, 2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 2],
     leads: ["Digital ads", "Email", "Reviews", "Guest history"],
   },
   {
@@ -45,7 +39,6 @@ const concepts = [
       "Allergies, anniversaries and the wine they had last time, attached to the guest — not to a manager's memory.",
       "Private event inquiries answered the same day, then followed up until a human takes over.",
     ],
-    weights: [0, 2, 2, 2, 1, 1, 2, 2, 0, 2, 0, 2],
     leads: ["Reservations", "Private events", "Guest history", "Reviews"],
   },
   {
@@ -59,7 +52,6 @@ const concepts = [
       "Loyalty that tracks to a real guest record, so an offer means something.",
       "Win-backs for the regular who quietly stopped being one.",
     ],
-    weights: [2, 1, 0, 2, 2, 1, 2, 0, 1, 0, 2, 1],
     leads: ["Digital ads", "Text", "Email", "Reviews", "Loyalty"],
   },
   {
@@ -73,7 +65,6 @@ const concepts = [
       "Event announcements to the people who came to the last one.",
       "Function and party inquiries captured with the date, the headcount and a reply already sent.",
     ],
-    weights: [1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1, 1],
     leads: ["Text", "Social", "Private events"],
   },
   {
@@ -87,7 +78,6 @@ const concepts = [
       "The morning-rush message that goes to people within walking distance.",
       "A quiet nudge to the customer who used to come every Tuesday and hasn't in a month.",
     ],
-    weights: [1, 1, 0, 2, 1, 1, 2, 0, 1, 0, 2, 2],
     leads: ["Text", "Reviews", "Loyalty", "Guest history"],
   },
   {
@@ -101,7 +91,6 @@ const concepts = [
       "Win-backs triggered by an order gap, not by a calendar.",
       "Ads that put you in front of the household two streets over, and track whether they ordered.",
     ],
-    weights: [2, 2, 2, 2, 1, 1, 1, 0, 1, 0, 2, 2],
     leads: ["Digital ads", "Website", "Phone", "Text", "Loyalty", "Guest history"],
   },
   {
@@ -115,34 +104,28 @@ const concepts = [
       "An immediate acknowledgement, then staged follow-up until someone on your side picks it up.",
       "One screen showing every live event still in play, and who owes whom an answer.",
     ],
-    weights: [2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 0, 2],
     leads: ["Private events", "Email", "Phone", "Digital ads", "Guest history"],
   },
 ];
 ---
 
 <Base
-  title="Who Tempo Chorus is for — every restaurant, arranged differently"
-  description="Fine dining, fast casual, multi-location groups, cafés, bars, pizza and private event venues — how Tempo Chorus is arranged for each kind of restaurant."
+  title="Who Tempo Chorus is for — one platform, configured for how you operate"
+  description="Fine dining, fast casual, multi-location groups, cafés, bars, pizza and private event venues — how Tempo Chorus fits each kind of restaurant."
   active="concepts"
 >
   <section class="lead">
     <div class="shell">
       <h1 class="lead__title">
-        Built for the way<br />
-        <span class="lead__accent">your restaurant operates.</span>
+        One Platform. Configured<br />
+        <span class="lead__accent">for the Way You Operate.</span>
       </h1>
       <p class="lead__sub">No two restaurants grow the same way.</p>
       <p class="lead__sub">
-        A neighborhood café has different priorities than a steakhouse. A
-        multi-unit quick-service brand operates differently than an
-        event-driven restaurant. What drives success for one may not matter as
-        much for another.
-      </p>
-      <p class="lead__sub">
-        Tempo Chorus adapts to the way you do business—bringing together the
-        tools, automations, and guest experiences that matter most to your
-        restaurant.
+        Chorus adapts to the restaurant's operation, priorities and guest
+        journey — a neighborhood café doesn't need the same things as a
+        steakhouse, and a multi-unit quick-service brand doesn't operate like
+        an event-driven restaurant.
       </p>
       <div class="lead__jump">
         <p>Find yours</p>
@@ -165,14 +148,17 @@ const concepts = [
               <ul class="concept__moments">
                 {c.moments.map((m) => (
                   <li>
-                    <span class="notehead" aria-hidden="true" />
+                    <span class="dot" aria-hidden="true" />
                     {m}
                   </li>
                 ))}
               </ul>
-            </div>
-            <div class="concept__show">
-              <Arrangement weights={c.weights} leads={c.leads} />
+              <ul class="concept__leads">
+                <li class="concept__leads-label">Leans on</li>
+                {c.leads.map((l) => (
+                  <li class="chip">{l}</li>
+                ))}
+              </ul>
             </div>
           </article>
         ))
@@ -185,9 +171,9 @@ const concepts = [
       <h2 class="close__title">Yours isn't on the list?</h2>
       <p class="close__sub">
         Ghost kitchens, food halls, hotel restaurants, food trucks, breweries
-        with three taprooms and a festival schedule — the arrangement changes,
-        the system doesn't. Tell us how your business actually runs and we'll
-        show you the arrangement for it.
+        with three taprooms and a festival schedule — the operation changes,
+        the platform doesn't. Tell us how your business actually runs and
+        we'll show you where it fits.
       </p>
       <a class="btn" href="/#demo">Book a demo</a>
     </div>
@@ -264,10 +250,7 @@ const concepts = [
   }
 
   .concept {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: center;
+    position: relative;
     padding-block: clamp(3rem, 7vw, 5rem);
     border-top: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
     scroll-margin-top: 5.5rem;
@@ -275,11 +258,6 @@ const concepts = [
 
   .concept:first-child {
     border-top: 0;
-  }
-
-  /* Bar line, as on the features page and the homepage chain. */
-  .concept {
-    position: relative;
   }
 
   .concept::before {
@@ -294,10 +272,6 @@ const concepts = [
 
   .concept:first-child::before {
     display: none;
-  }
-
-  .concept--flip .concept__say {
-    order: 2;
   }
 
   .concept__name {
@@ -341,18 +315,38 @@ const concepts = [
     line-height: 1.5;
   }
 
-  .concept__moments .notehead {
+  .concept__moments .dot {
     color: var(--violet-400);
     margin-top: 0.55em;
   }
 
-  @media (max-width: 62rem) {
-    .concept {
-      grid-template-columns: 1fr;
-    }
-    .concept--flip .concept__say {
-      order: 0;
-    }
+  .concept__leads {
+    list-style: none;
+    margin: 1.85rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .concept__leads-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .concept__leads .chip {
+    background: var(--ink-600);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 40%, transparent);
+    border-radius: 4px;
+    padding: 0.4rem 0.7rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.86rem;
+    color: var(--text-hi);
   }
 
   .close {

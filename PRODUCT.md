@@ -12,47 +12,106 @@ Delegated: Astro, deployed as a static-first marketing site. Rationale: this is 
 
 ## Users
 
-Primary user: restaurant operators (owners/GMs), not marketers and not GoHighLevel admins/agencies. They are evaluating whether to adopt Tempo Chorus for their restaurant. They are not fluent in marketing/CRM jargon (CRM, automation, pipeline, workflow) and need the product explained in plain, concrete terms tied to their day-to-day operating reality.
+Primary customers:
+
+- Independent single-location restaurants.
+- Single-concept restaurant brands with multiple locations.
+- Small restaurant groups with up to approximately three concepts and multiple locations.
+
+Across full service, fine dining, fast casual/QSR, pizza/delivery, cafés/coffee, bars/breweries, and restaurants with meaningful private-event/catering business. Buyers are restaurant operators (owners/GMs), not marketers and not GoHighLevel admins/agencies — not fluent in marketing/CRM jargon (CRM, automation, pipeline, workflow), and need the product explained in plain, concrete terms tied to their day-to-day operating reality.
 
 ## Product Purpose
 
-Tempo Chorus is a GoHighLevel (GHL) whitelabel platform sold to restaurant operators. It connects every channel a restaurant uses to communicate with guests — website, phone, text/SMS, email, reviews, social media, reservations, private events, customer database, marketing, and AI — into one coordinated system, so no guest interaction falls through the cracks and staff aren't doing the same work across five disconnected tools.
+Tempo Chorus is a branded restaurant growth platform, built on a GoHighLevel (GHL) whitelabel foundation, that brings marketing, guest communication, customer relationships, reputation, automation and AI together in one connected system. It connects every channel a restaurant uses to talk to guests — website, phone, text/SMS, email, reviews, social media, reservations, private events, customer database, marketing and AI — so no guest interaction falls through the cracks and staff aren't doing the same work across disconnected tools.
 
 ## Positioning
 
-The category (GHL whitelabels sold into local business verticals) is typically sold to GHL admins/agencies using feature-and-jargon-heavy language that assumes the buyer already knows what the product is. Tempo Chorus's buyer does not — they're a restaurant operator asking "is this a website? my POS? a loyalty program? do I need this?"
+Primary promise: **Everything working together.**
 
-Tempo Chorus's position is to sell the *mental model* before the feature list: the name "Chorus" is the product's explanation, not just a label. A chorus is many voices working together into one performance — the product takes a restaurant's disconnected channels and gets them "singing from the same sheet of music," turning scattered touchpoints into one continuous guest conversation. This mirrors a prior naming success ("Momentum") where the name itself did the explaining.
+Supporting language (approved, reusable across the site):
 
-Competing narrative approaches the team is deliberately moving away from: static feature lists, CRM/software terminology, and copy written for someone who already understands marketing automation.
+- One Platform. Configured for the Way You Operate.
+- Get Found. Stay Connected. Bring Guests Back. Save Time.
+- Built for restaurants. Not adapted to them.
+- You won't be handed a login and left to figure it out.
+- All together now. (Recurring brand signature — use as a closing note, not on every section.)
+
+The category (GHL whitelabels sold into local business verticals) is typically sold to GHL admins/agencies using feature-and-jargon-heavy language that assumes the buyer already knows what the product is. Tempo Chorus's buyer does not — they're a restaurant operator asking "is this a website? my POS? a loyalty program? do I need this?" The site sells the restaurant outcome first, using restaurant language before software terminology.
+
+The "Chorus" name still carries its own explanatory metaphor (individual parts coming together into something stronger), but the site does not lean on it repeatedly — no recurring explanation of arrangements, voices, melodies, or sheet music. One "Why Chorus?" moment states the metaphor once; the rest of the site speaks in plain operator language and concrete scenarios.
+
+Competing narrative approaches the team is deliberately moving away from: static feature lists, CRM/software terminology, copy written for someone who already understands marketing automation, and a literal, repeated musical-notation visual system.
 
 ## Operating Context
 
-Restaurant day-to-day operations across the guest lifecycle: discovery (Google/social), the website, phone calls, reservations, private event inquiries, in-visit experience, post-visit follow-up (thank-yous, review requests), win-back (guests who haven't returned), loyalty/repeat-visit occasions (birthdays, special invites), and multi-location coordination where applicable.
+Restaurant day-to-day operations across the guest lifecycle: discovery (Google/local/social), the website, phone calls, reservations, private event and catering inquiries, in-visit experience, post-visit follow-up (thank-yous, review requests), guest recovery (negative feedback), win-back (guests who haven't returned), loyalty/repeat-visit occasions (birthdays, celebrations, VIP/regulars), hiring and donation requests, and multi-location coordination where applicable.
 
 ## Capabilities and Constraints
 
-- Built on a GoHighLevel (GHL) whitelabel foundation.
-- Unifies: website, phone, SMS/text, email, reviews, social media, reservations, private events, customer database, marketing automation, and AI-driven responses/follow-up into a single system.
-- Example behaviors the product performs: answering after-hours calls, responding to social messages, requesting reviews after a great visit, inviting back guests who've lapsed, capturing and following up on private event inquiries, sending reservation reminders.
-- Lead-gen conversion mechanism for this site is a demo booking (not self-serve signup).
+Platform capabilities, pre-built Restaurant Systems, AI capabilities, add-ons, and Tempo-managed services are distinct, named categories — do not blur them together in copy.
+
+**Platform capability categories** (organizing structure for the Features page):
+
+- **Get Found** — website tools, landing pages, forms/lead capture, social planning and publishing, Google/local presence tools, promotions, advertising tools where applicable.
+- **Stay Connected** — unified inbox, phone, two-way text, email, social messaging, web chat, missed-call recovery, calendars/scheduling.
+- **Bring Guests Back** — guest database, email/SMS campaigns, reviews, birthdays, win-back campaigns, offers, segmentation, follow-up.
+- **Save Time** — workflow automation, social scheduling, automated responses, reminders, internal notifications, AI assistance, reporting.
+- **Under the Hood** — the platform is broad and continuously evolving (websites, forms, funnels, guest records, email, SMS, phone, social, reviews, calendars, workflows, pipelines, surveys, documents, reporting, AI, integrations, etc.). Never state a fixed total feature count.
+
+**Restaurant Systems** — not separate paid add-ons by default; restaurant-specific applications of the platform capabilities above, and a major part of the product's value:
+
+| System | Operator benefit |
+| --- | --- |
+| Private Events | Capture inquiries, respond immediately, organize opportunities, automate follow-up and keep every potential event moving toward a booking. |
+| Catering | Capture catering leads, qualify requests, track follow-up and keep opportunities organized. |
+| Missed Call Recovery | Automatically start a text conversation when the restaurant cannot answer. |
+| Guest Reviews | Request reviews at the right time, centralize review activity and make responses easier. |
+| Guest Recovery | Route negative feedback to the right person and create a consistent recovery process. |
+| Birthday & Celebrations | Collect important dates and automate timely, personalized reasons to return. |
+| Guest Win-Back | Reconnect with guests who have not visited recently. |
+| VIP & Regulars | Segment and communicate differently with the restaurant's most valuable guests. |
+| Restaurant Events | Promote special dinners, tastings, live music, holiday events and other experiences. |
+| Hiring | Collect applications, organize candidates, schedule interviews and automate candidate communication. |
+| Donation Requests | Collect and route community/donation requests through a consistent process. |
+| Guest Inquiries | Bring website, social, text and other inquiries into a more manageable workflow. |
+
+**Pricing** (confirmed; use exactly these figures, no fake sale pricing):
+
+- Chorus Trio — $299/mo. Complete core platform, Restaurant Systems, marketing/communication tools, automations, social planning, guest database, reviews, white-glove onboarding, training and support.
+- Chorus Ensemble — $399/mo (Most Popular). Everything in Trio, plus Local Presence/listings, advanced segmentation, advanced reputation, advanced automation/reporting, and advertising tools.
+- Chorus Symphony — $499/mo. Everything in Ensemble, plus AI phone answering, AI web/text conversations, AI review assistance, AI guest assistance, and AI inquiry follow-up.
+- Multi-location add-on per additional location: Trio +$149/mo, Ensemble +$179/mo, Symphony +$229/mo.
+- Add-ons (short list, deliberately): Local SEO (~$149+/mo/location, software/tool layer only — Tempo-managed SEO is a separate service); AI Unlimited (~$79/mo/location, higher-volume Symphony customers); Dedicated Email (~$79/mo/domain, higher-volume sending).
+- Tempo-Managed Services (human-delivered, explicitly separate from the software subscription, never implied as included in a tier): Managed Social Media, Managed Email & SMS, Managed Advertising, Managed SEO, Website Design & Management, Broader Restaurant Marketing Services. Use custom/starting-at pricing. Framing line: "Chorus gives you the tools. Tempo can also provide the team."
+- Onboarding & Support is included with every plan (not a tier differentiator): white-glove onboarding, restaurant-specific configuration rather than an empty account, essential workflows/campaigns configured during onboarding, team training, a support-ticket link inside Chorus that Tempo triages, and ongoing platform updates.
+
+**Guardrails (binding on all copy, every page):**
+
+- Never mention GoHighLevel anywhere on the public site, and never position Chorus as a CRM reseller or generic marketing software.
+- Do not claim direct POS, reservation, loyalty, ordering, or guest-spend integrations unless actually configured and verified for the customer in question.
+- Do not present managed advertising, social, or SEO as automatically included in a software subscription — those are Tempo-managed services unless a plan explicitly includes human service.
+- Do not invent performance statistics, customer counts, ROI numbers, or testimonials. Illustrative guest scenarios must be clearly presented as examples, not measured customer results (existing footer disclosure: "All guest moments shown on this site are illustrative").
+- Do not use a fixed total feature count anywhere ("Under the Hood" is deliberately open-ended).
+- Lead-gen conversion mechanism for this site is a demo booking (not self-serve signup), and the demo is positioned as personalized/restaurant-specific, not a generic software tour.
 
 ## Brand Commitments
 
-- Product name: **Tempo Chorus**. "Chorus" was deliberately chosen for its "bringing everything together" / "all together now" meaning, and the team wants this metaphor to run through the product story (not just be a name), including a "Why Chorus?" narrative tying it to how a musical chorus brings many voices into one stronger, clearer performance.
-- Voice: plain-spoken, addressed to a restaurant owner — avoid marketing/CRM jargon (CRM, automation, pipeline, workflow). Prefer concrete scenarios ("someone calls after closing, Tempo Chorus answers") over abstract feature naming.
+- Product name: **Tempo Chorus**. Keep top navigation simple: Overview / What it does / Who it's for / Pricing / Book a demo.
+- Voice: plain-spoken, restaurant language first, software terminology secondary. Avoid marketing/CRM jargon (CRM, automation, pipeline, workflow). Prefer concrete restaurant scenarios over abstract feature naming.
+- Visual direction: premium, modern hospitality-tech rather than generic SaaS; large confident typography, generous whitespace, restrained motion; restaurant-specific UI mockups, workflow diagrams and guest scenarios rather than stock restaurant photography; cards used sparingly (avoid an endless grid of SaaS feature cards); subtle connection/flow motifs to communicate "bringing everything together" — explicitly without literal musical notation (no stave lines, bar lines, braces, or "voices" framing repeated through the UI). "All together now." is a recurring signature line, not a section-by-section refrain.
 - Naming precedent: an earlier product named "Momentum" succeeded partly because the name was instantly, universally understood — the team wants Chorus to work the same way.
 
 ## Evidence on Hand
 
 - Competitor/anti-reference: https://restaurantsnapshotforghl.com/ — a comparable GHL-whitelabel product page, sold to GHL admins/agencies rather than restaurant operators. Identified weakness to avoid repeating: it assumes the buyer already understands what the product is, rather than building the mental model first.
-- No real Tempo Chorus name-specific photos, testimonials, or case studies are available yet — build with clearly-marked placeholder content until real assets are supplied.
-- Extensive founder narrative/positioning draft exists (channel list, "chaos before Chorus" diagram concept, guest-journey timeline concept, hostess/mission-control analogies, hero line and CTA ideas). This is real strategic input, not placeholder — it belongs to page/surface strategy and should carry forward into the surface brief (shape/new-work), not be treated as draft-only.
+- Motion/layout reference (style only, not feature parity): get.popmenu.com and get.popmenu.com/pricing — used for restrained animated-mockup and pricing-page layout inspiration. Nothing from Popmenu's own feature set is implied as something Chorus has.
+- No real Tempo Chorus name-specific photos, testimonials, or case studies are available yet — build with clearly-marked placeholder/illustrative content until real assets are supplied.
+- Authoritative content/architecture source: `Tempo_Chorus_Website_Design_Brief_for_Claude.docx` (client-approved). Where this brief and earlier draft positioning conflict, the brief wins.
 
 ## Product Principles
 
-1. Explain the mental model before the feature list — buyers don't yet know what category this product is in.
-2. Speak in restaurant-operator language, not marketing/CRM jargon.
-3. Show the fragmentation problem concretely (the disconnected channel list) before showing the resolution.
-4. Let the "Chorus" metaphor do explanatory work throughout, not just as a name.
-5. Sell the guest journey (one guest, start to loyal regular) rather than a list of software modules.
+1. Lead with the restaurant outcome, not the feature list or the category jargon.
+2. Speak in restaurant-operator language; software terminology can appear secondarily where useful.
+3. Keep platform capabilities, Restaurant Systems, AI capabilities, add-ons, and Tempo-managed services clearly distinct in every explanation.
+4. Prove the "everything together" claim with concrete guest moments and product surfaces, not repeated assertion or metaphor.
+5. Pricing should be immediately understandable in under 10 seconds; never imply a capability, integration, or managed service that isn't actually included at that tier.

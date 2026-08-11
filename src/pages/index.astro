@@ -1,12 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
-import ChaosField from "../components/ChaosField.astro";
 import TogetherField from "../components/TogetherField.astro";
 import ProductMocks from "../components/ProductMocks.astro";
-
-// Hero variant. "together" opens on the voices arriving into one system;
-// "chaos" opens on the fragmentation, unresolved. Switch here to compare.
-const HERO: "together" | "chaos" = "together";
 
 // GoHighLevel booking calendar, served from the Tempo whitelabel domain — NOT
 // api.leadconnectorhq.com, which does not serve this calendar. WIDGET_ID is the
@@ -17,14 +12,30 @@ const GHL_DOMAIN = "https://links.tempohg.com";
 const CALENDAR_ID = "I5Q7FwuP2H7GVLaL1Cai";
 const WIDGET_ID = "yVHkwu10vymju35mIkBW_1786414705061";
 
-const vignettes = [
+const jobs = [
   {
-    marker: "Two miles away · Tuesday",
-    trigger: "Someone who has never heard of you is deciding where to eat Friday.",
-    response:
-      "Tempo Chorus puts you in front of them, and the moment they click, they stop being an ad click and start being a guest it knows how to follow up with.",
-    weight: "normal",
+    name: "Get Found",
+    line: "Help more guests discover and choose the restaurant.",
+    mark: "found",
   },
+  {
+    name: "Stay Connected",
+    line: "Make it easier for guests to reach the restaurant, and the team to respond.",
+    mark: "connected",
+  },
+  {
+    name: "Bring Guests Back",
+    line: "Build repeat visits and stronger relationships.",
+    mark: "back",
+  },
+  {
+    name: "Save Time",
+    line: "Automate the repetitive marketing and communication work.",
+    mark: "time",
+  },
+];
+
+const vignettes = [
   {
     marker: "11:47 PM · Tuesday",
     trigger: "The phone rings twenty minutes after you locked the door.",
@@ -50,7 +61,7 @@ const vignettes = [
     marker: "Last visit · 11 March",
     trigger: "A regular quietly stopped being a regular. Nobody noticed.",
     response:
-      "Tempo Chorus noticed. It sends the kind of invitation that sounds like it came from you, because you wrote it once and it has been waiting.",
+      "Tempo Chorus noticed, and reached out with the kind of message that sounds like it came from you — because you wrote it once, and it's been waiting.",
     weight: "wide",
   },
   {
@@ -61,105 +72,140 @@ const vignettes = [
     weight: "normal",
   },
   {
-    marker: "Friday · 7:00 PM booking",
-    trigger: "A party of eight is about to not show up.",
+    marker: "Birthday · in 3 days",
+    trigger: "A regular's birthday is coming up, and nobody was going to mention it.",
     response:
-      "Tempo Chorus reminds them the day before and again that afternoon, and tells you the moment they can't make it — while the table can still be resold.",
+      "Tempo Chorus already knows the date. The invitation goes out on time, personalized, without anyone adding it to a list.",
     weight: "normal",
   },
 ];
 
-const journey = [
-  { step: "Sees your ad", note: "Tuesday" },
-  { step: "Reads your site", note: "Website" },
-  { step: "Books a table", note: "Reservation" },
-  { step: "Eats. Loves it.", note: "The visit" },
-  { step: "Gets thanked", note: "Next morning" },
-  { step: "Leaves a review", note: "Day two" },
-  { step: "Hears from you on their birthday", note: "Month four" },
-  { step: "Books the Christmas party", note: "Month nine" },
-  { step: "Is a regular", note: "Ongoing" },
+const systems = [
+  { name: "Private Events", benefit: "Capture inquiries, respond immediately, organize opportunities, automate follow-up and keep every potential event moving toward a booking." },
+  { name: "Catering", benefit: "Capture catering leads, qualify requests, track follow-up and keep opportunities organized." },
+  { name: "Missed Call Recovery", benefit: "Automatically start a text conversation when the restaurant cannot answer." },
+  { name: "Guest Reviews", benefit: "Request reviews at the right time, centralize review activity and make responses easier." },
+  { name: "Guest Recovery", benefit: "Route negative feedback to the right person and create a consistent recovery process." },
+  { name: "Birthday & Celebrations", benefit: "Collect important dates and automate timely, personalized reasons to return." },
+  { name: "Guest Win-Back", benefit: "Reconnect with guests who have not visited recently." },
+  { name: "VIP & Regulars", benefit: "Segment and communicate differently with the restaurant's most valuable guests." },
+  { name: "Restaurant Events", benefit: "Promote special dinners, tastings, live music, holiday events and other experiences." },
+  { name: "Hiring", benefit: "Collect applications, organize candidates, schedule interviews and automate candidate communication." },
+  { name: "Donation Requests", benefit: "Collect and route community/donation requests through a consistent process." },
+  { name: "Guest Inquiries", benefit: "Bring website, social, text and other inquiries into a more manageable workflow." },
+];
+
+const care = [
+  "Restaurant-specific setup, not an empty account.",
+  "White-glove onboarding and essential workflows configured for you.",
+  "Team training, so everyone actually uses it.",
+  "A support-ticket link inside Chorus, triaged to the right person.",
+  "Ongoing platform updates and restaurant-specific improvements.",
+];
+
+const tiers = [
+  { name: "Chorus Trio", price: "$299", note: "Bring everything together.", popular: false },
+  { name: "Chorus Ensemble", price: "$399", note: "Turn connection into growth.", popular: true },
+  { name: "Chorus Symphony", price: "$499", note: "Put AI to work for your restaurant.", popular: false },
 ];
 ---
 
 <Base
-  title="Tempo Chorus — every part of your restaurant, finally in time"
-  description="Tempo Chorus connects every way your restaurant talks to guests — phone, text, email, website, reviews, social, reservations and private events — into one system. Book a demo."
+  title="Tempo Chorus — everything working together"
+  description="Tempo Chorus brings your restaurant's marketing, guest communication, reputation, customer relationships and automation into one connected platform. Book a demo."
   active="home"
 >
-  {
-    HERO === "together" ? (
-      <section class="hero hero--together">
-        <div class="shell hero__grid">
-          <div class="hero__say">
-            <h1 class="hero__title">
-              Every guest interaction.
-              <span class="hero__accent">All together now.</span>
-            </h1>
-            <p class="hero__sub">
-              <strong>Tempo Chorus is one system for everything your restaurant
-              says to guests.</strong> Your ads, website, phone, texts, email,
-              reviews, reservations and private events — brought into a single
-              coordinated experience, instead of twelve places to look.
-            </p>
-            <div class="hero__actions">
-              <a class="btn" href="#demo">Book a demo</a>
-              <a class="hero__link" href="#mocks">See it working</a>
-            </div>
-          </div>
-          <div class="hero__show">
-            <TogetherField />
-          </div>
+  <section class="hero">
+    <div class="shell hero__grid">
+      <div class="hero__say">
+        <h1 class="hero__title">
+          Everything <span class="hero__accent">working together.</span>
+        </h1>
+        <p class="hero__sub">
+          <strong>Tempo Chorus is one platform for everything your restaurant
+          says to guests.</strong> Marketing, guest communication, reputation,
+          customer relationships and automation — brought into one connected
+          system, instead of a different tool for each.
+        </p>
+        <div class="hero__actions">
+          <a class="btn" href="#demo">Book a demo</a>
+          <a class="hero__link" href="#mocks">See how it works</a>
         </div>
-        <div class="hero__floor" />
-      </section>
-    ) : (
-      <section class="hero">
-        <ChaosField />
-        <div class="hero__veil" />
-        <div class="shell hero__inner">
-          <h1 class="hero__title">
-            Software doesn't
-            <br /> grow restaurants.
-            <br />
-            <span class="hero__accent">Systems do.</span>
-          </h1>
-          <p class="hero__sub">
-            Right now your website, your phone, your inbox, your reviews and your
-            reservations don't talk to each other. Tempo Chorus is what happens
-            when they do.
-          </p>
-          <div class="hero__actions">
-            <a class="btn" href="#demo">Book a demo</a>
-            <a class="hero__link" href="#what">First — what is this?</a>
-          </div>
-        </div>
-        <div class="hero__floor" />
-      </section>
-    )
-  }
+      </div>
+      <div class="hero__show">
+        <TogetherField />
+      </div>
+    </div>
+    <div class="hero__floor" />
+  </section>
 
   <section class="what" id="what">
-    <div class="shell">
-      <h2 class="eyeless-h2 what__head">So what exactly<br /> is Tempo Chorus?</h2>
+    <div class="shell what__grid">
+      <div class="what__lead">
+        <h2 class="eyeless-h2 what__head">So what exactly<br /> is Chorus?</h2>
 
-      <ul class="nots">
-        <li>It is not a website.</li>
-        <li>It is not your POS.</li>
-        <li>It is not a loyalty app.</li>
-      </ul>
+        <ul class="nots">
+          <li>It is not a website.</li>
+          <li>It is not your POS.</li>
+          <li>It is not a loyalty app.</li>
+        </ul>
+      </div>
 
       <div class="what__say">
         <p class="what__body">
           Tempo Chorus connects <strong>every way your restaurant communicates
-          with guests</strong> into one system. Instead of five apps, five
-          logins, five databases and five places to look, there is one — and
-          every part of it knows what the others just did.
+          with guests</strong> into one system. Instead of separate apps,
+          separate logins, separate lists and a different place to look for
+          each one, there is one — and every part of it knows what the others
+          just did.
         </p>
         <p class="what__body what__body--quiet">
-          Your guest doesn't experience twelve channels. They experience you.
-          This is the software that finally agrees with them.
+          Your guest doesn't experience separate channels. They experience
+          you. This is the platform built to finally agree with them.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="jobs" aria-labelledby="jobs-title">
+    <div class="shell">
+      <h2 class="eyeless-h2 jobs__title" id="jobs-title">Four jobs. One platform.</h2>
+      <div class="jobs__grid" data-reveal>
+        {
+          jobs.map((j, i) => (
+            <article class="job" style={`--i:${i}`}>
+              <span class="job__mark" aria-hidden="true">
+                {j.mark === "found" && (
+                  <svg viewBox="0 0 40 40" fill="none">
+                    <circle cx="20" cy="20" r="3" fill="var(--mint-400)" />
+                    <path d="M20 8 V14 M20 26 V32 M8 20 H14 M26 20 H32" stroke="var(--violet-400)" stroke-width="1.6" stroke-linecap="round" />
+                  </svg>
+                )}
+                {j.mark === "connected" && (
+                  <svg viewBox="0 0 40 40" fill="none">
+                    <circle cx="10" cy="14" r="3" fill="var(--violet-400)" />
+                    <circle cx="30" cy="26" r="3" fill="var(--mint-400)" />
+                    <path d="M10 17 C 14 24, 22 20, 30 23" stroke="var(--violet-400)" stroke-width="1.6" fill="none" />
+                  </svg>
+                )}
+                {j.mark === "back" && (
+                  <svg viewBox="0 0 40 40" fill="none">
+                    <path d="M12 14 C 8 22, 12 30, 22 30 C 30 30, 32 24, 28 19" stroke="var(--violet-400)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                    <circle cx="12" cy="14" r="2.6" fill="var(--mint-400)" />
+                  </svg>
+                )}
+                {j.mark === "time" && (
+                  <svg viewBox="0 0 40 40" fill="none">
+                    <path d="M11 12 C 15 8, 25 8, 29 12 C 33 16, 33 24, 29 28 C 25 32, 15 32, 11 28" stroke="var(--violet-400)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                    <path d="M20 15 V20 L24 23" stroke="var(--mint-400)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                  </svg>
+                )}
+              </span>
+              <h3 class="job__name">{j.name}</h3>
+              <p class="job__line">{j.line}</p>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -170,20 +216,20 @@ const journey = [
         Here is what that<br /> actually means.
       </h2>
       <p class="lede chain__lede">
-        Not features. Nine hours on a Tuesday.
+        Not features. Ordinary moments in a Tuesday.
       </p>
     </div>
 
     <div class="shell chain__list">
       <div class="chain__spine" aria-hidden="true"></div>
       {
-        vignettes.map((v, i) => (
+        vignettes.map((v) => (
           <article class={`vignette vignette--${v.weight}`}>
             <h3 class="vignette__trigger">{v.trigger}</h3>
             <p class="vignette__marker">{v.marker}</p>
             <div class="vignette__rule" aria-hidden="true"></div>
             <p class="vignette__response">
-              <span class="notehead" aria-hidden="true" />
+              <span class="dot" aria-hidden="true" />
               <span>{v.response}</span>
             </p>
           </article>
@@ -201,6 +247,30 @@ const journey = [
 
   <ProductMocks />
 
+  <section class="systems" aria-labelledby="systems-title">
+    <div class="shell">
+      <h2 class="eyeless-h2 systems__title" id="systems-title">
+        Restaurant Systems, not software features.
+      </h2>
+      <p class="lede systems__lede">
+        Ready-to-use workflows built into every plan.
+      </p>
+      <ul class="systems__list" data-reveal>
+        {
+          systems.map((s, i) => (
+            <li class="system" style={`--i:${i}`}>
+              <span class="dot" aria-hidden="true" />
+              <div>
+                <p class="system__name">{s.name}</p>
+                <p class="system__benefit">{s.benefit}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
   <section class="why" aria-labelledby="why-title">
     <div class="shell why__inner">
       <h2 class="why__title" id="why-title">
@@ -213,14 +283,14 @@ const journey = [
         </p>
         <p>Restaurants work the same way.</p>
         <p>
-          Your website, guest communications, reviews, marketing, online
-          ordering, private events, and customer relationships all play an
-          important role. But when they're disconnected, opportunities are
-          missed and the guest experience suffers.
+          Your website, guest communications, reviews, marketing, private
+          events, and customer relationships all play an important role. But
+          when they're disconnected, opportunities are missed and the guest
+          experience suffers.
         </p>
         <p>
           Tempo Chorus brings every interaction together into one connected
-          system—so your restaurant delivers a more consistent experience,
+          system — so your restaurant delivers a more consistent experience,
           builds stronger guest relationships, and grows with less effort.
         </p>
         <p class="why__close">All together now.</p>
@@ -228,30 +298,45 @@ const journey = [
     </div>
   </section>
 
-  <section class="journey" aria-labelledby="journey-title">
-    <div class="shell">
-      <h2 class="eyeless-h2 journey__title" id="journey-title">
-        One guest. Nine months.<br /> One continuous conversation.
-      </h2>
-      <ol class="journey__line">
-        <span class="journey__rule" aria-hidden="true"></span>
+  <section class="care" aria-labelledby="care-title">
+    <div class="shell care__inner">
+      <div class="care__say">
+        <h2 class="eyeless-h2 care__title" id="care-title">
+          You won't be handed a login<br /> and left to figure it out.
+        </h2>
+        <p class="lede care__lede">
+          Chorus gives you the tools. Tempo gives you the team behind them.
+        </p>
+      </div>
+      <ul class="care__list">
         {
-          journey.map((j, i) => (
-            <li
-              class={`journey__stop journey__stop--${i % 2 === 0 ? "up" : "down"}`}
-              style={`--col:${i + 1}`}
-            >
-              <span class="journey__note" aria-hidden="true" />
-              <span class="journey__step">{j.step}</span>
-              <span class="journey__meta">{j.note}</span>
+          care.map((c) => (
+            <li>
+              <span class="dot" aria-hidden="true" />
+              {c}
             </li>
           ))
         }
-      </ol>
-      <p class="journey__thread">
-        Every one of those steps happens whether you have Tempo Chorus or not.
-        The difference is whether anyone was there for them.
-      </p>
+      </ul>
+    </div>
+  </section>
+
+  <section class="pricing-preview" aria-labelledby="pricing-preview-title">
+    <div class="shell">
+      <h2 class="eyeless-h2 pp__title" id="pricing-preview-title">Simple pricing. Complete platform.</h2>
+      <div class="pp__grid">
+        {
+          tiers.map((t) => (
+            <div class={`pp__card ${t.popular ? "pp__card--popular" : ""}`}>
+              {t.popular && <p class="pp__badge">Most popular</p>}
+              <p class="pp__name">{t.name}</p>
+              <p class="pp__price">{t.price}<span>/mo</span></p>
+              <p class="pp__note">{t.note}</p>
+            </div>
+          ))
+        }
+      </div>
+      <a class="hero__link pp__more" href="/pricing">See full pricing and what's included →</a>
     </div>
   </section>
 
@@ -259,17 +344,17 @@ const journey = [
     <div class="shell demo__inner">
       <div class="demo__pitch">
         <h2 class="demo__title" id="demo-title">
-          Hear what your restaurant sounds like<br /> when everything works together.
+          One Platform.<br /> Configured for the Way You Operate.
         </h2>
         <p class="demo__sub">
-          A personalised walkthrough of Tempo Chorus — not a generic software
+          A personalized walkthrough of Tempo Chorus — not a generic software
           tour. Tell us how your restaurant runs and we'll show you exactly
           where it fits.
         </p>
         <ul class="demo__points">
-          <li>Around 30 minutes, with someone who has worked in restaurants.</li>
-          <li>Built around your concept, your locations, your service.</li>
-          <li>No obligation, and no pretending your current setup is worse than it is.</li>
+          <li><span class="dot" aria-hidden="true" />Around 30 minutes, with someone who has worked in restaurants.</li>
+          <li><span class="dot" aria-hidden="true" />Built around your concept, your locations, your service.</li>
+          <li><span class="dot" aria-hidden="true" />No obligation, and no pretending your current setup is worse than it is.</li>
         </ul>
       </div>
 
@@ -304,26 +389,12 @@ const journey = [
 
   .hero {
     position: relative;
-    min-height: clamp(34rem, 82vh, 52rem);
+    min-height: clamp(32rem, 78vh, 48rem);
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     padding-block: clamp(5rem, 12vh, 9rem) clamp(3.5rem, 8vh, 6rem);
     isolation: isolate;
     overflow: hidden;
-  }
-
-  .hero__veil {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background:
-      radial-gradient(
-        120% 85% at 22% 88%,
-        color-mix(in oklab, var(--ink-900) 96%, transparent) 0%,
-        color-mix(in oklab, var(--ink-900) 78%, transparent) 42%,
-        transparent 78%
-      ),
-      linear-gradient(180deg, color-mix(in oklab, var(--ink-900) 72%, transparent), transparent 30%);
   }
 
   .hero__floor {
@@ -343,18 +414,6 @@ const journey = [
     );
   }
 
-  .hero__inner {
-    position: relative;
-    z-index: 2;
-  }
-
-  /* ---- Hero variant: the voices arriving together ---- */
-
-  .hero--together {
-    align-items: center;
-    min-height: clamp(32rem, 78vh, 48rem);
-  }
-
   .hero__grid {
     display: grid;
     grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
@@ -362,27 +421,9 @@ const journey = [
     align-items: center;
   }
 
-  .hero--together .hero__title {
-    font-size: clamp(2.1rem, 1.4rem + 4.2vw, 4.4rem);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .hero--together .hero__sub {
-    max-width: 46ch;
-  }
-
-  .hero__sub strong {
-    color: var(--text-hi);
-    font-weight: 600;
-  }
-
   @media (max-width: 62rem) {
     .hero__grid {
       grid-template-columns: 1fr;
-    }
-    .hero--together {
-      align-items: flex-end;
     }
     .hero__show {
       margin-top: 1rem;
@@ -390,7 +431,7 @@ const journey = [
   }
 
   .hero__title {
-    font-size: clamp(2.75rem, 1.1rem + 6vw, 5.6rem);
+    font-size: clamp(2.3rem, 1.4rem + 4.4vw, 4.6rem);
     letter-spacing: -0.045em;
   }
 
@@ -400,10 +441,15 @@ const journey = [
 
   .hero__sub {
     margin-top: 1.6rem;
-    max-width: 44ch;
+    max-width: 46ch;
     font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
     line-height: 1.5;
     color: var(--text-mid);
+  }
+
+  .hero__sub strong {
+    color: var(--text-hi);
+    font-weight: 600;
   }
 
   .hero__actions {
@@ -436,8 +482,19 @@ const journey = [
     background: var(--ink-800);
   }
 
-  /* The negation carries this section: it is the fastest way an operator
-     learns what category they are not being sold. */
+  .what__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  @media (max-width: 62rem) {
+    .what__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .nots {
     list-style: none;
     margin: clamp(2.25rem, 5vw, 3.5rem) 0 0;
@@ -461,11 +518,9 @@ const journey = [
   }
 
   .what__say {
-    margin-top: clamp(2.5rem, 5vw, 3.75rem);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
-    gap: clamp(1.5rem, 4vw, 3.5rem);
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 4vw, 2rem);
   }
 
   .what__body {
@@ -482,11 +537,57 @@ const journey = [
     color: var(--text-low);
   }
 
+  /* ---------- Four Jobs ---------- */
+
+  .jobs {
+    padding-block: clamp(4.5rem, 10vw, 8rem) clamp(3rem, 7vw, 5rem);
+  }
+
+  .jobs__grid {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1px;
+    background: color-mix(in oklab, var(--violet-500) 20%, transparent);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .job {
+    background: var(--ink-800);
+    padding: clamp(1.75rem, 3vw, 2.25rem);
+  }
+
+  .job__mark {
+    display: inline-flex;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .job__mark svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .job__name {
+    margin-top: 1.25rem;
+    font-size: 1.35rem;
+    letter-spacing: -0.03em;
+    color: var(--text-hi);
+  }
+
+  .job__line {
+    margin-top: 0.65rem;
+    max-width: 26ch;
+    color: var(--text-mid);
+  }
 
   /* ---------- Vignette chain ---------- */
 
   .chain {
     padding-block: clamp(5rem, 11vw, 9rem) clamp(3rem, 7vw, 5rem);
+    background: var(--ink-800);
   }
 
   .chain__lede {
@@ -521,39 +622,18 @@ const journey = [
   .vignette {
     position: relative;
     max-width: 54ch;
-    --indent: 0rem;
-    margin-left: var(--indent);
   }
 
   .vignette--wide {
     max-width: 68ch;
   }
 
-  /* Voices enter at different points in the bar, the way parts do on a score */
-  @media (min-width: 62rem) {
-    .vignette:nth-child(3) {
-      --indent: 7rem;
-    }
-    .vignette:nth-child(4) {
-      --indent: 2.5rem;
-    }
-    .vignette:nth-child(5) {
-      --indent: 11rem;
-    }
-    .vignette:nth-child(6) {
-      --indent: 4.5rem;
-    }
-    .vignette:nth-child(7) {
-      --indent: 14rem;
-    }
-  }
-
   .vignette::before {
     content: "";
     position: absolute;
-    left: calc((var(--indent) + clamp(1.5rem, 4vw, 3.25rem)) * -1);
+    left: clamp(-3.25rem, -4vw, -1.5rem);
     top: 0.85rem;
-    width: calc(var(--indent) + clamp(0.9rem, 2.4vw, 1.9rem));
+    width: clamp(1.5rem, 4vw, 3.25rem);
     height: 1px;
     background: linear-gradient(
       90deg,
@@ -600,7 +680,7 @@ const journey = [
     line-height: 1.62;
   }
 
-  .vignette__response .notehead {
+  .vignette__response .dot {
     color: var(--mint-400);
     margin-top: 0.62em;
   }
@@ -621,6 +701,59 @@ const journey = [
     color: var(--text-hi);
   }
 
+  /* ---------- Restaurant Systems ---------- */
+
+  .systems {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .systems__lede {
+    margin-top: 1.25rem;
+    color: var(--text-low);
+  }
+
+  .systems__list {
+    list-style: none;
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(2rem, 6vw, 5rem);
+  }
+
+  .system {
+    display: flex;
+    gap: 0.9rem;
+    padding-block: 1.15rem;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
+  }
+
+  .system .dot {
+    margin-top: 0.55em;
+    color: var(--violet-400);
+  }
+
+  .system__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.025em;
+    color: var(--text-hi);
+  }
+
+  .system__benefit {
+    margin-top: 0.35rem;
+    max-width: 42ch;
+    font-size: 0.95rem;
+    color: var(--text-mid);
+  }
+
+  @media (max-width: 56rem) {
+    .systems__list {
+      grid-template-columns: 1fr;
+    }
+  }
+
   /* ---------- Why Chorus ---------- */
 
   .why {
@@ -629,7 +762,6 @@ const journey = [
     overflow: hidden;
   }
 
-  /* Title and text sit side by side so the section is not half empty ground. */
   .why__inner {
     position: relative;
     display: grid;
@@ -679,163 +811,130 @@ const journey = [
     margin-top: 0.75rem;
   }
 
-  /* ---------- Guest journey ---------- */
+  /* ---------- White-glove care ---------- */
 
-  .journey {
+  .care {
     padding-block: clamp(4.5rem, 10vw, 8rem);
     background: var(--ink-800);
   }
 
-  .journey__line {
-    list-style: none;
-    margin: clamp(3rem, 7vw, 4.5rem) 0 0;
-    padding: 0;
+  .care__inner {
     display: grid;
-    grid-template-columns: repeat(9, minmax(0, 1fr));
-    grid-template-rows: minmax(6rem, auto) 1px minmax(6rem, auto);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
   }
 
-  .journey__rule {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--violet-500) 70%, transparent) 0%,
-      color-mix(in oklab, var(--violet-500) 70%, transparent) 80%,
-      var(--mint-400) 100%
-    );
+  .care__lede {
+    margin-top: 1.25rem;
+    color: var(--text-mid);
   }
 
-  .journey__stop {
+  .care__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .care__list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    font-size: 1.05rem;
+    color: var(--text-hi);
+  }
+
+  .care__list .dot {
+    color: var(--mint-400);
+  }
+
+  @media (max-width: 62rem) {
+    .care__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- Pricing preview ---------- */
+
+  .pricing-preview {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .pp__grid {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .pp__card {
     position: relative;
-    padding-right: 0.9rem;
-    grid-column: var(--col);
+    background: var(--ink-700);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
+    border-radius: 5px;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    box-shadow: 0 18px 38px -24px rgb(0 0 0 / 0.9);
   }
 
-  .journey__stop--up {
-    grid-row: 1;
-    align-self: end;
-    padding-bottom: 1.7rem;
+  .pp__card--popular {
+    border-color: color-mix(in oklab, var(--mint-400) 55%, transparent);
   }
 
-  .journey__stop--down {
-    grid-row: 3;
-    align-self: start;
-    padding-top: 1.7rem;
-  }
-
-  .journey__note {
+  .pp__badge {
     position: absolute;
-    left: 0;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--violet-400);
-  }
-
-  .journey__stop--up .journey__note {
-    bottom: -5px;
-  }
-
-  .journey__stop--down .journey__note {
-    top: -5px;
-  }
-
-  .journey__stop::after {
-    content: "";
-    position: absolute;
-    left: 4px;
-    width: 1px;
-    height: 1.5rem;
-    background: color-mix(in oklab, var(--violet-500) 50%, transparent);
-  }
-
-  .journey__stop--up::after {
-    bottom: 0;
-  }
-
-  .journey__stop--down::after {
-    top: 0;
-  }
-
-  .journey__stop:last-child .journey__note {
+    top: -0.75rem;
+    left: clamp(1.5rem, 3vw, 2rem);
     background: var(--mint-400);
-    box-shadow: 0 0 0 5px color-mix(in oklab, var(--mint-400) 20%, transparent);
-  }
-
-  .journey__step {
-    display: block;
+    color: var(--ink-900);
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1rem;
-    line-height: 1.2;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.28rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .pp__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
     letter-spacing: -0.025em;
     color: var(--text-hi);
   }
 
-  .journey__meta {
-    display: block;
-    margin-top: 0.45rem;
-    font-size: 0.875rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-low);
-  }
-
-  .journey__stop:last-child .journey__step {
+  .pp__price {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2.25rem;
+    letter-spacing: -0.03em;
     color: var(--mint-300);
   }
 
-  @media (max-width: 68rem) {
-    .journey__line {
-      position: relative;
-      grid-template-columns: 1fr;
-      grid-template-rows: none;
-    }
-    .journey__rule {
-      position: absolute;
-      top: 0.6rem;
-      bottom: 0.6rem;
-      left: 4px;
-      width: 1px;
-      height: auto;
-      background: linear-gradient(
-        180deg,
-        color-mix(in oklab, var(--violet-500) 70%, transparent) 0%,
-        color-mix(in oklab, var(--violet-500) 70%, transparent) 80%,
-        var(--mint-400) 100%
-      );
-    }
-    .journey__stop--up,
-    .journey__stop--down {
-      grid-column: 1;
-      grid-row: auto;
-      align-self: auto;
-      padding: 0.8rem 0 0.8rem 2rem;
-    }
-    .journey__stop::after {
-      display: none;
-    }
-    .journey__stop--up .journey__note,
-    .journey__stop--down .journey__note {
-      top: 1rem;
-      bottom: auto;
-    }
-    .journey__meta {
-      margin-top: 0.2rem;
-    }
+  .pp__price span {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-low);
   }
 
-  .journey__thread {
-    margin-top: clamp(2.5rem, 6vw, 4rem);
-    max-width: 56ch;
-    font-family: var(--font-display);
-    font-size: clamp(1.3rem, 0.95rem + 1vw, 1.65rem);
-    font-weight: 600;
-    line-height: 1.34;
-    letter-spacing: -0.025em;
-    color: var(--text-hi);
+  .pp__note {
+    margin-top: 0.5rem;
+    color: var(--text-mid);
+  }
+
+  .pp__more {
+    display: inline-block;
+    margin-top: clamp(2rem, 4vw, 2.5rem);
+  }
+
+  @media (max-width: 56rem) {
+    .pp__grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* ---------- Demo ---------- */
@@ -880,14 +979,8 @@ const journey = [
     align-items: baseline;
   }
 
-  .demo__points li::before {
-    content: "";
-    flex: none;
-    width: 0.7rem;
-    height: 0.55rem;
-    border-radius: 50%;
-    background: var(--violet-400);
-    transform: rotate(-22deg) translateY(-0.1em);
+  .demo__points .dot {
+    color: var(--violet-400);
   }
 
   .booking {
@@ -911,14 +1004,9 @@ const journey = [
   }
 
   /* The GHL widget renders its own interface inside the iframe and cannot be
-     restyled from here. Rather than fight it, the panel gives it a light,
-     deliberate inset that reads as an embedded tool. Its colours and fonts are
-     set in GoHighLevel under Calendars -> Customise. */
-  /* Transparent, so whatever the widget paints is the only background there is.
-     While GHL's calendar background is white this reads as a light card on the
-     dark panel; set backgroundColor to --ink-700 in GHL (Calendars → Customise)
-     and the seam disappears entirely. Keeping this dark also removes the white
-     flash that showed before the iframe finished loading. */
+     restyled from here. Transparent, so whatever the widget paints is the
+     only background there is; set backgroundColor to --ink-700 in GHL
+     (Calendars → Customise) and the seam disappears entirely. */
   .booking__widget {
     background: transparent;
     border-radius: 3px;

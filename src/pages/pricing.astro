@@ -1,0 +1,633 @@
+---
+import Base from "../layouts/Base.astro";
+
+const tiers = [
+  {
+    name: "Chorus Trio",
+    price: "$299",
+    tagline: "Bring everything together.",
+    popular: false,
+    includes: [
+      "Complete core platform",
+      "Restaurant Systems",
+      "Marketing and communication tools",
+      "Automations",
+      "Social planning",
+      "Guest database",
+      "Reviews",
+      "White-glove onboarding, training and support",
+    ],
+    includesLabel: "Includes",
+  },
+  {
+    name: "Chorus Ensemble",
+    price: "$399",
+    tagline: "Turn connection into growth.",
+    popular: true,
+    includes: [
+      "Local Presence and listings",
+      "Advanced segmentation",
+      "Advanced reputation management",
+      "Advanced automation and reporting",
+      "Advertising tools",
+    ],
+    includesLabel: "Everything in Trio, plus",
+  },
+  {
+    name: "Chorus Symphony",
+    price: "$499",
+    tagline: "Put AI to work for your restaurant.",
+    popular: false,
+    includes: [
+      "AI phone answering",
+      "AI web and text conversations",
+      "AI review assistance",
+      "AI guest assistance",
+      "AI inquiry follow-up",
+    ],
+    includesLabel: "Everything in Ensemble, plus",
+  },
+];
+
+const locationPricing = [
+  { plan: "Trio", first: "$299/mo", additional: "+$149/mo" },
+  { plan: "Ensemble", first: "$399/mo", additional: "+$179/mo" },
+  { plan: "Symphony", first: "$499/mo", additional: "+$229/mo" },
+];
+
+const addOns = [
+  {
+    name: "Local SEO",
+    price: "From ~$149/mo per location",
+    note: "Software/tool layer. Tempo-managed SEO is a separate service.",
+  },
+  {
+    name: "AI Unlimited",
+    price: "~$79/mo per location",
+    note: "For higher-volume Symphony customers.",
+  },
+  {
+    name: "Dedicated Email",
+    price: "~$79/mo per domain",
+    note: "For higher-volume sending.",
+  },
+];
+
+const managed = [
+  "Managed Social Media",
+  "Managed Email & SMS",
+  "Managed Advertising",
+  "Managed SEO",
+  "Website Design & Management",
+  "Broader Restaurant Marketing Services",
+];
+
+const care = [
+  "White-glove onboarding included with every plan.",
+  "Restaurant-specific configuration, not an empty account.",
+  "Essential workflows and campaigns configured during onboarding.",
+  "Team training included.",
+  "A support-ticket link inside Chorus, triaged to the right person.",
+  "Ongoing platform updates and restaurant-specific improvements.",
+];
+---
+
+<Base
+  title="Tempo Chorus pricing — simple plans, complete platform"
+  description="Chorus Trio, Ensemble and Symphony — clear monthly pricing, what's included at every tier, multi-location rates, add-ons and Tempo-managed services."
+  active="pricing"
+>
+  <section class="lead">
+    <div class="shell">
+      <h1 class="lead__title">
+        Simple pricing.<br />
+        <span class="lead__accent">Complete platform.</span>
+      </h1>
+      <p class="lead__sub">
+        Three plans, every one a complete platform — not a stripped-down
+        starter tier. Higher plans add sophistication, not the basics.
+      </p>
+    </div>
+  </section>
+
+  <section class="tiers">
+    <div class="shell tiers__grid">
+      {
+        tiers.map((t) => (
+          <div class={`tier ${t.popular ? "tier--popular" : ""}`}>
+            {t.popular && <p class="tier__badge">Most popular</p>}
+            <p class="tier__name">{t.name}</p>
+            <p class="tier__tagline">{t.tagline}</p>
+            <p class="tier__price">
+              {t.price}
+              <span>/mo</span>
+            </p>
+            <a class="btn tier__cta" href="/#demo">Book a demo</a>
+            <p class="tier__includes-label">{t.includesLabel}</p>
+            <ul class="tier__list">
+              {t.includes.map((item) => (
+                <li>
+                  <span class="dot" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="locations" aria-labelledby="locations-title">
+    <div class="shell">
+      <h2 class="eyeless-h2 locations__title" id="locations-title">
+        1 location or many.
+      </h2>
+      <p class="lede locations__lede">
+        Every plan scales the same way — a base price, and a flat rate per
+        additional location.
+      </p>
+      <div class="locations__table" role="table">
+        <div class="locations__row locations__row--head" role="row">
+          <span role="columnheader">Plan</span>
+          <span role="columnheader">First location</span>
+          <span role="columnheader">Additional location</span>
+        </div>
+        {
+          locationPricing.map((row) => (
+            <div class="locations__row" role="row">
+              <span role="cell" class="locations__plan">{row.plan}</span>
+              <span role="cell">{row.first}</span>
+              <span role="cell">{row.additional}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="addons" aria-labelledby="addons-title">
+    <div class="shell addons__grid">
+      <div>
+        <h2 class="eyeless-h2 addons__title" id="addons-title">Add-ons.</h2>
+        <p class="lede addons__lede">Kept short, and priced simply.</p>
+      </div>
+      <ul class="addons__list">
+        {
+          addOns.map((a) => (
+            <li>
+              <p class="addons__name">{a.name}</p>
+              <p class="addons__price">{a.price}</p>
+              <p class="addons__note">{a.note}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="managed" aria-labelledby="managed-title">
+    <div class="shell managed__inner">
+      <div class="managed__say">
+        <h2 class="eyeless-h2 managed__title" id="managed-title">
+          Chorus gives you the tools.<br />
+          <span class="managed__accent">Tempo can also provide the team.</span>
+        </h2>
+        <p class="lede managed__lede">
+          Human-delivered services, separate from your software plan —
+          custom-scoped, never assumed as included.
+        </p>
+        <a
+          class="hero__link"
+          href="https://links.tempohg.com/widget/booking/hS2oh8e23QoVCAjR4WgK"
+          target="_blank"
+          rel="noopener"
+        >
+          Talk to us about managed services →
+        </a>
+      </div>
+      <ul class="managed__list">
+        {
+          managed.map((m) => (
+            <li>
+              <span class="dot" aria-hidden="true" />
+              {m}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="care" aria-labelledby="care-title">
+    <div class="shell">
+      <h2 class="eyeless-h2 care__title" id="care-title">
+        Onboarding and support,<br /> on every plan.
+      </h2>
+      <ul class="care__list" data-reveal>
+        {
+          care.map((c, i) => (
+            <li style={`--i:${i}`}>
+              <span class="dot" aria-hidden="true" />
+              {c}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="shell close__inner">
+      <h2 class="close__title">
+        Not sure which plan?<br />
+        <span class="close__accent">We'll help you pick.</span>
+      </h2>
+      <p class="close__sub">
+        A personalized walkthrough, built around your restaurant — not a
+        generic software tour.
+      </p>
+      <a class="btn" href="/#demo">Book a demo</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lead {
+    padding-block: clamp(4rem, 10vw, 7.5rem) clamp(3rem, 7vw, 5rem);
+  }
+
+  .lead__title {
+    font-size: clamp(2.75rem, 1.1rem + 6vw, 5.6rem);
+    letter-spacing: -0.045em;
+  }
+
+  .lead__accent {
+    color: var(--mint-400);
+  }
+
+  .lead__sub {
+    margin-top: 1.75rem;
+    max-width: 58ch;
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+    line-height: 1.5;
+    color: var(--text-mid);
+  }
+
+  /* ---------- Tiers ---------- */
+
+  .tiers {
+    padding-block: clamp(2rem, 5vw, 3.5rem) clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .tiers__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.25rem, 3vw, 2rem);
+    align-items: start;
+  }
+
+  .tier {
+    position: relative;
+    background: var(--ink-700);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
+    border-radius: 5px;
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    box-shadow: 0 18px 38px -24px rgb(0 0 0 / 0.9);
+  }
+
+  .tier--popular {
+    border-color: color-mix(in oklab, var(--mint-400) 55%, transparent);
+  }
+
+  .tier__badge {
+    position: absolute;
+    top: -0.75rem;
+    left: clamp(1.75rem, 4vw, 2.5rem);
+    background: var(--mint-400);
+    color: var(--ink-900);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.28rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .tier__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: -0.03em;
+    color: var(--text-hi);
+  }
+
+  .tier__tagline {
+    margin-top: 0.5rem;
+    color: var(--text-mid);
+  }
+
+  .tier__price {
+    margin-top: 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2.6rem;
+    letter-spacing: -0.04em;
+    color: var(--mint-300);
+  }
+
+  .tier__price span {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-low);
+  }
+
+  .tier__cta {
+    margin-top: 1.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tier__includes-label {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .tier__list {
+    list-style: none;
+    margin: 1.1rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .tier__list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    color: var(--text-hi);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .tier__list .dot {
+    color: var(--mint-400);
+  }
+
+  @media (max-width: 62rem) {
+    .tiers__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- Locations ---------- */
+
+  .locations {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    background: var(--ink-800);
+  }
+
+  .locations__lede {
+    margin-top: 1.25rem;
+    color: var(--text-mid);
+  }
+
+  .locations__table {
+    margin-top: clamp(2rem, 5vw, 3rem);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .locations__row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 1rem clamp(1.25rem, 3vw, 1.75rem);
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 18%, transparent);
+  }
+
+  .locations__row:first-child {
+    border-top: 0;
+  }
+
+  .locations__row--head {
+    background: var(--ink-600);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .locations__plan {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-hi);
+  }
+
+  @media (max-width: 40rem) {
+    .locations__row {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      font-size: 0.9rem;
+    }
+  }
+
+  /* ---------- Add-ons ---------- */
+
+  .addons {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .addons__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .addons__lede {
+    margin-top: 1.25rem;
+    color: var(--text-low);
+  }
+
+  .addons__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .addons__list li {
+    padding-block: 1.25rem;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
+  }
+
+  .addons__list li:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .addons__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text-hi);
+  }
+
+  .addons__price {
+    margin-top: 0.3rem;
+    color: var(--mint-300);
+    font-weight: 600;
+  }
+
+  .addons__note {
+    margin-top: 0.3rem;
+    color: var(--text-mid);
+    font-size: 0.9rem;
+    max-width: 46ch;
+  }
+
+  @media (max-width: 56rem) {
+    .addons__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- Managed services ---------- */
+
+  .managed {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    background: var(--ink-800);
+  }
+
+  .managed__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .managed__accent {
+    color: var(--violet-400);
+  }
+
+  .managed__lede {
+    margin-top: 1.25rem;
+    color: var(--text-mid);
+    max-width: 46ch;
+  }
+
+  .managed__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .managed__list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    font-size: 1.05rem;
+    color: var(--text-hi);
+  }
+
+  .managed__list .dot {
+    color: var(--violet-400);
+  }
+
+  .hero__link {
+    display: inline-block;
+    margin-top: 2rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--violet-400);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in oklab, var(--violet-400) 45%, transparent);
+    padding-bottom: 2px;
+    transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+  }
+
+  .hero__link:hover {
+    color: var(--text-hi);
+    border-bottom-color: var(--text-hi);
+  }
+
+  @media (max-width: 56rem) {
+    .managed__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- Care ---------- */
+
+  .care {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .care__list {
+    list-style: none;
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem clamp(2rem, 6vw, 5rem);
+  }
+
+  .care__list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    padding-block: 0.6rem;
+    color: var(--text-hi);
+    font-size: 1.02rem;
+  }
+
+  .care__list .dot {
+    color: var(--mint-400);
+  }
+
+  @media (max-width: 56rem) {
+    .care__list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- Close ---------- */
+
+  .close {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    background: var(--ink-800);
+  }
+
+  .close__title {
+    font-size: clamp(2.1rem, 1.1rem + 3.2vw, 3.5rem);
+    letter-spacing: -0.04em;
+  }
+
+  .close__accent {
+    color: var(--mint-400);
+  }
+
+  .close__sub {
+    margin-top: 1.6rem;
+    max-width: 56ch;
+    color: var(--text-mid);
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+  }
+
+  .close__inner .btn {
+    margin-top: 2.4rem;
+  }
+</style>
