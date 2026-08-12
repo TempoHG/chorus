@@ -11,7 +11,7 @@ import TempoMark from "./TempoMark.astro";
    entrance the first time it scrolls into view — see the reveal script in
    Base.astro. */
 interface Props {
-  kind: "calendar" | "reviews" | "reservations" | "inbox" | "afterhours" | "attribution";
+  kind: "calendar" | "reviews" | "reservations" | "inbox" | "afterhours" | "attribution" | "unified";
 }
 const { kind } = Astro.props;
 
@@ -94,6 +94,16 @@ const flow = [
   { label: "Tuesday", title: "Sees your ad", meta: "Instagram · 2 miles away", done: false },
   { label: "Tuesday", title: "Lands on your page", meta: "Menu · Book a table", done: false },
   { label: "Friday", title: "Sits down", meta: "Party of 2 · 8:00 PM", done: true },
+];
+
+/* --- Why Chorus: six separate tools, orbiting one system --- */
+const orbit = [
+  "Website",
+  "Phone",
+  "Text",
+  "Email",
+  "Social",
+  "Reviews",
 ];
 ---
 
@@ -275,6 +285,26 @@ const flow = [
             Chorus knows those were the same person — so the spend has a table
             attached to it, not a click.
           </p>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    kind === "unified" && (
+      <div class="unified__wrap">
+        <div class="unified__orbit" data-orbit-reveal>
+          {orbit.map((name) => (
+            <div class="unified__tablet">
+              <span class="unified__tablet-chip">{name}</span>
+            </div>
+          ))}
+          <span class="unified__node" aria-hidden="true">
+            <span class="unified__node-halo" />
+            <span class="unified__node-core">
+              <TempoMark class="unified__node-spark" />
+            </span>
+          </span>
         </div>
       </div>
     )
@@ -892,6 +922,107 @@ const flow = [
       height: 1.5rem;
       min-width: 0;
       margin-left: 1.25rem;
+    }
+  }
+
+  /* ---- unified: six tools orbiting one system ---- */
+
+  /* No card, no fill — this sits directly on the section's own background,
+     not inside a separate dark panel. */
+  .unified__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .unified__orbit {
+    position: relative;
+    width: 100%;
+    max-width: 32rem;
+    height: 29rem;
+  }
+
+  .unified__tablet {
+    /* Anchored dead-center; the orbit position (and centering) is set
+       entirely by GSAP (motion.js) via x/y + xPercent/yPercent, since it
+       needs to move continuously — CSS can't drive that. */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    padding: 0.75rem 1.25rem;
+    background: var(--ink-700);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 32%, transparent);
+    border-radius: 0.85rem;
+    box-shadow: 0 18px 32px -18px rgb(0 0 0 / 0.85);
+    pointer-events: none;
+  }
+
+  .unified__tablet-chip {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    color: var(--text-hi);
+    white-space: nowrap;
+  }
+
+  .unified__node {
+    /* Centering set by GSAP (motion.js) — see note on .unified__tablet. */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6rem;
+    height: 6rem;
+    display: grid;
+    place-items: center;
+    z-index: 2;
+  }
+
+  .unified__node-halo {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: color-mix(in oklab, var(--mint-400) 14%, transparent);
+    border: 2px solid color-mix(in oklab, var(--mint-500) 65%, var(--ink-900));
+  }
+
+  .unified__node-core {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background: var(--mint-400);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 10px 24px -10px color-mix(in oklab, var(--mint-400) 60%, transparent);
+  }
+
+  .unified__node-spark {
+    width: 58%;
+    height: 58%;
+    color: var(--ink-900);
+  }
+
+  /* The tags' motion — spring out from behind the node, orbit clockwise,
+     retract, loop — is driven entirely by orbitReveals() in
+     src/scripts/motion.js, since it's continuous and CSS can't own that. */
+
+  @media (max-width: 30rem) {
+    .unified__orbit {
+      height: 22rem;
+    }
+    .unified__tablet {
+      padding: 0.6rem 1rem;
+    }
+    .unified__tablet-chip {
+      font-size: 0.92rem;
+    }
+    .unified__node {
+      width: 4.75rem;
+      height: 4.75rem;
     }
   }
 </style>

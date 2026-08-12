@@ -10,14 +10,14 @@ import TempoMark from "./TempoMark.astro";
    if that rule gets revisited for this surface. Screen content auto-scrolls
    in a seamless loop (rendered twice, translated by exactly -50%). */
 const voices = [
-  { label: "Website", dx: "-30vw", dy: "-7rem", rot: "-6deg" },
-  { label: "Phone", dx: "18vw", dy: "-10rem", rot: "5deg" },
-  { label: "Text", dx: "-20vw", dy: "6rem", rot: "4deg" },
-  { label: "Email", dx: "24vw", dy: "-3rem", rot: "-5deg" },
-  { label: "Social", dx: "-34vw", dy: "5rem", rot: "5deg" },
-  { label: "Reviews", dx: "14vw", dy: "9rem", rot: "-4deg" },
-  { label: "Events", dx: "-16vw", dy: "-11rem", rot: "6deg" },
-  { label: "Guests", dx: "20vw", dy: "-6rem", rot: "-4deg" },
+  { label: "Website", dx: "-30vw", dy: "-7rem", rot: -6 },
+  { label: "Phone", dx: "18vw", dy: "-10rem", rot: 5 },
+  { label: "Text", dx: "-20vw", dy: "6rem", rot: 4 },
+  { label: "Email", dx: "24vw", dy: "-3rem", rot: -5 },
+  { label: "Social", dx: "-34vw", dy: "5rem", rot: 5 },
+  { label: "Reviews", dx: "14vw", dy: "9rem", rot: -4 },
+  { label: "Events", dx: "-16vw", dy: "-11rem", rot: 6 },
+  { label: "Guests", dx: "20vw", dy: "-6rem", rot: -4 },
 ];
 
 const dishes = [
@@ -34,11 +34,8 @@ const dishes = [
   <div class="merge__list">
     <ol class="merge__voices">
       {
-        voices.map((v, i) => (
-          <li
-            class="mvoice"
-            style={`--dx:${v.dx}; --dy:${v.dy}; --rot:${v.rot}; --i:${i}`}
-          >
+        voices.map((v) => (
+          <li class="mvoice" data-dx={v.dx} data-dy={v.dy} data-rot={v.rot}>
             <span class="mvoice__name">{v.label}</span>
             <span class="mvoice__rule" aria-hidden="true" />
           </li>
@@ -60,7 +57,6 @@ const dishes = [
             <path
               class="merge__strand"
               d={`M0 ${y.toFixed(2)} C 45 ${y.toFixed(2)}, 85 50, 130 50`}
-              style={`--i:${i}`}
             />
           );
         })
@@ -378,72 +374,13 @@ const dishes = [
     }
   }
 
-  /* ---- arrival, matching the site's other hero variants ---- */
-
-  :global(.js) .mvoice,
-  :global(.js) .merge__strand,
-  :global(.js) .merge__node {
-    opacity: 0;
-  }
-
-  :global(.js) .mvoice {
-    translate: var(--dx) var(--dy);
-    rotate: var(--rot);
-    animation: settle 1.15s var(--ease-out) forwards;
-    animation-delay: calc(160ms + var(--i) * 85ms);
-  }
-
-  :global(.js) .merge__strand {
-    animation: strand-fade 0.6s var(--ease-out) forwards;
-    animation-delay: calc(1.05s + var(--i) * 60ms);
-  }
-
-  :global(.js) .merge__node {
-    animation: node-in 0.75s var(--ease-out) 1.55s forwards;
-  }
-
-  @keyframes settle {
-    from {
-      opacity: 0;
-      translate: var(--dx) var(--dy);
-      rotate: var(--rot);
-      filter: blur(5px);
-    }
-    to {
-      opacity: 1;
-      translate: 0 0;
-      rotate: 0deg;
-      filter: blur(0);
-    }
-  }
-
-  @keyframes strand-fade {
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes node-in {
-    from {
-      opacity: 0;
-      scale: 0.5;
-    }
-    to {
-      opacity: 1;
-      scale: 1;
-    }
-  }
+  /* Arrival (scatter-to-settle, strand fade, node pop) is a GSAP timeline —
+     see heroArrival() in src/scripts/motion.js. Kept out of CSS entirely
+     since these elements need a permanent-then-animated transform, which is
+     exactly the composition GSAP owns and CSS keyframes fought. */
 
   @media (prefers-reduced-motion: reduce) {
     .menu-scroll__track {
-      animation: none;
-    }
-    :global(.js) .mvoice,
-    :global(.js) .merge__strand,
-    :global(.js) .merge__node {
-      opacity: 1;
-      translate: none;
-      rotate: none;
       animation: none;
     }
   }

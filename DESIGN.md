@@ -1,6 +1,6 @@
 ---
 name: Tempo Chorus
-description: A premium hospitality-tech system where a restaurant's scattered guest channels visibly flow together into one platform — dark navy ground, violet/mint brand accents, authored UI-mockup proof instead of stock photography or literal musical notation.
+description: A premium hospitality-tech system where a restaurant's scattered guest channels visibly flow together into one platform — dark navy ground, violet/mint brand accents, authored UI-mockup proof and real (never stock) restaurant photography/video knocked back with a violet wash, instead of literal musical notation.
 colors:
   ink-900: "#0b0917"
   ink-800: "#12102a"
@@ -186,7 +186,7 @@ The client brief that governs this build (`Tempo_Chorus_Website_Design_Brief_for
 
 The one recurring visual idea, replacing the brace, is **flow**: scattered channels (website, phone, text, email, social, reviews, events, guests) connect to a single Chorus node by thin lines, not a bracket. The same connector-line vocabulary (`.wires`, `.flowline` — already prototyped in `ProductMocks.astro`) is the site's one motif for "bringing everything together," used at the hero and echoed sparingly elsewhere. It is a diagram, not a decoration: every line connects two real things.
 
-Color still carries the argument exactly as before: violet is structure (rules, connectors, borders), brand green marks resolution (the answered call, the confirmed booking, the primary action), amber marks the unresolved. Density stays editorial, not dashboard — generous vertical rhythm, short measures (44–68ch), Bricolage Grotesque running large at the top of each beat. The site still refuses the feature-icon grid and the claim-without-proof hero, and it still refuses photography entirely.
+Color still carries the argument exactly as before: violet is structure (rules, connectors, borders), brand green marks resolution (the answered call, the confirmed booking, the primary action), amber marks the unresolved. Density stays editorial, not dashboard — generous vertical rhythm, short measures (44–68ch), Bricolage Grotesque running large at the top of each beat. The site still refuses the feature-icon grid and the claim-without-proof hero, and it still refuses stock or AI-generated imagery — but real, verified restaurant photography and video, always knocked back with a violet wash, is now a deliberate part of the system (the Four Jobs background, the vignette-timeline media).
 
 **Key Characteristics:**
 
@@ -195,7 +195,7 @@ Color still carries the argument exactly as before: violet is structure (rules, 
 - Authored UI-mockup panels (inbox threads, calendars, review queues, service rails) are the primary proof system, used across the homepage and the Features page.
 - Violet structures, green resolves, amber marks what is still open.
 - Bricolage Grotesque display over Archivo text; no third face, no icon font, no glyph icons.
-- All imagery is authored SVG/CSS. No photography anywhere.
+- Feature graphics and demonstration UI are authored SVG/CSS, not stock photography. Real, user-supplied restaurant photography and video are used deliberately in two places, both always knocked back with a violet wash: the Four Jobs section's ambient background (dark violet wash over muted/looping video), and the small media frame beside each "Here is what that actually means" vignette (a lighter violet wash — 26% mix rather than the Four Jobs treatment's near-full wash — since these read as supporting frames, not a full-bleed backdrop). All of it is verified footage/photos of real restaurant work and moments, never stock or AI-generated imagery.
 - Restrained motion: a settle-in arrival at the hero, plus small scroll-triggered entrances on mockup panels — never a global scroll-reveal, never Popmenu-style pinned scroll-jacking.
 
 ## Colors
@@ -354,11 +354,13 @@ The site's primary proof system: an inbox thread merging three channels into one
 
 ### Motion
 
-`--ease-out: cubic-bezier(0.16, 1, 0.3, 1)` is the only easing token; state transitions run 0.2s (color/border), 0.25s (background/transform) or 0.3s (shadow).
+The site's animation engine is [GSAP](https://gsap.com/) plus its ScrollTrigger plugin, via one shared module (`src/scripts/motion.js`, initialized once from `Base.astro`) — not CSS `@keyframes`. GSAP owns every animated transform directly through its own internal transform cache, which matters here specifically: an element that needs both a *permanent* positioning transform (centering via `xPercent`/`yPercent`, a per-item rotation) and an *animated* one can't get the permanent part from CSS once GSAP also touches that element — GSAP composites `x`/`y`/`rotation`/`scale` into one `transform` and silently drops a CSS-only `translate`/`rotate` set outside it. The fix, used everywhere this applies (the hero's channel scatter, the "Why Chorus" orbit tablets), is to hand GSAP the permanent part too (`gsap.set` once, un-animated) rather than leaving it in CSS.
 
-**The Restrained-Motion Rule.** One authored arrival at the hero (channels scatter, then settle and connect to the node). Beyond that, mockup panels get a single small entrance stagger the first time they scroll into view (rows/cards fade + translate-y, `IntersectionObserver`-driven, animating once) — never a global scroll-reveal on every section, never a second competing hero sequence, never Popmenu-style pinned/scrubbed scroll-jacking.
+`--ease-out: cubic-bezier(0.16, 1, 0.3, 1)` (GSAP's `power3.out`, the closest named equivalent) remains the house ease; CSS state transitions (color/border/background/shadow on hover, focus, etc.) still use plain CSS transitions at 0.2–0.3s, untouched by GSAP.
 
-Every animated component pairs its keyframes with a `prefers-reduced-motion: reduce` block that sets the resting state directly and cancels the animation, and every animation is gated behind a `.js` class stamped on `<html>` by an inline script, so the resting state is what renders without JS.
+**The Restrained-Motion Rule.** One authored arrival at the hero (channels scatter, settle, connect to the node — a GSAP timeline, not scroll-triggered, since it's the first-viewport moment). Mockup panels and list groups (`[data-reveal]`/`[data-reveal-solo]`) get a single small entrance stagger the first time they scroll into view, once. The homepage vignette timeline is the one deliberate scroll-*scrubbed* moment on the site: its spine grows in sync with scroll progress (`ScrollTrigger` with `scrub: true`) while each vignette still gets a one-shot fade-in — the page itself never pins or freezes, which is what keeps this from becoming Popmenu-style scroll-jacking. Never a global scroll-reveal on every section, never a second competing hero sequence.
+
+`initMotion()` checks `prefers-reduced-motion` once, up front: reduced-motion visitors skip GSAP's animated calls entirely and get every element's final state set directly (`gsap.set`, no tween). There is no `.js`-class CSS gating anymore — GSAP sets each animated element's hidden starting state itself at runtime, so without JS nothing is ever hidden in the first place.
 
 ## Do's and Don'ts
 
@@ -372,13 +374,13 @@ Every animated component pairs its keyframes with a `prefers-reduced-motion: red
 - **Do** give every prose block an explicit `ch` measure (44–68ch).
 - **Do** make two-column grids unequal and collapse them at 62rem unless documented otherwise.
 - **Do** put the subordinate line *below* its heading, as a caption.
-- **Do** ship every animation with a `prefers-reduced-motion` resting state and a no-JS resting state.
+- **Do** register every new animated element with `motion.js` so `prefers-reduced-motion` and the no-JS resting state stay covered centrally, rather than writing a one-off reduced-motion block per component.
 - **Do** keep the full nav visible on phones as a second masthead row.
 - **Do** keep demonstration data clearly labeled illustrative (footer disclosure) until real material lands.
 
 ### Don't:
 
-- **Don't** add photography of any kind — a standing constraint, not a temporary state.
+- **Don't** add stock or AI-generated photography, ever. Real, verified restaurant photography/video is allowed only where it's already established (Four Jobs background, vignette-timeline media) and only knocked back with a violet wash — don't add it as a plain, untinted image elsewhere without deciding that on purpose.
 - **Don't** add a global scroll-reveal, a second competing hero sequence, or pinned/scrubbed scroll-jacking.
 - **Don't** put an eyebrow, kicker or uppercase label above a heading anywhere on a page.
 - **Don't** introduce a light theme, a white surface, or a fifth ink step.

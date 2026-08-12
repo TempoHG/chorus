@@ -95,65 +95,8 @@ const { title, description, active } = Astro.props;
     </footer>
 
     <script>
-      // Restrained scroll reveal: each [data-reveal]'s children (and each
-      // [data-reveal-solo] itself) fade + lift in once, the first time they
-      // enter view. No-ops entirely under reduced motion or without JS —
-      // the CSS only hides them once the `.js` class is present.
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      const revealTargets = document.querySelectorAll(
-        "[data-reveal], [data-reveal-solo]",
-      );
-
-      if (reduceMotion || !("IntersectionObserver" in window)) {
-        revealTargets.forEach((el) => el.classList.add("is-in"));
-      } else {
-        const io = new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-in");
-                io.unobserve(entry.target);
-              }
-            }
-          },
-          { threshold: 0.25, rootMargin: "0px 0px -10% 0px" },
-        );
-        revealTargets.forEach((el) => io.observe(el));
-      }
-
-      // A single authored stat count-up (e.g. "calls answered after close").
-      const counters = document.querySelectorAll("[data-count-to]");
-      if (!counters.length) {
-        // no-op
-      } else if (reduceMotion) {
-        counters.forEach((el) => {
-          el.textContent = el.getAttribute("data-count-to") ?? el.textContent;
-        });
-      } else {
-        const countIo = new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              if (!entry.isIntersecting) continue;
-              const el = entry.target;
-              countIo.unobserve(el);
-              const to = parseInt(el.getAttribute("data-count-to") || "0", 10);
-              const duration = 900;
-              const start = performance.now();
-              const tick = (now) => {
-                const p = Math.min(1, (now - start) / duration);
-                const eased = 1 - Math.pow(1 - p, 3);
-                el.textContent = String(Math.round(to * eased));
-                if (p < 1) requestAnimationFrame(tick);
-              };
-              requestAnimationFrame(tick);
-            }
-          },
-          { threshold: 0.6 },
-        );
-        counters.forEach((el) => countIo.observe(el));
-      }
+      import { initMotion } from "../scripts/motion.js";
+      initMotion();
     </script>
   </body>
 </html>

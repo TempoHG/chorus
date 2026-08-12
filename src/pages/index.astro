@@ -2,6 +2,8 @@
 import Base from "../layouts/Base.astro";
 import PhoneField from "../components/PhoneField.astro";
 import ProductMocks from "../components/ProductMocks.astro";
+import FeatureArt from "../components/FeatureArt.astro";
+import JobIcon from "../components/JobIcon.astro";
 
 // GoHighLevel booking calendar, served from the Tempo whitelabel domain — NOT
 // api.leadconnectorhq.com, which does not serve this calendar. WIDGET_ID is the
@@ -42,6 +44,7 @@ const vignettes = [
     response:
       "Tempo Chorus picks up, answers the question about Saturday, holds a table for six, and texts the confirmation before they've put the phone down.",
     weight: "wide",
+    media: { type: "image", src: "/img/vignettes/closed.jpg", alt: "A \"Closed\" sign hanging in a restaurant's front window at night." },
   },
   {
     marker: "9:12 AM · Sunday",
@@ -49,6 +52,7 @@ const vignettes = [
     response:
       "Tempo Chorus answers in the same minute, in your words, and drops the conversation into the same place as every call and text.",
     weight: "normal",
+    media: { type: "image", src: "/img/vignettes/glutenfree.jpg", alt: "A guest checking their phone for a reply." },
   },
   {
     marker: "Table 14 · 9:40 PM",
@@ -56,6 +60,7 @@ const vignettes = [
     response:
       "The next morning Tempo Chorus thanks them and asks for the review — while it's still the best meal they've had all month.",
     weight: "normal",
+    media: { type: "video", src: "/video/vignettes/bestmeal.mp4" },
   },
   {
     marker: "Last visit · 11 March",
@@ -63,6 +68,7 @@ const vignettes = [
     response:
       "Tempo Chorus noticed, and reached out with the kind of message that sounds like it came from you — because you wrote it once, and it's been waiting.",
     weight: "wide",
+    media: { type: "image", src: "/img/vignettes/missingregular.jpg", alt: "An empty seat at a restaurant counter." },
   },
   {
     marker: "Inquiry · 40 people, December",
@@ -70,6 +76,7 @@ const vignettes = [
     response:
       "Tempo Chorus captures it, replies immediately, and keeps politely following up until a human on your side picks it up.",
     weight: "normal",
+    media: { type: "image", src: "/img/vignettes/privateevent.jpg", alt: "A group celebrating together at a private event." },
   },
   {
     marker: "Birthday · in 3 days",
@@ -77,6 +84,7 @@ const vignettes = [
     response:
       "Tempo Chorus already knows the date. The invitation goes out on time, personalized, without anyone adding it to a list.",
     weight: "normal",
+    media: { type: "video", src: "/video/vignettes/birthday.mp4" },
   },
 ];
 
@@ -139,67 +147,27 @@ const tiers = [
     <div class="hero__floor" />
   </section>
 
-  <section class="what" id="what">
-    <div class="shell what__grid">
-      <div class="what__lead">
-        <h2 class="eyeless-h2 what__head">So what exactly<br /> is Chorus?</h2>
-
-        <ul class="nots">
-          <li>It is not a website.</li>
-          <li>It is not your POS.</li>
-          <li>It is not a loyalty app.</li>
-        </ul>
-      </div>
-
-      <div class="what__say">
-        <p class="what__body">
-          Tempo Chorus connects <strong>every way your restaurant communicates
-          with guests</strong> into one system. Instead of separate apps,
-          separate logins, separate lists and a different place to look for
-          each one, there is one — and every part of it knows what the others
-          just did.
-        </p>
-        <p class="what__body what__body--quiet">
-          Your guest doesn't experience separate channels. They experience
-          you. This is the platform built to finally agree with them.
-        </p>
-      </div>
-    </div>
-  </section>
-
   <section class="jobs" aria-labelledby="jobs-title">
-    <div class="shell">
+    <video
+      class="jobs__bg"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+    >
+      <source src="/video/four-jobs-bg.mp4" type="video/mp4" />
+    </video>
+    <div class="jobs__veil" aria-hidden="true"></div>
+    <div class="shell jobs__shell">
       <h2 class="eyeless-h2 jobs__title" id="jobs-title">Four jobs. One platform.</h2>
       <div class="jobs__grid" data-reveal>
         {
           jobs.map((j, i) => (
             <article class="job" style={`--i:${i}`}>
               <span class="job__mark" aria-hidden="true">
-                {j.mark === "found" && (
-                  <svg viewBox="0 0 40 40" fill="none">
-                    <circle cx="20" cy="20" r="3" fill="var(--mint-400)" />
-                    <path d="M20 8 V14 M20 26 V32 M8 20 H14 M26 20 H32" stroke="var(--violet-400)" stroke-width="1.6" stroke-linecap="round" />
-                  </svg>
-                )}
-                {j.mark === "connected" && (
-                  <svg viewBox="0 0 40 40" fill="none">
-                    <circle cx="10" cy="14" r="3" fill="var(--violet-400)" />
-                    <circle cx="30" cy="26" r="3" fill="var(--mint-400)" />
-                    <path d="M10 17 C 14 24, 22 20, 30 23" stroke="var(--violet-400)" stroke-width="1.6" fill="none" />
-                  </svg>
-                )}
-                {j.mark === "back" && (
-                  <svg viewBox="0 0 40 40" fill="none">
-                    <path d="M12 14 C 8 22, 12 30, 22 30 C 30 30, 32 24, 28 19" stroke="var(--violet-400)" stroke-width="1.6" fill="none" stroke-linecap="round" />
-                    <circle cx="12" cy="14" r="2.6" fill="var(--mint-400)" />
-                  </svg>
-                )}
-                {j.mark === "time" && (
-                  <svg viewBox="0 0 40 40" fill="none">
-                    <path d="M11 12 C 15 8, 25 8, 29 12 C 33 16, 33 24, 29 28 C 25 32, 15 32, 11 28" stroke="var(--violet-400)" stroke-width="1.6" fill="none" stroke-linecap="round" />
-                    <path d="M20 15 V20 L24 23" stroke="var(--mint-400)" stroke-width="1.6" fill="none" stroke-linecap="round" />
-                  </svg>
-                )}
+                <JobIcon name={j.mark} />
               </span>
               <h3 class="job__name">{j.name}</h3>
               <p class="job__line">{j.line}</p>
@@ -225,13 +193,38 @@ const tiers = [
       {
         vignettes.map((v) => (
           <article class={`vignette vignette--${v.weight}`}>
-            <h3 class="vignette__trigger">{v.trigger}</h3>
-            <p class="vignette__marker">{v.marker}</p>
-            <div class="vignette__rule" aria-hidden="true"></div>
-            <p class="vignette__response">
-              <span class="dot" aria-hidden="true" />
-              <span>{v.response}</span>
-            </p>
+            <div class="vignette__say">
+              <h3 class="vignette__trigger">{v.trigger}</h3>
+              <p class="vignette__marker">{v.marker}</p>
+              <div class="vignette__rule" aria-hidden="true"></div>
+              <p class="vignette__response">
+                <span class="dot" aria-hidden="true" />
+                <span>{v.response}</span>
+              </p>
+            </div>
+            <div class="vignette__media">
+              {v.media.type === "video" ? (
+                <video
+                  class="vignette__asset"
+                  src={v.media.src}
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  aria-hidden="true"
+                />
+              ) : (
+                <img
+                  class="vignette__asset"
+                  src={v.media.src}
+                  alt={v.media.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+              <span class="vignette__veil" aria-hidden="true"></span>
+            </div>
           </article>
         ))
       }
@@ -273,27 +266,32 @@ const tiers = [
 
   <section class="why" aria-labelledby="why-title">
     <div class="shell why__inner">
-      <h2 class="why__title" id="why-title">
-        <span class="why__titletext">Why "Chorus"?</span>
-      </h2>
-      <div class="why__text">
-        <p class="why__lead">
-          A chorus is where individual parts come together to create something
-          stronger than they could on their own.
-        </p>
-        <p>Restaurants work the same way.</p>
-        <p>
-          Your website, guest communications, reviews, marketing, private
-          events, and customer relationships all play an important role. But
-          when they're disconnected, opportunities are missed and the guest
-          experience suffers.
-        </p>
-        <p>
-          Tempo Chorus brings every interaction together into one connected
-          system — so your restaurant delivers a more consistent experience,
-          builds stronger guest relationships, and grows with less effort.
-        </p>
-        <p class="why__close">All together now.</p>
+      <div class="why__show">
+        <FeatureArt kind="unified" />
+      </div>
+      <div class="why__say">
+        <h2 class="why__title" id="why-title">
+          <span class="why__titletext">Why "Chorus"?</span>
+        </h2>
+        <div class="why__text">
+          <p class="why__lead">
+            A chorus is where individual parts come together to create something
+            stronger than they could on their own.
+          </p>
+          <p>Restaurants work the same way.</p>
+          <p>
+            Your website, guest communications, reviews, marketing, private
+            events, and customer relationships all play an important role. But
+            when they're disconnected, opportunities are missed and the guest
+            experience suffers.
+          </p>
+          <p>
+            Tempo Chorus brings every interaction together into one connected
+            system — so your restaurant delivers a more consistent experience,
+            builds stronger guest relationships, and grows with less effort.
+          </p>
+          <p class="why__close">All together now.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -475,72 +473,43 @@ const tiers = [
     border-bottom-color: var(--text-hi);
   }
 
-  /* ---------- What ---------- */
-
-  .what {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
-    background: var(--ink-800);
-  }
-
-  .what__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: start;
-  }
-
-  @media (max-width: 62rem) {
-    .what__grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .nots {
-    list-style: none;
-    margin: clamp(2.25rem, 5vw, 3.5rem) 0 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.15em;
-  }
-
-  .nots li {
-    font-family: var(--font-display);
-    font-size: clamp(2.1rem, 1.4rem + 4.2vw, 4.4rem);
-    font-weight: 700;
-    line-height: 1.06;
-    letter-spacing: -0.042em;
-    color: var(--text-low);
-  }
-
-  .nots li:last-child {
-    color: var(--violet-400);
-  }
-
-  .what__say {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1.5rem, 4vw, 2rem);
-  }
-
-  .what__body {
-    max-width: 48ch;
-    color: var(--text-mid);
-  }
-
-  .what__body strong {
-    color: var(--text-hi);
-    font-weight: 600;
-  }
-
-  .what__body--quiet {
-    color: var(--text-low);
-  }
-
   /* ---------- Four Jobs ---------- */
 
   .jobs {
-    padding-block: clamp(4.5rem, 10vw, 8rem) clamp(3rem, 7vw, 5rem);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    /* 25% taller than the original clamp(4.5rem,10vw,8rem)/clamp(3rem,7vw,5rem) */
+    padding-block: clamp(5.6rem, 12.5vw, 10rem) clamp(3.75rem, 8.75vw, 6.25rem);
+  }
+
+  .jobs__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Knocks the footage back so it reads as ambiance behind the cards, never
+     competing with them — a dark violet wash, not a plain black scrim. */
+  .jobs__veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in oklab, var(--ink-900) 55%, transparent),
+        color-mix(in oklab, var(--ink-900) 88%, transparent)
+      ),
+      color-mix(in oklab, var(--violet-700) 55%, transparent);
+  }
+
+  .jobs__shell {
+    position: relative;
+    z-index: 2;
   }
 
   .jobs__grid {
@@ -563,6 +532,7 @@ const tiers = [
     display: inline-flex;
     width: 2.5rem;
     height: 2.5rem;
+    color: var(--violet-400);
   }
 
   .job__mark svg {
@@ -621,10 +591,18 @@ const tiers = [
 
   .vignette {
     position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(12rem, 19rem);
+    align-items: center;
+    gap: clamp(1.75rem, 5vw, 3.5rem);
+    max-width: 68rem;
+  }
+
+  .vignette__say {
     max-width: 54ch;
   }
 
-  .vignette--wide {
+  .vignette--wide .vignette__say {
     max-width: 68ch;
   }
 
@@ -642,6 +620,44 @@ const tiers = [
     );
   }
 
+  .vignette__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: var(--ink-700);
+    box-shadow: 0 24px 40px -22px rgb(0 0 0 / 0.7);
+  }
+
+  .vignette__asset {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* A light violet wash to keep photography/video on-brand rather than
+     reading as stock imagery — deliberately lighter than the Four Jobs
+     background treatment, since these sit as small supporting frames rather
+     than a full-bleed backdrop. */
+  .vignette__veil {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in oklab, var(--violet-700) 26%, transparent);
+  }
+
+  @media (max-width: 56rem) {
+    .vignette {
+      grid-template-columns: 1fr;
+    }
+
+    .vignette__media {
+      order: -1;
+      max-width: 22rem;
+    }
+  }
+
   .vignette__marker {
     margin-top: 0.75rem;
     font-family: var(--font-body);
@@ -654,10 +670,6 @@ const tiers = [
     font-size: clamp(1.3rem, 0.95rem + 1.7vw, 2.1rem);
     letter-spacing: -0.032em;
     color: var(--text-hi);
-  }
-
-  .vignette--wide .vignette__trigger {
-    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
   }
 
   .vignette__rule {
@@ -767,13 +779,25 @@ const tiers = [
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(2rem, 6vw, 5rem);
-    align-items: start;
+    align-items: stretch;
+  }
+
+  .why__show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   @media (max-width: 62rem) {
     .why__inner {
       grid-template-columns: 1fr;
     }
+  }
+
+  .why__say {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 4vw, 2rem);
   }
 
   .why__title {
