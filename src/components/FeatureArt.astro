@@ -1,5 +1,6 @@
 ---
 import TempoMark from "./TempoMark.astro";
+import Wordmark from "./Wordmark.astro";
 
 /* The site's shared library of authored UI-mockup panels — restaurant
    surfaces shown doing their job, not stock photography and not literal
@@ -299,11 +300,11 @@ const orbit = [
               <span class="unified__tablet-chip">{name}</span>
             </div>
           ))}
-          <span class="unified__node" aria-hidden="true">
-            <span class="unified__node-halo" />
-            <span class="unified__node-core">
-              <TempoMark class="unified__node-spark" />
-            </span>
+          <span class="unified__node">
+            <Wordmark class="unified__node-logo" height={34} />
+            <p class="unified__node-tagline">
+              The restaurant growth platform that brings everything together.
+            </p>
           </span>
         </div>
       </div>
@@ -974,36 +975,22 @@ const orbit = [
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 6rem;
-    height: 6rem;
-    display: grid;
-    place-items: center;
+    width: max-content;
+    max-width: 12rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    text-align: center;
     z-index: 2;
   }
 
-  .unified__node-halo {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: color-mix(in oklab, var(--mint-400) 14%, transparent);
-    border: 2px solid color-mix(in oklab, var(--mint-500) 65%, var(--ink-900));
-  }
-
-  .unified__node-core {
-    position: relative;
-    width: 80%;
-    height: 80%;
-    border-radius: 50%;
-    background: var(--mint-400);
-    display: grid;
-    place-items: center;
-    box-shadow: 0 10px 24px -10px color-mix(in oklab, var(--mint-400) 60%, transparent);
-  }
-
-  .unified__node-spark {
-    width: 58%;
-    height: 58%;
-    color: var(--ink-900);
+  .unified__node-tagline {
+    margin: 0;
+    max-width: 11rem;
+    font-size: 0.76rem;
+    line-height: 1.4;
+    color: var(--text-mid);
   }
 
   /* The tags' motion — spring out from behind the node, orbit clockwise,
@@ -1021,8 +1008,19 @@ const orbit = [
       font-size: 0.92rem;
     }
     .unified__node {
-      width: 4.75rem;
-      height: 4.75rem;
+      max-width: 9.5rem;
+    }
+    /* :global is required here: this class lives on the <img> rendered
+       inside Wordmark.astro's own template, so it carries Wordmark's scope
+       attribute, not this file's — a plain scoped selector can never match
+       it (same gotcha as the `.js` selector documented in DESIGN.md). */
+    :global(.unified__node-logo) {
+      height: 26px !important;
+      width: auto !important;
+    }
+    .unified__node-tagline {
+      max-width: 9rem;
+      font-size: 0.68rem;
     }
   }
 </style>
