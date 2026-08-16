@@ -90,6 +90,60 @@ const care = [
   "A support-ticket link inside Chorus, triaged to the right person.",
   "Ongoing platform updates and restaurant-specific improvements.",
 ];
+
+const faqs = [
+  {
+    q: "How quickly will I see results?",
+    a: "Most restaurants start seeing measurable wins inside the first 14 days — captured calls, fewer no-shows, and more 5-star reviews.",
+  },
+  {
+    q: "Is there really no contract?",
+    a: "Correct. Month-to-month. Cancel in one click. 14-day money-back guarantee if it's not a fit.",
+  },
+  {
+    q: "Is there a free trial?",
+    a: "We offer a free consultation for your restaurant, and may provide a free trial for certain offerings.",
+  },
+  {
+    q: "How fast is setup, and when will my system go live?",
+    a: "It typically goes live in 7–10 business days from the moment we receive all your onboarding requirements (brand assets, business info, integration credentials). Each launch includes automation workflows, a nurture email campaign, and AI caller + chatbot — all fully preconfigured and ready to take leads. If we're building your website too, we'll confirm your timeline after onboarding, but that's typically about 20 business days.",
+  },
+  {
+    q: "Does this replace my POS or reservation system?",
+    a: "No. It works alongside Toast, Square, Clover, Resy, OpenTable, Tock, and similar tools.",
+  },
+  {
+    q: "What POS and reservation systems can you integrate with?",
+    a: "Toast, Square, Clover, Lightspeed, Resy, OpenTable, and Tock via documented webhooks. Other systems can be connected through a custom build — we audit what you have on the demo call.",
+  },
+  {
+    q: "What happens if I have an existing website?",
+    list: [
+      "You can keep it — we'll integrate into your current site.",
+      "Or we can rebuild it on our platform (included).",
+    ],
+  },
+  {
+    q: "How does the AI caller work when we have a busy night?",
+    a: "It answers every call on the second ring — even when every line is ringing and the floor is slammed. It books the table or captures the order, sends an SMS confirmation, and logs the call. Calls after close get answered too, instead of going to voicemail.",
+  },
+  {
+    q: "Is the SMS automation TCPA and A2P 10DLC compliant?",
+    a: "Yes. Every workflow ships with TCPA-correct opt-in language, STOP/HELP keyword routing, A2P 10DLC brand-and-campaign registration support, and audit-friendly opt-out logging. We have a compliance guide with this information.",
+  },
+  {
+    q: "How is this different from a generic CRM or marketing toolkit?",
+    a: "A CRM gives you a database. A toolkit gives you pieces to assemble yourself. Tempo Chorus is a done-for-you system with AI receptionist, industry-specific websites, prebuilt workflows, and AI-generated SEO content — all included and tuned for you, out of the box.",
+  },
+  {
+    q: "What if I have multiple locations?",
+    a: "Not a problem — we have configurations for multiple locations and franchises that make it easy to set up and manage all of your stores. Just give us a shout and we'll be glad to assist.",
+  },
+  {
+    q: "Do you charge per location?",
+    a: "Yes, multi-location restaurants receive tiered savings. Cost is determined by a number of factors, including number of Google Business Profiles, integrations, shared resources and more.",
+  },
+];
 ---
 
 <Base
@@ -234,6 +288,41 @@ const care = [
           ))
         }
       </ul>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="shell">
+      <h2 class="eyeless-h2 faq__title" id="faq-title">Questions, answered.</h2>
+      <div class="faq__list" data-reveal>
+        {
+          faqs.map((f, i) => (
+            <details class="faq__item" style={`--i:${i}`}>
+              <summary class="faq__q">
+                {f.q}
+                <span class="faq__toggle" aria-hidden="true" />
+              </summary>
+              <div class="faq__a">
+                {f.list ? (
+                  <ul class="faq__a-list">
+                    {f.list.map((item) => (
+                      <li>
+                        <span class="dot" aria-hidden="true" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>{f.a}</p>
+                )}
+              </div>
+            </details>
+          ))
+        }
+      </div>
+      <p class="faq__more">
+        Still have questions? <a href="/#demo">Book a 30-minute demo</a> or email us — we'll answer honestly.
+      </p>
     </div>
   </section>
 
@@ -602,6 +691,130 @@ const care = [
     .care__list {
       grid-template-columns: 1fr;
     }
+  }
+
+  /* ---------- FAQ ---------- */
+
+  .faq {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .faq__list {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    max-width: 52rem;
+  }
+
+  .faq__item {
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
+  }
+
+  .faq__item:first-child {
+    border-top: 0;
+  }
+
+  .faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.35rem;
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.02rem, 0.98rem + 0.3vw, 1.15rem);
+    color: var(--text-hi);
+    transition: color 0.2s var(--ease-out);
+  }
+
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__q:hover {
+    color: var(--mint-300);
+  }
+
+  .faq__toggle {
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+  }
+
+  .faq__toggle::before,
+  .faq__toggle::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+    transition: transform 0.25s var(--ease-out);
+  }
+
+  .faq__toggle::before {
+    width: 100%;
+    height: 1.5px;
+  }
+
+  .faq__toggle::after {
+    width: 1.5px;
+    height: 100%;
+  }
+
+  .faq__item[open] .faq__toggle::after {
+    transform: translate(-50%, -50%) rotate(90deg) scaleY(0);
+  }
+
+  .faq__a {
+    padding-bottom: 1.5rem;
+    padding-right: clamp(0rem, 4vw, 3rem);
+    color: var(--text-mid);
+    font-size: 0.98rem;
+    line-height: 1.62;
+    max-width: 62ch;
+  }
+
+  .faq__a-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .faq__a-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .faq__a-list .dot {
+    color: var(--mint-400);
+  }
+
+  .faq__more {
+    margin-top: clamp(2rem, 5vw, 3rem);
+    padding-top: 1.75rem;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 26%, transparent);
+    max-width: 52rem;
+    color: var(--text-mid);
+  }
+
+  .faq__more a {
+    font-weight: 600;
+    color: var(--violet-400);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in oklab, var(--violet-400) 45%, transparent);
+    padding-bottom: 1px;
+    transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+  }
+
+  .faq__more a:hover {
+    color: var(--text-hi);
+    border-bottom-color: var(--text-hi);
   }
 
   /* ---------- Close ---------- */
