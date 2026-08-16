@@ -12,6 +12,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 const EASE = "power3.out";
 
+/* Landing on a hash link (e.g. /#demo from another page) is unreliable on
+   this site's tallest pages: `scroll-behavior: smooth` makes the browser's
+   own initial-load fragment scroll an animated one over a very long
+   distance, and it can land hundreds of pixels short if anything touches
+   scroll or layout mid-animation. Bypass that with our own instant,
+   corrected jump once the page has actually finished loading. */
+function fixHashScroll() {
+  if (!location.hash) return;
+  const target = document.querySelector(location.hash);
+  if (!target) return;
+
+  const settle = () => {
+    const behavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = "auto";
+    target.scrollIntoView({ block: "start" });
+    document.documentElement.style.scrollBehavior = behavior;
+  };
+
+  if (document.readyState === "complete") {
+    requestAnimationFrame(settle);
+  } else {
+    window.addEventListener("load", () => requestAnimationFrame(settle), { once: true });
+  }
+}
+
 /* [data-reveal]'s direct children stagger in once. [data-reveal-solo]
    animates itself once. Both replace the old CSS `.is-in` toggle exactly —
    same fade + lift, same one-shot-on-first-view behavior. */
@@ -239,6 +264,8 @@ function settleForReducedMotion() {
 }
 
 export function initMotion() {
+  fixHashScroll();
+
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (reduceMotion) {

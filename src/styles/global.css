@@ -50,6 +50,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Clears the sticky masthead so an anchor target (e.g. #demo) doesn't land
+   flush under it — applies to both the native hash jump and motion.js's
+   corrected one. */
+[id] {
+  scroll-margin-top: 5.5rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
