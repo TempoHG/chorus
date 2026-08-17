@@ -377,6 +377,27 @@ const tiers = [
     </div>
   </section>
 
+  <section class="parent" aria-labelledby="parent-title">
+    <div class="shell parent__inner">
+      <h2 class="parent__title" id="parent-title">
+        More than a marketing platform.
+      </h2>
+      <div class="parent__text">
+        <p>
+          Tempo Chorus is backed by Tempo Hospitality Group, a restaurant
+          advisory and technology company working across marketing,
+          operations, financial performance, technology and growth.
+        </p>
+        <p>
+          That means we don't look at marketing in isolation. We understand
+          how it connects to the rest of your restaurant — and what actually
+          has to happen to turn marketing activity into profitable
+          customers.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- GoHighLevel's resize script: lets the booking iframe report its own
        height so the panel grows with the widget instead of scrolling. -->
   <script is:inline src={`${GHL_DOMAIN}/js/form_embed.js`}></script>
@@ -1055,5 +1076,36 @@ const tiers = [
     .demo__inner {
       grid-template-columns: 1fr;
     }
+  }
+
+  /* ---------- Parent company ---------- */
+
+  .parent {
+    padding-block: clamp(4rem, 9vw, 6.5rem);
+    background: var(--ink-800);
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
+  }
+
+  .parent__inner {
+    max-width: 46rem;
+    text-align: center;
+  }
+
+  .parent__title {
+    font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+    letter-spacing: -0.04em;
+  }
+
+  .parent__text {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .parent__text p {
+    color: var(--text-mid);
+    font-size: clamp(1.02rem, 0.98rem + 0.3vw, 1.15rem);
+    line-height: 1.62;
   }
 </style>
