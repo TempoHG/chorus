@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Wordmark from "../components/Wordmark.astro";
+import Analytics from "@vercel/analytics/astro";
 
 interface Props {
   title: string;
@@ -25,6 +26,7 @@ const { title, description, active } = Astro.props;
     <script is:inline>
       document.documentElement.classList.add("js");
     </script>
+    <Analytics />
   </head>
   <body>
     <!--
