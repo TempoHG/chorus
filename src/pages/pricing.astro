@@ -1,70 +1,72 @@
 ---
 import Base from "../layouts/Base.astro";
 
-const tiers = [
-  {
-    name: "Chorus Trio",
-    price: "$299",
-    tagline: "Bring everything together.",
-    popular: false,
-    includes: [
-      "Complete core platform",
-      "Restaurant Systems",
-      "Marketing and communication tools",
-      "Automations",
-      "Social planning",
-      "Guest database",
-      "Reviews",
-      "White-glove onboarding, training and support",
-    ],
-    includesLabel: "Includes",
-  },
-  {
-    name: "Chorus Ensemble",
-    price: "$399",
-    tagline: "Turn connection into growth.",
-    popular: true,
-    includes: [
-      "Local Presence and listings",
-      "Advanced segmentation",
-      "Advanced reputation management",
-      "Advanced automation and reporting",
-      "Advertising tools",
-    ],
-    includesLabel: "Everything in Trio, plus",
-  },
-  {
-    name: "Chorus Symphony",
-    price: "$499",
-    tagline: "Put AI to work for your restaurant.",
-    popular: false,
-    includes: [
-      "AI phone answering",
-      "AI web and text conversations",
-      "AI review assistance",
-      "AI guest assistance",
-      "AI inquiry follow-up",
-    ],
-    includesLabel: "Everything in Ensemble, plus",
-  },
-];
+const plan = {
+  name: "Chorus",
+  price: "$299",
+  tagline: "Bring everything together.",
+  includesLabel: "Includes",
+  includes: [
+    {
+      name: "Website & lead capture",
+      desc: "A restaurant-ready website with landing pages and lead-capture forms, built to turn visitors into guests — or we integrate with the site you already have.",
+    },
+    {
+      name: "Restaurant Systems",
+      desc: "Ready-to-use workflows for private events, catering, missed-call recovery, guest recovery, birthdays, VIPs, win-backs and more — configured for your restaurant, not built from scratch.",
+    },
+    {
+      name: "Unified guest inbox",
+      desc: "Phone, text, email, social messages and web chat, all answered from one place — nothing falls through the cracks between apps.",
+    },
+    {
+      name: "Guest database & marketing",
+      desc: "One record per guest, with email and SMS campaigns, offers and segmentation to bring them back.",
+    },
+    {
+      name: "Reviews & reputation",
+      desc: "Review requests sent at the right time, and every review centralized so responses actually happen.",
+    },
+    {
+      name: "Automations & reporting",
+      desc: "The repetitive follow-up, reminders and internal notifications run themselves, with reporting on what's working.",
+    },
+    {
+      name: "Social planning",
+      desc: "Plan, schedule and publish social content from the same place you manage everything else.",
+    },
+    {
+      name: "White-glove onboarding, training and support",
+      desc: "Restaurant-specific setup and team training to start, a support-ticket link inside Chorus, and ongoing updates after you're live.",
+    },
+  ],
+};
 
-const locationPricing = [
-  { plan: "Trio", first: "$299/mo", additional: "+$149/mo" },
-  { plan: "Ensemble", first: "$399/mo", additional: "+$179/mo" },
-  { plan: "Symphony", first: "$499/mo", additional: "+$229/mo" },
-];
+const locationPricing = {
+  first: "$299",
+  additional: "+$149",
+};
 
 const addOns = [
   {
-    name: "Local SEO",
-    price: "From ~$149/mo per location",
-    note: "Software/tool layer. Tempo-managed SEO is a separate service.",
+    name: "AI Receptionist & Guest Chat",
+    price: "+$100/mo",
+    note: "AI phone answering, web and text conversations, review replies and guest follow-up — for restaurants ready to put AI to work.",
+  },
+  {
+    name: "Advanced Marketing & Automation",
+    price: "+$100/mo",
+    note: "Local presence and listings, deeper segmentation and reporting, and advertising tools — for restaurants ready to grow harder.",
   },
   {
     name: "AI Unlimited",
     price: "~$79/mo per location",
-    note: "For higher-volume Symphony customers.",
+    note: "For higher-volume restaurants running the AI Receptionist add-on.",
+  },
+  {
+    name: "Local SEO",
+    price: "From ~$149/mo per location",
+    note: "Software/tool layer. Tempo-managed SEO is a separate service.",
   },
   {
     name: "Dedicated Email",
@@ -141,14 +143,14 @@ const faqs = [
   },
   {
     q: "Do you charge per location?",
-    a: "Yes, multi-location restaurants receive tiered savings. Cost is determined by a number of factors, including number of Google Business Profiles, integrations, shared resources and more.",
+    a: "Yes — $299/mo for the first location, then a flat $149/mo for each additional one. Add-ons like AI Receptionist and Advanced Marketing are priced per location where they apply.",
   },
 ];
 ---
 
 <Base
-  title="Tempo Chorus pricing — simple plans, complete platform"
-  description="Chorus Trio, Ensemble and Symphony — clear monthly pricing, what's included at every tier, multi-location rates, add-ons and Tempo-managed services."
+  title="Tempo Chorus pricing — one plan, complete platform"
+  description="One plan at $299/mo — everything included, with a short list of add-ons for AI, advanced marketing and multi-location scale."
   active="pricing"
 >
   <section class="lead">
@@ -158,37 +160,39 @@ const faqs = [
         <span class="lead__accent">Complete platform.</span>
       </h1>
       <p class="lead__sub">
-        Three plans, every one a complete platform — not a stripped-down
-        starter tier. Higher plans add sophistication, not the basics.
+        One plan, complete on its own — not a stripped-down starter tier.
+        Add exactly what you need, only when you need it.
       </p>
     </div>
   </section>
 
   <section class="tiers">
-    <div class="shell tiers__grid">
-      {
-        tiers.map((t) => (
-          <div class={`tier ${t.popular ? "tier--popular" : ""}`}>
-            {t.popular && <p class="tier__badge">Most popular</p>}
-            <p class="tier__name">{t.name}</p>
-            <p class="tier__tagline">{t.tagline}</p>
-            <p class="tier__price">
-              {t.price}
-              <span>/mo</span>
-            </p>
-            <a class="btn tier__cta" href="/#demo">Book a demo</a>
-            <p class="tier__includes-label">{t.includesLabel}</p>
-            <ul class="tier__list">
-              {t.includes.map((item) => (
-                <li>
-                  <span class="dot" aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
+    <div class="shell">
+      <div class="tier">
+        <p class="tier__name">{plan.name}</p>
+        <p class="tier__tagline">{plan.tagline}</p>
+        <div class="tier__top">
+          <p class="tier__price">
+            {plan.price}
+            <span>/mo</span>
+          </p>
+          <a class="btn tier__cta" href="/#demo">Book a demo</a>
+        </div>
+        <p class="tier__includes-label">{plan.includesLabel}</p>
+        <ul class="tier__list">
+          {
+            plan.includes.map((item) => (
+              <li>
+                <span class="dot" aria-hidden="true" />
+                <div>
+                  <p class="tier__item-name">{item.name}</p>
+                  <p class="tier__item-desc">{item.desc}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -198,24 +202,21 @@ const faqs = [
         1 location or many.
       </h2>
       <p class="lede locations__lede">
-        Every plan scales the same way — a base price, and a flat rate per
-        additional location.
+        A base price, and one flat rate per additional location.
       </p>
-      <div class="locations__table" role="table">
-        <div class="locations__row locations__row--head" role="row">
-          <span role="columnheader">Plan</span>
-          <span role="columnheader">First location</span>
-          <span role="columnheader">Additional location</span>
+      <div class="locations__stats">
+        <div class="locations__stat">
+          <p class="locations__stat-value">
+            {locationPricing.first}<span>/mo</span>
+          </p>
+          <p class="locations__stat-label">First location</p>
         </div>
-        {
-          locationPricing.map((row) => (
-            <div class="locations__row" role="row">
-              <span role="cell" class="locations__plan">{row.plan}</span>
-              <span role="cell">{row.first}</span>
-              <span role="cell">{row.additional}</span>
-            </div>
-          ))
-        }
+        <div class="locations__stat">
+          <p class="locations__stat-value">
+            {locationPricing.additional}<span>/mo</span>
+          </p>
+          <p class="locations__stat-label">Each additional location</p>
+        </div>
       </div>
     </div>
   </section>
@@ -224,7 +225,11 @@ const faqs = [
     <div class="shell addons__grid">
       <div>
         <h2 class="eyeless-h2 addons__title" id="addons-title">Add-ons.</h2>
-        <p class="lede addons__lede">Kept short, and priced simply.</p>
+        <p class="lede addons__lede">
+          The plan above is complete on its own. Everything else — more AI,
+          deeper marketing tools — is an add-on, kept short and priced
+          simply.
+        </p>
       </div>
       <ul class="addons__list">
         {
@@ -369,39 +374,15 @@ const faqs = [
     padding-block: clamp(2rem, 5vw, 3.5rem) clamp(4.5rem, 10vw, 8rem);
   }
 
-  .tiers__grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1.25rem, 3vw, 2rem);
-    align-items: start;
-  }
-
   .tier {
     position: relative;
+    max-width: 54rem;
+    margin-inline: auto;
     background: var(--ink-700);
     border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
     border-radius: 5px;
-    padding: clamp(1.75rem, 4vw, 2.5rem);
+    padding: clamp(1.75rem, 4vw, 3rem);
     box-shadow: 0 18px 38px -24px rgb(0 0 0 / 0.9);
-  }
-
-  .tier--popular {
-    border-color: color-mix(in oklab, var(--mint-400) 55%, transparent);
-  }
-
-  .tier__badge {
-    position: absolute;
-    top: -0.75rem;
-    left: clamp(1.75rem, 4vw, 2.5rem);
-    background: var(--mint-400);
-    color: var(--ink-900);
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.28rem 0.6rem;
-    border-radius: 2px;
   }
 
   .tier__name {
@@ -417,8 +398,15 @@ const faqs = [
     color: var(--text-mid);
   }
 
-  .tier__price {
+  .tier__top {
     margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .tier__price {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 2.6rem;
@@ -433,9 +421,7 @@ const faqs = [
   }
 
   .tier__cta {
-    margin-top: 1.5rem;
-    width: 100%;
-    justify-content: center;
+    padding-inline: 2rem;
   }
 
   .tier__includes-label {
@@ -451,29 +437,51 @@ const faqs = [
 
   .tier__list {
     list-style: none;
-    margin: 1.1rem 0 0;
+    margin: 1.25rem 0 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem 2rem;
   }
 
   .tier__list li {
     display: flex;
-    align-items: baseline;
+    align-items: flex-start;
     gap: 0.7rem;
-    color: var(--text-hi);
-    font-size: 0.95rem;
-    line-height: 1.4;
   }
 
   .tier__list .dot {
+    margin-top: 0.55em;
     color: var(--mint-400);
   }
 
-  @media (max-width: 62rem) {
-    .tiers__grid {
+  .tier__item-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--text-hi);
+  }
+
+  .tier__item-desc {
+    margin-top: 0.3rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-mid);
+  }
+
+  @media (max-width: 40rem) {
+    .tier__list {
       grid-template-columns: 1fr;
+    }
+
+    .tier__top {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .tier__cta {
+      width: 100%;
+      justify-content: center;
     }
   }
 
@@ -489,44 +497,38 @@ const faqs = [
     color: var(--text-mid);
   }
 
-  .locations__table {
+  .locations__stats {
     margin-top: clamp(2rem, 5vw, 3rem);
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  .locations__stat {
+    flex: 1 1 14rem;
     border: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
     border-radius: 5px;
-    overflow: hidden;
+    padding: clamp(1.5rem, 3vw, 2rem);
   }
 
-  .locations__row {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    padding: 1rem clamp(1.25rem, 3vw, 1.75rem);
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 18%, transparent);
+  .locations__stat-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2.1rem;
+    letter-spacing: -0.03em;
+    color: var(--mint-300);
   }
 
-  .locations__row:first-child {
-    border-top: 0;
-  }
-
-  .locations__row--head {
-    background: var(--ink-600);
-    font-size: 0.72rem;
+  .locations__stat-value span {
+    font-size: 1rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     color: var(--text-low);
   }
 
-  .locations__plan {
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: var(--text-hi);
-  }
-
-  @media (max-width: 40rem) {
-    .locations__row {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      font-size: 0.9rem;
-    }
+  .locations__stat-label {
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--text-mid);
   }
 
   /* ---------- Add-ons ---------- */

@@ -77,11 +77,9 @@ Platform capabilities, pre-built Restaurant Systems, AI capabilities, add-ons, a
 
 **Pricing** (confirmed; use exactly these figures, no fake sale pricing):
 
-- Chorus Trio — $299/mo. Complete core platform, Restaurant Systems, marketing/communication tools, automations, social planning, guest database, reviews, white-glove onboarding, training and support.
-- Chorus Ensemble — $399/mo (Most Popular). Everything in Trio, plus Local Presence/listings, advanced segmentation, advanced reputation, advanced automation/reporting, and advertising tools.
-- Chorus Symphony — $499/mo. Everything in Ensemble, plus AI phone answering, AI web/text conversations, AI review assistance, AI guest assistance, and AI inquiry follow-up.
-- Multi-location add-on per additional location: Trio +$149/mo, Ensemble +$179/mo, Symphony +$229/mo.
-- Add-ons (short list, deliberately): Local SEO (~$149+/mo/location, software/tool layer only — Tempo-managed SEO is a separate service); AI Unlimited (~$79/mo/location, higher-volume Symphony customers); Dedicated Email (~$79/mo/domain, higher-volume sending).
+- Chorus — $299/mo. One plan, complete on its own: website & lead capture, Restaurant Systems, unified guest inbox, guest database & marketing, reviews & reputation, automations & reporting, social planning, white-glove onboarding, training and support.
+- Multi-location: a flat +$149/mo for each additional location (one rate — there is no per-tier variation, since there is only one tier).
+- Add-ons (short list, deliberately — everything beyond the base plan is one of these, not a second or third tier): AI Receptionist & Guest Chat (+$100/mo — AI phone answering, AI web/text conversations, AI review assistance, AI guest assistance, AI inquiry follow-up); Advanced Marketing & Automation (+$100/mo — Local Presence/listings, advanced segmentation, advanced reporting, advertising tools); AI Unlimited (~$79/mo/location, for higher-volume restaurants running the AI Receptionist add-on); Local SEO (~$149+/mo/location, software/tool layer only — Tempo-managed SEO is a separate service); Dedicated Email (~$79/mo/domain, higher-volume sending).
 - Tempo-Managed Services (human-delivered, explicitly separate from the software subscription, never implied as included in a tier): Managed Social Media, Managed Email & SMS, Managed Advertising, Managed SEO, Website Design & Management, Broader Restaurant Marketing Services. Use custom/starting-at pricing. Framing line: "Chorus gives you the tools. Tempo can also provide the team."
 - Onboarding & Support is included with every plan (not a tier differentiator): white-glove onboarding, restaurant-specific configuration rather than an empty account, essential workflows/campaigns configured during onboarding, team training, a support-ticket link inside Chorus that Tempo triages, and ongoing platform updates.
 

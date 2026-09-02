@@ -111,11 +111,11 @@ const care = [
   "Ongoing platform updates and restaurant-specific improvements.",
 ];
 
-const tiers = [
-  { name: "Chorus Trio", price: "$299", note: "Bring everything together.", popular: false },
-  { name: "Chorus Ensemble", price: "$399", note: "Turn connection into growth.", popular: true },
-  { name: "Chorus Symphony", price: "$499", note: "Put AI to work for your restaurant.", popular: false },
-];
+const plan = {
+  name: "Chorus",
+  price: "$299",
+  note: "One complete platform. Add AI, deeper marketing tools or extra locations as you grow.",
+};
 ---
 
 <Base
@@ -322,17 +322,10 @@ const tiers = [
   <section class="pricing-preview" aria-labelledby="pricing-preview-title">
     <div class="shell">
       <h2 class="eyeless-h2 pp__title" id="pricing-preview-title">Simple pricing. Complete platform.</h2>
-      <div class="pp__grid">
-        {
-          tiers.map((t) => (
-            <div class={`pp__card ${t.popular ? "pp__card--popular" : ""}`}>
-              {t.popular && <p class="pp__badge">Most popular</p>}
-              <p class="pp__name">{t.name}</p>
-              <p class="pp__price">{t.price}<span>/mo</span></p>
-              <p class="pp__note">{t.note}</p>
-            </div>
-          ))
-        }
+      <div class="pp__card pp__card--solo">
+        <p class="pp__name">{plan.name}</p>
+        <p class="pp__price">{plan.price}<span>/mo</span></p>
+        <p class="pp__note">{plan.note}</p>
       </div>
       <a class="hero__link pp__more" href="/pricing">See full pricing and what's included →</a>
     </div>
@@ -908,15 +901,9 @@ const tiers = [
     padding-block: clamp(4.5rem, 10vw, 8rem);
   }
 
-  .pp__grid {
-    margin-top: clamp(2.5rem, 6vw, 4rem);
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1.25rem, 3vw, 2rem);
-  }
-
   .pp__card {
     position: relative;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
     background: var(--ink-700);
     border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
     border-radius: 5px;
@@ -924,23 +911,8 @@ const tiers = [
     box-shadow: 0 18px 38px -24px rgb(0 0 0 / 0.9);
   }
 
-  .pp__card--popular {
-    border-color: color-mix(in oklab, var(--mint-400) 55%, transparent);
-  }
-
-  .pp__badge {
-    position: absolute;
-    top: -0.75rem;
-    left: clamp(1.5rem, 3vw, 2rem);
-    background: var(--mint-400);
-    color: var(--ink-900);
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.28rem 0.6rem;
-    border-radius: 2px;
+  .pp__card--solo {
+    max-width: 26rem;
   }
 
   .pp__name {
@@ -974,12 +946,6 @@ const tiers = [
   .pp__more {
     display: inline-block;
     margin-top: clamp(2rem, 4vw, 2.5rem);
-  }
-
-  @media (max-width: 56rem) {
-    .pp__grid {
-      grid-template-columns: 1fr;
-    }
   }
 
   /* ---------- Demo ---------- */
