@@ -12,12 +12,24 @@ const plan = {
       name: "Get Found",
       items: [
         {
-          name: "Website & lead capture",
-          desc: "A restaurant-ready website with landing pages and lead-capture forms, built to turn visitors into guests — or we integrate with the site you already have.",
+          name: "Website Tools",
+          desc: "Build and manage restaurant web experiences, pages and content.",
         },
         {
-          name: "Social planning",
-          desc: "Plan, schedule and publish social content from the same place you manage everything else.",
+          name: "Landing Pages",
+          desc: "Create focused pages for promotions, events, catering, hiring and campaigns.",
+        },
+        {
+          name: "Forms & Lead Capture",
+          desc: "Capture guest inquiries and information directly into Chorus.",
+        },
+        {
+          name: "Google Business Connection",
+          desc: "Connect your Google Business Profile with your restaurant's guest and reputation tools.",
+        },
+        {
+          name: "Social Planning & Publishing",
+          desc: "Plan, schedule and publish social content from one place.",
         },
       ],
     },
@@ -25,12 +37,36 @@ const plan = {
       name: "Stay Connected",
       items: [
         {
-          name: "Unified guest inbox",
-          desc: "Phone, text, email, social messages and web chat, all answered from one place — nothing falls through the cracks between apps.",
+          name: "Unified Guest Inbox",
+          desc: "Bring guest conversations together so your team has one place to respond.",
         },
         {
-          name: "Guest database",
-          desc: "One record per guest — contact info, conversations and activity all connected.",
+          name: "Email",
+          desc: "Communicate directly with guests from Chorus.",
+        },
+        {
+          name: "Text Messaging",
+          desc: "Send and receive guest SMS conversations.",
+        },
+        {
+          name: "Phone",
+          desc: "Manage restaurant calls and guest communication through Chorus.",
+        },
+        {
+          name: "Missed-Call Text Back",
+          desc: "Automatically text guests when your team can't answer the phone.",
+        },
+        {
+          name: "Website Live Chat",
+          desc: "Let website visitors start a conversation directly with your restaurant.",
+        },
+        {
+          name: "Facebook & Instagram Messaging",
+          desc: "Bring social conversations into your guest communication system.",
+        },
+        {
+          name: "Guest Database",
+          desc: "Keep guest contact information, conversations, activity and relationships connected.",
         },
       ],
     },
@@ -38,16 +74,52 @@ const plan = {
       name: "Bring Guests Back",
       items: [
         {
-          name: "Restaurant Systems",
-          desc: "Ready-to-use workflows for private events, catering, missed-call recovery, guest recovery, birthdays, VIPs, win-backs and more — configured for your restaurant, not built from scratch.",
+          name: "Email Campaigns",
+          desc: "Send promotions, announcements, newsletters and restaurant updates.",
         },
         {
-          name: "Guest marketing & campaigns",
-          desc: "Email and SMS campaigns, offers and segmentation to bring guests back.",
+          name: "SMS Campaigns",
+          desc: "Reach opted-in guests with timely offers, events and messages.",
         },
         {
-          name: "Reviews & reputation",
-          desc: "Review requests sent at the right time, and every review centralized so responses actually happen.",
+          name: "Review Requests",
+          desc: "Automatically ask guests for reviews and make it easy to leave one.",
+        },
+        {
+          name: "Reputation Management",
+          desc: "Monitor and manage guest reviews from Chorus.",
+        },
+        {
+          name: "Birthday Club",
+          desc: "Capture birthdays and automatically bring guests back around their birthday.",
+        },
+        {
+          name: "Win-Back Campaigns",
+          desc: "Re-engage guests who haven't visited or interacted recently.",
+        },
+        {
+          name: "Promotions & Offers",
+          desc: "Create campaigns around specials, events and other reasons to return.",
+        },
+        {
+          name: "Automated Guest Follow-Up",
+          desc: "Keep conversations and opportunities moving without relying on someone to remember every follow-up.",
+        },
+        {
+          name: "Guest Segmentation",
+          desc: "Build targeted audiences based on guest information and behavior.",
+        },
+        {
+          name: "Private Event Follow-Up",
+          desc: "Capture, organize and follow up with private-event inquiries.",
+        },
+        {
+          name: "Catering Follow-Up",
+          desc: "Turn catering inquiries into an organized follow-up process.",
+        },
+        {
+          name: "Guest Recovery",
+          desc: "Route poor guest experiences to the restaurant team so problems can be addressed quickly.",
         },
       ],
     },
@@ -55,13 +127,57 @@ const plan = {
       name: "Save Time",
       items: [
         {
-          name: "Automations & reporting",
-          desc: "The repetitive follow-up, reminders and internal notifications run themselves, with reporting on what's working.",
+          name: "Marketing Automations",
+          desc: "Automate repetitive marketing and guest communication tasks.",
+        },
+        {
+          name: "Social Scheduling",
+          desc: "Plan content ahead and keep the restaurant's social calendar moving.",
+        },
+        {
+          name: "Calendars & Scheduling",
+          desc: "Manage appointments, meetings and scheduled interactions.",
+        },
+        {
+          name: "Internal Notifications",
+          desc: "Alert the right team member when a guest or opportunity needs attention.",
+        },
+        {
+          name: "Automated Responses",
+          desc: "Give guests an immediate response while the team handles the next step.",
+        },
+        {
+          name: "Marketing Calendar",
+          desc: "Organize campaigns and communication around one schedule.",
+        },
+        {
+          name: "Workflow Automation",
+          desc: "Build multi-step processes around inquiries, guest activity and follow-up.",
+        },
+        {
+          name: "Basic AI Assistance",
+          desc: "Help the team draft content, messages and responses faster.",
+        },
+        {
+          name: "Reporting",
+          desc: "See activity and performance across Chorus.",
+        },
+        {
+          name: "Campaign Reporting",
+          desc: "Understand how email, SMS and other campaigns are performing.",
+        },
+        {
+          name: "Guest Reporting",
+          desc: "Better understand the audience being built inside Chorus.",
+        },
+        {
+          name: "Advertising Tools",
+          desc: "Organize and manage digital advertising activity.",
         },
       ],
     },
   ],
-  plus: "White-glove onboarding, training and support — included with every setup, not sold separately.",
+  plus: "White-glove onboarding, training and support — included with every setup.",
 };
 
 const additionalLocationPrice = "+$149";
@@ -411,7 +527,7 @@ const faqs = [
 
   .tier {
     position: relative;
-    max-width: 54rem;
+    max-width: 68rem;
     margin-inline: auto;
     background: var(--ink-700);
     border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
@@ -503,8 +619,8 @@ const faqs = [
     margin: 0.85rem 0 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.35rem 2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.35rem 1.75rem;
   }
 
   .tier__list li {
@@ -540,6 +656,12 @@ const faqs = [
     color: var(--text-low);
   }
 
+  @media (max-width: 56rem) {
+    .tier__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   @media (max-width: 40rem) {
     .tier__list {
       grid-template-columns: 1fr;
@@ -564,7 +686,7 @@ const faqs = [
 
   .addons__grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
     gap: clamp(2rem, 6vw, 5rem);
     align-items: start;
   }
@@ -578,8 +700,9 @@ const faqs = [
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 2rem;
   }
 
   .addons__list li {
@@ -587,7 +710,7 @@ const faqs = [
     border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
   }
 
-  .addons__list li:first-child {
+  .addons__list li:nth-child(-n + 2) {
     border-top: 0;
     padding-top: 0;
   }
@@ -609,6 +732,22 @@ const faqs = [
   @media (max-width: 56rem) {
     .addons__grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .addons__list {
+      grid-template-columns: 1fr;
+    }
+
+    .addons__list li:nth-child(-n + 2) {
+      border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
+      padding-top: 1.25rem;
+    }
+
+    .addons__list li:first-child {
+      border-top: 0;
+      padding-top: 0;
     }
   }
 
