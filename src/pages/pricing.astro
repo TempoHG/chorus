@@ -7,40 +7,61 @@ const plan = {
   price: "$299",
   tagline: "Bring everything together.",
   includesLabel: "Includes",
-  includes: [
+  groups: [
     {
-      name: "Website & lead capture",
-      desc: "A restaurant-ready website with landing pages and lead-capture forms, built to turn visitors into guests — or we integrate with the site you already have.",
+      name: "Get Found",
+      items: [
+        {
+          name: "Website & lead capture",
+          desc: "A restaurant-ready website with landing pages and lead-capture forms, built to turn visitors into guests — or we integrate with the site you already have.",
+        },
+        {
+          name: "Social planning",
+          desc: "Plan, schedule and publish social content from the same place you manage everything else.",
+        },
+      ],
     },
     {
-      name: "Restaurant Systems",
-      desc: "Ready-to-use workflows for private events, catering, missed-call recovery, guest recovery, birthdays, VIPs, win-backs and more — configured for your restaurant, not built from scratch.",
+      name: "Stay Connected",
+      items: [
+        {
+          name: "Unified guest inbox",
+          desc: "Phone, text, email, social messages and web chat, all answered from one place — nothing falls through the cracks between apps.",
+        },
+        {
+          name: "Guest database",
+          desc: "One record per guest — contact info, conversations and activity all connected.",
+        },
+      ],
     },
     {
-      name: "Unified guest inbox",
-      desc: "Phone, text, email, social messages and web chat, all answered from one place — nothing falls through the cracks between apps.",
+      name: "Bring Guests Back",
+      items: [
+        {
+          name: "Restaurant Systems",
+          desc: "Ready-to-use workflows for private events, catering, missed-call recovery, guest recovery, birthdays, VIPs, win-backs and more — configured for your restaurant, not built from scratch.",
+        },
+        {
+          name: "Guest marketing & campaigns",
+          desc: "Email and SMS campaigns, offers and segmentation to bring guests back.",
+        },
+        {
+          name: "Reviews & reputation",
+          desc: "Review requests sent at the right time, and every review centralized so responses actually happen.",
+        },
+      ],
     },
     {
-      name: "Guest database & marketing",
-      desc: "One record per guest, with email and SMS campaigns, offers and segmentation to bring them back.",
-    },
-    {
-      name: "Reviews & reputation",
-      desc: "Review requests sent at the right time, and every review centralized so responses actually happen.",
-    },
-    {
-      name: "Automations & reporting",
-      desc: "The repetitive follow-up, reminders and internal notifications run themselves, with reporting on what's working.",
-    },
-    {
-      name: "Social planning",
-      desc: "Plan, schedule and publish social content from the same place you manage everything else.",
-    },
-    {
-      name: "White-glove onboarding, training and support",
-      desc: "Restaurant-specific setup and team training to start, a support-ticket link inside Chorus, and ongoing updates after you're live.",
+      name: "Save Time",
+      items: [
+        {
+          name: "Automations & reporting",
+          desc: "The repetitive follow-up, reminders and internal notifications run themselves, with reporting on what's working.",
+        },
+      ],
     },
   ],
+  plus: "White-glove onboarding, training and support — included with every setup, not sold separately.",
 };
 
 const additionalLocationPrice = "+$149";
@@ -211,19 +232,25 @@ const faqs = [
           <a class="btn tier__cta" href="/#demo">Book a demo</a>
         </div>
         <p class="tier__includes-label">{plan.includesLabel}</p>
-        <ul class="tier__list">
-          {
-            plan.includes.map((item) => (
-              <li>
-                <span class="dot" aria-hidden="true" />
-                <div>
-                  <p class="tier__item-name">{item.name}</p>
-                  <p class="tier__item-desc">{item.desc}</p>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
+        {
+          plan.groups.map((group) => (
+            <div class="tier__group">
+              <p class="tier__group-name">{group.name}</p>
+              <ul class="tier__list">
+                {group.items.map((item) => (
+                  <li>
+                    <span class="dot" aria-hidden="true" />
+                    <div>
+                      <p class="tier__item-name">{item.name}</p>
+                      <p class="tier__item-desc">{item.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+        <p class="tier__plus">{plan.plus}</p>
       </div>
     </div>
   </section>
@@ -459,9 +486,21 @@ const faqs = [
     color: var(--text-low);
   }
 
+  .tier__group {
+    margin-top: 1.75rem;
+  }
+
+  .tier__group-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.92rem;
+    letter-spacing: -0.01em;
+    color: var(--violet-400);
+  }
+
   .tier__list {
     list-style: none;
-    margin: 1.25rem 0 0;
+    margin: 0.85rem 0 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -491,6 +530,14 @@ const faqs = [
     font-size: 0.88rem;
     line-height: 1.5;
     color: var(--text-mid);
+  }
+
+  .tier__plus {
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
+    font-size: 0.88rem;
+    color: var(--text-low);
   }
 
   @media (max-width: 40rem) {
