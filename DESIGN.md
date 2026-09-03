@@ -332,7 +332,7 @@ Corners are near-square: **2px** (buttons, focus-visible), **3px** (form fields)
 - **Panel** (`.panel`): the depicted product surface. `--ink-600`, 1px violet border at 34%, 5px radius, surface-seat shadow.
 - **Tile / Flow card:** same recipe as panel at reduced padding; a resolved flow card swaps its border to `--mint-400` at 55% and its title to `--mint-300`.
 - **Booking card** (`.booking`): `--ink-700`, 1px violet border at 30%, 4px radius, form-lift shadow.
-- **Pricing card:** `--ink-700`, 1px violet border at 30% (mint at 55% for the "Most Popular" tier), 5px radius, surface-seat shadow, `clamp(1.75rem, 4vw, 2.5rem)` padding.
+- **Pricing card:** `--ink-700`, 1px violet border at 30%, 5px radius, surface-seat shadow, `clamp(1.75rem, 4vw, 2.5rem)` padding. There's one Chorus product now, so there's no "Most Popular" variant to reach for — don't reintroduce one.
 
 ### Inputs / Fields
 

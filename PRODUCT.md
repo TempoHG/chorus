@@ -77,11 +77,11 @@ Platform capabilities, pre-built Restaurant Systems, AI capabilities, add-ons, a
 
 **Pricing** (confirmed; use exactly these figures, no fake sale pricing):
 
-- Chorus — $299/mo. One plan, complete on its own: website & lead capture, Restaurant Systems, unified guest inbox, guest database & marketing, reviews & reputation, automations & reporting, social planning, white-glove onboarding, training and support.
-- Multi-location: a flat +$149/mo for each additional location (one rate — there is no per-tier variation, since there is only one tier).
-- Add-ons (short list, deliberately — everything beyond the base plan is one of these, not a second or third tier): AI Receptionist & Guest Chat (+$75/mo — AI phone answering, AI web/text conversations, AI review assistance, AI guest assistance, AI inquiry follow-up); Advanced Marketing & Automation (+$30/mo — Local Presence/listings, advanced segmentation, advanced reporting, advertising tools); AI Unlimited (~$127/mo/location, for higher-volume restaurants running the AI Receptionist add-on); Local SEO (~$97+/mo/location, software/tool layer only — Tempo-managed SEO is a separate service); Dedicated Email (~$89/mo/domain, higher-volume sending).
-- Tempo-Managed Services (human-delivered, explicitly separate from the software subscription, never implied as included in a tier): Managed Social Media, Managed Email & SMS, Managed Advertising, Managed SEO, Website Design & Management, Broader Restaurant Marketing Services. Use custom/starting-at pricing. Framing line: "Chorus gives you the tools. Tempo can also provide the team."
-- Onboarding & Support is included with every plan (not a tier differentiator): white-glove onboarding, restaurant-specific configuration rather than an empty account, essential workflows/campaigns configured during onboarding, team training, a support-ticket link inside Chorus that Tempo triages, and ongoing platform updates.
+- Chorus — $299/mo. One product, complete on its own: website & lead capture, Restaurant Systems, unified guest inbox, guest database & marketing, reviews & reputation, automations & reporting, social planning, white-glove onboarding, training and support. There is no second or third tier — never present Chorus as having multiple plans/tiers to choose between.
+- Multi-location: a flat +$149/mo for each additional location. One rate, full stop — there is no per-tier variation to reference.
+- Add-ons (short list, deliberately, and always shown after every included feature — never priced yet; the pricing architecture for these is being reconsidered post-simplification, so do not invent figures): Local Presence; Local SEO; AI Restaurant Assistant; AI Phone; AI Web & Text Conversations; AI Review Responses; AI Unlimited; Dedicated Email; WhatsApp.
+- Tempo-Managed Services (human-delivered, explicitly separate from the software subscription AND from the add-ons above — never mixed into that list): Managed Social Media, Managed Email & SMS, Managed Advertising, Managed SEO, Website Design & Management, Restaurant Marketing. Use custom/starting-at pricing. Framing line: "Chorus gives you the tools. Tempo can also provide the team."
+- Onboarding & Support is included with the product (not a tier differentiator — there are no tiers): white-glove onboarding, restaurant-specific configuration rather than an empty account, essential workflows/campaigns configured during onboarding, team training, a support-ticket link inside Chorus that Tempo triages, and ongoing platform updates. Pull-quote line used on the features page: "You won't be handed a login and left to figure it out."
 
 **Guardrails (binding on all copy, every page):**
 
@@ -91,6 +91,7 @@ Platform capabilities, pre-built Restaurant Systems, AI capabilities, add-ons, a
 - Do not invent performance statistics, customer counts, ROI numbers, or testimonials. Illustrative guest scenarios must be clearly presented as examples, not measured customer results (existing footer disclosure: "All guest moments shown on this site are illustrative").
 - Do not use a fixed total feature count anywhere ("Under the Hood" is deliberately open-ended).
 - Lead-gen conversion mechanism for this site is a demo booking (not self-serve signup), and the demo is positioned as personalized/restaurant-specific, not a generic software tour.
+- There is exactly one Chorus product — no Trio, Ensemble or Symphony, no tier comparison, no "Most Popular" badge, and no feature gated behind a plan level. Everything in the Pricing table above is included; add-ons and Tempo-Managed Services are the only two ways to get more, and they are never priced/positioned as a second or third tier.
 
 ## Brand Commitments
 
@@ -112,4 +113,4 @@ Platform capabilities, pre-built Restaurant Systems, AI capabilities, add-ons, a
 2. Speak in restaurant-operator language; software terminology can appear secondarily where useful.
 3. Keep platform capabilities, Restaurant Systems, AI capabilities, add-ons, and Tempo-managed services clearly distinct in every explanation.
 4. Prove the "everything together" claim with concrete guest moments and product surfaces, not repeated assertion or metaphor.
-5. Pricing should be immediately understandable in under 10 seconds; never imply a capability, integration, or managed service that isn't actually included at that tier.
+5. Pricing should be immediately understandable in under 10 seconds; never imply a capability, integration, or managed service that isn't actually included in the product, and never gate a capability behind a plan level that doesn't exist.

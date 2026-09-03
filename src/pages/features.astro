@@ -9,12 +9,26 @@ const categories = [
     line: "Help more guests discover and choose the restaurant.",
     art: "calendar" as const,
     items: [
-      "Website tools and landing pages",
-      "Forms and lead capture",
-      "Social planning and publishing",
-      "Google and local presence tools",
-      "Promotions",
-      "Advertising tools where applicable",
+      {
+        name: "Website Tools",
+        desc: "Build and manage restaurant web experiences, pages and content.",
+      },
+      {
+        name: "Landing Pages",
+        desc: "Create focused pages for promotions, events, catering, hiring and campaigns.",
+      },
+      {
+        name: "Forms & Lead Capture",
+        desc: "Capture guest inquiries and information directly into Chorus.",
+      },
+      {
+        name: "Google Business Connection",
+        desc: "Connect your Google Business Profile with your restaurant's guest and reputation tools.",
+      },
+      {
+        name: "Social Planning & Publishing",
+        desc: "Plan, schedule and publish social content from one place.",
+      },
     ],
     callout: {
       title: "Social, without living on your phone",
@@ -27,14 +41,38 @@ const categories = [
     line: "Make it easier for guests to reach the restaurant, and the team to respond.",
     art: "inbox" as const,
     items: [
-      "Unified inbox",
-      "Phone",
-      "Two-way text",
-      "Email",
-      "Social messaging",
-      "Web chat",
-      "Missed-call recovery",
-      "Calendars and scheduling",
+      {
+        name: "Unified Guest Inbox",
+        desc: "Bring guest conversations together so your team has one place to respond.",
+      },
+      {
+        name: "Email",
+        desc: "Communicate directly with guests from Chorus.",
+      },
+      {
+        name: "Text Messaging",
+        desc: "Send and receive guest SMS conversations.",
+      },
+      {
+        name: "Phone",
+        desc: "Manage restaurant calls and guest communication through Chorus.",
+      },
+      {
+        name: "Missed-Call Text Back",
+        desc: "Automatically text guests when your team can't answer the phone.",
+      },
+      {
+        name: "Website Live Chat",
+        desc: "Let website visitors start a conversation directly with your restaurant.",
+      },
+      {
+        name: "Facebook & Instagram Messaging",
+        desc: "Bring social conversations into your guest communication system.",
+      },
+      {
+        name: "Guest Database",
+        desc: "Keep guest contact information, conversations, activity and relationships connected.",
+      },
     ],
   },
   {
@@ -43,14 +81,54 @@ const categories = [
     line: "Build repeat visits and stronger relationships.",
     art: "reviews" as const,
     items: [
-      "Guest database",
-      "Email and SMS campaigns",
-      "Reviews",
-      "Birthdays",
-      "Win-back campaigns",
-      "Offers",
-      "Segmentation",
-      "Follow-up",
+      {
+        name: "Email Campaigns",
+        desc: "Send promotions, announcements, newsletters and restaurant updates.",
+      },
+      {
+        name: "SMS Campaigns",
+        desc: "Reach opted-in guests with timely offers, events and messages.",
+      },
+      {
+        name: "Review Requests",
+        desc: "Automatically ask guests for reviews and make it easy to leave one.",
+      },
+      {
+        name: "Reputation Management",
+        desc: "Monitor and manage guest reviews from Chorus.",
+      },
+      {
+        name: "Birthday Club",
+        desc: "Capture birthdays and automatically bring guests back around their birthday.",
+      },
+      {
+        name: "Win-Back Campaigns",
+        desc: "Re-engage guests who haven't visited or interacted recently.",
+      },
+      {
+        name: "Promotions & Offers",
+        desc: "Create campaigns around specials, events and other reasons to return.",
+      },
+      {
+        name: "Automated Guest Follow-Up",
+        desc: "Keep conversations and opportunities moving without relying on someone to remember every follow-up.",
+      },
+      {
+        name: "Guest Segmentation",
+        desc: "Build targeted audiences based on guest information and behavior.",
+      },
+      {
+        name: "Private Event Follow-Up",
+        desc: "Capture, organize and follow up with private-event inquiries.",
+      },
+      {
+        name: "Catering Follow-Up",
+        desc: "Turn catering inquiries into an organized follow-up process.",
+      },
+      {
+        name: "Guest Recovery",
+        desc: "Route poor guest experiences to the restaurant team so problems can be addressed quickly.",
+      },
     ],
   },
   {
@@ -59,13 +137,54 @@ const categories = [
     line: "Automate the repetitive marketing and communication work.",
     art: "reservations" as const,
     items: [
-      "Workflow automation",
-      "Social scheduling",
-      "Automated responses",
-      "Reminders",
-      "Internal notifications",
-      "AI assistance",
-      "Reporting",
+      {
+        name: "Marketing Automations",
+        desc: "Automate repetitive marketing and guest communication tasks.",
+      },
+      {
+        name: "Social Scheduling",
+        desc: "Plan content ahead and keep the restaurant's social calendar moving.",
+      },
+      {
+        name: "Calendars & Scheduling",
+        desc: "Manage appointments, meetings and scheduled interactions.",
+      },
+      {
+        name: "Internal Notifications",
+        desc: "Alert the right team member when a guest or opportunity needs attention.",
+      },
+      {
+        name: "Automated Responses",
+        desc: "Give guests an immediate response while the team handles the next step.",
+      },
+      {
+        name: "Marketing Calendar",
+        desc: "Organize campaigns and communication around one schedule.",
+      },
+      {
+        name: "Workflow Automation",
+        desc: "Build multi-step processes around inquiries, guest activity and follow-up.",
+      },
+      {
+        name: "Basic AI Assistance",
+        desc: "Help the team draft content, messages and responses faster.",
+      },
+      {
+        name: "Reporting",
+        desc: "See activity and performance across Chorus.",
+      },
+      {
+        name: "Campaign Reporting",
+        desc: "Understand how email, SMS and other campaigns are performing.",
+      },
+      {
+        name: "Guest Reporting",
+        desc: "Better understand the audience being built inside Chorus.",
+      },
+      {
+        name: "Advertising Tools",
+        desc: "Organize and manage digital advertising activity.",
+      },
     ],
   },
 ];
@@ -75,11 +194,73 @@ const underTheHood = [
   "Social", "Reviews", "Calendars", "Workflows", "Pipelines", "Surveys",
   "Documents", "Reporting", "AI", "Integrations",
 ];
+
+const setup = [
+  {
+    name: "White-Glove Onboarding",
+    desc: "Tempo helps get the platform configured and ready for the restaurant.",
+  },
+  {
+    name: "Restaurant-Specific Setup",
+    desc: "Core communications, workflows and tools are configured around the operation.",
+  },
+  {
+    name: "Team Training",
+    desc: "Straightforward training focused on what the restaurant team actually needs to use.",
+  },
+  {
+    name: "Tempo Support",
+    desc: "Get help from Tempo when questions or issues come up.",
+  },
+  {
+    name: "Ongoing Platform Updates",
+    desc: "Chorus continues improving as Tempo develops new restaurant-specific capabilities.",
+  },
+];
+
+const addOns = [
+  {
+    name: "Local Presence",
+    desc: "Keep restaurant information accurate across major directories, maps and search destinations.",
+  },
+  {
+    name: "Local SEO",
+    desc: "Add keyword research, SEO audits, optimization tools, local search insights and reporting.",
+  },
+  {
+    name: "AI Restaurant Assistant",
+    desc: "Add AI-powered guest conversations and assistance across supported channels.",
+  },
+  {
+    name: "AI Phone",
+    desc: "Answer calls, handle common questions and help guests when the restaurant team can't get to the phone.",
+  },
+  {
+    name: "AI Web & Text Conversations",
+    desc: "Automatically handle common guest conversations through website chat and SMS.",
+  },
+  {
+    name: "AI Review Responses",
+    desc: "Help generate and manage responses to guest reviews.",
+  },
+  {
+    name: "AI Unlimited",
+    desc: "Increase AI capacity for restaurants with higher conversation or call volume.",
+  },
+  {
+    name: "Dedicated Email",
+    desc: "Dedicated sending infrastructure for restaurants with higher-volume email programs.",
+  },
+  {
+    name: "WhatsApp",
+    desc: "Add WhatsApp as another guest messaging channel where relevant.",
+  },
+];
 ---
 
 <Base
   title="What Tempo Chorus does — everything working together"
-  description="Get Found, Stay Connected, Bring Guests Back, Save Time — what Tempo Chorus actually does for a restaurant, in plain language."
+  description="Get Found, Stay Connected, Bring Guests Back, Save Time — everything included in Tempo Chorus, in plain language."
   active="features"
 >
   <section class="lead">
@@ -89,15 +270,18 @@ const underTheHood = [
         <span class="lead__accent">Working together.</span>
       </h1>
       <p class="lead__sub">
-        Tempo Chorus connects marketing, communication, guest relationships,
-        reputation, automation and more into one platform — not a fixed list
-        of features, but a system that keeps growing with your restaurant.
+        One platform, configured for the way you operate. Tempo Chorus
+        connects marketing, communication, guest relationships, reputation
+        and automation — not a fixed list of features, but a system that
+        keeps growing with your restaurant.
       </p>
       <div class="lead__jump">
         <p>Jump to</p>
         <ul>
           {categories.map((c) => <li><a href={`#${c.id}`}>{c.name}</a></li>)}
           <li><a href="#under-the-hood">Under the Hood</a></li>
+          <li><a href="#tempo-setup">Tempo Setup</a></li>
+          <li><a href="#add-ons">Add-ons</a></li>
         </ul>
       </div>
     </div>
@@ -107,28 +291,33 @@ const underTheHood = [
     <div class="shell">
       {
         categories.map((c, i) => (
-          <article class={`category ${i % 2 === 1 ? "category--flip" : ""}`} id={c.id}>
-            <div class="category__say">
-              <h2 class="category__name">{c.name}</h2>
-              <p class="category__line">{c.line}</p>
-              <ul class="category__items" data-reveal>
-                {c.items.map((item) => (
-                  <li>
-                    <span class="dot" aria-hidden="true" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              {c.callout && (
-                <div class="category__callout">
-                  <p class="category__callout-title">{c.callout.title}</p>
-                  <p class="category__callout-body">{c.callout.body}</p>
-                </div>
-              )}
+          <article class="category" id={c.id}>
+            <div class={`category__head ${i % 2 === 1 ? "category__head--flip" : ""}`}>
+              <div class="category__say">
+                <h2 class="category__name">{c.name}</h2>
+                <p class="category__line">{c.line}</p>
+              </div>
+              <div class="category__show">
+                <FeatureArt kind={c.art} />
+              </div>
             </div>
-            <div class="category__show">
-              <FeatureArt kind={c.art} />
-            </div>
+            <ul class="category__grid" data-reveal>
+              {c.items.map((item) => (
+                <li>
+                  <span class="dot" aria-hidden="true" />
+                  <div>
+                    <p class="category__item-name">{item.name}</p>
+                    <p class="category__item-desc">{item.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            {c.callout && (
+              <div class="category__callout">
+                <p class="category__callout-title">{c.callout.title}</p>
+                <p class="category__callout-body">{c.callout.body}</p>
+              </div>
+            )}
           </article>
         ))
       }
@@ -156,6 +345,63 @@ const underTheHood = [
           </>
         ))}
       </p>
+    </div>
+  </section>
+
+  <section class="setup" id="tempo-setup" aria-labelledby="setup-title">
+    <div class="shell">
+      <h2 class="eyeless-h2 setup__title" id="setup-title">
+        And Tempo sets it up for you.
+      </h2>
+      <p class="lede setup__lede">
+        Chorus isn't another piece of software you're left to figure out.
+        Tempo helps configure the platform around your restaurant and gets
+        your team ready to use it.
+      </p>
+      <ul class="setup__list" data-reveal>
+        {
+          setup.map((s, i) => (
+            <li style={`--i:${i}`}>
+              <span class="dot" aria-hidden="true" />
+              <div>
+                <p class="setup__item-name">{s.name}</p>
+                <p class="setup__item-desc">{s.desc}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="setup__callout">
+        "You won't be handed a login and left to figure it out."
+      </p>
+      <p class="setup__note">
+        All included with every Chorus platform — none of this is a paid
+        add-on.
+      </p>
+    </div>
+  </section>
+
+  <section class="addons" id="add-ons" aria-labelledby="addons-title">
+    <div class="shell addons__grid">
+      <div>
+        <h2 class="eyeless-h2 addons__title" id="addons-title">
+          Add more when you need it.
+        </h2>
+        <p class="lede addons__lede">
+          Start with the complete Chorus platform. Add specialized
+          capabilities when they make sense for your restaurant.
+        </p>
+      </div>
+      <ul class="addons__list">
+        {
+          addOns.map((a) => (
+            <li>
+              <p class="addons__name">{a.name}</p>
+              <p class="addons__note">{a.desc}</p>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
@@ -247,10 +493,6 @@ const underTheHood = [
   }
 
   .category {
-    display: grid;
-    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: center;
     padding-block: clamp(3rem, 7vw, 5rem);
     border-top: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
     scroll-margin-top: 5.5rem;
@@ -260,7 +502,14 @@ const underTheHood = [
     border-top: 0;
   }
 
-  .category--flip .category__show {
+  .category__head {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .category__head--flip .category__show {
     order: 2;
   }
 
@@ -280,30 +529,42 @@ const underTheHood = [
     max-width: 32ch;
   }
 
-  .category__items {
+  .category__grid {
     list-style: none;
-    margin: 1.85rem 0 0;
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem 2.5rem;
   }
 
-  .category__items li {
+  .category__grid li {
     display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+
+  .category__grid .dot {
+    margin-top: 0.55em;
+    color: var(--mint-400);
+  }
+
+  .category__item-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.98rem;
     color: var(--text-hi);
-    font-size: 1rem;
-    line-height: 1.45;
   }
 
-  .category__items .dot {
-    color: var(--violet-400);
+  .category__item-desc {
+    margin-top: 0.3rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-mid);
   }
 
   .category__callout {
-    margin-top: 1.85rem;
+    margin-top: clamp(2rem, 5vw, 3rem);
     padding-top: 1.5rem;
     border-top: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
     max-width: 46ch;
@@ -324,11 +585,17 @@ const underTheHood = [
   }
 
   @media (max-width: 60rem) {
-    .category {
+    .category__head {
       grid-template-columns: 1fr;
     }
-    .category--flip .category__show {
+    .category__head--flip .category__show {
       order: 0;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .category__grid {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -358,6 +625,134 @@ const underTheHood = [
   .hood__sep {
     color: var(--violet-500);
     margin: 0 0.55em;
+  }
+
+  /* ---------- Tempo setup (service layer) ---------- */
+
+  .setup {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    background: var(--ink-800);
+  }
+
+  .setup__lede {
+    margin-top: 1.25rem;
+    max-width: 58ch;
+    color: var(--text-mid);
+  }
+
+  .setup__list {
+    list-style: none;
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem 2.5rem;
+  }
+
+  .setup__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+
+  .setup__list .dot {
+    margin-top: 0.55em;
+    color: var(--mint-400);
+  }
+
+  .setup__item-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--text-hi);
+  }
+
+  .setup__item-desc {
+    margin-top: 0.3rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-mid);
+  }
+
+  .setup__callout {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-top: clamp(2rem, 5vw, 3rem);
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 0.95rem + 1.7vw, 2.1rem);
+    font-weight: 600;
+    line-height: 1.28;
+    letter-spacing: -0.03em;
+    color: var(--text-hi);
+    max-width: 46ch;
+  }
+
+  .setup__note {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-low);
+  }
+
+  @media (max-width: 40rem) {
+    .setup__list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- Add-ons ---------- */
+
+  .addons {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .addons__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .addons__lede {
+    margin-top: 1.25rem;
+    color: var(--text-low);
+  }
+
+  .addons__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .addons__list li {
+    padding-block: 1.25rem;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
+  }
+
+  .addons__list li:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .addons__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text-hi);
+  }
+
+  .addons__note {
+    margin-top: 0.3rem;
+    color: var(--text-mid);
+    font-size: 0.9rem;
+    max-width: 46ch;
+  }
+
+  @media (max-width: 56rem) {
+    .addons__grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .close {

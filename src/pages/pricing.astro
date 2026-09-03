@@ -47,39 +47,68 @@ const additionalLocationPrice = "+$149";
 
 const addOns = [
   {
-    name: "AI Receptionist & Guest Chat",
-    price: "+$75/mo",
-    note: "AI phone answering, web and text conversations, review replies and guest follow-up — for restaurants ready to put AI to work.",
-  },
-  {
-    name: "Advanced Marketing & Automation",
-    price: "+$30/mo",
-    note: "Local presence and listings, deeper segmentation and reporting, and advertising tools — for restaurants ready to grow harder.",
-  },
-  {
-    name: "AI Unlimited",
-    price: "~$127/mo per location",
-    note: "For higher-volume restaurants running the AI Receptionist add-on.",
+    name: "Local Presence",
+    note: "Keep restaurant information accurate across major directories, maps and search destinations.",
   },
   {
     name: "Local SEO",
-    price: "From ~$97/mo per location",
-    note: "Software/tool layer. Tempo-managed SEO is a separate service.",
+    note: "Add keyword research, SEO audits, optimization tools, local search insights and reporting.",
+  },
+  {
+    name: "AI Restaurant Assistant",
+    note: "Add AI-powered guest conversations and assistance across supported channels.",
+  },
+  {
+    name: "AI Phone",
+    note: "Answer calls, handle common questions and help guests when the restaurant team can't get to the phone.",
+  },
+  {
+    name: "AI Web & Text Conversations",
+    note: "Automatically handle common guest conversations through website chat and SMS.",
+  },
+  {
+    name: "AI Review Responses",
+    note: "Help generate and manage responses to guest reviews.",
+  },
+  {
+    name: "AI Unlimited",
+    note: "Increase AI capacity for restaurants with higher conversation or call volume.",
   },
   {
     name: "Dedicated Email",
-    price: "~$89/mo per domain",
-    note: "For higher-volume sending.",
+    note: "Dedicated sending infrastructure for restaurants with higher-volume email programs.",
+  },
+  {
+    name: "WhatsApp",
+    note: "Add WhatsApp as another guest messaging channel where relevant.",
   },
 ];
 
 const managed = [
-  "Managed Social Media",
-  "Managed Email & SMS",
-  "Managed Advertising",
-  "Managed SEO",
-  "Website Design & Management",
-  "Broader Restaurant Marketing Services",
+  {
+    name: "Managed Social Media",
+    note: "Planning, content creation, scheduling and ongoing social management.",
+  },
+  {
+    name: "Managed Email & SMS",
+    note: "Campaign strategy, copy, calendar and execution.",
+  },
+  {
+    name: "Managed Advertising",
+    note: "Paid media creation, launch and optimization. Ad spend is separate.",
+  },
+  {
+    name: "Managed SEO",
+    note: "Strategy, optimization, content and ongoing search improvement.",
+  },
+  {
+    name: "Website Design & Management",
+    note: "Design, build and ongoing website management.",
+  },
+  {
+    name: "Restaurant Marketing",
+    note: "Broader outsourced strategy, creative, campaigns and execution.",
+  },
 ];
 
 const care = [
@@ -141,7 +170,7 @@ const faqs = [
   },
   {
     q: "Do you charge per location?",
-    a: "Yes — $299/mo for the first location, then a flat $149/mo for each additional one. Add-ons like AI Unlimited and Local SEO are priced per location where they apply.",
+    a: "Yes — $299/mo for the first location, then a flat $149/mo for each additional one. A few add-ons, like AI Unlimited and Local SEO, scale per location too — exact pricing gets confirmed on the demo call.",
   },
 ];
 ---
@@ -202,11 +231,12 @@ const faqs = [
   <section class="addons" aria-labelledby="addons-title">
     <div class="shell addons__grid">
       <div>
-        <h2 class="eyeless-h2 addons__title" id="addons-title">Add-ons.</h2>
+        <h2 class="eyeless-h2 addons__title" id="addons-title">
+          Add more when you need it.
+        </h2>
         <p class="lede addons__lede">
-          The plan above is complete on its own. Everything else — more AI,
-          deeper marketing tools — is an add-on, kept short and priced
-          simply.
+          Start with the complete Chorus platform. Add specialized
+          capabilities when they make sense for your restaurant.
         </p>
       </div>
       <ul class="addons__list">
@@ -214,7 +244,6 @@ const faqs = [
           addOns.map((a) => (
             <li>
               <p class="addons__name">{a.name}</p>
-              <p class="addons__price">{a.price}</p>
               <p class="addons__note">{a.note}</p>
             </li>
           ))
@@ -227,12 +256,10 @@ const faqs = [
     <div class="shell managed__inner">
       <div class="managed__say">
         <h2 class="eyeless-h2 managed__title" id="managed-title">
-          Chorus gives you the tools.<br />
-          <span class="managed__accent">Tempo can also provide the team.</span>
+          Want us to do it for you?
         </h2>
         <p class="lede managed__lede">
-          Human-delivered services, separate from your software plan —
-          custom-scoped, never assumed as included.
+          Chorus gives you the tools. Tempo can also provide the team.
         </p>
         <a
           class="hero__link"
@@ -248,7 +275,10 @@ const faqs = [
           managed.map((m) => (
             <li>
               <span class="dot" aria-hidden="true" />
-              {m}
+              <div>
+                <p class="managed__item-name">{m.name}</p>
+                <p class="managed__item-desc">{m.note}</p>
+              </div>
             </li>
           ))
         }
@@ -522,12 +552,6 @@ const faqs = [
     color: var(--text-hi);
   }
 
-  .addons__price {
-    margin-top: 0.3rem;
-    color: var(--mint-300);
-    font-weight: 600;
-  }
-
   .addons__note {
     margin-top: 0.3rem;
     color: var(--text-mid);
@@ -555,10 +579,6 @@ const faqs = [
     align-items: start;
   }
 
-  .managed__accent {
-    color: var(--violet-400);
-  }
-
   .managed__lede {
     margin-top: 1.25rem;
     color: var(--text-mid);
@@ -571,19 +591,32 @@ const faqs = [
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 1.1rem;
   }
 
   .managed__list li {
     display: flex;
-    align-items: baseline;
+    align-items: flex-start;
     gap: 0.8rem;
-    font-size: 1.05rem;
-    color: var(--text-hi);
   }
 
   .managed__list .dot {
+    margin-top: 0.55em;
     color: var(--violet-400);
+  }
+
+  .managed__item-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-hi);
+  }
+
+  .managed__item-desc {
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-mid);
   }
 
   .hero__link {
