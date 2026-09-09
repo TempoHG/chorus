@@ -4,7 +4,7 @@ import Wordmark from "../components/Wordmark.astro";
 
 const plan = {
   name: "Chorus",
-  price: "$299",
+  price: "$397",
   tagline: "Bring everything together.",
   includesLabel: "Includes",
   groups: [
@@ -182,28 +182,20 @@ const plan = {
 
 const additionalLocationPrice = "+$149";
 
-const addOns = [
-  {
-    name: "Local Presence",
-    note: "Keep restaurant information accurate across major directories, maps and search destinations.",
-  },
-  {
-    name: "Local SEO",
-    note: "Add keyword research, SEO audits, optimization tools, local search insights and reporting.",
-  },
-  {
-    name: "AI Unlimited",
-    note: "Increase AI capacity for restaurants with higher conversation or call volume.",
-  },
-  {
-    name: "Dedicated Email",
-    note: "Dedicated sending infrastructure for restaurants with higher-volume email programs.",
-  },
-  {
-    name: "WhatsApp",
-    note: "Add WhatsApp as another guest messaging channel where relevant.",
-  },
-];
+const onboarding = {
+  title: "White-Glove Onboarding",
+  subtitle: "We Set It Up. You Start Using It.",
+  intro: "Chorus isn't another platform you're expected to configure on your own. Tempo works with you to set up the platform around your restaurant, connect the essentials, build your core workflows, and get your team ready to use it.",
+  fee: "$497",
+  feeNote: "one-time onboarding fee",
+  includes: "Your onboarding includes platform configuration, guest communication setup, core workflows and automations, reputation setup, team training, and launch support.",
+  commitTitle: "Commit for 3 Months. We'll Waive the Fee.",
+  commitBody: "Start with a 3-month Chorus commitment and we'll waive the entire $497 onboarding fee.",
+  commitNote: "After your first three months, Chorus simply continues month-to-month.",
+  commitPrice: "$299/month",
+  commitPriceNote: "$0 onboarding with 3-month commitment",
+  cta: "Get Started",
+};
 
 const managed = [
   {
@@ -291,14 +283,14 @@ const faqs = [
   },
   {
     q: "Do you charge per location?",
-    a: "Yes — $299/mo for the first location, then a flat $149/mo for each additional one. A few add-ons, like AI Unlimited and Local SEO, scale per location too — exact pricing gets confirmed on the demo call.",
+    a: "Yes — $397/mo for the first location, then a flat $149/mo for each additional one. A few add-ons, like AI Unlimited and Local SEO, scale per location too — exact pricing gets confirmed on the demo call.",
   },
 ];
 ---
 
 <Base
   title="Tempo Chorus pricing — one plan, complete platform"
-  description="One plan at $299/mo — everything included, with a short list of add-ons for AI, advanced marketing and multi-location scale."
+  description="One plan at $397/mo — everything included, with a short list of add-ons for AI, advanced marketing and multi-location scale."
   active="pricing"
 >
   <section class="lead">
@@ -308,8 +300,8 @@ const faqs = [
         <span class="lead__accent">Complete platform.</span>
       </h1>
       <p class="lead__sub">
-        One plan, complete on its own — not a stripped-down starter tier.
-        Add exactly what you need, only when you need it.
+        One connected platform for your restaurant's marketing, guest
+        communication, reputation, customer relationships, and automation.
       </p>
     </div>
   </section>
@@ -355,27 +347,32 @@ const faqs = [
     </div>
   </section>
 
-  <section class="addons" aria-labelledby="addons-title">
-    <div class="shell addons__grid">
-      <div>
-        <h2 class="eyeless-h2 addons__title" id="addons-title">
-          Add more when you need it.
+  <section class="onboarding" aria-labelledby="onboarding-title">
+    <div class="shell onboarding__grid">
+      <div class="onboarding__say">
+        <h2 class="eyeless-h2 onboarding__title" id="onboarding-title">
+          {onboarding.title}
         </h2>
-        <p class="lede addons__lede">
-          Start with the complete Chorus platform. Add specialized
-          capabilities when they make sense for your restaurant.
-        </p>
+        <p class="onboarding__subtitle">{onboarding.subtitle}</p>
+        <p class="lede onboarding__intro">{onboarding.intro}</p>
       </div>
-      <ul class="addons__list">
-        {
-          addOns.map((a) => (
-            <li>
-              <p class="addons__name">{a.name}</p>
-              <p class="addons__note">{a.note}</p>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="onboarding__panel">
+        <p class="onboarding__fee">
+          {onboarding.fee}
+          <span>{onboarding.feeNote}</span>
+        </p>
+        <p class="onboarding__includes">{onboarding.includes}</p>
+        <div class="onboarding__commit">
+          <p class="onboarding__commit-title">{onboarding.commitTitle}</p>
+          <p class="onboarding__commit-body">{onboarding.commitBody}</p>
+          <p class="onboarding__commit-note">{onboarding.commitNote}</p>
+          <p class="onboarding__commit-price">
+            {onboarding.commitPrice}
+            <span>{onboarding.commitPriceNote}</span>
+          </p>
+          <a class="btn onboarding__cta" href="/#demo">{onboarding.cta}</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -662,76 +659,113 @@ const faqs = [
     }
   }
 
-  /* ---------- Add-ons ---------- */
+  /* ---------- Onboarding ---------- */
 
-  .addons {
+  .onboarding {
     padding-block: clamp(4.5rem, 10vw, 8rem);
   }
 
-  .addons__grid {
+  .onboarding__grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     gap: clamp(2rem, 6vw, 5rem);
     align-items: start;
   }
 
-  .addons__lede {
-    margin-top: 1.25rem;
-    color: var(--text-low);
-  }
-
-  .addons__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 2rem;
-  }
-
-  .addons__list li {
-    padding-block: 1.25rem;
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
-  }
-
-  .addons__list li:nth-child(-n + 2) {
-    border-top: 0;
-    padding-top: 0;
-  }
-
-  .addons__name {
+  .onboarding__subtitle {
+    margin-top: 0.75rem;
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: clamp(1.3rem, 1.1rem + 1vw, 1.75rem);
+    letter-spacing: -0.02em;
     color: var(--text-hi);
   }
 
-  .addons__note {
-    margin-top: 0.3rem;
+  .onboarding__intro {
+    margin-top: 1.25rem;
     color: var(--text-mid);
-    font-size: 0.9rem;
-    max-width: 46ch;
+  }
+
+  .onboarding__panel {
+    background: var(--ink-700);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
+    border-radius: 5px;
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    box-shadow: 0 18px 38px -24px rgb(0 0 0 / 0.9);
+  }
+
+  .onboarding__fee {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: -0.03em;
+    color: var(--text-hi);
+  }
+
+  .onboarding__fee span {
+    margin-left: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-low);
+  }
+
+  .onboarding__includes {
+    margin-top: 0.9rem;
+    color: var(--text-mid);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .onboarding__commit {
+    margin-top: 1.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid color-mix(in oklab, var(--mint-400) 30%, transparent);
+  }
+
+  .onboarding__commit-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--mint-300);
+  }
+
+  .onboarding__commit-body {
+    margin-top: 0.6rem;
+    color: var(--text-mid);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .onboarding__commit-note {
+    margin-top: 0.5rem;
+    color: var(--text-low);
+    font-size: 0.85rem;
+  }
+
+  .onboarding__commit-price {
+    margin-top: 1.1rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--mint-300);
+  }
+
+  .onboarding__commit-price span {
+    margin-left: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-low);
+  }
+
+  .onboarding__cta {
+    margin-top: 1.5rem;
+    width: 100%;
+    justify-content: center;
   }
 
   @media (max-width: 56rem) {
-    .addons__grid {
+    .onboarding__grid {
       grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 30rem) {
-    .addons__list {
-      grid-template-columns: 1fr;
-    }
-
-    .addons__list li:nth-child(-n + 2) {
-      border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
-      padding-top: 1.25rem;
-    }
-
-    .addons__list li:first-child {
-      border-top: 0;
-      padding-top: 0;
     }
   }
 
