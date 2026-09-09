@@ -218,44 +218,6 @@ const setup = [
   },
 ];
 
-const addOns = [
-  {
-    name: "Local Presence",
-    desc: "Keep restaurant information accurate across major directories, maps and search destinations.",
-  },
-  {
-    name: "Local SEO",
-    desc: "Add keyword research, SEO audits, optimization tools, local search insights and reporting.",
-  },
-  {
-    name: "AI Restaurant Assistant",
-    desc: "Add AI-powered guest conversations and assistance across supported channels.",
-  },
-  {
-    name: "AI Phone",
-    desc: "Answer calls, handle common questions and help guests when the restaurant team can't get to the phone.",
-  },
-  {
-    name: "AI Web & Text Conversations",
-    desc: "Automatically handle common guest conversations through website chat and SMS.",
-  },
-  {
-    name: "AI Review Responses",
-    desc: "Help generate and manage responses to guest reviews.",
-  },
-  {
-    name: "AI Unlimited",
-    desc: "Increase AI capacity for restaurants with higher conversation or call volume.",
-  },
-  {
-    name: "Dedicated Email",
-    desc: "Dedicated sending infrastructure for restaurants with higher-volume email programs.",
-  },
-  {
-    name: "WhatsApp",
-    desc: "Add WhatsApp as another guest messaging channel where relevant.",
-  },
-];
 ---
 
 <Base
@@ -281,7 +243,6 @@ const addOns = [
           {categories.map((c) => <li><a href={`#${c.id}`}>{c.name}</a></li>)}
           <li><a href="#under-the-hood">Under the Hood</a></li>
           <li><a href="#tempo-setup">Tempo Setup</a></li>
-          <li><a href="#add-ons">Add-ons</a></li>
         </ul>
       </div>
     </div>
@@ -378,30 +339,6 @@ const addOns = [
         All included with every Chorus platform — none of this is a paid
         add-on.
       </p>
-    </div>
-  </section>
-
-  <section class="addons" id="add-ons" aria-labelledby="addons-title">
-    <div class="shell addons__grid">
-      <div>
-        <h2 class="eyeless-h2 addons__title" id="addons-title">
-          Add more when you need it.
-        </h2>
-        <p class="lede addons__lede">
-          Start with the complete Chorus platform. Add specialized
-          capabilities when they make sense for your restaurant.
-        </p>
-      </div>
-      <ul class="addons__list">
-        {
-          addOns.map((a) => (
-            <li>
-              <p class="addons__name">{a.name}</p>
-              <p class="addons__note">{a.desc}</p>
-            </li>
-          ))
-        }
-      </ul>
     </div>
   </section>
 
@@ -695,62 +632,6 @@ const addOns = [
 
   @media (max-width: 40rem) {
     .setup__list {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* ---------- Add-ons ---------- */
-
-  .addons {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
-  }
-
-  .addons__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: start;
-  }
-
-  .addons__lede {
-    margin-top: 1.25rem;
-    color: var(--text-low);
-  }
-
-  .addons__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .addons__list li {
-    padding-block: 1.25rem;
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
-  }
-
-  .addons__list li:first-child {
-    border-top: 0;
-    padding-top: 0;
-  }
-
-  .addons__name {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: var(--text-hi);
-  }
-
-  .addons__note {
-    margin-top: 0.3rem;
-    color: var(--text-mid);
-    font-size: 0.9rem;
-    max-width: 46ch;
-  }
-
-  @media (max-width: 56rem) {
-    .addons__grid {
       grid-template-columns: 1fr;
     }
   }
