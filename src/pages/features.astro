@@ -330,15 +330,22 @@ const setup = [
 
   <section class="host-helper" id={hostHelper.id} aria-labelledby="host-helper-title">
     <div class="shell">
-      <h2 class="eyeless-h2 host-helper__title" id="host-helper-title">
-        {hostHelper.name}
-      </h2>
-      <p class="host-helper__line">{hostHelper.line}</p>
-      {
-        hostHelper.intro.map((p) => (
-          <p class="lede host-helper__intro">{p}</p>
-        ))
-      }
+      <div class="category__head">
+        <div class="category__say">
+          <h2 class="eyeless-h2 host-helper__title" id="host-helper-title">
+            {hostHelper.name}
+          </h2>
+          <p class="host-helper__line">{hostHelper.line}</p>
+          {
+            hostHelper.intro.map((p) => (
+              <p class="lede host-helper__intro">{p}</p>
+            ))
+          }
+        </div>
+        <div class="category__show">
+          <FeatureArt kind="agent" />
+        </div>
+      </div>
       <p class="host-helper__list-label">{hostHelper.listLabel}</p>
       <ul class="host-helper__list" data-reveal>
         {

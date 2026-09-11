@@ -12,7 +12,7 @@ import Wordmark from "./Wordmark.astro";
    entrance the first time it scrolls into view — see the reveal script in
    Base.astro. */
 interface Props {
-  kind: "calendar" | "reviews" | "reservations" | "inbox" | "afterhours" | "attribution" | "unified";
+  kind: "calendar" | "reviews" | "reservations" | "inbox" | "afterhours" | "attribution" | "unified" | "agent";
 }
 const { kind } = Astro.props;
 
@@ -307,6 +307,52 @@ const orbit = [
             </p>
           </span>
         </div>
+      </div>
+    )
+  }
+
+  {
+    kind === "agent" && (
+      <div class="art__stage agent" data-reveal-solo>
+        <p class="agent__status">
+          <span class="agent__status-dot" aria-hidden="true" />
+          Agent ready
+        </p>
+        <div class="agent__rings" aria-hidden="true">
+          <svg class="agent__rings-svg" viewBox="0 0 220 220" fill="none">
+            <circle
+              cx="110" cy="110" r="95"
+              stroke="var(--mint-400)" stroke-width="2" stroke-linecap="round"
+              stroke-dasharray="420 180" opacity="0.35"
+              transform="rotate(-90 110 110)"
+            />
+            <circle
+              cx="110" cy="110" r="78"
+              stroke="var(--mint-400)" stroke-width="2" stroke-linecap="round"
+              stroke-dasharray="270 220" opacity="0.55"
+              transform="rotate(60 110 110)"
+            />
+            <circle
+              cx="110" cy="110" r="60"
+              stroke="var(--text-low)" stroke-width="2" stroke-linecap="round"
+              stroke-dasharray="95 285" opacity="0.5"
+              transform="rotate(205 110 110)"
+            />
+          </svg>
+          <span class="agent__core">
+            <svg class="agent__mic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M12 15a3.5 3.5 0 0 0 3.5-3.5V5.5a3.5 3.5 0 0 0-7 0v6A3.5 3.5 0 0 0 12 15Z" />
+              <path d="M18.5 11a1 1 0 1 0-2 0 4.5 4.5 0 0 1-9 0 1 1 0 1 0-2 0 6.5 6.5 0 0 0 5.5 6.42V19H9a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2h-2.5v-1.58A6.5 6.5 0 0 0 18.5 11Z" />
+            </svg>
+          </span>
+        </div>
+        <a class="agent__cta" href="/#demo">
+          <svg class="agent__phone" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.28 21 3 13.72 3 4.75a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2Z" />
+          </svg>
+          Start test call
+        </a>
+        <p class="agent__note">No sales pitch. A live demo on your own phone.</p>
       </div>
     )
   }
@@ -1021,6 +1067,120 @@ const orbit = [
     .unified__node-tagline {
       max-width: 9rem;
       font-size: 0.68rem;
+    }
+  }
+
+  /* ---- agent: the AI Host Helper "test call" widget ---- */
+
+  .agent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+    max-width: 22rem;
+    margin-inline: auto;
+    padding-block: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .agent__status {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mint-300);
+  }
+
+  .agent__status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--mint-400);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--mint-400) 24%, transparent);
+    flex: none;
+  }
+
+  .agent__rings {
+    position: relative;
+    width: clamp(9rem, 22vw, 12rem);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+  }
+
+  .agent__rings-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    animation: agent-spin 26s linear infinite;
+  }
+
+  @keyframes agent-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .agent__core {
+    position: relative;
+    width: 46%;
+    height: 46%;
+    border-radius: 50%;
+    background: color-mix(in oklab, var(--mint-400) 88%, var(--ink-900));
+    display: grid;
+    place-items: center;
+    box-shadow: 0 0 0 10px color-mix(in oklab, var(--mint-400) 10%, transparent);
+  }
+
+  .agent__mic {
+    width: 42%;
+    height: 42%;
+    color: var(--ink-900);
+  }
+
+  .agent__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.95rem 1.6rem;
+    background: var(--mint-400);
+    color: var(--ink-900);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    border-radius: 999px;
+    transition: background 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+  }
+
+  .agent__cta:hover {
+    background: var(--mint-300);
+    transform: translateY(-2px);
+  }
+
+  .agent__phone {
+    width: 1.05rem;
+    height: 1.05rem;
+    flex: none;
+  }
+
+  .agent__note {
+    font-size: 0.85rem;
+    color: var(--text-low);
+    max-width: 26ch;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .agent__rings-svg {
+      animation: none;
     }
   }
 </style>
