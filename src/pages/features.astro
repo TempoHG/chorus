@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import FeatureArt from "../components/FeatureArt.astro";
+import HostHelper from "../components/HostHelper.astro";
 
 const categories = [
   {
@@ -189,48 +190,6 @@ const categories = [
   },
 ];
 
-const hostHelper = {
-  id: "ai-host-helper",
-  name: "Tempo AI Host Helper",
-  line: "Your Host Stand Could Use Another Set of Hands.",
-  intro: [
-    "Tempo AI Host Helper answers when your team can't — during the rush, after hours, on weekends, or whenever the phone starts competing with the guests already in the restaurant.",
-    "Built around your restaurant, it can answer common questions, help with reservations, capture catering and private event inquiries, and route calls that need a real person to the right member of your team. Every interaction is logged in Chorus, so opportunities don't disappear into voicemail.",
-  ],
-  listLabel: "It can help with",
-  items: [
-    {
-      name: "Reservations",
-      desc: "Help guests with availability and reservations without pulling someone away from the floor.",
-    },
-    {
-      name: "Catering & Private Events",
-      desc: "Capture and qualify valuable inquiries while the guest is still interested.",
-    },
-    {
-      name: "Guest Questions",
-      desc: "Answer everyday questions about hours, parking, menus, dietary needs, accessibility, policies, and more.",
-    },
-    {
-      name: "Smart Call Routing",
-      desc: "Recognize when a guest needs a real person and hand the conversation to the appropriate team member.",
-    },
-    {
-      name: "After-Hours Coverage",
-      desc: "Keep answering when the restaurant is closed or the host stand is unattended.",
-    },
-    {
-      name: "Call History & Insights",
-      desc: "See who called, what they needed, what was discussed, and what happened next.",
-    },
-  ],
-  callout: {
-    title: "Built Around Your Restaurant",
-    body: "This isn't a generic bot with your restaurant's name attached. Tempo configures AI Host Helper around your menu, hours, policies, booking system, and the way your team actually handles guest calls.",
-  },
-  closer: "More calls answered. More opportunities captured. Less interruption for your team.",
-};
-
 const underTheHood = [
   "Websites", "Forms", "Funnels", "Guest records", "Email", "SMS", "Phone",
   "Social", "Reviews", "Calendars", "Workflows", "Pipelines", "Surveys",
@@ -283,7 +242,7 @@ const setup = [
         <p>Jump to</p>
         <ul>
           {categories.map((c) => <li><a href={`#${c.id}`}>{c.name}</a></li>)}
-          <li><a href={`#${hostHelper.id}`}>AI Host Helper</a></li>
+          <li><a href="#ai-host-helper">AI Host Helper</a></li>
           <li><a href="#under-the-hood">Under the Hood</a></li>
           <li><a href="#tempo-setup">Tempo Setup</a></li>
         </ul>
@@ -328,45 +287,7 @@ const setup = [
     </div>
   </div>
 
-  <section class="host-helper" id={hostHelper.id} aria-labelledby="host-helper-title">
-    <div class="shell">
-      <div class="category__head">
-        <div class="category__say">
-          <h2 class="eyeless-h2 host-helper__title" id="host-helper-title">
-            {hostHelper.name}
-          </h2>
-          <p class="host-helper__line">{hostHelper.line}</p>
-          {
-            hostHelper.intro.map((p) => (
-              <p class="lede host-helper__intro">{p}</p>
-            ))
-          }
-        </div>
-        <div class="category__show">
-          <FeatureArt kind="agent" />
-        </div>
-      </div>
-      <p class="host-helper__list-label">{hostHelper.listLabel}</p>
-      <ul class="host-helper__list" data-reveal>
-        {
-          hostHelper.items.map((item) => (
-            <li>
-              <span class="dot" aria-hidden="true" />
-              <div>
-                <p class="host-helper__item-name">{item.name}</p>
-                <p class="host-helper__item-desc">{item.desc}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
-      <div class="host-helper__callout">
-        <p class="host-helper__callout-title">{hostHelper.callout.title}</p>
-        <p class="host-helper__callout-body">{hostHelper.callout.body}</p>
-      </div>
-      <p class="host-helper__closer">{hostHelper.closer}</p>
-    </div>
-  </section>
+  <HostHelper />
 
   <section class="hood" id="under-the-hood" aria-labelledby="hood-title">
     <div class="shell">
@@ -615,118 +536,6 @@ const setup = [
 
   @media (max-width: 40rem) {
     .category__grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* ---------- AI Host Helper ---------- */
-
-  .host-helper {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
-    background: var(--ink-800);
-  }
-
-  .host-helper__line {
-    margin-top: 0.9rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.15rem, 0.95rem + 0.9vw, 1.4rem);
-    font-weight: 600;
-    letter-spacing: -0.025em;
-    color: var(--violet-400);
-    max-width: 40ch;
-  }
-
-  .host-helper__intro {
-    margin-top: 1.25rem;
-    max-width: 62ch;
-    color: var(--text-mid);
-  }
-
-  .host-helper__intro + .host-helper__intro {
-    margin-top: 1rem;
-  }
-
-  .host-helper__list-label {
-    margin-top: clamp(2.5rem, 6vw, 4rem);
-    padding-top: 1.5rem;
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-low);
-  }
-
-  .host-helper__list {
-    list-style: none;
-    margin: 1.25rem 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.35rem 2.5rem;
-  }
-
-  .host-helper__list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.7rem;
-  }
-
-  .host-helper__list .dot {
-    margin-top: 0.55em;
-    color: var(--mint-400);
-  }
-
-  .host-helper__item-name {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.98rem;
-    color: var(--text-hi);
-  }
-
-  .host-helper__item-desc {
-    margin-top: 0.3rem;
-    font-size: 0.88rem;
-    line-height: 1.5;
-    color: var(--text-mid);
-  }
-
-  .host-helper__callout {
-    margin-top: clamp(2rem, 5vw, 3rem);
-    padding-top: 1.5rem;
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
-    max-width: 46ch;
-  }
-
-  .host-helper__callout-title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.05rem;
-    letter-spacing: -0.025em;
-    color: var(--text-hi);
-  }
-
-  .host-helper__callout-body {
-    margin-top: 0.5rem;
-    color: var(--text-mid);
-    line-height: 1.55;
-  }
-
-  .host-helper__closer {
-    margin-top: clamp(2.5rem, 6vw, 4rem);
-    padding-top: clamp(2rem, 5vw, 3rem);
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
-    font-family: var(--font-display);
-    font-size: clamp(1.3rem, 0.95rem + 1.7vw, 2.1rem);
-    font-weight: 600;
-    line-height: 1.28;
-    letter-spacing: -0.03em;
-    color: var(--text-hi);
-    max-width: 52ch;
-  }
-
-  @media (max-width: 40rem) {
-    .host-helper__list {
       grid-template-columns: 1fr;
     }
   }
