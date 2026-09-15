@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Wordmark from "../components/Wordmark.astro";
 import Analytics from "@vercel/analytics/astro";
+import OnboardingPopup from "../components/OnboardingPopup.astro";
 
 interface Props {
   title: string;
@@ -95,6 +96,8 @@ const { title, description, active } = Astro.props;
         <p>All guest moments shown on this site are illustrative.</p>
       </div>
     </footer>
+
+    <OnboardingPopup />
 
     <script>
       import { initMotion } from "../scripts/motion.js";

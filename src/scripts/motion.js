@@ -1,5 +1,6 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { track } from "@vercel/analytics";
 
 /* The site's one animation engine, replacing the old CSS-keyframe +
    IntersectionObserver combination. GSAP owns every animated transform
@@ -243,6 +244,89 @@ function vignetteTimeline() {
   });
 }
 
+/* The onboarding-fee popup: shows once per tab session, a few seconds after
+   load, and stays dismissed (sessionStorage) once closed by any of its close
+   controls or Escape. Runs regardless of prefers-reduced-motion — it's a
+   functional dialog, not decorative, so it still needs to appear and close;
+   only the open/close transition is skipped under reduced motion. */
+function initOnboardingPopup() {
+  const popup = document.querySelector("[data-onboarding-popup]");
+  if (!popup) return;
+
+  const DISMISS_KEY = "chorus-onboarding-popup-dismissed";
+  if (sessionStorage.getItem(DISMISS_KEY)) return;
+
+  const backdrop = popup.querySelector("[data-popup-backdrop]");
+  const card = popup.querySelector("[data-popup-card]");
+  const closeBtn = popup.querySelector(".popup__close");
+  const laterBtn = popup.querySelector(".popup__later");
+  const cta = popup.querySelector(".popup__cta");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  gsap.set(card, {
+    xPercent: -50,
+    yPercent: -50,
+    opacity: 0,
+    scale: reduceMotion ? 1 : 0.94,
+    y: reduceMotion ? 0 : 12,
+  });
+  gsap.set(backdrop, { opacity: 0 });
+
+  let lastFocused = null;
+
+  function onKeydown(e) {
+    if (e.key === "Escape") close("escape");
+  }
+
+  function open() {
+    lastFocused = document.activeElement;
+    popup.style.display = "block";
+    if (reduceMotion) {
+      gsap.set([backdrop, card], { opacity: 1, scale: 1, y: 0 });
+    } else {
+      gsap
+        .timeline()
+        .to(backdrop, { opacity: 1, duration: 0.35, ease: EASE })
+        .to(card, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" }, "<0.05");
+    }
+    document.body.classList.add("has-popup");
+    document.addEventListener("keydown", onKeydown);
+    if (closeBtn) closeBtn.focus();
+    track("onboarding_popup_shown");
+  }
+
+  function close(via) {
+    sessionStorage.setItem(DISMISS_KEY, "1");
+    document.removeEventListener("keydown", onKeydown);
+    document.body.classList.remove("has-popup");
+
+    const finish = () => {
+      popup.style.display = "none";
+    };
+    if (reduceMotion) {
+      gsap.set([backdrop, card], { opacity: 0 });
+      finish();
+    } else {
+      gsap
+        .timeline({ onComplete: finish })
+        .to(card, { opacity: 0, scale: 0.96, y: 8, duration: 0.25, ease: "power2.in" })
+        .to(backdrop, { opacity: 0, duration: 0.25, ease: "power2.in" }, "<");
+    }
+    if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+    track("onboarding_popup_dismissed", { via });
+  }
+
+  if (backdrop) backdrop.addEventListener("click", () => close("backdrop"));
+  if (closeBtn) closeBtn.addEventListener("click", () => close("close_button"));
+  if (laterBtn) laterBtn.addEventListener("click", () => close("later_link"));
+  // Not a close path — clicking through navigates to /#demo, so this only
+  // records the click itself (via sendBeacon under the hood, so it survives
+  // the navigation) rather than calling close().
+  if (cta) cta.addEventListener("click", () => track("onboarding_popup_claim_click"));
+
+  window.setTimeout(open, 5000);
+}
+
 /* Reduced motion: put every animated target in its final, static state and
    skip GSAP entirely. Mirrors the guarantee the old CSS media queries gave. */
 function settleForReducedMotion() {
@@ -265,6 +349,7 @@ function settleForReducedMotion() {
 
 export function initMotion() {
   fixHashScroll();
+  initOnboardingPopup();
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

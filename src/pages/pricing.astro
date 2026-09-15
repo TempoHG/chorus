@@ -189,12 +189,20 @@ const onboarding = {
   fee: "$497",
   feeNote: "one-time onboarding fee",
   includes: "Your onboarding includes platform configuration, guest communication setup, core workflows and automations, reputation setup, team training, and launch support.",
+  saveCallout: "Save $497!",
   commitTitle: "Commit for 3 Months. We'll Waive the Fee.",
   commitBody: "Start with a 3-month Chorus commitment and we'll waive the entire $497 onboarding fee.",
   commitNote: "After your first three months, Chorus simply continues month-to-month.",
   commitPrice: "$299/month",
   commitPriceNote: "$0 onboarding with 3-month commitment",
-  cta: "Get Started",
+  cta: "Yes, I want to save $497!",
+  // Same offer/campaign as the homepage popup's CTA, but its own utm_source
+  // so the two entry points can be told apart — plus a plain promo code a
+  // sales rep can read straight off the lead's landing URL in GHL (there's
+  // no self-serve coupon-redemption step on this site; it's a marker for
+  // the human follow-up to apply the waiver against).
+  ctaHref:
+    "/?utm_source=pricing_page&utm_medium=site&utm_campaign=onboarding_fee_waiver&promo=SAVE497#demo",
 };
 
 const managed = [
@@ -363,6 +371,7 @@ const faqs = [
         </p>
         <p class="onboarding__includes">{onboarding.includes}</p>
         <div class="onboarding__commit">
+          <p class="onboarding__save">{onboarding.saveCallout}</p>
           <p class="onboarding__commit-title">{onboarding.commitTitle}</p>
           <p class="onboarding__commit-body">{onboarding.commitBody}</p>
           <p class="onboarding__commit-note">{onboarding.commitNote}</p>
@@ -370,7 +379,7 @@ const faqs = [
             {onboarding.commitPrice}
             <span>{onboarding.commitPriceNote}</span>
           </p>
-          <a class="btn onboarding__cta" href="/#demo">{onboarding.cta}</a>
+          <a class="btn onboarding__cta" href={onboarding.ctaHref}>{onboarding.cta}</a>
         </div>
       </div>
     </div>
@@ -722,7 +731,16 @@ const faqs = [
     border-top: 1px solid color-mix(in oklab, var(--mint-400) 30%, transparent);
   }
 
+  .onboarding__save {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 1.9rem + 1.4vw, 2.75rem);
+    letter-spacing: -0.03em;
+    color: var(--mint-300);
+  }
+
   .onboarding__commit-title {
+    margin-top: 0.5rem;
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.25rem;
