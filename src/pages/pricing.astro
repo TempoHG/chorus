@@ -178,6 +178,7 @@ const plan = {
     },
   ],
   plus: "White-glove onboarding, training and support — included with every setup.",
+  usageNote: "Standard usage-based rates apply for email, phone, SMS, workflow automations, AI and other volume-based platform usage beyond normal levels.",
 };
 
 const additionalLocationPrice = "+$149";
@@ -351,6 +352,7 @@ const faqs = [
           ))
         }
         <p class="tier__plus">{plan.plus}</p>
+        <p class="tier__usage-note">{plan.usageNote}</p>
       </div>
     </div>
   </section>
@@ -643,6 +645,13 @@ const faqs = [
     padding-top: 1.5rem;
     border-top: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
     font-size: 0.88rem;
+    color: var(--text-low);
+  }
+
+  .tier__usage-note {
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    line-height: 1.5;
     color: var(--text-low);
   }
 
