@@ -347,9 +347,209 @@ function settleForReducedMotion() {
   settleHeroForReducedMotion();
 }
 
+/* AI Host Helper "test call" widget: idle -> lead form -> done, with
+   validation, a honeypot bot trap, phone auto-formatting and UTM/click-id
+   attribution capture. Submits straight to the GHL webhook that triggers
+   the outbound-call workflow — this site is static, so there's no
+   same-origin API route to proxy through. A failed submission (network
+   error, CORS block, workflow error) points people at the real /#demo
+   booking flow instead of faking a "we'll call you" success state. */
+const AGENT_WEBHOOK_URL =
+  "https://services.leadconnectorhq.com/hooks/3JJSsdBdAfv9hl1cQfxn/webhook-trigger/6turRCoSa53rhp8jRCF8";
+
+function initAgentCards() {
+  const cards = document.querySelectorAll("[data-agent-card]");
+  if (!cards.length) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function formatPhone(value) {
+    const digits = value.replace(/\D/g, "").replace(/^1/, "").slice(0, 10);
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  }
+
+  function setFieldError(input, message) {
+    const error = input.closest("[data-row]")?.querySelector("[data-error]");
+    if (!error) return;
+    if (message) {
+      input.setAttribute("data-invalid", "");
+      error.textContent = message;
+      error.hidden = false;
+    } else {
+      input.removeAttribute("data-invalid");
+      error.hidden = true;
+    }
+  }
+
+  function getCookie(name) {
+    return document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(`${name}=`))
+      ?.split("=")[1] ?? "";
+  }
+
+  function attributionPayload() {
+    const params = new URLSearchParams(window.location.search);
+    const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid"];
+    const payload = {};
+    keys.forEach((key) => {
+      const value = params.get(key);
+      if (value) payload[key] = value;
+    });
+    payload.fbp = getCookie("_fbp");
+    payload.fbc = getCookie("_fbc");
+    payload.referrer = document.referrer;
+    payload.landing_page = window.location.href;
+    return payload;
+  }
+
+  cards.forEach((card) => {
+    const idle = card.querySelector("[data-step-idle]");
+    const form = card.querySelector("[data-lead-form]");
+    const done = card.querySelector("[data-step-done]");
+    if (!idle || !form || !done) return;
+
+    function swapTo(target) {
+      const steps = [idle, form, done];
+      const focusTarget = target === form ? form.querySelector("[data-field]") : null;
+
+      if (reduceMotion) {
+        steps.forEach((step) => {
+          step.hidden = step !== target;
+        });
+        if (focusTarget) focusTarget.focus();
+        return;
+      }
+
+      const fromStep = steps.find((step) => !step.hidden);
+      const fromHeight = card.getBoundingClientRect().height;
+
+      steps.forEach((step) => {
+        step.hidden = step !== target;
+      });
+      const toHeight = card.getBoundingClientRect().height;
+
+      gsap.set(card, { height: fromHeight, overflow: "hidden" });
+      gsap.set(target, { opacity: 0 });
+      if (fromStep) gsap.set(fromStep, { opacity: 1 });
+
+      gsap
+        .timeline({
+          onComplete: () => {
+            gsap.set(card, { height: "auto", overflow: "" });
+            if (focusTarget) focusTarget.focus();
+          },
+        })
+        .to(card, { height: toHeight, duration: 0.35, ease: EASE })
+        .to(target, { opacity: 1, duration: 0.25, ease: EASE }, "<0.05");
+    }
+
+    card.querySelectorAll("[data-start-call]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        track("agent_widget_start_call");
+        swapTo(form);
+      });
+    });
+
+    const phoneInput = form.querySelector('[name="phone"]');
+    if (phoneInput) {
+      phoneInput.addEventListener("input", () => {
+        phoneInput.value = formatPhone(phoneInput.value);
+      });
+    }
+
+    form.querySelectorAll("[data-field]").forEach((input) => {
+      input.addEventListener("input", () => setFieldError(input, ""));
+    });
+
+    const consentInput = form.querySelector("[data-consent]");
+    const consentError = form.querySelector("[data-consent-error]");
+    if (consentInput && consentError) {
+      consentInput.addEventListener("change", () => {
+        if (consentInput.checked) consentError.hidden = true;
+      });
+    }
+
+    const formError = form.querySelector("[data-form-error]");
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const honeypot = form.querySelector('[name="website"]');
+      if (honeypot && honeypot.value) return;
+
+      const nameInput = form.querySelector('[name="first_name"]');
+      const emailInput = form.querySelector('[name="email"]');
+      let firstInvalid = null;
+
+      if (!nameInput.value.trim()) {
+        setFieldError(nameInput, "Enter your first name.");
+        firstInvalid = firstInvalid || nameInput;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailInput.value.trim())) {
+        setFieldError(emailInput, "Enter a valid email.");
+        firstInvalid = firstInvalid || emailInput;
+      }
+      const phoneDigits = phoneInput.value.replace(/\D/g, "");
+      if (phoneDigits.length !== 10) {
+        setFieldError(phoneInput, "Enter a 10-digit mobile number.");
+        firstInvalid = firstInvalid || phoneInput;
+      }
+      if (consentInput && !consentInput.checked && consentError) {
+        consentError.hidden = false;
+        firstInvalid = firstInvalid || consentInput;
+      }
+
+      if (firstInvalid) {
+        firstInvalid.focus();
+        return;
+      }
+
+      if (formError) formError.hidden = true;
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const response = await fetch(AGENT_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            first_name: nameInput.value.trim(),
+            full_name: nameInput.value.trim(),
+            email: emailInput.value.trim().toLowerCase(),
+            phone: `+1${phoneDigits}`,
+            consent: true,
+            consent_text: form.getAttribute("data-consent-text"),
+            consent_timestamp: new Date().toISOString(),
+            consent_source: window.location.href,
+            placement: card.closest("section")?.id || "host-helper",
+            ...attributionPayload(),
+          }),
+        });
+
+        if (!response.ok) throw new Error("lead webhook unavailable");
+
+        track("agent_widget_lead_sent");
+        swapTo(done);
+      } catch {
+        track("agent_widget_lead_failed");
+        if (formError) {
+          formError.innerHTML =
+            'That didn\'t go through. <a href="/#demo">Book a live walkthrough</a> instead and we\'ll show you the agent in person.';
+          formError.hidden = false;
+        }
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  });
+}
+
 export function initMotion() {
   fixHashScroll();
   initOnboardingPopup();
+  initAgentCards();
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

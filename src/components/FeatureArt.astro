@@ -313,46 +313,126 @@ const orbit = [
 
   {
     kind === "agent" && (
-      <div class="art__stage agent" data-reveal-solo>
-        <p class="agent__status">
-          <span class="agent__status-dot" aria-hidden="true" />
-          Agent ready
-        </p>
-        <div class="agent__rings" aria-hidden="true">
-          <svg class="agent__rings-svg" viewBox="0 0 220 220" fill="none">
-            <circle
-              cx="110" cy="110" r="95"
-              stroke="var(--mint-400)" stroke-width="2" stroke-linecap="round"
-              stroke-dasharray="420 180" opacity="0.35"
-              transform="rotate(-90 110 110)"
-            />
-            <circle
-              cx="110" cy="110" r="78"
-              stroke="var(--mint-400)" stroke-width="2" stroke-linecap="round"
-              stroke-dasharray="270 220" opacity="0.55"
-              transform="rotate(60 110 110)"
-            />
-            <circle
-              cx="110" cy="110" r="60"
-              stroke="var(--text-low)" stroke-width="2" stroke-linecap="round"
-              stroke-dasharray="95 285" opacity="0.5"
-              transform="rotate(205 110 110)"
-            />
-          </svg>
-          <span class="agent__core">
-            <svg class="agent__mic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-              <path d="M12 15a3.5 3.5 0 0 0 3.5-3.5V5.5a3.5 3.5 0 0 0-7 0v6A3.5 3.5 0 0 0 12 15Z" />
-              <path d="M18.5 11a1 1 0 1 0-2 0 4.5 4.5 0 0 1-9 0 1 1 0 1 0-2 0 6.5 6.5 0 0 0 5.5 6.42V19H9a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2h-2.5v-1.58A6.5 6.5 0 0 0 18.5 11Z" />
+      <div class="art__stage agent" data-agent-card data-reveal-solo>
+        <div class="agent__idle" data-step-idle>
+          <p class="agent__status">
+            <span class="agent__status-dot" aria-hidden="true" />
+            Agent ready
+          </p>
+          <div class="agent__rings" aria-hidden="true">
+            <svg class="agent__rings-svg" viewBox="0 0 220 220" fill="none">
+              <circle
+                cx="110" cy="110" r="95"
+                stroke="var(--mint-400)" stroke-width="2" stroke-linecap="round"
+                stroke-dasharray="420 180" opacity="0.35"
+                transform="rotate(-90 110 110)"
+              />
+              <circle
+                cx="110" cy="110" r="78"
+                stroke="var(--mint-400)" stroke-width="2" stroke-linecap="round"
+                stroke-dasharray="270 220" opacity="0.55"
+                transform="rotate(60 110 110)"
+              />
+              <circle
+                cx="110" cy="110" r="60"
+                stroke="var(--text-low)" stroke-width="2" stroke-linecap="round"
+                stroke-dasharray="95 285" opacity="0.5"
+                transform="rotate(205 110 110)"
+              />
+            </svg>
+            <button type="button" class="agent__core" data-start-call aria-label="Start test call">
+              <svg class="agent__mic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M12 15a3.5 3.5 0 0 0 3.5-3.5V5.5a3.5 3.5 0 0 0-7 0v6A3.5 3.5 0 0 0 12 15Z" />
+                <path d="M18.5 11a1 1 0 1 0-2 0 4.5 4.5 0 0 1-9 0 1 1 0 1 0-2 0 6.5 6.5 0 0 0 5.5 6.42V19H9a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2h-2.5v-1.58A6.5 6.5 0 0 0 18.5 11Z" />
+              </svg>
+            </button>
+          </div>
+          <p class="agent__intro">
+            Give us your number and we'll call you back — usually within a few minutes.
+          </p>
+          <button type="button" class="agent__cta" data-start-call>
+            <svg class="agent__phone" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.28 21 3 13.72 3 4.75a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2Z" />
+            </svg>
+            Start test call
+          </button>
+          <p class="agent__note">No sales pitch. A live demo on your own phone.</p>
+        </div>
+
+        <form
+          class="agent__form"
+          data-lead-form
+          data-consent-text="I agree to receive automated and artificial voice calls and text messages from Tempo Chorus at the number provided, including for marketing. Consent is not a condition of purchase. Msg and data rates may apply. Calls may be recorded and stored as described in the Terms of Service and Privacy Policy."
+          novalidate
+          hidden
+        >
+          <p class="agent__form-label">Three things and it calls</p>
+          <div class="agent__form-grid">
+            <div class="agent__row" data-row>
+              <label class="agent__field-label">
+                First name
+                <input class="agent__field" name="first_name" type="text" autocomplete="given-name" placeholder="Alex" data-field />
+              </label>
+              <p class="agent__field-error" data-error role="alert" hidden />
+            </div>
+            <div class="agent__row" data-row>
+              <label class="agent__field-label">
+                Email
+                <input class="agent__field" name="email" type="email" inputmode="email" autocomplete="email" placeholder="alex@yourrestaurant.com" data-field />
+              </label>
+              <p class="agent__field-error" data-error role="alert" hidden />
+            </div>
+            <div class="agent__row" data-row>
+              <label class="agent__field-label">
+                Mobile number
+                <input class="agent__field" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 123-4567" data-field />
+              </label>
+              <p class="agent__field-error" data-error role="alert" hidden />
+            </div>
+          </div>
+
+          {/* Honeypot: real people never fill this in. */}
+          <div class="agent__honeypot" aria-hidden="true">
+            <label>
+              Website
+              <input name="website" type="text" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+
+          <label class="agent__consent">
+            <input type="checkbox" name="consent" class="agent__consent-input" data-consent required />
+            <span class="agent__consent-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5">
+                <path d="m5 12.5 4.5 4.5L19 7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span class="agent__consent-text">
+              I agree to receive automated and artificial voice calls and text messages from
+              Tempo Chorus at the number provided, including for marketing. Consent is not a
+              condition of purchase. Msg and data rates may apply. Calls may be recorded and
+              stored as described in the{" "}
+              <a href="https://www.tempohg.com/terms-conditions" target="_blank" rel="noopener">Terms of Service</a> and{" "}
+              <a href="https://www.tempohg.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.
+            </span>
+          </label>
+          <p class="agent__consent-error" data-consent-error role="alert" hidden />
+
+          <button type="submit" class="agent__submit">Call me now</button>
+          <p class="agent__form-error" data-form-error role="alert" hidden />
+        </form>
+
+        <div class="agent__done" data-step-done hidden>
+          <span class="agent__done-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="m4.5 12.5 5 5 10-11" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </span>
+          <p class="agent__done-title">Your phone will ring shortly.</p>
+          <p class="agent__done-body">
+            Usually within a few minutes. Answer it the way a guest would — ask for a table,
+            or a quote for a private event.
+          </p>
         </div>
-        <a class="agent__cta" href="/#demo">
-          <svg class="agent__phone" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-            <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.28 21 3 13.72 3 4.75a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2Z" />
-          </svg>
-          Start test call
-        </a>
-        <p class="agent__note">No sales pitch. A live demo on your own phone.</p>
       </div>
     )
   }
@@ -1073,14 +1153,24 @@ const orbit = [
   /* ---- agent: the AI Host Helper "test call" widget ---- */
 
   .agent {
+    max-width: 22rem;
+    margin-inline: auto;
+    padding-block: clamp(1.5rem, 4vw, 2.5rem);
+    overflow: hidden;
+  }
+
+  .agent__idle {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 1.25rem;
-    max-width: 22rem;
-    margin-inline: auto;
-    padding-block: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .agent__intro {
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    max-width: 30ch;
   }
 
   .agent__status {
@@ -1135,6 +1225,14 @@ const orbit = [
     display: grid;
     place-items: center;
     box-shadow: 0 0 0 10px color-mix(in oklab, var(--mint-400) 10%, transparent);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s var(--ease-out);
+  }
+
+  .agent__core:hover {
+    transform: scale(1.05);
   }
 
   .agent__mic {
@@ -1157,7 +1255,9 @@ const orbit = [
     font-size: 1rem;
     letter-spacing: -0.01em;
     text-decoration: none;
+    border: 0;
     border-radius: 999px;
+    cursor: pointer;
     transition: background 0.2s var(--ease-out), transform 0.2s var(--ease-out);
   }
 
@@ -1176,6 +1276,228 @@ const orbit = [
     font-size: 0.85rem;
     color: var(--text-low);
     max-width: 26ch;
+  }
+
+  /* ---- agent: lead-capture form state ---- */
+
+  .agent__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    text-align: left;
+  }
+
+  .agent__form-label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mint-300);
+    text-align: center;
+  }
+
+  .agent__form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .agent__row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .agent__field-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-mid);
+  }
+
+  .agent__field {
+    padding: 0.75rem 0.9rem;
+    background: var(--ink-800);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
+    border-radius: 8px;
+    color: var(--text-hi);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+  }
+
+  .agent__field:focus-visible {
+    outline: 2px solid var(--mint-400);
+    outline-offset: 1px;
+  }
+
+  .agent__field[data-invalid] {
+    border-color: var(--amber-500);
+  }
+
+  .agent__field-error {
+    margin-top: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--amber-400);
+  }
+
+  .agent__field-error.hidden,
+  .agent__field-error[hidden] {
+    display: none;
+  }
+
+  .agent__honeypot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .agent__consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    cursor: pointer;
+  }
+
+  .agent__consent-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .agent__consent-box {
+    flex: none;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.1rem;
+    border-radius: 4px;
+    border: 1.5px solid color-mix(in oklab, var(--violet-400) 55%, transparent);
+    display: grid;
+    place-items: center;
+    color: var(--ink-900);
+    transition: background 0.15s var(--ease-out), border-color 0.15s var(--ease-out);
+  }
+
+  .agent__consent-box svg {
+    width: 0.75rem;
+    height: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.1s var(--ease-out);
+  }
+
+  .agent__consent-input:checked + .agent__consent-box {
+    background: var(--mint-400);
+    border-color: var(--mint-400);
+  }
+
+  .agent__consent-input:checked + .agent__consent-box svg {
+    opacity: 1;
+  }
+
+  .agent__consent-input:focus-visible + .agent__consent-box {
+    outline: 2px solid var(--mint-400);
+    outline-offset: 2px;
+  }
+
+  .agent__consent-text {
+    font-size: 0.74rem;
+    line-height: 1.5;
+    color: var(--text-low);
+  }
+
+  .agent__consent-text a {
+    color: var(--text-mid);
+    text-decoration-color: color-mix(in oklab, var(--text-mid) 45%, transparent);
+  }
+
+  .agent__consent-error {
+    margin-top: -0.6rem;
+    font-size: 0.78rem;
+    color: var(--amber-400);
+  }
+
+  .agent__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.95rem 1.6rem;
+    background: var(--mint-400);
+    color: var(--ink-900);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s var(--ease-out), transform 0.2s var(--ease-out), opacity 0.2s var(--ease-out);
+  }
+
+  .agent__submit:hover {
+    background: var(--mint-300);
+    transform: translateY(-2px);
+  }
+
+  .agent__submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .agent__form-error {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--amber-400);
+  }
+
+  /* ---- agent: done state ---- */
+
+  .agent__done {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.85rem;
+  }
+
+  .agent__done-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: color-mix(in oklab, var(--mint-400) 20%, transparent);
+    color: var(--mint-400);
+    display: grid;
+    place-items: center;
+  }
+
+  .agent__done-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .agent__done-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+
+  .agent__done-body {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    max-width: 28ch;
+  }
+
+  [data-lead-form][hidden],
+  [data-step-idle][hidden],
+  [data-step-done][hidden] {
+    display: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
