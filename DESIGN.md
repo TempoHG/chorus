@@ -19,37 +19,37 @@ colors:
   shadow: "rgb(0 0 0 / 0.9)"
 typography:
   display:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Poppins, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(2.75rem, 1.1rem + 6vw, 5.6rem)"
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: "-0.045em"
   headline:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Poppins, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(2.1rem, 1.4rem + 4.2vw, 4.4rem)"
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: "-0.03em"
   title:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Poppins, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.65rem, 1rem + 2.2vw, 2.75rem)"
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: "-0.038em"
   subhead:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Poppins, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(2.1rem, 1.1rem + 3.2vw, 3.5rem)"
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: "-0.04em"
   subtitle:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Poppins, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.3rem, 0.95rem + 1.7vw, 2.1rem)"
     fontWeight: 700
     lineHeight: 1.1
     letterSpacing: "-0.032em"
   statement:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Poppins, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.3rem, 0.95rem + 1vw, 1.65rem)"
     fontWeight: 600
     lineHeight: 1.32
@@ -85,19 +85,19 @@ typography:
     lineHeight: 1.5
     letterSpacing: "normal"
   nav:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Poppins, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.05rem"
     fontWeight: 600
     lineHeight: 1.4
     letterSpacing: "normal"
   panelTitle:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Poppins, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.35rem"
     fontWeight: 700
     lineHeight: 1.1
     letterSpacing: "-0.03em"
   statValue:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Poppins, ui-sans-serif, system-ui, sans-serif"
     fontSize: "2.6rem"
     fontWeight: 700
     lineHeight: 1
@@ -186,7 +186,7 @@ The client brief that governs this build (`Tempo_Chorus_Website_Design_Brief_for
 
 The one recurring visual idea, replacing the brace, is **flow**: scattered channels (website, phone, text, email, social, reviews, events, guests) connect to a single Chorus node by thin lines, not a bracket. The same connector-line vocabulary (`.wires`, `.flowline` — already prototyped in `ProductMocks.astro`) is the site's one motif for "bringing everything together," used at the hero and echoed sparingly elsewhere. It is a diagram, not a decoration: every line connects two real things.
 
-Color still carries the argument exactly as before: violet is structure (rules, connectors, borders), brand green marks resolution (the answered call, the confirmed booking, the primary action), amber marks the unresolved. Density stays editorial, not dashboard — generous vertical rhythm, short measures (44–68ch), Bricolage Grotesque running large at the top of each beat. The site still refuses the feature-icon grid and the claim-without-proof hero, and it still refuses stock or AI-generated imagery — but real, verified restaurant photography and video, always knocked back with a violet wash, is now a deliberate part of the system (the Four Jobs background, the vignette-timeline media).
+Color still carries the argument exactly as before: violet is structure (rules, connectors, borders), brand green marks resolution (the answered call, the confirmed booking, the primary action), amber marks the unresolved. Density stays editorial, not dashboard — generous vertical rhythm, short measures (44–68ch), Poppins running large at the top of each beat. The site still refuses the feature-icon grid and the claim-without-proof hero, and it still refuses stock or AI-generated imagery — but real, verified restaurant photography and video, always knocked back with a violet wash, is now a deliberate part of the system (the Four Jobs background, the vignette-timeline media).
 
 **Key Characteristics:**
 
@@ -194,7 +194,7 @@ Color still carries the argument exactly as before: violet is structure (rules, 
 - Flow as the connective idiom: thin connector lines joining channels to outcomes, not bar lines or braces.
 - Authored UI-mockup panels (inbox threads, calendars, review queues, service rails) are the primary proof system, used across the homepage and the Features page.
 - Violet structures, green resolves, amber marks what is still open.
-- Bricolage Grotesque display over Archivo text; no third face, no icon font, no glyph icons.
+- Poppins display over Archivo text; no third face, no icon font, no glyph icons.
 - Feature graphics and demonstration UI are authored SVG/CSS, not stock photography. Real, user-supplied restaurant photography and video are used deliberately in two places, both always knocked back with a violet wash: the Four Jobs section's ambient background (dark violet wash over muted/looping video), and the small media frame beside each "Here is what that actually means" vignette (a lighter violet wash — 26% mix rather than the Four Jobs treatment's near-full wash — since these read as supporting frames, not a full-bleed backdrop). All of it is verified footage/photos of real restaurant work and moments, never stock or AI-generated imagery.
 - Restrained motion: a settle-in arrival at the hero, plus small scroll-triggered entrances on mockup panels — never a global scroll-reveal, never Popmenu-style pinned scroll-jacking.
 
@@ -240,10 +240,10 @@ A dark, high-chroma pair — one violet, one green — lifted directly from the 
 
 ## Typography
 
-**Display Font:** Bricolage Grotesque (variable, `opsz 12..96, wdth 75..100, wght 400..800`), falling back to `ui-sans-serif, system-ui, sans-serif`
+**Display Font:** Poppins (static weights 400/500/600/700/800), falling back to `ui-sans-serif, system-ui, sans-serif`
 **Body Font:** Archivo (`wght 400..700`, plus italic 400), falling back to `ui-sans-serif, system-ui, sans-serif`
 
-**Character:** Bricolage is a wide, slightly eccentric grotesque that holds up at genuinely large sizes and reads as authored rather than defaulted; Archivo underneath it is plain, wide-aperture and unfussy, matching a "talk to the operator, not the marketer" voice. One loud face, one quiet one — no third.
+**Character:** Poppins is a geometric sans — circular letterforms, even stroke weight, confident and clean at genuinely large sizes without any grotesque idiosyncrasy; Archivo underneath it is plain, wide-aperture and unfussy, matching a "talk to the operator, not the marketer" voice. One geometric face, one quiet grotesque — no third.
 
 ### Hierarchy
 
@@ -261,7 +261,7 @@ A dark, high-chroma pair — one violet, one green — lifted directly from the 
 
 **The Optical Tracking Rule.** Tracking tightens as size grows: −0.025em for statement copy, −0.03em for section headings, −0.038 to −0.045em for titles and display.
 
-**The Two-Face Rule.** Bricolage for anything that carries emphasis (headings, buttons, nav, chips, statements, big figures); Archivo for anything read as prose. No third family, no monospace, no icon font.
+**The Two-Face Rule.** Poppins for anything that carries emphasis (headings, buttons, nav, chips, statements, big figures); Archivo for anything read as prose. No third family, no monospace, no icon font.
 
 ## Layout
 

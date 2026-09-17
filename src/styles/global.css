@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Archivo:ital,wght@0,400..700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Archivo:ital,wght@0,400..700;1,400&display=swap");
 
 :root {
   /* Ground: score paper at night */
@@ -29,7 +29,7 @@
   --text-mid: #b8b0d8;
   --text-low: #8e86b0;
 
-  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Archivo", ui-sans-serif, system-ui, sans-serif;
 
   --measure: 68ch;
