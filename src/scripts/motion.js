@@ -357,6 +357,30 @@ function settleForReducedMotion() {
 const AGENT_WEBHOOK_URL =
   "https://services.leadconnectorhq.com/hooks/3JJSsdBdAfv9hl1cQfxn/webhook-trigger/6turRCoSa53rhp8jRCF8";
 
+function getCookie(name) {
+  return document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(`${name}=`))
+    ?.split("=")[1] ?? "";
+}
+
+// Shared by the agent-card lead form and the demo-booking listener so both
+// dataLayer events carry identical attribution.
+function attributionPayload() {
+  const params = new URLSearchParams(window.location.search);
+  const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "ad_id", "fbclid", "gclid"];
+  const payload = {};
+  keys.forEach((key) => {
+    const value = params.get(key);
+    if (value) payload[key] = value;
+  });
+  payload.fbp = getCookie("_fbp");
+  payload.fbc = getCookie("_fbc");
+  payload.referrer = document.referrer;
+  payload.landing_page = window.location.href;
+  return payload;
+}
+
 function initAgentCards() {
   const cards = document.querySelectorAll("[data-agent-card]");
   if (!cards.length) return;
@@ -383,26 +407,20 @@ function initAgentCards() {
     }
   }
 
-  function getCookie(name) {
-    return document.cookie
-      .split("; ")
-      .find((row) => row.startsWith(`${name}=`))
-      ?.split("=")[1] ?? "";
+  async function sha256Hex(value) {
+    const bytes = new TextEncoder().encode(value);
+    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
   }
 
-  function attributionPayload() {
-    const params = new URLSearchParams(window.location.search);
-    const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid"];
-    const payload = {};
-    keys.forEach((key) => {
-      const value = params.get(key);
-      if (value) payload[key] = value;
-    });
-    payload.fbp = getCookie("_fbp");
-    payload.fbc = getCookie("_fbc");
-    payload.referrer = document.referrer;
-    payload.landing_page = window.location.href;
-    return payload;
+  // Matches offer1.thgchorus.com's generate_lead event exactly: hashed
+  // email/phone (em/ph) for GTM's Enhanced Conversions, never raw PII.
+  async function pushGenerateLead({ email, phone, placement }) {
+    try {
+      const [em, ph] = await Promise.all([sha256Hex(email.trim().toLowerCase()), sha256Hex(phone.replace(/\D/g, ""))]);
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "generate_lead", lead_placement: placement, em, ph, ...attributionPayload() });
+    } catch {}
   }
 
   cards.forEach((card) => {
@@ -532,6 +550,11 @@ function initAgentCards() {
         if (!response.ok) throw new Error("lead webhook unavailable");
 
         track("agent_widget_lead_sent");
+        pushGenerateLead({
+          email: emailInput.value,
+          phone: phoneDigits,
+          placement: card.closest("section")?.id || "host-helper",
+        });
         swapTo(done);
       } catch {
         track("agent_widget_lead_failed");
@@ -546,10 +569,30 @@ function initAgentCards() {
   });
 }
 
+// GHL's booking-calendar iframe (loaded via form_embed.js) posts a message
+// from inside the iframe when someone completes a booking — the parent page
+// has no other way to know. GHL doesn't document the shape publicly; several
+// independent GTM/GHL integration write-ups agree it's an array,
+// `["msgsndr-booking-complete", details]`, not a plain object. Deliberately
+// not origin-gated: our calendar is served from the whitelabeled
+// links.tempohg.com (proxying to GHL's own infrastructure), not the
+// api.leadconnectorhq.com origin generic guides assume, so the distinctive
+// message shape is the safer, whitelabel-proof check.
+function initDemoBookedTracking() {
+  window.addEventListener("message", (event) => {
+    const data = event.data;
+    if (!Array.isArray(data) || data[0] !== "msgsndr-booking-complete") return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "demo_booked", booking: data[1] ?? null, ...attributionPayload() });
+    track("demo_booked");
+  });
+}
+
 export function initMotion() {
   fixHashScroll();
   initOnboardingPopup();
   initAgentCards();
+  initDemoBookedTracking();
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
