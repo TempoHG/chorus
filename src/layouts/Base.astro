@@ -15,6 +15,24 @@ const { title, description, active } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google Tag Manager. First thing in <head>, per GTM's own install
+         instructions — keep tags/triggers in the GTM container itself
+         rather than hardcoding them here. -->
+    <script is:inline>
+      (function () {
+        const GTM_ID = "GTM-NS5MKTGH";
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, "script", "dataLayer", GTM_ID);
+      })();
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
@@ -30,6 +48,15 @@ const { title, description, active } = Astro.props;
     <Analytics />
   </head>
   <body>
+    <!-- Google Tag Manager (noscript). First thing in the body, per GTM. -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-NS5MKTGH"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+        title="Google Tag Manager"></iframe>
+    </noscript>
     <!--
       THESIS: A restaurant's scattered guest channels visibly flow together into one
       platform. Refuses the SaaS feature-icon grid, the "all-in-one platform"
