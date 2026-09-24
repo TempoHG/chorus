@@ -12,7 +12,16 @@ import Wordmark from "./Wordmark.astro";
    entrance the first time it scrolls into view — see the reveal script in
    Base.astro. */
 interface Props {
-  kind: "calendar" | "reviews" | "reservations" | "inbox" | "afterhours" | "attribution" | "unified" | "agent";
+  kind:
+    | "calendar"
+    | "marketing-calendar"
+    | "reviews"
+    | "reservations"
+    | "inbox"
+    | "afterhours"
+    | "attribution"
+    | "unified"
+    | "agent";
 }
 const { kind } = Astro.props;
 
@@ -38,6 +47,26 @@ const month: Record<number, { label: string; time: string; tone: string }[]> = {
   24: [{ label: "Regulars offer", time: "9:00", tone: "violet" }],
   26: [{ label: "Half-term", time: "11:00", tone: "lilac" }],
 };
+
+/* --- Guest Marketing (homepage story): a May campaign calendar,
+   Mother's Day the standout send, plus a small performance snapshot --- */
+const mayMonth: Record<number, { label: string; time: string; tone: string }[]> = {
+  1: [{ label: "Spring menu launch", time: "9:00", tone: "violet" }],
+  5: [{ label: "Cinco de Mayo post", time: "11:00", tone: "lilac" }],
+  6: [{ label: "Patio season email", time: "9:00", tone: "violet" }],
+  7: [{ label: "Mother's Day countdown", time: "8:00", tone: "amber" }],
+  8: [{ label: "Reserve for Mom text", time: "10:00", tone: "green" }],
+  10: [{ label: "Mother's Day brunch", time: "9:00", tone: "violet" }],
+  12: [{ label: "Thank-you send", time: "15:00", tone: "green" }],
+  15: [{ label: "Graduation parties", time: "12:00", tone: "lilac" }],
+  18: [{ label: "Review request", time: "10:00", tone: "green" }],
+  22: [{ label: "Weekend push", time: "16:00", tone: "amber" }],
+  25: [{ label: "Memorial Day BBQ", time: "9:00", tone: "violet" }],
+  29: [{ label: "Local promotion", time: "8:00", tone: "amber" }],
+};
+const snapshot = [
+  "1,247 emails", "386 texts", "42 birthday offers", "71 review requests", "12 social posts",
+];
 
 /* --- Bring Guests Back: the review queue --- */
 const reviews = [
@@ -139,6 +168,44 @@ const orbit = [
           }
         </div>
         <p class="art__sum">One sitting to approve · four channels · a month of guest contact</p>
+      </div>
+    )
+  }
+
+  {
+    kind === "marketing-calendar" && (
+      <div class="art__stage" data-reveal-solo>
+        <div class="art__head">
+          <p class="art__title">May</p>
+          <ul class="chips">
+            {channels.map((c) => (
+              <li class={`chip chip--${c.tone}`}>{c.name}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="cal">
+          {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
+            <p class="cal__dow">{d}</p>
+          ))}
+          {
+            Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
+              <div class={`cal__day ${day === 10 ? "cal__day--feature" : ""}`}>
+                <span class="cal__num">{day}</span>
+                {(mayMonth[day] ?? []).map((e) => (
+                  <span class={`cal__entry cal__entry--${e.tone}`}>
+                    <span class="cal__label">{e.label}</span>
+                    <span class="cal__time">{e.time}</span>
+                  </span>
+                ))}
+              </div>
+            ))
+          }
+        </div>
+        <p class="art__sum">A month of sends, one Sunday brunch campaign at the center of it</p>
+        <div class="snapshot" data-reveal-solo>
+          <p class="art__label">This month</p>
+          {snapshot.map((line) => <p class="snapshot__row">{line}</p>)}
+        </div>
       </div>
     )
   }
@@ -631,6 +698,49 @@ const orbit = [
   .cal__time {
     font-size: 0.72rem;
     color: var(--text-low);
+  }
+
+  /* The featured send of the month (Mother's Day) — a mint wash and ring
+     rather than a bigger cell, so it reads as "the payoff" without
+     breaking the grid. */
+  .cal__day--feature {
+    background: color-mix(in oklab, var(--mint-400) 12%, var(--ink-800));
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--mint-400) 45%, transparent);
+  }
+
+  .cal__day--feature .cal__num {
+    color: var(--mint-300);
+    font-weight: 700;
+  }
+
+  /* A small overlay card floating on the calendar stage — the
+     performance-snapshot beat the marketing-calendar art needs. */
+  .snapshot {
+    position: absolute;
+    right: clamp(0.75rem, 2vw, 1.5rem);
+    bottom: clamp(0.75rem, 2vw, 1.5rem);
+    background: var(--ink-600);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 40%, transparent);
+    border-radius: 5px;
+    padding: 0.85rem 1rem;
+    box-shadow: 0 22px 44px -26px rgb(0 0 0 / 0.9);
+    max-width: 12rem;
+  }
+
+  .snapshot__row {
+    margin-top: 0.22rem;
+    font-size: 0.78rem;
+    line-height: 1.3;
+    color: var(--text-hi);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 30rem) {
+    .snapshot {
+      position: static;
+      margin-top: 1.1rem;
+      max-width: none;
+    }
   }
 
   /* ---- reviews ---- */

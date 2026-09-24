@@ -1,0 +1,502 @@
+---
+import Base from "../layouts/Base.astro";
+import PhotoSection from "../components/PhotoSection.astro";
+
+const builtFor = [
+  "Menus", "Reservations", "Online Ordering", "Private Events", "Catering",
+  "Gift Cards", "Locations", "Hours", "Events", "Careers", "Guest Capture",
+  "Live Chat", "Analytics",
+];
+
+const menuIncludes = [
+  "Categories", "Items & Pricing", "Descriptions", "Menu Search",
+  "Dietary Indicators*", "Ordering Links", "Reservation Links",
+  "Optional Photography", "Search-Friendly Content", "Easy Updates",
+];
+---
+
+<Base
+  title="Websites & Menus — Tempo Chorus"
+  description="Keep the restaurant website you have, or let Tempo build you a modern one for $500 one-time plus $15/month hosting. Menus Made for the Web is included either way."
+  active="websites"
+>
+  <section class="lead">
+    <div class="shell">
+      <h1 class="lead__title">Your website. Your way.</h1>
+      <p class="lede lead__sub">
+        Keep the one you have — or let Tempo build you a better one. Chorus works with your
+        existing website. If it's time for something new, we'll build a modern restaurant
+        website around your brand.
+      </p>
+      <p class="lead__price">$500 one-time + $15/month hosting</p>
+      <div class="lead__actions">
+        <a class="btn" href="/#demo">Book a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="choice" aria-labelledby="choice-title">
+    <div class="shell choice__inner">
+      <article class="choice__card">
+        <p class="choice__kicker">Existing Website</p>
+        <h2 class="choice__title" id="choice-title">Keep it.</h2>
+        <p class="choice__body">
+          Add Chorus forms, live chat, guest capture and Menus Made for the Web without
+          rebuilding everything.
+        </p>
+        <p class="choice__note">
+          <span class="dot" aria-hidden="true" />
+          Your website doesn't have to live inside Chorus to work with Chorus.
+        </p>
+      </article>
+      <article class="choice__card">
+        <p class="choice__kicker">New Website</p>
+        <h2 class="choice__title">We'll build it.</h2>
+        <div class="choice__options">
+          <div class="choice__option">
+            <p class="choice__option-name">WordPress</p>
+            <p class="choice__option-line">Flexible. Familiar. Portable.</p>
+          </div>
+          <div class="choice__option">
+            <p class="choice__option-name">Tempo Managed</p>
+            <p class="choice__option-line">Modern. Fast. Managed by Tempo. No WordPress environment to maintain.</p>
+          </div>
+        </div>
+        <p class="choice__body">Same $500 build. Same $15/month hosting. Same Chorus connection.</p>
+        <p class="choice__note">
+          <span class="dot" aria-hidden="true" />
+          Your domain. Your brand. Your website.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="showcase">
+    <div class="shell showcase__inner">
+      <PhotoSection
+        treatment="supporting"
+        layout="framed"
+        placeholder
+        shotList="Three real restaurant websites shown across desktop and mobile — fine dining, neighborhood restaurant, fast casual/bar — dramatically different from each other"
+      />
+    </div>
+  </section>
+
+  <section class="built-for" aria-labelledby="built-for-title">
+    <div class="shell">
+      <p class="built-for__label" id="built-for-title">Built for Restaurants</p>
+      <ul class="built-for__list">
+        {builtFor.map((item) => <li class="chip">{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="menus" aria-labelledby="menus-title">
+    <div class="shell menus__inner">
+      <div class="menus__say">
+        <p class="menus__label">Menus Made for the Web</p>
+        <h2 class="menus__title" id="menus-title">Your menu shouldn't be a PDF.</h2>
+        <p class="lede menus__lede">
+          Turn your existing menu into a fast, mobile-friendly digital experience that's easier
+          to browse and easier to keep current.
+        </p>
+        <p class="menus__statement">No PDFs. No pinching and zooming.</p>
+        <p class="menus__included-label">Included with Chorus</p>
+        <ul class="menus__included">
+          {menuIncludes.map((item) => (
+            <li>
+              <span class="dot" aria-hidden="true" />
+              {item}
+            </li>
+          ))}
+        </ul>
+        <p class="menus__cta-line">Send us your menu. We'll take it from there.</p>
+        <p class="menus__footnote">*Dietary information is based on restaurant-supplied and approved information.</p>
+      </div>
+      <div class="menus__show">
+        <PhotoSection
+          treatment="supporting"
+          layout="framed"
+          placeholder
+          shotList="A guest browsing a fast, mobile-friendly digital menu on their phone at the table"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" aria-labelledby="photos-title">
+    <div class="shell beat__inner">
+      <p class="beat__label">Photography</p>
+      <h2 class="beat__title" id="photos-title">Photos optional.</h2>
+      <p class="lede beat__lede">
+        A great digital menu shouldn't require professional photography of every dish. Chorus
+        menus are designed typography-first — add photography to categories, signature dishes
+        or throughout the menu whenever you have it.
+      </p>
+    </div>
+  </section>
+
+  <section class="beat beat--alt" aria-labelledby="search-title">
+    <div class="shell beat__inner">
+      <p class="beat__label">Search</p>
+      <h2 class="beat__title" id="search-title">Help hungry people find you.</h2>
+      <p class="lede beat__lede">
+        Fast pages. Searchable menus. Clear hours. Structured restaurant information. Give
+        search engines — and increasingly AI-powered discovery tools — useful information about
+        what you serve and where to find you.
+      </p>
+    </div>
+  </section>
+
+  <section class="price" aria-labelledby="price-title">
+    <div class="shell price__inner">
+      <h2 class="price__title" id="price-title">$500. Your website.</h2>
+      <div class="price__rows">
+        <div class="price__row">
+          <p class="price__row-name">WordPress or Tempo Managed</p>
+          <p class="price__row-value">$500 one-time</p>
+        </div>
+        <div class="price__row">
+          <p class="price__row-name">Tempo Hosting</p>
+          <p class="price__row-value">$15/month</p>
+        </div>
+      </div>
+      <p class="price__note">Already have a website? Keep it.</p>
+    </div>
+  </section>
+
+  <section class="close" aria-labelledby="close-title">
+    <div class="shell close__inner">
+      <h2 class="close__title" id="close-title">See it working.</h2>
+      <a class="btn" href="/#demo">Book a Demo</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lead {
+    padding-block: clamp(5rem, 11vw, 8rem) clamp(3rem, 7vw, 5rem);
+  }
+
+  .lead__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.75rem, 1.1rem + 6vw, 5.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    max-width: 20ch;
+  }
+
+  .lead__sub {
+    margin-top: 1.25rem;
+    max-width: 58ch;
+  }
+
+  .lead__price {
+    margin-top: 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--mint-300);
+    font-size: 1.15rem;
+  }
+
+  .lead__actions {
+    margin-top: 1.75rem;
+  }
+
+  .choice {
+    padding-block: clamp(3rem, 7vw, 5rem);
+  }
+
+  .choice__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  @media (max-width: 56rem) {
+    .choice__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .choice__card {
+    background: var(--ink-700);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
+    border-radius: 5px;
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+  }
+
+  .choice__kicker {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .choice__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.2rem);
+    letter-spacing: -0.038em;
+  }
+
+  .choice__body {
+    margin-top: 1rem;
+    color: var(--text-mid);
+    max-width: 46ch;
+  }
+
+  .choice__note {
+    margin-top: 1rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    color: var(--text-mid);
+    font-size: 0.95rem;
+  }
+
+  .choice__options {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .choice__option-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-hi);
+  }
+
+  .choice__option-line {
+    margin-top: 0.25rem;
+    color: var(--text-mid);
+    font-size: 0.92rem;
+  }
+
+  .showcase {
+    padding-block: clamp(2rem, 5vw, 3rem);
+  }
+
+  .showcase__inner {
+    max-width: 46rem;
+    margin-inline: auto;
+  }
+
+  .built-for {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    background: var(--ink-800);
+  }
+
+  .built-for__label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .built-for__list {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .built-for__list .chip {
+    background: var(--ink-600);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 40%, transparent);
+    border-radius: 4px;
+    padding: 0.4rem 0.7rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.86rem;
+    color: var(--text-hi);
+  }
+
+  .menus {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .menus__inner {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  @media (max-width: 62rem) {
+    .menus__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .menus__label,
+  .menus__included-label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .menus__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 1.4rem + 4.2vw, 3.2rem);
+    letter-spacing: -0.03em;
+    max-width: 16ch;
+  }
+
+  .menus__lede {
+    margin-top: 1rem;
+  }
+
+  .menus__statement {
+    margin-top: 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.3rem, 0.95rem + 1vw, 1.65rem);
+    line-height: 1.32;
+    letter-spacing: -0.025em;
+  }
+
+  .menus__included-label {
+    margin-top: 1.75rem;
+  }
+
+  .menus__included {
+    margin-top: 0.85rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem 1rem;
+  }
+
+  .menus__included li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    color: var(--text-mid);
+    font-size: 0.95rem;
+  }
+
+  .menus__cta-line {
+    margin-top: 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-hi);
+  }
+
+  .menus__footnote {
+    margin-top: 0.75rem;
+    color: var(--text-low);
+    font-size: 0.8rem;
+  }
+
+  .beat {
+    padding-block: clamp(4rem, 9vw, 6.5rem);
+  }
+
+  .beat--alt {
+    background: var(--ink-800);
+  }
+
+  .beat__inner {
+    max-width: 46rem;
+  }
+
+  .beat__label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .beat__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+  }
+
+  .beat__lede {
+    margin-top: 1rem;
+  }
+
+  .price {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .price__inner {
+    max-width: 34rem;
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  .price__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 1.4rem + 4.2vw, 3rem);
+    letter-spacing: -0.03em;
+  }
+
+  .price__rows {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    text-align: left;
+    background: var(--ink-700);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
+    border-radius: 5px;
+    padding: clamp(1.5rem, 3.5vw, 2rem);
+  }
+
+  .price__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .price__row-name {
+    color: var(--text-mid);
+  }
+
+  .price__row-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--mint-300);
+  }
+
+  .price__note {
+    margin-top: 1.5rem;
+    color: var(--text-low);
+    font-size: 0.9rem;
+  }
+
+  .close {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    text-align: center;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
+  }
+
+  .close__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.2rem);
+    margin-bottom: 1.5rem;
+  }
+</style>

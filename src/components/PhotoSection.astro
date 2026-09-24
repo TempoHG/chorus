@@ -1,0 +1,162 @@
+---
+/* The site's other half of proof, alongside FeatureArt's authored UI
+   mockups (see DESIGN.md's Half-and-Half Rule and Violet-Wash Rule) — the
+   one reusable primitive for real, verified restaurant photography/video.
+   Two treatments only, both always washed, never bare:
+     - "ambient": full-bleed backdrop, copy sits on top (the Four Jobs
+       section's original treatment, generalized here).
+     - "supporting": a bounded media frame beside/under copy (the
+       vignette-timeline media's original treatment, generalized here —
+       note the radius is corrected to the panel token; the pre-v2 vignette
+       markup's 16px radius was a bug, not a precedent).
+   `placeholder` renders a distinct, unmistakable "needs a real shot" state
+   instead of a bare gray box — never a stock photo standing in as if real.
+   Write `alt`/`shotList` as if the real photo were already there; it
+   doubles as the shot description for the photographer-facing shot list. */
+interface Props {
+  src?: string;
+  type?: "image" | "video";
+  alt?: string;
+  treatment: "ambient" | "supporting";
+  layout: "full-bleed" | "framed";
+  placeholder?: boolean;
+  shotList?: string;
+}
+const { src, type = "image", alt = "", treatment, layout, placeholder = false, shotList } = Astro.props;
+---
+
+<div class={`photo photo--${treatment} photo--${layout}${placeholder ? " photo--placeholder" : ""}`}>
+  <div class="photo__frame">
+    {
+      !placeholder && src && (
+        type === "video" ? (
+          <video class="photo__asset" src={src} autoplay muted loop playsinline preload="metadata" aria-hidden="true" />
+        ) : (
+          <img class="photo__asset" src={src} alt={alt} loading="lazy" decoding="async" />
+        )
+      )
+    }
+    {
+      placeholder && (
+        <div class="photo__placeholder" aria-hidden="true">
+          <svg class="photo__crosshair" viewBox="0 0 100 100" fill="none">
+            <path d="M4 22V4h18" stroke="currentColor" stroke-width="2" />
+            <path d="M96 22V4H78" stroke="currentColor" stroke-width="2" />
+            <path d="M4 78v18h18" stroke="currentColor" stroke-width="2" />
+            <path d="M96 78v18H78" stroke="currentColor" stroke-width="2" />
+          </svg>
+          {shotList && <p class="photo__shotlist">{shotList}</p>}
+        </div>
+      )
+    }
+    <span class="photo__veil" aria-hidden="true" />
+  </div>
+  <div class="photo__content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .photo {
+    position: relative;
+  }
+
+  .photo--full-bleed {
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .photo--full-bleed .photo__frame {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .photo--full-bleed .photo__content {
+    position: relative;
+    z-index: 2;
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .photo--framed .photo__frame {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 5px;
+    overflow: hidden;
+    background: var(--ink-700);
+    box-shadow: 0 24px 40px -22px rgb(0 0 0 / 0.7);
+  }
+
+  .photo--framed .photo__content:empty {
+    display: none;
+  }
+
+  .photo__asset {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* The Violet-Wash Rule's two strengths — never a bare, untinted photo. */
+  .photo--ambient .photo__veil {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in oklab, var(--ink-900) 55%, transparent),
+        color-mix(in oklab, var(--ink-900) 88%, transparent)
+      ),
+      color-mix(in oklab, var(--violet-700) 55%, transparent);
+  }
+
+  .photo--supporting .photo__veil {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in oklab, var(--violet-700) 26%, transparent);
+  }
+
+  /* Placeholder: a deliberately unmistakable "needs a real shot" state —
+     never a plain gray box that reads as nearly finished. */
+  .photo--placeholder .photo__frame {
+    background: var(--ink-700);
+  }
+
+  .photo__placeholder {
+    position: absolute;
+    inset: 0.75rem;
+  }
+
+  /* Corner brackets span the whole frame, like a camera framing guide, so
+     the slot reads as unmistakably empty at a glance without a centered
+     icon that would fight with any overlaid copy (ambient mode always has
+     content on top of it). */
+  .photo__crosshair {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: color-mix(in oklab, var(--violet-400) 55%, transparent);
+  }
+
+  .photo__shotlist {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 32ch;
+    padding: 0.5rem 0.7rem;
+    background: color-mix(in oklab, var(--ink-900) 70%, transparent);
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--text-low);
+  }
+
+  .photo--placeholder .photo__veil {
+    display: none;
+  }
+</style>

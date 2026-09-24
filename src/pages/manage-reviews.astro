@@ -1,0 +1,219 @@
+---
+import Base from "../layouts/Base.astro";
+
+const recoverySteps = ["Manager notified", "Guest identified", "Follow-up created"];
+---
+
+<Base
+  title="Manage Reviews — Tempo Chorus"
+  description="Ask for reviews, monitor feedback and manage responses — while making sure poor experiences reach the right person."
+  active="manage-reviews"
+>
+  <section class="lead">
+    <div class="shell">
+      <h1 class="lead__title">Get more great reviews. Do something about the bad ones.</h1>
+      <p class="lede lead__sub">
+        Ask for reviews, monitor feedback and manage responses — while making sure poor
+        experiences reach the right person.
+      </p>
+    </div>
+  </section>
+
+  <section class="beat" aria-labelledby="requests-title">
+    <div class="shell beat__inner">
+      <p class="beat__label">Requests</p>
+      <h2 class="beat__title" id="requests-title">Make great experiences easy to share.</h2>
+      <p class="lede beat__lede">
+        Automatically ask guests for reviews without relying on someone to remember.
+      </p>
+    </div>
+  </section>
+
+  <section class="beat beat--alt" aria-labelledby="reputation-title">
+    <div class="shell beat__inner">
+      <p class="beat__label">Reputation</p>
+      <h2 class="beat__title" id="reputation-title">Keep your reputation in view.</h2>
+      <p class="lede beat__lede">
+        Monitor feedback and respond more consistently. AI can help draft responses while your
+        team stays in control of what gets published.
+      </p>
+    </div>
+  </section>
+
+  <section class="recovery" aria-labelledby="recovery-title">
+    <div class="shell recovery__inner">
+      <div class="recovery__say">
+        <p class="recovery__label">Recovery</p>
+        <h2 class="recovery__title" id="recovery-title">When something goes wrong.</h2>
+        <p class="lede recovery__body">
+          Give your team a chance to respond while the experience can still be addressed.
+        </p>
+      </div>
+      <div class="recovery__show">
+        <div class="recovery__card">
+          <p class="recovery__stars" aria-label="Two out of five stars">★★☆☆☆</p>
+          <p class="recovery__flag">Guest Recovery Started</p>
+          <ul class="recovery__steps">
+            {recoverySteps.map((step) => (
+              <li>
+                <span class="dot" aria-hidden="true" />
+                {step}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="close" aria-labelledby="close-title">
+    <div class="shell close__inner">
+      <h2 class="close__title" id="close-title">Listen. Respond. Improve.</h2>
+      <p class="close__sub">Reviews aren't just stars. They're information about the guest experience.</p>
+      <a class="btn" href="/#demo">Book a Demo</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lead {
+    padding-block: clamp(5rem, 11vw, 8rem) clamp(3rem, 7vw, 5rem);
+  }
+
+  .lead__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 1rem + 5.4vw, 4.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    max-width: 22ch;
+  }
+
+  .lead__sub {
+    margin-top: 1.25rem;
+    max-width: 58ch;
+  }
+
+  .beat {
+    padding-block: clamp(4rem, 9vw, 6.5rem);
+  }
+
+  .beat--alt {
+    background: var(--ink-800);
+  }
+
+  .beat__inner {
+    max-width: 46rem;
+  }
+
+  .beat__label,
+  .recovery__label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .beat__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+  }
+
+  .beat__lede {
+    margin-top: 1rem;
+  }
+
+  .recovery {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .recovery__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  @media (max-width: 56rem) {
+    .recovery__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .recovery__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+  }
+
+  .recovery__body {
+    margin-top: 1rem;
+  }
+
+  .recovery__card {
+    background: var(--ink-700);
+    border: 1px solid color-mix(in oklab, var(--amber-400) 30%, transparent);
+    border-radius: 5px;
+    padding: clamp(1.5rem, 3.5vw, 2rem);
+    max-width: 24rem;
+  }
+
+  .recovery__stars {
+    font-size: 1.2rem;
+    color: var(--amber-400);
+    letter-spacing: 0.1em;
+  }
+
+  .recovery__flag {
+    margin-top: 0.75rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-hi);
+  }
+
+  .recovery__steps {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .recovery__steps li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    color: var(--mint-300);
+    font-size: 0.9rem;
+  }
+
+  .recovery__steps .dot {
+    color: var(--mint-400);
+  }
+
+  .close {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    text-align: center;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
+  }
+
+  .close__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.2rem);
+  }
+
+  .close__sub {
+    margin-top: 0.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-mid);
+  }
+</style>

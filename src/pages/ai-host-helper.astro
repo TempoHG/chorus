@@ -1,0 +1,325 @@
+---
+import Base from "../layouts/Base.astro";
+import FeatureArt from "../components/FeatureArt.astro";
+
+const capabilities = [
+  { name: "Reservations", desc: "Help with common reservation needs." },
+  { name: "Guest Questions", desc: "Hours, parking, menu, dietary information, accessibility and policies." },
+  { name: "Private Events", desc: "Capture valuable inquiries." },
+  { name: "Catering", desc: "Collect information and start the follow-up." },
+  { name: "Call Routing", desc: "Get the right calls to a real person." },
+  { name: "After Hours", desc: "Keep answering when the host stand isn't." },
+];
+
+const handled = ["Reservation information handled", "Guest identified", "Conversation logged"];
+---
+
+<Base
+  title="AI Host Helper — Tempo Chorus"
+  description="Tempo AI Host Helper answers when your team can't — during the rush, after hours, or whenever the phone competes with the guests in front of you."
+  active="ai-host-helper"
+>
+  <section class="lead">
+    <div class="shell">
+      <h1 class="lead__title">Your host stand could use another set of hands.</h1>
+      <p class="lede lead__sub">
+        Tempo AI Host Helper answers when your team can't — during the rush, after hours or
+        whenever the phone competes with the guests in front of you.
+      </p>
+    </div>
+  </section>
+
+  <section class="try" id="try-it" aria-labelledby="try-title">
+    <div class="shell try__inner">
+      <div class="try__say">
+        <p class="try__label">Try It Yourself</p>
+        <h2 class="try__title" id="try-title">Let Tempo AI Host Helper call you.</h2>
+      </div>
+      <div class="try__show">
+        <FeatureArt kind="agent" />
+      </div>
+    </div>
+  </section>
+
+  <section class="capabilities" aria-labelledby="capabilities-title">
+    <div class="shell">
+      <p class="capabilities__label">Capabilities</p>
+      <h2 class="capabilities__title" id="capabilities-title">What can it handle?</h2>
+      <ul class="capabilities__list" data-reveal>
+        {capabilities.map((c) => (
+          <li>
+            <span class="dot" aria-hidden="true" />
+            <div>
+              <p class="capabilities__item-name">{c.name}</p>
+              <p class="capabilities__item-desc">{c.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="example" aria-labelledby="example-title">
+    <div class="shell example__inner">
+      <p class="example__label">Example</p>
+      <h2 class="example__title" id="example-title">A call becomes more than a call.</h2>
+      <div class="example__card">
+        <p class="example__time">7:42 PM</p>
+        <p class="example__quote">"Do you have anything for six around 7:30 Saturday?"</p>
+        <p class="example__response">AI Host Helper responds.</p>
+        <ul class="example__handled">
+          {handled.map((line) => (
+            <li>
+              <span class="dot" aria-hidden="true" />
+              {line}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p class="example__closer">Your host keeps taking care of the guests in front of them.</p>
+    </div>
+  </section>
+
+  <section class="history" aria-labelledby="history-title">
+    <div class="shell history__inner">
+      <p class="history__label">History</p>
+      <h2 class="history__title" id="history-title">Know what happened.</h2>
+      <p class="lede history__body">
+        See who called, what they needed and what happened next. When appropriate, the
+        conversation becomes part of their Chorus guest history.
+      </p>
+      <p class="history__statement">
+        That's the difference between answering a phone and building a guest relationship.
+      </p>
+    </div>
+  </section>
+
+  <section class="setup" aria-labelledby="setup-title">
+    <div class="shell setup__inner">
+      <p class="setup__label">Setup</p>
+      <h2 class="setup__title" id="setup-title">Built around your restaurant.</h2>
+      <p class="setup__line">Your menu. Hours. Policies. Reservations. Frequently asked questions.</p>
+      <p class="lede setup__body">Not a generic bot with your restaurant's name attached.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lead {
+    padding-block: clamp(5rem, 11vw, 8rem) clamp(3rem, 7vw, 5rem);
+  }
+
+  .lead__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.75rem, 1.1rem + 6vw, 5rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    max-width: 22ch;
+  }
+
+  .lead__sub {
+    margin-top: 1.25rem;
+    max-width: 58ch;
+  }
+
+  .setup,
+  .capabilities,
+  .example,
+  .history {
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+  }
+
+  .setup {
+    background: var(--ink-800);
+  }
+
+  .setup__inner {
+    max-width: 46rem;
+  }
+
+  .setup__label,
+  .capabilities__label,
+  .example__label,
+  .history__label,
+  .try__label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .setup__title,
+  .capabilities__title,
+  .example__title,
+  .history__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+  }
+
+  .setup__line {
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--violet-400);
+  }
+
+  .setup__body {
+    margin-top: 0.75rem;
+  }
+
+  .capabilities__list {
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem 2.5rem;
+  }
+
+  .capabilities__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+
+  .capabilities__list .dot {
+    margin-top: 0.55em;
+    color: var(--mint-400);
+  }
+
+  .capabilities__item-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--text-hi);
+  }
+
+  .capabilities__item-desc {
+    margin-top: 0.3rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-mid);
+  }
+
+  @media (max-width: 40rem) {
+    .capabilities__list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .example {
+    background: var(--ink-800);
+  }
+
+  .example__inner {
+    max-width: 34rem;
+  }
+
+  .example__card {
+    margin-top: 1.75rem;
+    background: var(--ink-700);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
+    border-radius: 5px;
+    padding: clamp(1.5rem, 3.5vw, 2rem);
+  }
+
+  .example__time {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .example__quote {
+    margin-top: 0.75rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-hi);
+  }
+
+  .example__response {
+    margin-top: 0.5rem;
+    color: var(--text-mid);
+    font-size: 0.92rem;
+  }
+
+  .example__handled {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .example__handled li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    color: var(--mint-300);
+    font-size: 0.9rem;
+  }
+
+  .example__handled .dot {
+    color: var(--mint-400);
+  }
+
+  .example__closer {
+    margin-top: 1.5rem;
+    color: var(--text-mid);
+  }
+
+  .history__inner {
+    max-width: 46rem;
+  }
+
+  .history__body {
+    margin-top: 1rem;
+  }
+
+  .history__statement {
+    margin-top: 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.3rem, 0.95rem + 1vw, 1.65rem);
+    line-height: 1.32;
+    letter-spacing: -0.025em;
+    color: var(--text-hi);
+    max-width: 40ch;
+  }
+
+  .try {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .try__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .try__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+    max-width: 14ch;
+  }
+
+  @media (max-width: 60rem) {
+    .try__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

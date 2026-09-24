@@ -1,0 +1,294 @@
+---
+import Base from "../layouts/Base.astro";
+import PhotoSection from "../components/PhotoSection.astro";
+
+const campaigns = [
+  { name: "Birthdays", desc: "Remember the date. Invite them back." },
+  { name: "Win-Back", desc: "Reconnect with guests you haven't seen." },
+  { name: "Reviews", desc: "Follow a great experience with an invitation to share it." },
+  { name: "Events & Promotions", desc: "Give guests a reason to visit this week." },
+  { name: "Email", desc: "Stories, offers, events and restaurant news." },
+  { name: "Text", desc: "Timely messages when SMS makes sense." },
+  { name: "Social", desc: "Plan ahead instead of scrambling every day." },
+];
+
+const segments = ["Regulars", "Birthday guests", "Event prospects", "Catering leads", "Lapsed guests", "VIPs"];
+
+const automations = [
+  { trigger: "New birthday member", action: "Welcome" },
+  { trigger: "Birthday approaching", action: "Invite back" },
+  { trigger: "Guest feedback", action: "Follow up" },
+  { trigger: "Event inquiry", action: "Start follow-up" },
+  { trigger: "Guest hasn't returned", action: "Reconnect" },
+];
+---
+
+<Base
+  title="Guest Marketing — Tempo Chorus"
+  description="Email, text, social and automated campaigns built around your guest relationships. Some things you plan. Some things Chorus remembers."
+  active="guest-marketing"
+>
+  <section class="lead">
+    <div class="shell">
+      <h1 class="lead__title">Give guests a reason to come back.</h1>
+      <p class="lede lead__sub">
+        Email, text, social and automated campaigns built around your guest relationships.
+      </p>
+    </div>
+  </section>
+
+  <PhotoSection treatment="ambient" layout="full-bleed" placeholder shotList="Staff plating a dish or a server delivering food, warm active service, wide shot for a full-bleed background">
+    <div class="shell campaigns">
+      <p class="campaigns__label">Campaigns</p>
+      <h2 class="campaigns__title">Some things you plan. Some things Chorus remembers.</h2>
+      <ul class="campaigns__list" data-reveal>
+        {campaigns.map((c) => (
+          <li>
+            <span class="dot" aria-hidden="true" />
+            <div>
+              <p class="campaigns__item-name">{c.name}</p>
+              <p class="campaigns__item-desc">{c.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </PhotoSection>
+
+  <section class="segmentation" aria-labelledby="segmentation-title">
+    <div class="shell segmentation__inner">
+      <p class="segmentation__label">Segmentation</p>
+      <h2 class="segmentation__title" id="segmentation-title">Know who you're talking to.</h2>
+      <ul class="segmentation__chips">
+        {segments.map((s) => <li class="chip">{s}</li>)}
+      </ul>
+      <p class="segmentation__line">Your entire guest list doesn't need every message.</p>
+      <p class="lede segmentation__body">Better information makes better marketing possible.</p>
+    </div>
+  </section>
+
+  <section class="automation" aria-labelledby="automation-title">
+    <div class="shell automation__inner">
+      <p class="automation__label">Automation</p>
+      <h2 class="automation__title" id="automation-title">Build it once. Let it run.</h2>
+      <ul class="automation__flow">
+        {automations.map((a) => (
+          <li>
+            <span class="automation__trigger">{a.trigger}</span>
+            <span class="automation__arrow" aria-hidden="true">→</span>
+            <span class="automation__action">{a.action}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="automation__closer">Chorus remembers the next step.</p>
+    </div>
+  </section>
+
+  <section class="close" aria-labelledby="close-title">
+    <div class="shell close__inner">
+      <h2 class="close__title" id="close-title">Marketing that feels like your restaurant.</h2>
+      <p class="close__sub">Your voice. Your offers. Your events. Your guests.</p>
+      <a class="btn" href="/#demo">Book a Demo</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lead {
+    padding-block: clamp(5rem, 11vw, 8rem) clamp(3rem, 7vw, 5rem);
+  }
+
+  .lead__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.75rem, 1.1rem + 6vw, 5rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    max-width: 20ch;
+  }
+
+  .lead__sub {
+    margin-top: 1.25rem;
+    max-width: 58ch;
+  }
+
+  .campaigns {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .campaigns__label,
+  .segmentation__label,
+  .automation__label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .campaigns__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 1.4rem + 4.2vw, 3.2rem);
+    letter-spacing: -0.03em;
+    max-width: 20ch;
+    color: var(--text-hi);
+  }
+
+  .campaigns__list {
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem 2.5rem;
+    max-width: 52rem;
+  }
+
+  .campaigns__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+
+  .campaigns__list .dot {
+    margin-top: 0.55em;
+    color: var(--mint-400);
+  }
+
+  .campaigns__item-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--text-hi);
+  }
+
+  .campaigns__item-desc {
+    margin-top: 0.3rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-mid);
+  }
+
+  @media (max-width: 40rem) {
+    .campaigns__list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .segmentation,
+  .automation {
+    padding-block: clamp(4rem, 9vw, 6.5rem);
+  }
+
+  .segmentation__inner,
+  .automation__inner {
+    max-width: 46rem;
+  }
+
+  .segmentation__title,
+  .automation__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+  }
+
+  .segmentation__chips {
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .segmentation__chips .chip {
+    background: var(--ink-600);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 40%, transparent);
+    border-radius: 4px;
+    padding: 0.4rem 0.7rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.86rem;
+    color: var(--text-hi);
+  }
+
+  .segmentation__line {
+    margin-top: 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--text-hi);
+  }
+
+  .segmentation__body {
+    margin-top: 0.5rem;
+  }
+
+  .automation {
+    background: var(--ink-800);
+  }
+
+  .automation__flow {
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .automation__flow li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--violet-500) 18%, transparent);
+    font-size: 0.95rem;
+  }
+
+  .automation__trigger {
+    color: var(--text-mid);
+  }
+
+  .automation__arrow {
+    color: var(--violet-400);
+  }
+
+  .automation__action {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--mint-300);
+  }
+
+  .automation__closer {
+    margin-top: 1.75rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.3rem, 0.95rem + 1vw, 1.65rem);
+    line-height: 1.32;
+    letter-spacing: -0.025em;
+    color: var(--text-hi);
+  }
+
+  .close {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    text-align: center;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
+  }
+
+  .close__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.2rem);
+  }
+
+  .close__sub {
+    margin-top: 0.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-mid);
+  }
+</style>
