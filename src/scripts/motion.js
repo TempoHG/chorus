@@ -588,11 +588,46 @@ function initDemoBookedTracking() {
   });
 }
 
+// The masthead's "Features ▾" dropdown is a plain <details>/<summary> (click
+// to toggle works with no JS at all). This only adds the hover-intent and
+// outside-click/Escape polish desktop nav dropdowns are expected to have.
+function initFeaturesDropdown() {
+  const dropdown = document.querySelector(".masthead__dropdown");
+  if (!dropdown) return;
+
+  let closeTimer = null;
+  const cancelClose = () => window.clearTimeout(closeTimer);
+  const scheduleClose = () => {
+    closeTimer = window.setTimeout(() => {
+      dropdown.removeAttribute("open");
+    }, 150);
+  };
+
+  dropdown.addEventListener("mouseenter", () => {
+    cancelClose();
+    dropdown.setAttribute("open", "");
+  });
+  dropdown.addEventListener("mouseleave", scheduleClose);
+
+  document.addEventListener("click", (event) => {
+    if (!dropdown.open || dropdown.contains(event.target)) return;
+    dropdown.removeAttribute("open");
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && dropdown.open) {
+      dropdown.removeAttribute("open");
+      dropdown.querySelector("summary")?.focus();
+    }
+  });
+}
+
 export function initMotion() {
   fixHashScroll();
   initOnboardingPopup();
   initAgentCards();
   initDemoBookedTracking();
+  initFeaturesDropdown();
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

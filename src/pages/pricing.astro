@@ -224,10 +224,6 @@ const managed = [
     note: "Strategy, optimization, content and ongoing search improvement.",
   },
   {
-    name: "Website Design & Management",
-    note: "Design, build and ongoing website management.",
-  },
-  {
     name: "Restaurant Marketing",
     note: "Broader outsourced strategy, creative, campaigns and execution.",
   },
@@ -404,6 +400,10 @@ const faqs = [
         >
           Talk to us about managed services →
         </a>
+        <p class="managed__note">
+          Need a website? That's its own fixed price —
+          <a href="/websites-menus">see Websites & Menus →</a>
+        </p>
       </div>
       <ul class="managed__list">
         {
@@ -814,6 +814,16 @@ const faqs = [
     margin-top: 1.25rem;
     color: var(--text-mid);
     max-width: 46ch;
+  }
+
+  .managed__note {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-low);
+  }
+
+  .managed__note a {
+    color: var(--violet-400);
   }
 
   .managed__list {

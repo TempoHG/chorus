@@ -7,7 +7,15 @@ import OnboardingPopup from "../components/OnboardingPopup.astro";
 interface Props {
   title: string;
   description: string;
-  active?: "home" | "features" | "concepts" | "pricing";
+  active?:
+    | "home"
+    | "features"
+    | "guest-marketing"
+    | "manage-reviews"
+    | "private-events"
+    | "websites"
+    | "ai-host-helper"
+    | "pricing";
 }
 const { title, description, active } = Astro.props;
 ---
@@ -84,11 +92,64 @@ const { title, description, active } = Astro.props;
       <div class="shell masthead__inner">
         <a class="masthead__mark" href="/"><Wordmark height={38} /></a>
         <nav class="masthead__nav" aria-label="Primary">
-          <a href="/" aria-current={active === "home" ? "page" : undefined}>Overview</a>
-          <a href="/features" aria-current={active === "features" ? "page" : undefined}>What it does</a>
-          <a href="/concepts" aria-current={active === "concepts" ? "page" : undefined}>Who it's for</a>
+          <!-- Desktop: a dropdown trigger, always visible, opening a flat
+               list of named destinations — the trigger itself is never
+               hidden, so this doesn't violate the No-Hidden-Menu Rule.
+               Hidden below 46rem in favor of the flattened links below. -->
+          <details class="masthead__dropdown">
+            <summary
+              aria-current={
+                active === "features" || active === "guest-marketing" || active === "manage-reviews" || active === "private-events"
+                  ? "page"
+                  : undefined
+              }
+            >
+              Features
+            </summary>
+            <nav class="dropdown__panel" aria-label="Features">
+              <a href="/features" aria-current={active === "features" ? "page" : undefined}>All Features</a>
+              <a href="/guest-marketing" aria-current={active === "guest-marketing" ? "page" : undefined}>Guest Marketing</a>
+              <a href="/manage-reviews" aria-current={active === "manage-reviews" ? "page" : undefined}>Manage Reviews</a>
+              <a href="/private-events-catering" aria-current={active === "private-events" ? "page" : undefined}>Private Events & Catering</a>
+            </nav>
+          </details>
+
+          <!-- Mobile (≤46rem): the dropdown flattens into plain sibling
+               links in the scrollable row — nothing hidden, nothing demoted
+               off the masthead. Hidden at desktop widths. -->
+          <a
+            class="masthead__mobile-only"
+            href="/features"
+            aria-current={active === "features" ? "page" : undefined}
+          >
+            All Features
+          </a>
+          <a
+            class="masthead__mobile-only"
+            href="/guest-marketing"
+            aria-current={active === "guest-marketing" ? "page" : undefined}
+          >
+            Guest Marketing
+          </a>
+          <a
+            class="masthead__mobile-only"
+            href="/manage-reviews"
+            aria-current={active === "manage-reviews" ? "page" : undefined}
+          >
+            Manage Reviews
+          </a>
+          <a
+            class="masthead__mobile-only"
+            href="/private-events-catering"
+            aria-current={active === "private-events" ? "page" : undefined}
+          >
+            Private Events & Catering
+          </a>
+
+          <a href="/websites-menus" aria-current={active === "websites" ? "page" : undefined}>Websites & Menus</a>
+          <a href="/ai-host-helper" aria-current={active === "ai-host-helper" ? "page" : undefined}>AI Host Helper</a>
           <a href="/pricing" aria-current={active === "pricing" ? "page" : undefined}>Pricing</a>
-          <a class="btn masthead__cta" href="/#demo">Book a demo</a>
+          <a class="btn masthead__cta" href="/#demo">Book a Demo</a>
         </nav>
       </div>
     </header>
@@ -108,10 +169,14 @@ const { title, description, active } = Astro.props;
         </div>
         <nav class="footer__nav" aria-label="Footer">
           <a href="/">Overview</a>
-          <a href="/features">What it does</a>
-          <a href="/concepts">Who it's for</a>
+          <a href="/features">All Features</a>
+          <a href="/guest-marketing">Guest Marketing</a>
+          <a href="/manage-reviews">Manage Reviews</a>
+          <a href="/private-events-catering">Private Events & Catering</a>
+          <a href="/websites-menus">Websites & Menus</a>
+          <a href="/ai-host-helper">AI Host Helper</a>
           <a href="/pricing">Pricing</a>
-          <a href="/#demo">Book a demo</a>
+          <a href="/#demo">Book a Demo</a>
         </nav>
       </div>
       <div class="shell footer__base">
@@ -208,8 +273,82 @@ const { title, description, active } = Astro.props;
     color: var(--ink-900);
   }
 
+  /* Desktop-only "Features ▾" dropdown. The trigger is always visible and
+     the panel is a flat list of named destinations, so this doesn't hide
+     anything — it just groups four related links under one label. Below
+     46rem it's replaced entirely by the flattened .masthead__mobile-only
+     links (see below and the media query), never shown at the same time. */
+  .masthead__dropdown {
+    position: relative;
+  }
+
+  .masthead__dropdown summary {
+    cursor: pointer;
+    color: var(--text-mid);
+    padding-block: 0.3rem;
+    border-bottom: 2px solid transparent;
+    list-style: none;
+    transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+  }
+
+  .masthead__dropdown summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .masthead__dropdown summary::after {
+    content: " \25BE";
+  }
+
+  .masthead__dropdown summary:hover,
+  .masthead__dropdown[open] summary {
+    color: var(--text-hi);
+    border-bottom-color: var(--violet-400);
+  }
+
+  .masthead__dropdown summary[aria-current="page"] {
+    color: var(--text-hi);
+    border-bottom-color: var(--mint-400);
+  }
+
+  .dropdown__panel {
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    left: 0;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    min-width: 14rem;
+    padding: 0.5rem;
+    background: var(--ink-600);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 34%, transparent);
+    border-radius: 5px;
+    box-shadow: 0 22px 44px -26px rgb(0 0 0 / 0.9);
+  }
+
+  .dropdown__panel a {
+    padding: 0.55rem 0.7rem;
+    border-radius: 4px;
+    border-bottom: 0 !important;
+  }
+
+  .dropdown__panel a:hover {
+    background: color-mix(in oklab, var(--violet-600) 22%, transparent);
+  }
+
+  .masthead__mobile-only {
+    display: none;
+  }
+
   /* Phones get the whole site, not a hidden menu: the bar becomes two rows. */
   @media (max-width: 46rem) {
+    .masthead__dropdown {
+      display: none;
+    }
+
+    .masthead__mobile-only {
+      display: block;
+    }
+
     .masthead__inner {
       flex-wrap: wrap;
       gap: 0.5rem 1rem;

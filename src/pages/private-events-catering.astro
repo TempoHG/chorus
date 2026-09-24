@@ -1,0 +1,326 @@
+---
+import Base from "../layouts/Base.astro";
+import PhotoSection from "../components/PhotoSection.astro";
+
+const process = [
+  { step: "01", name: "Capture", desc: "Guest submits an inquiry." },
+  { step: "02", name: "Respond", desc: "They immediately know you received it." },
+  { step: "03", name: "Notify", desc: "The right person on your team knows." },
+  { step: "04", name: "Organize", desc: "Guest and event details stay together." },
+  { step: "05", name: "Follow Up", desc: "Chorus keeps the process moving." },
+  { step: "06", name: "Book", desc: "Your team closes it." },
+];
+
+const eventDetails = [
+  { label: "Guest", value: "Sarah Mitchell" },
+  { label: "Date", value: "December 14 · 6:30 PM" },
+  { label: "Party", value: "42 Guests" },
+  { label: "Space", value: "Private Dining Room" },
+  { label: "Estimated Opportunity", value: "$4,500" },
+];
+
+const eventSteps = ["Confirmation sent", "Manager notified", "Follow-up scheduled"];
+---
+
+<Base
+  title="Private Events & Catering — Tempo Chorus"
+  description="A $5,000 inquiry shouldn't live in someone's inbox. Capture it. Organize it. Respond. Follow up."
+  active="private-events"
+>
+  <section class="lead">
+    <div class="shell">
+      <h1 class="lead__title">A $5,000 inquiry shouldn't live in someone's inbox.</h1>
+      <p class="lede lead__sub">Capture it. Organize it. Respond. Follow up.</p>
+    </div>
+  </section>
+
+  <section class="process" aria-labelledby="process-title">
+    <div class="shell">
+      <p class="process__label">Process</p>
+      <h2 class="process__title" id="process-title">From inquiry to opportunity.</h2>
+      <ol class="process__list" data-reveal>
+        {process.map((p) => (
+          <li>
+            <span class="process__step">{p.step}</span>
+            <div>
+              <p class="process__name">{p.name}</p>
+              <p class="process__desc">{p.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <PhotoSection
+    treatment="ambient"
+    layout="full-bleed"
+    placeholder
+    shotList="Private dining room set for an event, warm evening light, or a private event/celebration in progress"
+  >
+    <div class="shell speed">
+      <p class="speed__label">Speed</p>
+      <h2 class="speed__title">While they're still interested.</h2>
+      <p class="lede speed__body">
+        Guests looking for an event space are probably talking to other restaurants. Speed
+        matters. Follow-up matters. Chorus helps with both.
+      </p>
+    </div>
+  </PhotoSection>
+
+  <section class="example" aria-labelledby="example-title">
+    <div class="shell example__inner">
+      <p class="example__label">Example</p>
+      <h2 class="example__title" id="example-title">See the opportunity.</h2>
+      <div class="example__card">
+        <p class="example__flag">New Private Event — Holiday Dinner</p>
+        <dl class="example__details">
+          {eventDetails.map((d) => (
+            <div class="example__detail">
+              <dt>{d.label}</dt>
+              <dd>{d.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <ul class="example__steps">
+          {eventSteps.map((step) => (
+            <li>
+              <span class="dot" aria-hidden="true" />
+              {step}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="catering" aria-labelledby="catering-title">
+    <div class="shell catering__inner">
+      <p class="catering__label">Catering</p>
+      <h2 class="catering__title" id="catering-title">Catering works the same way.</h2>
+      <p class="lede catering__body">Capture. Organize. Follow up. Less chasing. Fewer forgotten leads.</p>
+    </div>
+  </section>
+
+  <section class="close" aria-labelledby="close-title">
+    <div class="shell close__inner">
+      <h2 class="close__title" id="close-title">Let Chorus catch the next one.</h2>
+      <a class="btn" href="/#demo">Book a Demo</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lead {
+    padding-block: clamp(5rem, 11vw, 8rem) clamp(3rem, 7vw, 5rem);
+  }
+
+  .lead__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 1rem + 5.4vw, 4.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    max-width: 20ch;
+  }
+
+  .lead__sub {
+    margin-top: 1.25rem;
+    max-width: 50ch;
+  }
+
+  .process {
+    padding-block: clamp(4rem, 9vw, 6.5rem);
+    background: var(--ink-800);
+  }
+
+  .process__label,
+  .speed__label,
+  .example__label,
+  .catering__label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .process__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+  }
+
+  .process__list {
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 2.5rem;
+    max-width: 56rem;
+  }
+
+  .process__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+
+  .process__step {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--violet-400);
+    flex: none;
+  }
+
+  .process__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-hi);
+  }
+
+  .process__desc {
+    margin-top: 0.3rem;
+    font-size: 0.9rem;
+    color: var(--text-mid);
+  }
+
+  @media (max-width: 40rem) {
+    .process__list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .speed {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    max-width: 46rem;
+  }
+
+  .speed__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+    color: var(--text-hi);
+  }
+
+  .speed__body {
+    margin-top: 1rem;
+    color: var(--text-mid);
+  }
+
+  .example {
+    padding-block: clamp(4rem, 9vw, 6.5rem);
+  }
+
+  .example__inner {
+    max-width: 30rem;
+  }
+
+  .example__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+  }
+
+  .example__card {
+    margin-top: 1.75rem;
+    background: var(--ink-700);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
+    border-radius: 5px;
+    padding: clamp(1.5rem, 3.5vw, 2rem);
+  }
+
+  .example__flag {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-hi);
+  }
+
+  .example__details {
+    margin: 1.25rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .example__detail {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .example__detail dt {
+    color: var(--text-low);
+  }
+
+  .example__detail dd {
+    margin: 0;
+    color: var(--text-mid);
+  }
+
+  .example__steps {
+    margin: 1.25rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 18%, transparent);
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .example__steps li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    color: var(--mint-300);
+    font-size: 0.9rem;
+  }
+
+  .example__steps .dot {
+    color: var(--mint-400);
+  }
+
+  .catering {
+    padding-block: clamp(4rem, 9vw, 6.5rem);
+    background: var(--ink-800);
+  }
+
+  .catering__inner {
+    max-width: 40rem;
+  }
+
+  .catering__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+  }
+
+  .catering__body {
+    margin-top: 1rem;
+  }
+
+  .close {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    text-align: center;
+  }
+
+  .close__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.2rem);
+    margin-bottom: 1.5rem;
+  }
+</style>

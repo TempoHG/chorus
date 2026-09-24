@@ -1,6 +1,6 @@
 ---
 name: Tempo Chorus
-description: A premium hospitality-tech system where a restaurant's scattered guest channels visibly flow together into one platform — dark navy ground, violet/mint brand accents, authored UI-mockup proof and real (never stock) restaurant photography/video knocked back with a violet wash, instead of literal musical notation.
+description: A premium hospitality-tech system where a restaurant's scattered guest channels visibly flow together into one platform — dark navy ground, violet/mint brand accents, real (never stock) restaurant photography/video knocked back with a violet wash as roughly half the visual language, and authored UI-mockup proof for the other half, instead of literal musical notation.
 colors:
   ink-900: "#0b0917"
   ink-800: "#12102a"
@@ -182,21 +182,31 @@ components:
 
 **Creative North Star: everything flowing together.**
 
-The client brief that governs this build (`Tempo_Chorus_Website_Design_Brief_for_Claude.docx`) explicitly retired the site's original "Night Score" musical-notation system — no more stave rules, bar lines, braces, noteheads, or a "12 voices" framing repeated through the copy and the UI. What survives from that build, because it was never actually musical notation, is the dark score-paper-navy ground and the authored-UI-mockup idiom (`ProductMocks.astro`, `FeatureArt.astro`): panels, chips, tiles and flow-cards that look like real product surfaces. That idiom is now the site's primary proof system, promoted from a homepage-only feature to the spine of the Features page too.
+The client brief that originally governed this build (`Tempo_Chorus_Website_Design_Brief_for_Claude.docx`) explicitly retired the site's original "Night Score" musical-notation system — no more stave rules, bar lines, braces, noteheads, or a "12 voices" framing repeated through the copy and the UI. That retirement still holds. What's changed since, per the v2 content/creative-direction brief (`Tempo_Chorus_Website_V2_Content_Creative_Direction.docx`, September 2026, client-approved), is the balance between the two proof systems that survived it: real restaurant photography and video are no longer a narrow, two-spot exception — they're now a full, deliberate half of the site's visual language, standing alongside the authored-UI-mockup idiom (`ProductMocks.astro`, `FeatureArt.astro`, now joined by `PhotoSection.astro`) rather than playing a supporting role to it.
 
-The one recurring visual idea, replacing the brace, is **flow**: scattered channels (website, phone, text, email, social, reviews, events, guests) connect to a single Chorus node by thin lines, not a bracket. The same connector-line vocabulary (`.wires`, `.flowline` — already prototyped in `ProductMocks.astro`) is the site's one motif for "bringing everything together," used at the hero and echoed sparingly elsewhere. It is a diagram, not a decoration: every line connects two real things.
+The one recurring visual idea, replacing the brace, is still **flow**: scattered channels (website, phone, text, email, social, reviews, events, guests) connect to a single Chorus node by thin lines, not a bracket. The same connector-line vocabulary (`.wires`, `.flowline` — already prototyped in `ProductMocks.astro`) is the site's one motif for "bringing everything together," used at the hero and echoed sparingly elsewhere — now used more sparingly still, since photography does more of the persuasive work than it used to. It is a diagram, not a decoration: every line connects two real things.
 
-Color still carries the argument exactly as before: violet is structure (rules, connectors, borders), brand green marks resolution (the answered call, the confirmed booking, the primary action), amber marks the unresolved. Density stays editorial, not dashboard — generous vertical rhythm, short measures (44–68ch), Poppins running large at the top of each beat. The site still refuses the feature-icon grid and the claim-without-proof hero, and it still refuses stock or AI-generated imagery — but real, verified restaurant photography and video, always knocked back with a violet wash, is now a deliberate part of the system (the Four Jobs background, the vignette-timeline media).
+Color still carries the argument exactly as before: violet is structure (rules, connectors, borders), brand green marks resolution (the answered call, the confirmed booking, the primary action), amber marks the unresolved. Typography turns more editorial in v2 — large, confident, generous negative space, and some sections now almost entirely typographic rather than every beat carrying a mockup or a photo. The site still refuses the feature-icon grid, the claim-without-proof hero, glowing gradients, floating glass cards, abstract network illustrations, excessive pill shapes, neon effects, generic AI-style illustration, oversized literal dashboard screenshots, and putting everything inside a rounded rectangle. It still refuses *stock or AI-generated* imagery absolutely — that line never moved — but real, verified restaurant photography and video, always knocked back with a violet wash, is now used generously across the site, not confined to two named spots.
 
 **Key Characteristics:**
 
 - Night-navy ground: a four-step ink ladder, no light mode, no white surfaces.
-- Flow as the connective idiom: thin connector lines joining channels to outcomes, not bar lines or braces.
-- Authored UI-mockup panels (inbox threads, calendars, review queues, service rails) are the primary proof system, used across the homepage and the Features page.
+- Flow as the connective idiom: thin connector lines joining channels to outcomes, not bar lines or braces — used more sparingly in v2 now that photography carries more of the argument.
+- Real restaurant photography/video and authored UI-mockup panels (inbox threads, calendars, review queues, service rails) are **equal partners in proof**, roughly half-and-half across the site (see the Half-and-Half Rule) — photography establishes that the restaurant and the work are real, UI panels prove Chorus does what the copy says.
 - Violet structures, green resolves, amber marks what is still open.
-- Poppins display over Archivo text; no third face, no icon font, no glyph icons.
-- Feature graphics and demonstration UI are authored SVG/CSS, not stock photography. Real, user-supplied restaurant photography and video are used deliberately in two places, both always knocked back with a violet wash: the Four Jobs section's ambient background (dark violet wash over muted/looping video), and the small media frame beside each "Here is what that actually means" vignette (a lighter violet wash — 26% mix rather than the Four Jobs treatment's near-full wash — since these read as supporting frames, not a full-bleed backdrop). All of it is verified footage/photos of real restaurant work and moments, never stock or AI-generated imagery.
-- Restrained motion: a settle-in arrival at the hero, plus small scroll-triggered entrances on mockup panels — never a global scroll-reveal, never Popmenu-style pinned scroll-jacking.
+- Poppins display over Archivo text, now run larger and more editorially in v2; no third face, no icon font, no glyph icons.
+- Product-demonstration UI stays authored SVG/CSS (`FeatureArt.astro`), shown only when it demonstrates something actually happening, never as decoration. Real restaurant photography/video (`PhotoSection.astro`) is generously used — active dining rooms, host stands, bars, private dining, staff during service, guests arriving — always knocked back with a violet wash (see the Violet-Wash Rule). Both are always real and verified; neither is ever stock or AI-generated.
+- Restrained motion: a settle-in arrival at the hero, plus small scroll-triggered entrances on mockup panels and photo sections — never a global scroll-reveal, never Popmenu-style pinned scroll-jacking.
+
+### Named Rules
+
+**The Half-and-Half Rule.** Real restaurant photography/video and authored UI-mockup demonstration split the site's proof burden roughly 50/50 — but as a *page-level* budget, not a section-level ratio. One page can lean almost entirely photographic, another almost entirely typographic with no photo or mockup at all, as long as the 8-page site balances out. Never force both onto every section just to hit a local ratio.
+
+**The Violet-Wash Rule.** Real photography/video never appears bare or untinted. It gets exactly one of two documented treatments, both applied via `PhotoSection.astro`:
+- **Ambient** — a near-full violet wash (55–88% mix) over a full-bleed backdrop image/video, copy sitting on top. The Four Jobs section background is the original instance of this treatment.
+- **Supporting** — a lighter 26% violet wash inside a bounded media frame beside or under copy, reading as a supporting frame rather than a backdrop. The vignette-timeline media is the original instance of this treatment.
+
+There is no third, bare/untinted photo treatment — inventing one ad hoc is a Don't (see Do's and Don'ts).
 
 ## Colors
 
@@ -298,7 +308,7 @@ The ground is flat. Depth comes from the tonal ink ladder — `ink-900` page →
 
 ## Shapes
 
-Corners are near-square: **2px** (buttons, focus-visible), **3px** (form fields), **4px** (chips, the booking card), **5px** (product panels, tiles, flow cards, pricing cards), **6px** (a mock stage). Circles (`border-radius: 50%`) are used only for the convergence node, status pulses and the plain list-marker dot.
+Corners are near-square: **2px** (buttons, focus-visible), **3px** (form fields), **4px** (chips, the booking card), **5px** (product panels, tiles, flow cards, pricing cards), **6px** (a mock stage). Circles (`border-radius: 50%`) are used only for the convergence node, status pulses and the plain list-marker dot. `PhotoSection` frames use the 5–6px panel/stage radius for `layout="framed"`, or true 0px for `layout="full-bleed"` — never a third radius value (the pre-v2 vignette media's 16px radius was an inconsistency, not a precedent; it's corrected to the panel radius as part of the `PhotoSection` build).
 
 **The connective primitives — the actual form language:**
 
@@ -340,8 +350,8 @@ Corners are near-square: **2px** (buttons, focus-visible), **3px** (form fields)
 
 ### Navigation
 
-- **Masthead:** sticky, `ink-900` at 88% with a 14px backdrop blur, closed by a 22% violet hairline. Links are display face 600 at 1.05rem, `--text-mid` at rest, with a 2px transparent bottom border that turns `--violet-400` on hover and `--mint-400` on `aria-current="page"`. Order: Overview / What it does / Who it's for / Pricing / Book a demo.
-- **Mobile (≤46rem):** two rows — see **The No-Hidden-Menu Rule**.
+- **Masthead:** sticky, `ink-900` at 88% with a 14px backdrop blur, closed by a 22% violet hairline. Links are display face 600 at 1.05rem, `--text-mid` at rest, with a 2px transparent bottom border that turns `--violet-400` on hover and `--mint-400` on `aria-current="page"`. Order (v2): Tempo Chorus (wordmark) / Features ▾ (a hover/focus/click dropdown listing All Features, Guest Marketing, Manage Reviews, Private Events & Catering) / Websites & Menus / AI Host Helper / Pricing / Book a Demo. The dropdown trigger is always visible and its contents are a flat list of named destinations — it doesn't violate the No-Hidden-Menu Rule, which is about *hiding* the nav, not disclosure of a labeled submenu.
+- **Mobile (≤46rem):** two rows — see **The No-Hidden-Menu Rule**. The Features dropdown flattens entirely here: all 5 Features-related links sit as plain siblings in the scrollable second row alongside the other top-level links (8 links total) — no dropdown UI on mobile at all, nothing demoted off the masthead.
 - **Footer:** `--ink-800` above a 24% violet hairline, wordmark plus prose, a vertical nav in the display face that goes green on hover, a base row carrying the copyright and the illustrative-content disclosure.
 
 ### Signature: PhoneField (the hero)
@@ -350,7 +360,11 @@ Channel labels stacked as `name / hairline-rule` rows, each joined by a thin flo
 
 ### Signature: Authored UI mockups (ProductMocks / FeatureArt)
 
-The site's primary proof system: an inbox thread merging three channels into one guest record, an after-hours call answered and confirmed, a content calendar staging a month of sends, a review queue with one item flagged for a human, a service rail showing a resold table. Each lives inside a `.stage`, uses `.panel`/`.chip`/`.tile`/`.fcard` for its internal surfaces, and enters with a small scroll-triggered stagger (list rows/cards fade and lift in sequence) rather than sitting static — the site's answer to "animated graphics that show the feature working," kept restrained rather than pinned-scroll-driven.
+Used only when demonstrating something actually happening, not as decoration: an inbox thread merging three channels into one guest record, an after-hours call answered and confirmed, a content calendar staging a month of sends, a review queue with one item flagged for a human, a service rail showing a resold table. Each lives inside a `.stage`, uses `.panel`/`.chip`/`.tile`/`.fcard` for its internal surfaces, and enters with a small scroll-triggered stagger (list rows/cards fade and lift in sequence) rather than sitting static — the site's answer to "animated graphics that show the feature working," kept restrained rather than pinned-scroll-driven.
+
+### Signature: PhotoSection (real restaurant photography/video)
+
+The site's other half of proof, alongside the authored UI mockups above. One component, two treatments (Ambient full-bleed backdrop, Supporting bounded media frame — see the Violet-Wash Rule), both always applying the violet-wash veil rather than showing a bare photo. Takes a `src`/`type`/`alt`/`treatment`/`layout` prop set; a `placeholder` mode renders a distinct `--ink-700` frame with a violet-hairline corner mark and a visible shot-list caption for slots awaiting real assets, never a plain gray box that reads as "almost done." Never contains simulated product UI — a moment like a phone overlay chip showing "Incoming Call ✓" is a `FeatureArt` kind, CSS-drawn, not a `PhotoSection` addition; the two components never blend into one surface.
 
 ### Motion
 
@@ -368,7 +382,7 @@ The site's animation engine is [GSAP](https://gsap.com/) plus its ScrollTrigger 
 
 - **Do** take violet and green from the logo. Derive new shades from them; do not re-pick them by eye.
 - **Do** keep green on both the hero headline accent and the primary CTA. Settled, user-confirmed.
-- **Do** author every image. All imagery on this site is SVG or CSS drawn by hand.
+- **Do** author every piece of product-demonstration UI by hand as SVG/CSS (`FeatureArt.astro`) — this rule is unchanged, it just no longer covers *all* imagery on the site (see the Violet-Wash Rule for real photography/video).
 - **Do** use `.dot` as the only list marker, colored green for a resolution and violet for a capability.
 - **Do** use a thin flow line whenever the point is "these things connect" — a channel to the node, a trigger to an automated response, a step to the next step.
 - **Do** give every prose block an explicit `ch` measure (44–68ch).
@@ -380,7 +394,10 @@ The site's animation engine is [GSAP](https://gsap.com/) plus its ScrollTrigger 
 
 ### Don't:
 
-- **Don't** add stock or AI-generated photography, ever. Real, verified restaurant photography/video is allowed only where it's already established (Four Jobs background, vignette-timeline media) and only knocked back with a violet wash — don't add it as a plain, untinted image elsewhere without deciding that on purpose.
+- **Don't** add stock or AI-generated photography, ever — that line never moved. Real, verified restaurant photography/video is now used generously across the whole site (no longer confined to two named spots), always through `PhotoSection.astro` and always knocked back with a violet wash — never a plain, untinted photo.
+- **Don't** ship a real (non-placeholder) photo the client hasn't actually supplied. Use `PhotoSection`'s `placeholder` mode until a real asset lands — never a stock substitute standing in as if it were real.
+- **Don't** add glowing gradients, floating glass cards, abstract network illustrations, excessive pill shapes, neon effects, generic AI-style illustration, or an oversized literal dashboard screenshot.
+- **Don't** put every piece of content inside a rounded rectangle — vary between full-bleed, framed and typographic-only treatments per the Half-and-Half Rule.
 - **Don't** add a global scroll-reveal, a second competing hero sequence, or pinned/scrubbed scroll-jacking.
 - **Don't** put an eyebrow, kicker or uppercase label above a heading anywhere on a page.
 - **Don't** introduce a light theme, a white surface, or a fifth ink step.

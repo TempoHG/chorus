@@ -1,18 +1,21 @@
 ---
 import Base from "../layouts/Base.astro";
 import FeatureArt from "../components/FeatureArt.astro";
-import HostHelper from "../components/HostHelper.astro";
 
 const categories = [
   {
     id: "get-found",
     name: "Get Found",
-    line: "Help more guests discover and choose the restaurant.",
+    line: "Make it easier for guests to find — and choose — you.",
     art: "calendar" as const,
     items: [
       {
-        name: "Website Tools",
-        desc: "Build and manage restaurant web experiences, pages and content.",
+        name: "Google Business",
+        desc: "Connect your Google presence with Chorus.",
+      },
+      {
+        name: "Menus Made for the Web",
+        desc: "Fast, mobile-friendly menus guests can actually browse.",
       },
       {
         name: "Landing Pages",
@@ -23,12 +26,12 @@ const categories = [
         desc: "Capture guest inquiries and information directly into Chorus.",
       },
       {
-        name: "Google Business Connection",
-        desc: "Connect your Google Business Profile with your restaurant's guest and reputation tools.",
+        name: "Social Publishing",
+        desc: "Plan, schedule and publish social content from one place.",
       },
       {
-        name: "Social Planning & Publishing",
-        desc: "Plan, schedule and publish social content from one place.",
+        name: "Advertising Tools",
+        desc: "Keep paid activity connected to your marketing.",
       },
     ],
     callout: {
@@ -39,9 +42,13 @@ const categories = [
   {
     id: "stay-connected",
     name: "Stay Connected",
-    line: "Make it easier for guests to reach the restaurant, and the team to respond.",
+    line: "Be there when guests reach out.",
     art: "inbox" as const,
     items: [
+      {
+        name: "AI Host Helper",
+        desc: "Answer calls and capture opportunities when your team can't.",
+      },
       {
         name: "Unified Guest Inbox",
         desc: "Bring guest conversations together so your team has one place to respond.",
@@ -75,11 +82,15 @@ const categories = [
         desc: "Keep guest contact information, conversations, activity and relationships connected.",
       },
     ],
+    callout: {
+      title: "AI Host Helper gets its own home",
+      body: "See exactly how it handles a call, start to finish, on the AI Host Helper page.",
+    },
   },
   {
     id: "bring-guests-back",
     name: "Bring Guests Back",
-    line: "Build repeat visits and stronger relationships.",
+    line: "The first visit shouldn't be the last conversation.",
     art: "reviews" as const,
     items: [
       {
@@ -119,23 +130,19 @@ const categories = [
         desc: "Build targeted audiences based on guest information and behavior.",
       },
       {
-        name: "Private Event Follow-Up",
-        desc: "Capture, organize and follow up with private-event inquiries.",
-      },
-      {
-        name: "Catering Follow-Up",
-        desc: "Turn catering inquiries into an organized follow-up process.",
-      },
-      {
         name: "Guest Recovery",
         desc: "Route poor guest experiences to the restaurant team so problems can be addressed quickly.",
       },
     ],
+    callout: {
+      title: "Private events and catering get their own home",
+      body: "Every inquiry, organized from first message to booked event — see how on the Private Events & Catering page.",
+    },
   },
   {
     id: "save-time",
     name: "Save Time",
-    line: "Automate the repetitive marketing and communication work.",
+    line: "Let Chorus remember the next step.",
     art: "reservations" as const,
     items: [
       {
@@ -196,55 +203,40 @@ const underTheHood = [
   "Documents", "Reporting", "AI", "Integrations",
 ];
 
-const setup = [
-  {
-    name: "White-Glove Onboarding",
-    desc: "Tempo helps get the platform configured and ready for the restaurant.",
-  },
-  {
-    name: "Restaurant-Specific Setup",
-    desc: "Core communications, workflows and tools are configured around the operation.",
-  },
-  {
-    name: "Team Training",
-    desc: "Straightforward training focused on what the restaurant team actually needs to use.",
-  },
-  {
-    name: "Tempo Support",
-    desc: "Get help from Tempo when questions or issues come up.",
-  },
-  {
-    name: "Ongoing Platform Updates",
-    desc: "Chorus continues improving as Tempo develops new restaurant-specific capabilities.",
-  },
+const workflows = [
+  { name: "Private Events", steps: ["Capture", "Respond", "Notify", "Follow Up", "Book"] },
+  { name: "Catering", steps: ["Inquire", "Organize", "Follow Up", "Close"] },
+  { name: "Guest Recovery", steps: ["Feedback", "Alert", "Respond", "Recover"] },
+  { name: "Birthdays", steps: ["Capture", "Remember", "Invite Back"] },
+  { name: "Reviews", steps: ["Visit", "Ask", "Review", "Respond"] },
+  { name: "Missed Calls", steps: ["Missed Call", "Text Back", "Continue"] },
 ];
 
 ---
 
 <Base
-  title="What Tempo Chorus does — everything working together"
-  description="Get Found, Stay Connected, Bring Guests Back, Save Time — everything included in Tempo Chorus, in plain language."
+  title="Everything you need — Tempo Chorus"
+  description="Guest communication, marketing, reputation, relationships and automation — connected around your restaurant."
   active="features"
 >
   <section class="lead">
     <div class="shell">
       <h1 class="lead__title">
-        Everything your restaurant needs.<br />
+        Everything you need.<br />
         <span class="lead__accent">Working together.</span>
       </h1>
       <p class="lead__sub">
-        One platform, configured for the way you operate. Tempo Chorus
-        connects marketing, communication, guest relationships, reputation
-        and automation — not a fixed list of features, but a system that
-        keeps growing with your restaurant.
+        Guest communication, marketing, reputation, relationships and automation —
+        connected around your restaurant.
       </p>
       <div class="lead__jump">
         <p>Jump to</p>
         <ul>
           {categories.map((c) => <li><a href={`#${c.id}`}>{c.name}</a></li>)}
-          <li><a href="#ai-host-helper">AI Host Helper</a></li>
-          <li><a href="#under-the-hood">Under the Hood</a></li>
-          <li><a href="#tempo-setup">Tempo Setup</a></li>
+          <li><a href="/ai-host-helper">AI Host Helper</a></li>
+          <li><a href="/guest-marketing">Guest Marketing</a></li>
+          <li><a href="/manage-reviews">Manage Reviews</a></li>
+          <li><a href="/private-events-catering">Private Events & Catering</a></li>
         </ul>
       </div>
     </div>
@@ -287,7 +279,17 @@ const setup = [
     </div>
   </div>
 
-  <HostHelper />
+  <section class="teaser" id="ai-host-helper" aria-labelledby="teaser-title">
+    <div class="shell teaser__inner">
+      <p class="teaser__label">AI Host Helper</p>
+      <h2 class="teaser__title" id="teaser-title">Your host stand could use another set of hands.</h2>
+      <p class="lede teaser__body">
+        Answers when your team can't — during the rush, after hours, or whenever the phone
+        competes with the guests in front of you.
+      </p>
+      <a class="teaser__link" href="/ai-host-helper">See how it works →</a>
+    </div>
+  </section>
 
   <section class="hood" id="under-the-hood" aria-labelledby="hood-title">
     <div class="shell">
@@ -313,58 +315,41 @@ const setup = [
     </div>
   </section>
 
-  <section class="setup" id="tempo-setup" aria-labelledby="setup-title">
+  <section class="workflows" aria-labelledby="workflows-title">
     <div class="shell">
-      <h2 class="eyeless-h2 setup__title" id="setup-title">
-        And Tempo sets it up for you.
+      <p class="workflows__label">Built for Restaurants</p>
+      <h2 class="workflows__title" id="workflows-title">
+        Not generic workflows with a restaurant logo on them.
       </h2>
-      <p class="lede setup__lede">
-        Chorus isn't another piece of software you're left to figure out.
-        Tempo helps configure the platform around your restaurant and gets
-        your team ready to use it.
-      </p>
-      <ul class="setup__list" data-reveal>
-        {
-          setup.map((s, i) => (
-            <li style={`--i:${i}`}>
-              <span class="dot" aria-hidden="true" />
-              <div>
-                <p class="setup__item-name">{s.name}</p>
-                <p class="setup__item-desc">{s.desc}</p>
-              </div>
-            </li>
-          ))
-        }
+      <ul class="workflows__list" data-reveal>
+        {workflows.map((w) => (
+          <li>
+            <p class="workflows__name">{w.name}</p>
+            <p class="workflows__chain">
+              {w.steps.map((step, i) => (
+                <>
+                  <span>{step}</span>
+                  {i < w.steps.length - 1 && <span class="workflows__arrow" aria-hidden="true">→</span>}
+                </>
+              ))}
+            </p>
+          </li>
+        ))}
       </ul>
-      <p class="setup__callout">
-        "You won't be handed a login and left to figure it out."
-      </p>
-      <p class="setup__note">
-        All included with every Chorus platform — none of this is a paid
-        add-on.
-      </p>
     </div>
   </section>
 
   <section class="close">
     <div class="shell close__inner">
       <h2 class="close__title">
-        Many interactions.<br />
-        <span class="close__accent">One relationship.</span>
+        All Together<br />
+        <span class="close__accent">Now.</span>
       </h2>
-      <p class="close__sub">
-        Every call, reservation, review, text message, and return visit belongs
-        to the same guest.
-      </p>
-      <p class="close__sub">
-        Tempo Chorus keeps every conversation connected, so nothing gets lost
-        and every interaction builds on the last.
-      </p>
+      <p class="close__sub">You don't need another disconnected tool.</p>
       <p class="close__statement">
-        Because your guests experience one restaurant.<br />
-        Your platform should too.
+        You need the pieces around your guests to work together.
       </p>
-      <a class="btn" href="/#demo">Book a demo</a>
+      <a class="btn" href="/#demo">Book a Demo</a>
     </div>
   </section>
 </Base>
@@ -568,74 +553,108 @@ const setup = [
     margin: 0 0.55em;
   }
 
-  /* ---------- Tempo setup (service layer) ---------- */
+  /* ---------- AI Host Helper teaser ---------- */
 
-  .setup {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
+  .teaser {
+    padding-block: clamp(4rem, 9vw, 6.5rem);
     background: var(--ink-800);
   }
 
-  .setup__lede {
-    margin-top: 1.25rem;
-    max-width: 58ch;
-    color: var(--text-mid);
+  .teaser__inner {
+    max-width: 46rem;
   }
 
-  .setup__list {
+  .teaser__label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .teaser__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.5rem);
+    letter-spacing: -0.038em;
+  }
+
+  .teaser__body {
+    margin-top: 1rem;
+  }
+
+  .teaser__link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--violet-400);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s var(--ease-out);
+  }
+
+  .teaser__link:hover {
+    border-bottom-color: var(--violet-400);
+  }
+
+  /* ---------- Built for restaurants (workflow chains) ---------- */
+
+  .workflows {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .workflows__label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .workflows__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+    max-width: 24ch;
+  }
+
+  .workflows__list {
     list-style: none;
     margin: clamp(2.5rem, 6vw, 4rem) 0 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.35rem 2.5rem;
+    gap: 1.5rem 2.5rem;
   }
 
-  .setup__list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.7rem;
-  }
-
-  .setup__list .dot {
-    margin-top: 0.55em;
-    color: var(--mint-400);
-  }
-
-  .setup__item-name {
+  .workflows__name {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 0.98rem;
+    font-size: 1rem;
     color: var(--text-hi);
   }
 
-  .setup__item-desc {
-    margin-top: 0.3rem;
-    font-size: 0.88rem;
-    line-height: 1.5;
+  .workflows__chain {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-size: 0.85rem;
     color: var(--text-mid);
   }
 
-  .setup__callout {
-    margin-top: clamp(2.5rem, 6vw, 4rem);
-    padding-top: clamp(2rem, 5vw, 3rem);
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
-    font-family: var(--font-display);
-    font-size: clamp(1.3rem, 0.95rem + 1.7vw, 2.1rem);
-    font-weight: 600;
-    line-height: 1.28;
-    letter-spacing: -0.03em;
-    color: var(--text-hi);
-    max-width: 46ch;
-  }
-
-  .setup__note {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: var(--text-low);
+  .workflows__arrow {
+    color: var(--violet-400);
   }
 
   @media (max-width: 40rem) {
-    .setup__list {
+    .workflows__list {
       grid-template-columns: 1fr;
     }
   }

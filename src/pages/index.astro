@@ -4,7 +4,63 @@ import PhoneField from "../components/PhoneField.astro";
 import ProductMocks from "../components/ProductMocks.astro";
 import FeatureArt from "../components/FeatureArt.astro";
 import JobIcon from "../components/JobIcon.astro";
-import HostHelper from "../components/HostHelper.astro";
+import PhotoSection from "../components/PhotoSection.astro";
+
+const stories = [
+  {
+    id: "website",
+    kind: "photo" as const,
+    eyebrow: "01 / Your Restaurant Website",
+    title: "Your website. Your way.",
+    body: "Already have one you like? Keep it. Need something better? Tempo can build a modern restaurant website around your brand, menu, reservations, ordering and events. WordPress or Tempo Managed — $500 one-time + $15/month hosting.",
+    cta: { label: "Explore Websites & Menus →", href: "/websites-menus" },
+    shotList: "Three real restaurant websites across desktop and mobile, dramatically different from each other",
+  },
+  {
+    id: "host-helper",
+    kind: "widget" as const,
+    eyebrow: "02 / Tempo AI Host Helper",
+    title: "Your host stand could use another set of hands.",
+    body: "When your team can't answer, Tempo AI Host Helper can — handling everyday questions, reservations, private events, catering and more. Built around your restaurant. Your menu. Your hours. Your policies.",
+    cta: { label: "Meet AI Host Helper →", href: "/ai-host-helper" },
+  },
+  {
+    id: "communication",
+    kind: "mock" as const,
+    art: "inbox" as const,
+    eyebrow: "03 / Guest Communication",
+    title: "Every conversation. One place.",
+    body: "Calls. Texts. Email. Website chat. Instagram. Facebook. Chorus brings conversations together so your team knows who's reaching out, what they need and what happened before.",
+    cta: { label: "Explore All Features →", href: "/features" },
+  },
+  {
+    id: "marketing",
+    kind: "photo" as const,
+    eyebrow: "04 / Guest Marketing",
+    title: "Give guests a reason to come back.",
+    body: "Email. Text. Social. Birthdays. Promotions. Win-backs. Some campaigns you plan. Some things Chorus simply remembers to do.",
+    cta: { label: "Explore Guest Marketing →", href: "/guest-marketing" },
+    shotList: "A beautiful restaurant marketing calendar with a small performance snapshot overlay",
+  },
+  {
+    id: "reviews",
+    kind: "mock" as const,
+    art: "reviews" as const,
+    eyebrow: "05 / Manage Reviews",
+    title: "Turn good experiences into great reviews.",
+    body: "Ask for reviews. Monitor feedback. Manage responses. And when the experience isn't great, make sure the right person knows.",
+    cta: { label: "Explore Review Management →", href: "/manage-reviews" },
+  },
+  {
+    id: "events",
+    kind: "photo" as const,
+    eyebrow: "06 / Private Events & Catering",
+    title: "Don't let your best leads disappear into an inbox.",
+    body: "Capture inquiries, organize the details, alert your team and keep the follow-up moving.",
+    cta: { label: "Explore Events & Catering →", href: "/private-events-catering" },
+    shotList: "Private dining room set for an event, warm evening light",
+  },
+];
 
 // GoHighLevel booking calendar, served from the Tempo whitelabel domain — NOT
 // api.leadconnectorhq.com, which does not serve this calendar. WIDGET_ID is the
@@ -131,21 +187,69 @@ const plan = {
           Everything <span class="hero__accent">working together.</span>
         </h1>
         <p class="hero__sub">
-          <strong>Tempo Chorus is one platform for everything your restaurant
-          says to guests.</strong> Marketing, guest communication, reputation,
-          customer relationships and automation — brought into one connected
-          system, instead of a different tool for each.
+          <strong>Your website. Your phone. Your marketing. Your guests.</strong> Tempo Chorus
+          helps restaurants get found, answer guests, build relationships and bring them back —
+          with everything connected in one place.
         </p>
+        <p class="hero__price">$397/month.</p>
         <div class="hero__actions">
-          <a class="btn" href="#demo">Book a demo</a>
-          <a class="hero__link" href="#mocks">See how it works</a>
+          <a class="btn" href="#demo">Book a Demo</a>
+          <a class="hero__link" href="#what-you-get">See What's Included</a>
         </div>
+        <p class="hero__note">No complicated tiers. No pile of disconnected tools.</p>
       </div>
       <div class="hero__show">
         <PhoneField />
       </div>
     </div>
     <div class="hero__floor" />
+  </section>
+
+  <section class="journey" aria-labelledby="journey-title">
+    <div class="shell journey__inner">
+      <h2 class="eyeless-h2 journey__title" id="journey-title">
+        Your guests don't think in channels.
+      </h2>
+      <p class="lede journey__lede">
+        Your restaurant has enough systems. Chorus connects the parts that matter. A guest
+        finds you. Visits your website. Calls. Makes a reservation. Joins your list. Leaves a
+        review. Comes back. To them, it's one relationship with your restaurant. Chorus treats
+        it that way, too.
+      </p>
+      <ol class="journey__flow" aria-label="Guest journey">
+        {["Search", "Website", "Call", "Reservation", "Visit", "Review", "Marketing", "Return"].map((step, i, arr) => (
+          <li>
+            <span>{step}</span>
+            {i < arr.length - 1 && <span class="journey__arrow" aria-hidden="true">→</span>}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="stories" id="what-you-get" aria-labelledby="stories-title">
+    <div class="shell">
+      <h2 class="eyeless-h2 stories__title" id="stories-title">What you get.</h2>
+      {
+        stories.map((s, i) => (
+          <article class={`story ${i % 2 === 1 ? "story--flip" : ""}`} id={s.id}>
+            <div class="story__say">
+              <p class="story__eyebrow">{s.eyebrow}</p>
+              <h3 class="story__title">{s.title}</h3>
+              <p class="lede story__body">{s.body}</p>
+              <a class="story__link" href={s.cta.href}>{s.cta.label}</a>
+            </div>
+            <div class="story__show">
+              {s.kind === "widget" && <FeatureArt kind="agent" />}
+              {s.kind === "mock" && <FeatureArt kind={s.art} />}
+              {s.kind === "photo" && (
+                <PhotoSection treatment="supporting" layout="framed" placeholder shotList={s.shotList} />
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
   </section>
 
   <section class="jobs" aria-labelledby="jobs-title">
@@ -162,7 +266,8 @@ const plan = {
     </video>
     <div class="jobs__veil" aria-hidden="true"></div>
     <div class="shell jobs__shell">
-      <h2 class="eyeless-h2 jobs__title" id="jobs-title">Four jobs. One platform.</h2>
+      <p class="jobs__label">Everything Included</p>
+      <h2 class="eyeless-h2 jobs__title" id="jobs-title">Four jobs. One connected platform.</h2>
       <div class="jobs__grid" data-reveal>
         {
           jobs.map((j, i) => (
@@ -176,6 +281,7 @@ const plan = {
           ))
         }
       </div>
+      <a class="jobs__link" href="/features">Explore All Features →</a>
     </div>
   </section>
 
@@ -264,8 +370,6 @@ const plan = {
       </ul>
     </div>
   </section>
-
-  <HostHelper />
 
   <section class="why" aria-labelledby="why-title">
     <div class="shell why__inner">
@@ -373,27 +477,6 @@ const plan = {
     </div>
   </section>
 
-  <section class="parent" aria-labelledby="parent-title">
-    <div class="shell parent__inner">
-      <h2 class="parent__title" id="parent-title">
-        More than a marketing platform.
-      </h2>
-      <div class="parent__text">
-        <p>
-          Tempo Chorus is backed by Tempo Hospitality Group, a restaurant
-          advisory agency working across marketing, operations, financial
-          performance, technology and growth.
-        </p>
-        <p>
-          That means we don't look at marketing in isolation. We understand
-          how it connects to the rest of your restaurant — and what actually
-          has to happen to turn marketing activity into profitable
-          customers.
-        </p>
-      </div>
-    </div>
-  </section>
-
   <!-- GoHighLevel's resize script: lets the booking iframe report its own
        height so the panel grows with the widget instead of scrolling. -->
   <script is:inline src={`${GHL_DOMAIN}/js/form_embed.js`}></script>
@@ -467,12 +550,26 @@ const plan = {
     font-weight: 600;
   }
 
+  .hero__price {
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--mint-300);
+  }
+
   .hero__actions {
-    margin-top: 2.4rem;
+    margin-top: 1.75rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 1.5rem 2rem;
+  }
+
+  .hero__note {
+    margin-top: 1.25rem;
+    font-size: 0.85rem;
+    color: var(--text-low);
   }
 
   .hero__link {
@@ -488,6 +585,141 @@ const plan = {
   .hero__link:hover {
     color: var(--text-hi);
     border-bottom-color: var(--text-hi);
+  }
+
+  /* ---------- Guest journey ---------- */
+
+  .journey {
+    padding-block: clamp(4rem, 9vw, 6.5rem);
+    background: var(--ink-800);
+  }
+
+  .journey__inner {
+    max-width: 52rem;
+  }
+
+  .journey__lede {
+    margin-top: 1.25rem;
+    max-width: 62ch;
+  }
+
+  .journey__flow {
+    margin: clamp(2rem, 5vw, 3rem) 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .journey__flow li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .journey__flow span:first-child {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-hi);
+    padding: 0.5rem 0.9rem;
+    background: var(--ink-600);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 40%, transparent);
+    border-radius: 4px;
+  }
+
+  .journey__arrow {
+    color: var(--mint-400);
+    font-weight: 700;
+  }
+
+  /* ---------- What you get (story beats) ---------- */
+
+  .stories {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .stories__title {
+    margin-bottom: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .story {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+    padding-block: clamp(3rem, 7vw, 5rem);
+    border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
+  }
+
+  .story:first-of-type {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .story--flip {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  }
+
+  .story--flip .story__say {
+    order: 2;
+  }
+
+  .story--flip .story__show {
+    order: 1;
+  }
+
+  .story__eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+  }
+
+  .story__title {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 1rem + 1.8vw, 2.2rem);
+    letter-spacing: -0.035em;
+    color: var(--text-hi);
+    max-width: 18ch;
+  }
+
+  .story__body {
+    margin-top: 1rem;
+    max-width: 46ch;
+  }
+
+  .story__link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--violet-400);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s var(--ease-out);
+  }
+
+  .story__link:hover {
+    border-bottom-color: var(--violet-400);
+  }
+
+  @media (max-width: 60rem) {
+    .story,
+    .story--flip {
+      grid-template-columns: 1fr;
+    }
+
+    .story--flip .story__say,
+    .story--flip .story__show {
+      order: initial;
+    }
   }
 
   /* ---------- Four Jobs ---------- */
@@ -527,6 +759,31 @@ const plan = {
   .jobs__shell {
     position: relative;
     z-index: 2;
+  }
+
+  .jobs__label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+    margin-bottom: 0.6rem;
+  }
+
+  .jobs__link {
+    display: inline-block;
+    margin-top: clamp(2rem, 5vw, 3rem);
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--violet-400);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s var(--ease-out);
+  }
+
+  .jobs__link:hover {
+    border-bottom-color: var(--violet-400);
   }
 
   .jobs__grid {
@@ -1047,34 +1304,4 @@ const plan = {
     }
   }
 
-  /* ---------- Parent company ---------- */
-
-  .parent {
-    padding-block: clamp(4rem, 9vw, 6.5rem);
-    background: var(--ink-800);
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
-  }
-
-  .parent__inner {
-    max-width: 46rem;
-    text-align: center;
-  }
-
-  .parent__title {
-    font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
-    letter-spacing: -0.04em;
-  }
-
-  .parent__text {
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-  }
-
-  .parent__text p {
-    color: var(--text-mid);
-    font-size: clamp(1.02rem, 0.98rem + 0.3vw, 1.15rem);
-    line-height: 1.62;
-  }
 </style>
