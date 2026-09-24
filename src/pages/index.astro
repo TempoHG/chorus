@@ -9,7 +9,7 @@ const stories = [
   {
     id: "website",
     kind: "graphic" as const,
-    src: "/img/home/websites-devices.svg",
+    src: "/img/home/websites-devices.html",
     alt: "Three real restaurant websites shown on desktop, tablet and phone — a fine-dining coastal grill, a neighborhood Italian restaurant, and a fast-casual bar, each dramatically different from the others.",
     eyebrow: "01 / Your Restaurant Website",
     title: "Your website. Your way.",
@@ -254,7 +254,16 @@ const plan = {
               {s.kind === "photo" && (
                 <PhotoSection treatment="supporting" layout="framed" placeholder shotList={s.shotList} />
               )}
-              {s.kind === "graphic" && <img class="story__graphic" src={s.src} alt={s.alt} loading="lazy" />}
+              {s.kind === "graphic" && (
+                <iframe
+                  class="story__graphic"
+                  src={s.src}
+                  title={s.alt}
+                  loading="lazy"
+                  sandbox="allow-scripts allow-same-origin"
+                  scrolling="no"
+                />
+              )}
             </div>
           </article>
         ))
@@ -801,10 +810,16 @@ const plan = {
 
   /* A finished, authored graphic (device mockup + real site screenshots) —
      no PhotoSection wash, unlike raw photography; it's already on-brand. */
+  /* An iframe, not an <img> — the source animates its own scroll position
+     via an inline <script>, and browsers strip script execution from SVGs
+     loaded as plain images, so this is the only way the motion survives. */
   .story__graphic {
     display: block;
     width: 100%;
-    height: auto;
+    aspect-ratio: 1660 / 1080;
+    border: 0;
+    background: transparent;
+    color-scheme: normal;
   }
 
   @media (max-width: 60rem) {
