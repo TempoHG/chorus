@@ -54,11 +54,12 @@ const stories = [
   {
     id: "events",
     kind: "photo" as const,
+    src: "/img/home/private-dining.jpg",
+    alt: "A long private-dining table set for an evening event, with white roses, taper candles and warm pendant lighting.",
     eyebrow: "06 / Private Events & Catering",
     title: "Don't let your best leads disappear into an inbox.",
     body: "Capture inquiries, organize the details, alert your team and keep the follow-up moving.",
     cta: { label: "Explore Events & Catering →", href: "/private-events-catering" },
-    shotList: "Private dining room set for an event, warm evening light",
   },
 ];
 
@@ -252,7 +253,7 @@ const plan = {
               {s.kind === "widget" && <FeatureArt kind="agent" />}
               {s.kind === "mock" && <FeatureArt kind={s.art} />}
               {s.kind === "photo" && (
-                <PhotoSection treatment="supporting" layout="framed" placeholder shotList={s.shotList} />
+                <PhotoSection treatment="supporting" layout="framed" src={s.src} alt={s.alt} />
               )}
               {s.kind === "graphic" && (
                 <iframe
