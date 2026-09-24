@@ -183,10 +183,15 @@ const plan = {
     <img
       class="hero__bg"
       src="/img/home/hero-service.jpg"
-      alt="A restaurant dining room during evening service — a server carrying plates past guests, with Tempo Chorus catching an incoming call, a new private event inquiry and a five-star review in the background."
+      alt="A restaurant dining room during evening service — a server carrying plates past smiling guests."
       fetchpriority="high"
     />
     <div class="hero__veil" aria-hidden="true"></div>
+    <div class="hero__chips" aria-hidden="true">
+      <img class="hero__chip hero__chip--call" src="/img/home/chips/incoming-call.png" alt="" />
+      <img class="hero__chip hero__chip--review" src="/img/home/chips/google-review.png" alt="" />
+      <img class="hero__chip hero__chip--event" src="/img/home/chips/private-event.png" alt="" />
+    </div>
     <div class="shell">
       <div class="hero__say">
         <h1 class="hero__title">
@@ -549,6 +554,44 @@ const plan = {
   .hero .shell {
     position: relative;
     z-index: 2;
+  }
+
+  /* Real interaction chips (extracted assets, not baked into the photo)
+     laid over the image and its veil — positioned to roughly match where
+     the original composited reference photo placed them. Hidden below
+     56rem: the photo crop and text column don't leave room for them once
+     the hero collapses toward a single, nearly-full-width column. */
+  .hero__chips {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .hero__chip {
+    position: absolute;
+    width: clamp(11rem, 19vw, 17rem);
+    filter: drop-shadow(0 18px 34px rgb(0 0 0 / 0.55));
+  }
+
+  .hero__chip--call {
+    top: 14%;
+    left: 61%;
+  }
+
+  .hero__chip--review {
+    top: 49%;
+    left: 76%;
+  }
+
+  .hero__chip--event {
+    top: 67%;
+    left: 53%;
+  }
+
+  @media (max-width: 56rem) {
+    .hero__chips {
+      display: none;
+    }
   }
 
   .hero__floor {
