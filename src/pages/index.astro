@@ -1,6 +1,5 @@
 ---
 import Base from "../layouts/Base.astro";
-import PhoneField from "../components/PhoneField.astro";
 import ProductMocks from "../components/ProductMocks.astro";
 import FeatureArt from "../components/FeatureArt.astro";
 import JobIcon from "../components/JobIcon.astro";
@@ -181,7 +180,14 @@ const plan = {
   active="home"
 >
   <section class="hero">
-    <div class="shell hero__grid">
+    <img
+      class="hero__bg"
+      src="/img/home/hero-service.jpg"
+      alt="A restaurant dining room during evening service — a server carrying plates past guests, with Tempo Chorus catching an incoming call, a new private event inquiry and a five-star review in the background."
+      fetchpriority="high"
+    />
+    <div class="hero__veil" aria-hidden="true"></div>
+    <div class="shell">
       <div class="hero__say">
         <h1 class="hero__title">
           Everything <span class="hero__accent">working together.</span>
@@ -197,9 +203,6 @@ const plan = {
           <a class="hero__link" href="#what-you-get">See What's Included</a>
         </div>
         <p class="hero__note">No complicated tiers. No pile of disconnected tools.</p>
-      </div>
-      <div class="hero__show">
-        <PhoneField />
       </div>
     </div>
     <div class="hero__floor" />
@@ -495,6 +498,59 @@ const plan = {
     overflow: hidden;
   }
 
+  /* Real, verified restaurant photography — the v2 hero treatment. A
+     directional scrim (heavier stage-left, where the headline sits;
+     lighter stage-right, where the photo's own baked-in interaction chips
+     already carry their own contrast) rather than DESIGN.md's uniform
+     Ambient wash, since this photo already reads as a finished, composed
+     shot rather than backdrop we're overlaying fresh content onto. */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+
+  .hero__veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(
+        100deg,
+        color-mix(in oklab, var(--ink-900) 88%, transparent) 0%,
+        color-mix(in oklab, var(--ink-900) 78%, transparent) 28%,
+        color-mix(in oklab, var(--ink-900) 30%, transparent) 55%,
+        color-mix(in oklab, var(--ink-900) 15%, transparent) 75%
+      ),
+      color-mix(in oklab, var(--violet-700) 20%, transparent);
+  }
+
+  /* The horizontal gradient above assumes a wide photo with room to fade
+     out; on a narrow viewport the hero__say column spans nearly the full
+     width, so a vertical wash keeps text legible regardless of what's
+     behind it instead of relying on a left-side scrim alone. */
+  @media (max-width: 48rem) {
+    .hero__veil {
+      background:
+        linear-gradient(
+          180deg,
+          color-mix(in oklab, var(--ink-900) 82%, transparent) 0%,
+          color-mix(in oklab, var(--ink-900) 88%, transparent) 60%,
+          color-mix(in oklab, var(--ink-900) 92%, transparent) 100%
+        ),
+        color-mix(in oklab, var(--violet-700) 20%, transparent);
+    }
+  }
+
+  .hero .shell {
+    position: relative;
+    z-index: 2;
+  }
+
   .hero__floor {
     position: absolute;
     left: 0;
@@ -512,20 +568,8 @@ const plan = {
     );
   }
 
-  .hero__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-    gap: clamp(2.5rem, 6vw, 5.5rem);
-    align-items: center;
-  }
-
-  @media (max-width: 62rem) {
-    .hero__grid {
-      grid-template-columns: 1fr;
-    }
-    .hero__show {
-      margin-top: 1rem;
-    }
+  .hero__say {
+    max-width: 34rem;
   }
 
   .hero__title {
