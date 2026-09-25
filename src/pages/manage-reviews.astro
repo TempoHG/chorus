@@ -2,6 +2,15 @@
 import Base from "../layouts/Base.astro";
 
 const recoverySteps = ["Manager notified", "Guest identified", "Follow-up created"];
+
+const requestMessage = {
+  business: "Barton Beach Bistro",
+  channel: "Text message",
+  time: "9:42 PM",
+  body: "Thanks for dining with us tonight, Sarah! We'd love to hear how it went — mind leaving us a quick review?",
+  cta: "Leave a Review",
+  note: "Takes about 30 seconds",
+};
 ---
 
 <Base
@@ -19,13 +28,30 @@ const recoverySteps = ["Manager notified", "Guest identified", "Follow-up create
     </div>
   </section>
 
-  <section class="beat" aria-labelledby="requests-title">
-    <div class="shell beat__inner">
-      <p class="beat__label">Requests</p>
-      <h2 class="beat__title" id="requests-title">Make great experiences easy to share.</h2>
-      <p class="lede beat__lede">
-        Automatically ask guests for reviews without relying on someone to remember.
-      </p>
+  <section class="requests" aria-labelledby="requests-title">
+    <div class="shell requests__inner">
+      <div class="requests__say">
+        <p class="beat__label">Requests</p>
+        <h2 class="beat__title" id="requests-title">Make great experiences easy to share.</h2>
+        <p class="lede beat__lede">
+          Automatically ask guests for reviews without relying on someone to remember.
+        </p>
+      </div>
+      <div class="requests__show">
+        <div class="request__card">
+          <div class="request__head">
+            <span class="request__avatar" aria-hidden="true">BB</span>
+            <div>
+              <p class="request__business">{requestMessage.business}</p>
+              <p class="request__meta">{requestMessage.channel} · {requestMessage.time}</p>
+            </div>
+          </div>
+          <p class="request__body">{requestMessage.body}</p>
+          <p class="request__stars" aria-label="Five out of five stars">★★★★★</p>
+          <p class="request__btn">{requestMessage.cta}</p>
+          <p class="request__note">{requestMessage.note}</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -104,6 +130,101 @@ const recoverySteps = ["Manager notified", "Guest identified", "Follow-up create
 
   .beat__inner {
     max-width: 46rem;
+  }
+
+  .requests {
+    padding-block: clamp(4rem, 9vw, 6.5rem);
+  }
+
+  .requests__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  @media (max-width: 56rem) {
+    .requests__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .requests__say {
+    max-width: 46rem;
+  }
+
+  .request__card {
+    background: var(--ink-700);
+    border: 1px solid color-mix(in oklab, var(--mint-400) 30%, transparent);
+    border-radius: 5px;
+    padding: clamp(1.5rem, 3.5vw, 2rem);
+    max-width: 24rem;
+    margin-inline: auto;
+  }
+
+  .request__head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .request__avatar {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--violet-500) 30%, transparent);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-hi);
+  }
+
+  .request__business {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-hi);
+  }
+
+  .request__meta {
+    margin-top: 0.15rem;
+    font-size: 0.78rem;
+    color: var(--text-low);
+  }
+
+  .request__body {
+    margin-top: 1.1rem;
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.55;
+  }
+
+  .request__stars {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: var(--amber-400);
+    letter-spacing: 0.1em;
+  }
+
+  .request__btn {
+    margin-top: 1.1rem;
+    text-align: center;
+    background: var(--mint-400);
+    color: var(--ink-900);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+  }
+
+  .request__note {
+    margin-top: 0.75rem;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-low);
   }
 
   .beat__label,
