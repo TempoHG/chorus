@@ -55,8 +55,8 @@ const eventSteps = ["Confirmation sent", "Manager notified", "Follow-up schedule
   <PhotoSection
     treatment="ambient"
     layout="full-bleed"
-    placeholder
-    shotList="Private dining room set for an event, warm evening light, or a private event/celebration in progress"
+    src="/img/home/private-events-fullbleed.jpg"
+    alt="A long private-dining table set with dark ceramic plates, linen napkins, dried grasses and lit taper candles against a moody green backdrop."
   >
     <div class="shell speed">
       <p class="speed__label">Speed</p>
@@ -96,9 +96,19 @@ const eventSteps = ["Confirmation sent", "Manager notified", "Follow-up schedule
 
   <section class="catering" aria-labelledby="catering-title">
     <div class="shell catering__inner">
-      <p class="catering__label">Catering</p>
-      <h2 class="catering__title" id="catering-title">Catering works the same way.</h2>
-      <p class="lede catering__body">Capture. Organize. Follow up. Less chasing. Fewer forgotten leads.</p>
+      <div class="catering__say">
+        <p class="catering__label">Catering</p>
+        <h2 class="catering__title" id="catering-title">Catering works the same way.</h2>
+        <p class="lede catering__body">Capture. Organize. Follow up. Less chasing. Fewer forgotten leads.</p>
+      </div>
+      <div class="catering__show">
+        <PhotoSection
+          treatment="supporting"
+          layout="framed"
+          src="/img/home/catering.jpg"
+          alt="A catering spread with polished chafing dishes, stacked white plates and appetizers, set among greenery and string lights."
+        />
+      </div>
     </div>
   </section>
 
@@ -297,6 +307,19 @@ const eventSteps = ["Confirmation sent", "Manager notified", "Follow-up schedule
   }
 
   .catering__inner {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  @media (max-width: 62rem) {
+    .catering__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .catering__say {
     max-width: 40rem;
   }
 
