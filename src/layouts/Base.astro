@@ -168,15 +168,19 @@ const { title, description, active } = Astro.props;
           </p>
         </div>
         <nav class="footer__nav" aria-label="Footer">
-          <a href="/">Overview</a>
-          <a href="/features">All Features</a>
-          <a href="/guest-marketing">Guest Marketing</a>
-          <a href="/manage-reviews">Manage Reviews</a>
-          <a href="/private-events-catering">Private Events & Catering</a>
-          <a href="/websites-menus">Websites & Menus</a>
-          <a href="/ai-host-helper">AI Host Helper</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/#demo">Book a Demo</a>
+          <div class="footer__nav-col">
+            <a href="/">Overview</a>
+            <a href="/websites-menus">Websites & Menus</a>
+            <a href="/ai-host-helper">AI Host Helper</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/#demo">Book a Demo</a>
+          </div>
+          <div class="footer__nav-col">
+            <a href="/features">All Features</a>
+            <a href="/guest-marketing">Guest Marketing</a>
+            <a href="/manage-reviews">Manage Reviews</a>
+            <a href="/private-events-catering">Private Events & Catering</a>
+          </div>
         </nav>
       </div>
       <div class="shell footer__base">
@@ -424,11 +428,16 @@ const { title, description, active } = Astro.props;
 
   .footer__nav {
     display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
+    gap: 2.5rem;
     font-family: var(--font-display);
     font-weight: 600;
     font-size: 1.05rem;
+  }
+
+  .footer__nav-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
   }
 
   .footer__nav a {
