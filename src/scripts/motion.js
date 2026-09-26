@@ -72,6 +72,42 @@ function revealGroups() {
   });
 }
 
+/* Reviews art (kind="reviews"): unlike every other [data-reveal] group,
+   this one loops — slide up, hold while the flagged row (already carries a
+   static amber border) pulses its amber glow a few times, fade out, reset,
+   repeat. Runs on its own dedicated timeline rather than the shared
+   revealGroups()/[data-reveal] system, since that system is deliberately
+   one-shot everywhere else on the site. The glow itself stays a CSS
+   keyframe animation (see .rev__row--needs-human.is-glowing); this timeline
+   just toggles the class on and off once per lap so it replays cleanly. */
+function initReviewLoop() {
+  const group = document.querySelector("[data-review-loop]");
+  if (!group) return;
+
+  const rows = gsap.utils.toArray(group.children);
+  const flagged = group.querySelector(".rev__row--needs-human");
+  if (!rows.length) return;
+
+  const GLOW_DURATION = 1.6 * 3; // must match .rev__row--needs-human.is-glowing's animation
+
+  gsap.set(rows, { opacity: 0, y: 14 });
+
+  const tl = gsap.timeline({ repeat: -1, paused: true });
+  tl.to(rows, { opacity: 1, y: 0, duration: 0.6, ease: EASE, stagger: 0.07 })
+    .call(() => flagged?.classList.add("is-glowing"))
+    .to({}, { duration: GLOW_DURATION })
+    .call(() => flagged?.classList.remove("is-glowing"))
+    .to(rows, { opacity: 0, duration: 0.5, ease: EASE }, "+=1.5")
+    .set(rows, { y: 14 });
+
+  ScrollTrigger.create({
+    trigger: group,
+    start: "top 85%",
+    once: true,
+    onEnter: () => tl.play(),
+  });
+}
+
 /* The "Why Chorus" orbit graphic: six channel tags spring out from behind
    the Chorus node, orbit it clockwise, retract back behind it, then loop.
    Position is driven by polar coordinates (radius, angle) recomputed into
@@ -335,6 +371,9 @@ function settleForReducedMotion() {
   });
   document.querySelectorAll("[data-reveal-solo]").forEach((el) => {
     gsap.set(el, { opacity: 1, y: 0 });
+  });
+  document.querySelectorAll("[data-review-loop]").forEach((group) => {
+    gsap.set(group.children, { opacity: 1, y: 0 });
   });
   document.querySelectorAll("[data-count-to]").forEach((el) => {
     el.textContent = el.getAttribute("data-count-to") || el.textContent;
@@ -622,12 +661,63 @@ function initFeaturesDropdown() {
   });
 }
 
+/* The marketing-calendar art's rotating siblings (Text, Email, Social,
+   Birthdays, Promotions, Win-backs) — auto-advances on a timer, pauses for
+   prefers-reduced-motion (the calendar just sits still), and a click on a
+   nav dot jumps straight there and resets the timer. Class-toggle only, no
+   GSAP — this is a simple slideshow, not a scroll-triggered entrance. */
+function initChannelRotator() {
+  const rotators = document.querySelectorAll("[data-channel-rotator]");
+  if (!rotators.length) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  rotators.forEach((rotator) => {
+    const slides = Array.from(rotator.querySelectorAll("[data-rotator-slide]"));
+    const dots = Array.from(rotator.querySelectorAll("[data-rotator-dot]"));
+    if (slides.length < 2) return;
+
+    let index = Math.max(
+      0,
+      slides.findIndex((s) => s.classList.contains("is-active")),
+    );
+    let timer = null;
+
+    const show = (next) => {
+      if (next === index) return;
+      slides[index].classList.remove("is-active");
+      dots[index]?.setAttribute("aria-selected", "false");
+      dots[index]?.classList.remove("is-active");
+      index = next;
+      slides[index].classList.add("is-active");
+      dots[index]?.setAttribute("aria-selected", "true");
+      dots[index]?.classList.add("is-active");
+    };
+
+    const restart = () => {
+      if (reduceMotion) return;
+      window.clearInterval(timer);
+      timer = window.setInterval(() => show((index + 1) % slides.length), 4000);
+    };
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        show(i);
+        restart();
+      });
+    });
+
+    restart();
+  });
+}
+
 export function initMotion() {
   fixHashScroll();
   initOnboardingPopup();
   initAgentCards();
   initDemoBookedTracking();
   initFeaturesDropdown();
+  initChannelRotator();
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -641,4 +731,5 @@ export function initMotion() {
   orbitReveals();
   countUps();
   vignetteTimeline();
+  initReviewLoop();
 }

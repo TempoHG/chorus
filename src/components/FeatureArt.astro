@@ -68,6 +68,63 @@ const snapshot = [
   "1,247 emails", "386 texts", "42 birthday offers", "71 review requests", "12 social posts",
 ];
 
+/* --- Guest Marketing (homepage story): the calendar's rotating siblings —
+   one small card per channel/campaign type, cycling in the same stage. The
+   "Text" slide uses the thread/panel vocabulary from kind="inbox" instead
+   of the subject/preview card the rest share, since a text is a two-way
+   exchange, not a broadcast. */
+const channelCards = [
+  {
+    id: "email",
+    title: "Email",
+    tag: "Weekly send",
+    tone: "violet",
+    subject: "This Friday: Patio Season Opens \u{1F33F}",
+    preview: "Live music, a new rosé, and your favorite table waiting.",
+    sum: "Sent to 1,204 guests · 48% open rate",
+  },
+  {
+    id: "social",
+    title: "Social",
+    tag: "Instagram",
+    tone: "lilac",
+    subject: "Behind the pass, tonight →",
+    preview: "Tonight's special, plated and ready to go out.",
+    sum: "312 likes · 18 comments · cross-posted to Facebook",
+  },
+  {
+    id: "birthdays",
+    title: "Birthdays",
+    tag: "Automated",
+    tone: "amber",
+    subject: "Happy Birthday, Marcus! \u{1F382}",
+    preview: "A free dessert is waiting whenever you're ready to celebrate.",
+    sum: "Sent automatically · no one has to remember",
+  },
+  {
+    id: "promotions",
+    title: "Promotions",
+    tag: "Weekend push",
+    tone: "violet",
+    subject: "20% off drinks, Friday–Sunday",
+    preview: "Just for the regulars who haven't been in this month.",
+    sum: "Sent to 842 guests in under a minute",
+  },
+  {
+    id: "winbacks",
+    title: "Win-backs",
+    tag: "45 days inactive",
+    tone: "green",
+    subject: "We miss you, Elena",
+    preview: "It's been a while — come back this week for a complimentary appetizer.",
+    sum: "Triggered automatically · no list to manage",
+  },
+];
+const textExchange = [
+  { src: "Guest", text: "Any chance of a window table Friday?", time: "4:12 PM", ours: false },
+  { src: "Chorus", text: "You're set — Friday 7:30, window requested.", time: "4:12 PM", ours: true },
+];
+
 /* --- Bring Guests Back: the review queue --- */
 const reviews = [
   {
@@ -175,36 +232,81 @@ const orbit = [
   {
     kind === "marketing-calendar" && (
       <div class="art__stage" data-reveal-solo>
-        <div class="art__head">
-          <p class="art__title">May</p>
-          <ul class="chips">
-            {channels.map((c) => (
-              <li class={`chip chip--${c.tone}`}>{c.name}</li>
-            ))}
-          </ul>
-        </div>
-        <div class="cal">
-          {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
-            <p class="cal__dow">{d}</p>
-          ))}
-          {
-            Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
-              <div class={`cal__day ${day === 10 ? "cal__day--feature" : ""}`}>
-                <span class="cal__num">{day}</span>
-                {(mayMonth[day] ?? []).map((e) => (
-                  <span class={`cal__entry cal__entry--${e.tone}`}>
-                    <span class="cal__label">{e.label}</span>
-                    <span class="cal__time">{e.time}</span>
-                  </span>
+        <div class="rotator" data-channel-rotator>
+          <div class="rotator__slide is-active" data-rotator-slide>
+            <div class="art__head">
+              <p class="art__title">May</p>
+              <ul class="chips">
+                {channels.map((c) => (
+                  <li class={`chip chip--${c.tone}`}>{c.name}</li>
                 ))}
+              </ul>
+            </div>
+            <div class="cal">
+              {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
+                <p class="cal__dow">{d}</p>
+              ))}
+              {
+                Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
+                  <div class={`cal__day ${day === 10 ? "cal__day--feature" : ""}`}>
+                    <span class="cal__num">{day}</span>
+                    {(mayMonth[day] ?? []).map((e) => (
+                      <span class={`cal__entry cal__entry--${e.tone}`}>
+                        <span class="cal__label">{e.label}</span>
+                        <span class="cal__time">{e.time}</span>
+                      </span>
+                    ))}
+                  </div>
+                ))
+              }
+            </div>
+            <p class="art__sum">A month of sends, one Sunday brunch campaign at the center of it</p>
+            <div class="snapshot">
+              <p class="art__label">This month</p>
+              {snapshot.map((line) => <p class="snapshot__row">{line}</p>)}
+            </div>
+          </div>
+
+          <div class="rotator__slide" data-rotator-slide>
+            <div class="art__head">
+              <p class="art__title">Text</p>
+              <span class="chip chip--green">Two-way SMS</span>
+            </div>
+            <div class="panel channel__panel">
+              <ul class="thread">
+                {textExchange.map((t) => (
+                  <li class={t.ours ? "is-ours" : ""}>
+                    <span class="thread__src">{t.src}</span>
+                    <p>“{t.text}”</p>
+                    <span class="thread__time">{t.time}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p class="art__sum">94% of texts read within 3 minutes</p>
+          </div>
+
+          {channelCards.map((c) => (
+            <div class="rotator__slide" data-rotator-slide>
+              <div class="art__head">
+                <p class="art__title">{c.title}</p>
+                <span class={`chip chip--${c.tone}`}>{c.tag}</span>
               </div>
-            ))
-          }
-        </div>
-        <p class="art__sum">A month of sends, one Sunday brunch campaign at the center of it</p>
-        <div class="snapshot" data-reveal-solo>
-          <p class="art__label">This month</p>
-          {snapshot.map((line) => <p class="snapshot__row">{line}</p>)}
+              <div class="channel__msg">
+                <p class="channel__subject">{c.subject}</p>
+                <p class="channel__preview">{c.preview}</p>
+              </div>
+              <p class="art__sum">{c.sum}</p>
+            </div>
+          ))}
+
+          <div class="rotator__nav" role="tablist" aria-label="Campaign type">
+            <button type="button" class="rotator__dot is-active" data-rotator-dot aria-label="Show May calendar" aria-selected="true" role="tab" />
+            <button type="button" class="rotator__dot" data-rotator-dot aria-label="Show Text example" aria-selected="false" role="tab" />
+            {channelCards.map((c) => (
+              <button type="button" class="rotator__dot" data-rotator-dot aria-label={`Show ${c.title} example`} aria-selected="false" role="tab" />
+            ))}
+          </div>
         </div>
       </div>
     )
@@ -217,7 +319,7 @@ const orbit = [
           <p class="art__title">Reviews</p>
           <p class="art__meta">Every platform, one queue</p>
         </div>
-        <ul class="rev" data-reveal>
+        <ul class="rev" data-review-loop>
           {reviews.map((r, i) => (
             <li class={`rev__row rev__row--${r.state}`} style={`--i:${i}`}>
               <div class="rev__top">
@@ -743,6 +845,105 @@ const orbit = [
     }
   }
 
+  /* ---- channel rotator (marketing-calendar's rotating siblings) ---- */
+
+  /* A floor, not a fixed height — the calendar slide is the tallest of the
+     seven and sets it. Without this, swapping to a shorter card shrinks
+     the stage every ~4s, which reflows everything below it on the page
+     and quietly invalidates any ScrollTrigger start position that was
+     calculated against the taller layout. */
+  .rotator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 44rem;
+  }
+
+  @media (max-width: 30rem) {
+    .rotator {
+      min-height: 40rem;
+    }
+  }
+
+  .rotator__slide {
+    display: none;
+  }
+
+  .rotator__slide.is-active {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .rotator__slide.is-active {
+      animation: rotator-in 0.5s var(--ease-out);
+    }
+  }
+
+  @keyframes rotator-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .rotator__nav {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1.25rem;
+  }
+
+  .rotator__dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    flex: none;
+    border-radius: 50%;
+    border: 0;
+    padding: 0;
+    background: color-mix(in oklab, var(--violet-500) 40%, transparent);
+    cursor: pointer;
+    transition: background 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+  }
+
+  .rotator__dot:hover {
+    background: color-mix(in oklab, var(--violet-400) 65%, transparent);
+  }
+
+  .rotator__dot.is-active {
+    background: var(--mint-400);
+    transform: scale(1.3);
+  }
+
+  .channel__panel {
+    margin-top: 0.25rem;
+  }
+
+  .channel__msg {
+    margin-top: 0.25rem;
+    padding: 1rem 1.1rem 1.1rem;
+    background: var(--ink-600);
+    border: 1px solid color-mix(in oklab, var(--violet-500) 26%, transparent);
+    border-radius: 4px;
+  }
+
+  .channel__subject {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text-hi);
+  }
+
+  .channel__preview {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-mid);
+  }
+
   /* ---- reviews ---- */
 
   .rev {
@@ -763,6 +964,24 @@ const orbit = [
 
   .rev__row--needs-human {
     border-color: color-mix(in oklab, var(--amber-400) 55%, transparent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .rev__row--needs-human.is-glowing {
+      animation: rev-glow 1.6s ease-in-out 3;
+    }
+  }
+
+  @keyframes rev-glow {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--amber-400) 0%, transparent);
+      border-color: color-mix(in oklab, var(--amber-400) 55%, transparent);
+    }
+    50% {
+      box-shadow: 0 0 18px 3px color-mix(in oklab, var(--amber-400) 55%, transparent);
+      border-color: color-mix(in oklab, var(--amber-400) 95%, transparent);
+    }
   }
 
   .rev__top {
