@@ -13,6 +13,30 @@ const menuIncludes = [
   "Dietary Indicators*", "Ordering Links", "Reservation Links",
   "Optional Photography", "Search-Friendly Content", "Easy Updates",
 ];
+
+const sites = [
+  {
+    name: "Citria Coastal Grill",
+    domain: "citria.net",
+    desc: "Mediterranean fine dining",
+    src: "/img/home/site-citria.jpg",
+    alt: "Citria's homepage hero: an oceanview patio table set for dinner at sunset.",
+  },
+  {
+    name: "Lou Amari's",
+    domain: "louamaris.com",
+    desc: "Neighborhood Italian restaurant",
+    src: "/img/home/site-lou-amaris.jpg",
+    alt: "Lou Amari's homepage hero: the restaurant's brick storefront lit up at night.",
+  },
+  {
+    name: "Da Wurst",
+    domain: "eatdawurst.com",
+    desc: "Fast casual restaurant & bar",
+    src: "/img/home/site-da-wurst.jpg",
+    alt: "Da Wurst's homepage hero: a lively string-lit beer garden patio at night.",
+  },
+];
 ---
 
 <Base
@@ -71,14 +95,26 @@ const menuIncludes = [
     </div>
   </section>
 
-  <section class="showcase">
-    <div class="shell showcase__inner">
-      <PhotoSection
-        treatment="supporting"
-        layout="framed"
-        placeholder
-        shotList="Three real restaurant websites shown across desktop and mobile — fine dining, neighborhood restaurant, fast casual/bar — dramatically different from each other"
-      />
+  <section class="showcase" aria-labelledby="showcase-title">
+    <div class="shell">
+      <p class="showcase__label">Real Sites</p>
+      <h2 class="showcase__title" id="showcase-title">One System. No Templates. Any Website.</h2>
+      <p class="lede showcase__sub">
+        Every Tempo website runs on the same powerful foundation—but the design is built around
+        your restaurant, your brand and your guests. No themes. No cookie-cutter layouts. No two
+        sites need to look alike.
+      </p>
+      <div class="showcase__grid" data-reveal>
+        {sites.map((s) => (
+          <div class="showcase__card">
+            <a class="showcase__frame" href={`https://${s.domain}`} target="_blank" rel="noopener noreferrer" aria-label={`Visit the ${s.name} website (opens in a new tab)`}>
+              <img class="showcase__img" src={s.src} alt={s.alt} loading="lazy" decoding="async" />
+            </a>
+            <p class="showcase__name">{s.name}</p>
+            <p class="showcase__desc">{s.desc}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -279,12 +315,86 @@ const menuIncludes = [
   }
 
   .showcase {
-    padding-block: clamp(2rem, 5vw, 3rem);
+    padding-block: clamp(3.5rem, 8vw, 6rem);
   }
 
-  .showcase__inner {
-    max-width: 46rem;
-    margin-inline: auto;
+  .showcase__label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-low);
+    text-align: center;
+  }
+
+  .showcase__title {
+    margin: 0.6rem auto 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
+    letter-spacing: -0.038em;
+    text-align: center;
+    max-width: 28ch;
+  }
+
+  .showcase__sub {
+    margin: 1rem auto 0;
+    text-align: center;
+    max-width: 52ch;
+  }
+
+  .showcase__grid {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  @media (max-width: 46rem) {
+    .showcase__grid {
+      grid-template-columns: 1fr;
+      max-width: 26rem;
+      margin-inline: auto;
+    }
+  }
+
+  .showcase__frame {
+    display: block;
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 5px;
+    overflow: hidden;
+    background: var(--ink-700);
+    box-shadow: 0 24px 40px -22px rgb(0 0 0 / 0.7);
+  }
+
+  .showcase__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .showcase__frame:hover .showcase__img,
+  .showcase__frame:focus-visible .showcase__img {
+    transform: scale(1.04);
+  }
+
+  .showcase__name {
+    margin-top: 1.1rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-hi);
+  }
+
+  .showcase__desc {
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--text-mid);
   }
 
   .built-for {
