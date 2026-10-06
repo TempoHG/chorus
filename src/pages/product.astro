@@ -1,0 +1,389 @@
+---
+import Base from "../layouts/Base.astro";
+
+const areas = [
+  {
+    id: "guest-relations",
+    name: "Guest Relations",
+    head: "Be easy to find, easy to reach.",
+    items: ["Website", "AI Host Helper", "Guest communication", "Forms + guest capture"],
+  },
+  {
+    id: "guest-marketing",
+    name: "Guest Marketing",
+    head: "Give guests a reason to come back.",
+    items: ["Email", "Text", "Social", "Birthdays", "Promotions", "Win-back campaigns", "Guest segmentation"],
+  },
+  {
+    id: "reputation",
+    name: "Reputation",
+    head: "Build it. Protect it.",
+    items: ["Review requests", "Review monitoring", "Response management", "Guest feedback", "Guest recovery"],
+  },
+  {
+    id: "opportunities",
+    name: "Opportunities",
+    head: "Don't let good leads disappear.",
+    items: ["Private events", "Catering", "Inquiry capture", "Manager notifications", "Follow-up", "Lead tracking"],
+  },
+];
+
+const guestHistory = [
+  { when: "Mar 3", what: "Visited", detail: "Party of 4 · Table 12" },
+  { when: "Mar 12", what: "Called", detail: "Reservation booked by AI Host Helper" },
+  { when: "Apr 2", what: "Private-event inquiry", detail: "24 guests · Manager notified" },
+  { when: "Apr 9", what: "Review", detail: "★★★★★ · Response ready" },
+  { when: "May 14", what: "Birthday club", detail: "Welcome sent" },
+  { when: "Jun 1", what: "Email", detail: "Opened · Clicked patio menu" },
+];
+
+const nextSteps = [
+  { trigger: "New birthday member", action: "Welcome" },
+  { trigger: "Private-event inquiry", action: "Follow up" },
+  { trigger: "Poor guest experience", action: "Alert manager" },
+  { trigger: "Missed call", action: "Text back" },
+  { trigger: "Guest hasn't returned", action: "Reconnect" },
+  { trigger: "Great visit", action: "Ask for review" },
+];
+---
+
+<Base
+  title="Product — Tempo Chorus"
+  description="Chorus connects the ways guests find you, reach you and come back, so your team has less to manage and fewer opportunities fall through the cracks."
+  active="product"
+>
+  <section class="lead">
+    <div class="shell">
+      <h1 class="lead__title">Everything working together.</h1>
+      <p class="lead__sub">
+        Chorus connects the ways guests find you, reach you and come back, so your team has less to
+        manage and fewer opportunities fall through the cracks.
+      </p>
+      <a class="btn lead__cta" href="/book-a-demo">Book a Demo</a>
+    </div>
+  </section>
+
+  {areas.map((a) => (
+    <section class="area" id={a.id} aria-labelledby={`${a.id}-title`}>
+      <div class="shell area__inner">
+        <p class="eyebrow">{a.name}</p>
+        <h2 class="section-title" id={`${a.id}-title`}>{a.head}</h2>
+        <ul class="area__items">
+          {a.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        {a.id === "guest-relations" && (
+          <div class="menus" id="menus">
+            <p class="menus__label">Menus Made for the Web</p>
+            <p class="menus__text">Turn an existing menu into a fast, mobile-friendly experience that's easier to browse and keep current.</p>
+          </div>
+        )}
+      </div>
+    </section>
+  ))}
+
+  <section class="history" aria-labelledby="history-title">
+    <div class="shell history__inner">
+      <div class="history__say">
+        <p class="eyebrow">One Guest. One History.</p>
+        <h2 class="section-title" id="history-title">Every interaction belongs to the same guest.</h2>
+        <p class="lede">
+          Every interaction adds to what you know about a guest. Chorus keeps that relationship connected,
+          so individual tools become one picture of the guest.
+        </p>
+      </div>
+      <div class="record" aria-label="Example guest record: Sarah Chen, with her visits, calls, inquiry, review and email activity">
+        <p class="record__name">Sarah Chen</p>
+        <p class="record__meta">Since March · 6 visits</p>
+        <ol class="record__timeline">
+          {guestHistory.map((h) => (
+            <li>
+              <span class="record__when">{h.when}</span>
+              <span class="record__what">{h.what}</span>
+              <span class="record__detail">{h.detail}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="next" aria-labelledby="next-title">
+    <div class="shell">
+      <p class="eyebrow">Chorus Remembers the Next Step.</p>
+      <h2 class="section-title" id="next-title">Things that used to depend on somebody remembering now happen on their own.</h2>
+      <ul class="next__list">
+        {nextSteps.map((n) => (
+          <li class="next__row">
+            <span class="next__trigger">{n.trigger}</span>
+            <span class="next__arrow" aria-hidden="true">→</span>
+            <span class="next__action">{n.action}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="close" aria-labelledby="close-title">
+    <div class="shell close__inner">
+      <h2 class="close__title" id="close-title">Less software to think about. More restaurant to run.</h2>
+      <a class="btn btn--light" href="/book-a-demo">Book a Demo</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  section {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--v3-text-low);
+  }
+
+  .section-title {
+    margin-top: 0.75rem;
+    font-size: clamp(2rem, 1.2rem + 3.4vw, 3.4rem);
+    letter-spacing: -0.035em;
+    color: var(--eggplant);
+    max-width: 22ch;
+  }
+
+  .lede {
+    margin-top: 1.25rem;
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+    color: var(--v3-text-mid);
+    max-width: 48ch;
+  }
+
+  /* Lead */
+  .lead {
+    padding-top: clamp(5rem, 12vw, 9rem);
+    padding-bottom: clamp(3.5rem, 8vw, 5rem);
+  }
+
+  .lead__title {
+    font-size: clamp(2.8rem, 1.2rem + 6vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+    color: var(--eggplant);
+  }
+
+  .lead__sub {
+    margin-top: 1.75rem;
+    font-family: var(--font-body);
+    font-size: clamp(1.1rem, 1rem + 0.6vw, 1.4rem);
+    color: var(--v3-text-mid);
+    max-width: 44ch;
+  }
+
+  .lead__cta {
+    margin-top: 2.25rem;
+  }
+
+  /* Four product areas: hairline-separated, each given room. */
+  .area {
+    border-top: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+  }
+
+  .area__items {
+    margin: clamp(2rem, 4vw, 2.75rem) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem clamp(1.5rem, 3vw, 2.5rem);
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: var(--eggplant);
+  }
+
+  .area__items li {
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 10%, transparent);
+  }
+
+  .menus {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding: 1.5rem 0 0 0;
+    border-top: 1px solid color-mix(in oklab, var(--allium) 60%, transparent);
+    max-width: 42rem;
+  }
+
+  .menus__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--eggplant);
+  }
+
+  .menus__text {
+    margin-top: 0.5rem;
+    color: var(--v3-text-mid);
+  }
+
+  @media (max-width: 52rem) {
+    .area__items {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .area__items {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* One Guest. One History. */
+  .history {
+    background: var(--sand);
+  }
+
+  .history__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .record {
+    background: var(--white);
+    border-radius: 4px;
+    padding: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-family: var(--font-product);
+  }
+
+  .record__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--eggplant);
+  }
+
+  .record__meta {
+    margin-top: 0.25rem;
+    font-family: var(--font-system);
+    font-size: 0.8rem;
+    color: var(--v3-text-low);
+  }
+
+  .record__timeline {
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0;
+  }
+
+  .record__timeline li {
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: 0.2rem 1rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid color-mix(in oklab, var(--eggplant) 10%, transparent);
+  }
+
+  .record__when {
+    grid-row: span 2;
+    font-family: var(--font-system);
+    font-size: 0.78rem;
+    color: var(--v3-text-low);
+    padding-top: 0.15rem;
+  }
+
+  .record__what {
+    font-weight: 600;
+    color: var(--eggplant);
+  }
+
+  .record__detail {
+    font-size: 0.9rem;
+    color: var(--grape);
+  }
+
+  @media (max-width: 52rem) {
+    .history__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Chorus remembers the next step */
+  .next__list {
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .next__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 2.5rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: clamp(1rem, 2.5vw, 1.5rem) 0;
+    border-top: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1rem + 0.8vw, 1.5rem);
+    letter-spacing: -0.01em;
+  }
+
+  .next__trigger {
+    color: var(--v3-text-mid);
+  }
+
+  .next__arrow {
+    color: var(--allium);
+    text-align: center;
+  }
+
+  .next__action {
+    font-weight: 700;
+    color: var(--eggplant);
+  }
+
+  @media (max-width: 40rem) {
+    .next__row {
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+    }
+
+    .next__arrow {
+      display: none;
+    }
+  }
+
+  /* Close */
+  .close {
+    background: var(--eggplant);
+    color: var(--white);
+  }
+
+  .close__inner {
+    text-align: center;
+  }
+
+  .close__title {
+    font-size: clamp(2rem, 1.2rem + 3.6vw, 3.6rem);
+    letter-spacing: -0.035em;
+    max-width: 22ch;
+    margin: 0 auto;
+    color: var(--white);
+  }
+
+  .close__inner .btn {
+    margin-top: 2.25rem;
+  }
+
+  .btn--light {
+    --btn-bg: var(--white);
+    --btn-fg: var(--eggplant);
+  }
+
+  .btn--light:hover {
+    --btn-bg: var(--allium);
+  }
+</style>
