@@ -82,6 +82,9 @@ const sites = [
   active="home"
 >
   <section class="hero">
+    <div class="hero__media" aria-hidden="true">
+      <img src="/img/home/hero-service.jpg" alt="" decoding="async" fetchpriority="high" />
+    </div>
     <div class="shell hero__inner">
       <div class="hero__copy">
       <h1 class="hero__title">More guests.<br />More often.</h1>
@@ -264,23 +267,49 @@ const sites = [
 
   /* 01 — Hero: type-only, one interaction as the product evidence. */
   .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     padding-top: clamp(4.5rem, 12vw, 9rem);
     padding-bottom: clamp(4rem, 9vw, 6rem);
-    background: var(--white);
+    background: var(--grape);
+    color: var(--white);
+  }
+
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(1) contrast(1.05);
+  }
+
+  .hero__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--grape);
+    mix-blend-mode: multiply;
   }
 
   .hero__title {
+    color: var(--white);
     font-size: clamp(3rem, 1.2rem + 7vw, 6.8rem);
     line-height: 0.98;
     letter-spacing: -0.045em;
-    color: var(--eggplant);
   }
 
   .hero__sub {
     margin-top: 1.75rem;
     font-family: var(--font-body);
     font-size: clamp(1.1rem, 1rem + 0.6vw, 1.45rem);
-    color: var(--v3-text-mid);
+    color: color-mix(in oklab, var(--white) 88%, transparent);
     max-width: 36ch;
   }
 
@@ -295,7 +324,7 @@ const sites = [
   .hero__link {
     font-family: var(--font-display);
     font-weight: 600;
-    color: var(--eggplant);
+    color: var(--white);
     text-decoration: none;
     border-bottom: 2px solid var(--allium);
     padding-bottom: 0.15rem;
