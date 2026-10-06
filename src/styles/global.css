@@ -167,8 +167,8 @@ svg {
 /* ---- Buttons ---- */
 
 .btn {
-  --btn-bg: var(--eggplant);
-  --btn-fg: var(--white);
+  --btn-bg: var(--allium);
+  --btn-fg: var(--eggplant);
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
@@ -188,13 +188,14 @@ svg {
     background 0.25s var(--ease-out),
     transform 0.25s var(--ease-out),
     box-shadow 0.3s var(--ease-out);
-  box-shadow: 0 6px 22px -10px color-mix(in oklab, var(--eggplant) 55%, transparent);
+  box-shadow: 0 6px 22px -10px color-mix(in oklab, var(--allium) 60%, transparent);
 }
 
 .btn:hover {
   --btn-bg: var(--grape);
+  --btn-fg: var(--white);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -12px color-mix(in oklab, var(--eggplant) 60%, transparent);
+  box-shadow: 0 12px 30px -12px color-mix(in oklab, var(--grape) 60%, transparent);
 }
 
 .btn:active {
