@@ -1,0 +1,481 @@
+---
+import Base from "../layouts/Base.astro";
+
+const works = [
+  {
+    name: "Citria Coastal Grill",
+    domain: "citria.net",
+    desc: "Mediterranean fine dining",
+    src: "/img/home/site-citria.jpg",
+    alt: "Citria Coastal Grill's homepage hero: an oceanview patio table set for dinner at sunset.",
+  },
+  {
+    name: "Da Wurst",
+    domain: "eatdawurst.com",
+    desc: "Fast casual restaurant & bar",
+    src: "/img/home/site-da-wurst.jpg",
+    alt: "Da Wurst's homepage hero: a lively string-lit beer garden patio at night.",
+  },
+  {
+    name: "Lou Amari's",
+    domain: "louamaris.com",
+    desc: "Neighborhood Italian restaurant",
+    src: "/img/home/site-lou-amaris.jpg",
+    alt: "Lou Amari's homepage hero: the restaurant's brick storefront lit up at night.",
+  },
+];
+
+const builtFor = [
+  "Menus", "Reservations", "Online Ordering", "Private Events", "Catering",
+  "Gift Cards", "Locations", "Hours", "Events", "Careers", "Guest Capture",
+  "Live Chat",
+];
+
+const categories = [
+  {
+    name: "Classics",
+    items: [
+      { name: "Lou's Lasagna", desc: "House-made pasta, beef and pork ragù, ricotta, mozzarella, parmesan", price: "26" },
+      { name: "Chicken Parmigiana", desc: "Breaded chicken breast, marinara, mozzarella, spaghetti", price: "23" },
+      { name: "Eggplant Parmigiana", desc: "Breaded eggplant, marinara, mozzarella, parmesan", price: "26", tags: ["V"] },
+      { name: "Chicken Piccata", desc: "Lemon, capers, white wine, roasted potatoes, seasonal vegetables", price: "27", tags: ["GF"] },
+    ],
+  },
+  {
+    name: "From the Grill",
+    items: [
+      { name: "New York Strip", desc: "14 oz. prime strip, roasted garlic potatoes, rosemary jus", price: "46", tags: ["GF"] },
+      { name: "Filet Mignon", desc: "8 oz. center-cut filet, garlic mashed potatoes, red wine jus", price: "34", tags: ["GF"] },
+    ],
+  },
+];
+---
+
+<Base
+  title="Websites — Tempo Chorus"
+  description="Your restaurant isn't a template. Your website shouldn't be either. Tempo builds custom restaurant websites around your brand, your food and your guests."
+  active="websites"
+>
+  <section class="lead">
+    <div class="shell">
+      <h1 class="lead__title">Your restaurant isn't a template.<br />Your website shouldn't be either.</h1>
+      <p class="lede lead__sub">
+        Tempo builds custom restaurant websites designed around your brand, your food and the way your
+        guests actually use them.
+      </p>
+      <a class="text-link lead__link" href="#work">See the work ↓</a>
+    </div>
+  </section>
+
+  <section class="work" id="work" aria-label="Restaurant websites built by Tempo">
+    <div class="shell">
+      <ul class="work__list">
+        {works.map((w) => (
+          <li class="work__item">
+            <a class="work__frame" href={`https://${w.domain}`} target="_blank" rel="noopener noreferrer" aria-label={`Visit the ${w.name} website (opens in a new tab)`}>
+              <img src={w.src} alt={w.alt} loading="lazy" decoding="async" />
+            </a>
+            <p class="work__name">{w.name}</p>
+            <p class="work__desc">{w.desc}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="built" aria-labelledby="built-title">
+    <div class="shell built__inner">
+      <p class="eyebrow">Built for restaurants</p>
+      <h2 class="section-title" id="built-title">Built for restaurants.</h2>
+      <ul class="built__list">
+        {builtFor.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="keep" aria-labelledby="keep-title">
+    <div class="shell keep__inner">
+      <p class="eyebrow">Already have a website?</p>
+      <h2 class="section-title" id="keep-title">Keep it.</h2>
+      <p class="lede">
+        Chorus can work with the site a restaurant already has. Forms, chat, guest capture, menus, and
+        other Chorus tools can connect without forcing a rebuild.
+      </p>
+    </div>
+  </section>
+
+  <section class="menus" aria-labelledby="menus-title">
+    <div class="shell menus__inner">
+      <div class="menus__say">
+        <p class="eyebrow">Menus Made for the Web</p>
+        <h2 class="section-title" id="menus-title">Your menu shouldn't be a PDF.</h2>
+        <p class="lede">
+          Turn an existing menu into a fast, mobile-friendly experience that's easier to browse, easier to
+          find and easier to keep current.
+        </p>
+        <p class="menus__included">Menus Made for the Web is included with Chorus.</p>
+      </div>
+
+      <div class="menu" data-menu aria-label="Example menu: switch between categories and see each item with its price and dietary notes">
+        <div class="menu__top">
+          <p class="menu__restaurant">Lou Amari's</p>
+          <div class="menu__search" aria-hidden="true">Search the menu</div>
+        </div>
+        <div class="menu__tabs" role="tablist">
+          {categories.map((c, i) => (
+            <button type="button" role="tab" class="menu__tab" aria-selected={i === 0 ? "true" : "false"} data-menu-tab={i}>
+              {c.name}
+            </button>
+          ))}
+        </div>
+        {categories.map((c, i) => (
+          <ul class="menu__items" role="tabpanel" data-menu-panel={i} hidden={i !== 0}>
+            {c.items.map((item) => (
+              <li class="menu__item">
+                <div class="menu__row">
+                  <p class="menu__name">
+                    {item.name}
+                    {item.tags?.map((t) => <span class="menu__tag">{t}</span>)}
+                  </p>
+                  <p class="menu__price">{item.price}</p>
+                </div>
+                <p class="menu__desc">{item.desc}</p>
+              </li>
+            ))}
+          </ul>
+        ))}
+        <p class="menu__note">GF gluten-free · V vegetarian</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="price" aria-labelledby="price-title">
+    <div class="shell price__inner">
+      <p class="eyebrow">Website pricing</p>
+      <h2 class="section-title" id="price-title">$500 one-time + $15/month hosting.</h2>
+      <p class="lede">Already have a site? Keep it.</p>
+      <a class="btn price__cta" href="/book-a-demo">Talk to Tempo about a website</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  section {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--v3-text-low);
+  }
+
+  .section-title {
+    margin-top: 0.75rem;
+    font-size: clamp(2rem, 1.2rem + 3.4vw, 3.4rem);
+    letter-spacing: -0.035em;
+    color: var(--eggplant);
+    max-width: 22ch;
+  }
+
+  .lede {
+    margin-top: 1.25rem;
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+    color: var(--v3-text-mid);
+    max-width: 48ch;
+  }
+
+  .text-link {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--eggplant);
+    text-decoration: none;
+    border-bottom: 2px solid var(--allium);
+    padding-bottom: 0.15rem;
+  }
+
+  /* Lead */
+  .lead {
+    padding-top: clamp(5rem, 12vw, 9rem);
+    padding-bottom: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .lead__title {
+    font-size: clamp(2.6rem, 1.2rem + 5.4vw, 5.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    color: var(--eggplant);
+  }
+
+  .lead__sub {
+    max-width: 44ch;
+  }
+
+  .lead__link {
+    margin-top: 2rem;
+  }
+
+  /* The work: three real sites at scale, minimal copy. */
+  .work {
+    padding-top: 0;
+  }
+
+  .work__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: clamp(4rem, 9vw, 7rem);
+  }
+
+  .work__frame {
+    display: block;
+    aspect-ratio: 16 / 9;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .work__frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .work__frame:hover img,
+  .work__frame:focus-visible img {
+    transform: scale(1.03);
+  }
+
+  .work__name {
+    margin-top: 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 1rem + 0.8vw, 1.6rem);
+    color: var(--eggplant);
+  }
+
+  .work__desc {
+    margin-top: 0.25rem;
+    color: var(--v3-text-mid);
+  }
+
+  /* Built for restaurants: typographic, not cards. */
+  .built {
+    background: var(--sand);
+  }
+
+  .built__list {
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 1rem + 1.4vw, 2.3rem);
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: var(--eggplant);
+  }
+
+  .built__list li {
+    position: relative;
+  }
+
+  .built__list li:not(:last-child)::after {
+    content: "·";
+    margin-left: 1.5rem;
+    color: var(--allium);
+  }
+
+  /* Keep it */
+  .keep__inner {
+    max-width: 52rem;
+  }
+
+  /* Menus Made for the Web: a real menu interaction. */
+  .menus__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .menus__included {
+    margin-top: 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--grape);
+  }
+
+  .menu {
+    background: var(--white);
+    border-radius: 4px;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    box-shadow: 0 24px 48px -30px rgb(17 11 38 / 0.35);
+    font-family: var(--font-product);
+    color: var(--eggplant);
+  }
+
+  .menu__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 10%, transparent);
+  }
+
+  .menu__restaurant {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+
+  .menu__search {
+    font-size: 0.8rem;
+    color: var(--v3-text-low);
+    border: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    white-space: nowrap;
+  }
+
+  .menu__tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .menu__tab {
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in oklab, var(--eggplant) 18%, transparent);
+    background: transparent;
+    color: var(--eggplant);
+    cursor: pointer;
+  }
+
+  .menu__tab[aria-selected="true"] {
+    background: var(--eggplant);
+    border-color: var(--eggplant);
+    color: var(--white);
+  }
+
+  .menu__items {
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .menu__item {
+    padding: 0.9rem 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 10%, transparent);
+  }
+
+  .menu__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .menu__name {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .menu__tag {
+    margin-left: 0.5rem;
+    font-family: var(--font-system);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--grape);
+    border: 1px solid color-mix(in oklab, var(--grape) 40%, transparent);
+    border-radius: 3px;
+    padding: 0.05rem 0.3rem;
+    vertical-align: middle;
+  }
+
+  .menu__price {
+    font-family: var(--font-system);
+    font-size: 0.95rem;
+    color: var(--grape);
+  }
+
+  .menu__desc {
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--v3-text-mid);
+  }
+
+  .menu__note {
+    margin-top: 1rem;
+    font-family: var(--font-system);
+    font-size: 0.72rem;
+    color: var(--v3-text-low);
+  }
+
+  @media (max-width: 52rem) {
+    .menus__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Price */
+  .price {
+    background: var(--eggplant);
+    color: var(--white);
+  }
+
+  .price .eyebrow {
+    color: var(--allium);
+  }
+
+  .price .section-title {
+    color: var(--white);
+  }
+
+  .price .lede {
+    color: color-mix(in oklab, var(--white) 75%, transparent);
+  }
+
+  .price__cta {
+    margin-top: 2.25rem;
+    --btn-bg: var(--white);
+    --btn-fg: var(--eggplant);
+  }
+
+  .price__cta:hover {
+    --btn-bg: var(--allium);
+  }
+</style>
+
+<script>
+  const root = document.querySelector("[data-menu]");
+  if (root) {
+    const tabs = Array.from(root.querySelectorAll("[data-menu-tab]"));
+    const panels = Array.from(root.querySelectorAll("[data-menu-panel]"));
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const i = tab.getAttribute("data-menu-tab");
+        tabs.forEach((t) => t.setAttribute("aria-selected", String(t === tab)));
+        panels.forEach((p) => {
+          p.hidden = p.getAttribute("data-menu-panel") !== i;
+        });
+      });
+    });
+  }
+</script>
