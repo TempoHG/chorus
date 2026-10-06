@@ -83,7 +83,7 @@ const sites = [
 >
   <section class="hero">
     <div class="hero__media" aria-hidden="true">
-      <img src="/img/home/hero-service.jpg" alt="" decoding="async" fetchpriority="high" />
+      <img src="/img/home/hero-service-duotone.jpg" alt="" decoding="async" fetchpriority="high" />
     </div>
     <div class="shell hero__inner">
       <div class="hero__copy">
@@ -287,16 +287,6 @@ const sites = [
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: grayscale(1) contrast(1.05);
-  }
-
-  .hero__media::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--allium);
-    opacity: 0.5;
-    mix-blend-mode: multiply;
   }
 
   .hero__title {
