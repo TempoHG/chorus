@@ -1,6 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Archivo:ital,wght@0,400..700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Archivo:ital,wght@0,400..700;1,400&family=Public+Sans:wght@400;500;600;700&family=Google+Sans+Code:wght@400;500&display=swap");
 
 :root {
+  /* V3 palette — the brief's official Chorus colors. White and Mist carry
+     the page; Eggplant is the dark; Allium is the accent. */
+  --eggplant: #110b26;
+  --grape: #392671;
+  --allium: #b19cff;
+  --mist: #f7f7f7;
+  --sand: #e9e4da;
+  --sky: #e2f1f2;
+  --white: #ffffff;
+
+  --v3-text: var(--eggplant);
+  --v3-text-mid: color-mix(in oklab, var(--eggplant) 72%, white);
+  --v3-text-low: color-mix(in oklab, var(--eggplant) 55%, white);
+
+  --font-product: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-system: "Google Sans Code", ui-monospace, monospace;
+
   /* Ground: score paper at night */
   --ink-900: #0b0917;
   --ink-800: #12102a;
@@ -65,8 +82,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--ink-900);
-  color: var(--text-hi);
+  background: var(--mist);
+  color: var(--v3-text);
   font-family: var(--font-body);
   font-size: clamp(1rem, 0.96rem + 0.2vw, 1.05rem);
   line-height: 1.6;
@@ -150,8 +167,8 @@ svg {
 /* ---- Buttons ---- */
 
 .btn {
-  --btn-bg: var(--mint-400);
-  --btn-fg: var(--ink-900);
+  --btn-bg: var(--eggplant);
+  --btn-fg: var(--white);
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
@@ -171,13 +188,13 @@ svg {
     background 0.25s var(--ease-out),
     transform 0.25s var(--ease-out),
     box-shadow 0.3s var(--ease-out);
-  box-shadow: 0 6px 22px -8px color-mix(in oklab, var(--mint-400) 60%, transparent);
+  box-shadow: 0 6px 22px -10px color-mix(in oklab, var(--eggplant) 55%, transparent);
 }
 
 .btn:hover {
-  --btn-bg: var(--mint-300);
+  --btn-bg: var(--grape);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -10px color-mix(in oklab, var(--mint-400) 70%, transparent);
+  box-shadow: 0 12px 30px -12px color-mix(in oklab, var(--eggplant) 60%, transparent);
 }
 
 .btn:active {

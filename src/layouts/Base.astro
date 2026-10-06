@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import Wordmark from "../components/Wordmark.astro";
 import Analytics from "@vercel/analytics/astro";
-import OnboardingPopup from "../components/OnboardingPopup.astro";
 
 interface Props {
   title: string;
@@ -92,64 +91,20 @@ const { title, description, active } = Astro.props;
       <div class="shell masthead__inner">
         <a class="masthead__mark" href="/"><Wordmark height={38} /></a>
         <nav class="masthead__nav" aria-label="Primary">
-          <!-- Desktop: a dropdown trigger, always visible, opening a flat
-               list of named destinations — the trigger itself is never
-               hidden, so this doesn't violate the No-Hidden-Menu Rule.
-               Hidden below 46rem in favor of the flattened links below. -->
           <details class="masthead__dropdown">
-            <summary
-              aria-current={
-                active === "features" || active === "guest-marketing" || active === "manage-reviews" || active === "private-events"
-                  ? "page"
-                  : undefined
-              }
-            >
-              Features
-            </summary>
-            <nav class="dropdown__panel" aria-label="Features">
-              <a href="/features" aria-current={active === "features" ? "page" : undefined}>All Features</a>
-              <a href="/guest-marketing" aria-current={active === "guest-marketing" ? "page" : undefined}>Guest Marketing</a>
-              <a href="/manage-reviews" aria-current={active === "manage-reviews" ? "page" : undefined}>Manage Reviews</a>
-              <a href="/private-events-catering" aria-current={active === "private-events" ? "page" : undefined}>Private Events & Catering</a>
+            <summary aria-current={active === "product" ? "page" : undefined}>Product</summary>
+            <nav class="dropdown__panel" aria-label="Product">
+              <a href="/product#guest-marketing">Guest Marketing</a>
+              <a href="/product#reputation">Reviews + Guest Recovery</a>
+              <a href="/product#opportunities">Private Events + Catering</a>
+              <a href="/product#guest-relations">Guest Relations</a>
+              <a href="/product#menus">Menus Made for the Web</a>
             </nav>
           </details>
-
-          <!-- Mobile (≤46rem): the dropdown flattens into plain sibling
-               links in the scrollable row — nothing hidden, nothing demoted
-               off the masthead. Hidden at desktop widths. -->
-          <a
-            class="masthead__mobile-only"
-            href="/features"
-            aria-current={active === "features" ? "page" : undefined}
-          >
-            All Features
-          </a>
-          <a
-            class="masthead__mobile-only"
-            href="/guest-marketing"
-            aria-current={active === "guest-marketing" ? "page" : undefined}
-          >
-            Guest Marketing
-          </a>
-          <a
-            class="masthead__mobile-only"
-            href="/manage-reviews"
-            aria-current={active === "manage-reviews" ? "page" : undefined}
-          >
-            Manage Reviews
-          </a>
-          <a
-            class="masthead__mobile-only"
-            href="/private-events-catering"
-            aria-current={active === "private-events" ? "page" : undefined}
-          >
-            Private Events & Catering
-          </a>
-
-          <a href="/websites-menus" aria-current={active === "websites" ? "page" : undefined}>Websites & Menus</a>
+          <a href="/websites" aria-current={active === "websites" ? "page" : undefined}>Websites</a>
           <a href="/ai-host-helper" aria-current={active === "ai-host-helper" ? "page" : undefined}>AI Host Helper</a>
           <a href="/pricing" aria-current={active === "pricing" ? "page" : undefined}>Pricing</a>
-          <a class="btn masthead__cta" href="/#demo">Book a Demo</a>
+          <a class="btn masthead__cta" href="/book-a-demo">Book a Demo</a>
         </nav>
       </div>
     </header>
@@ -162,38 +117,32 @@ const { title, description, active } = Astro.props;
       <div class="shell footer__inner">
         <div class="footer__brand">
           <Wordmark height={34} />
-          <p>
-            A <a class="footer__brand-link" href="https://www.tempohg.com" rel="noopener">Tempo Hospitality Group</a> product.<br />
-            Built for the people who actually run restaurants.
-          </p>
+          <p>A <a class="footer__brand-link" href="https://www.tempohg.com" rel="noopener">Tempo Hospitality Group</a> product.</p>
+          <p class="footer__signature">All Together Now.</p>
         </div>
         <nav class="footer__nav" aria-label="Footer">
           <div class="footer__nav-col">
+            <p class="footer__heading">Product</p>
             <a href="/">Overview</a>
-            <a href="/websites-menus">Websites & Menus</a>
+            <a href="/websites">Websites</a>
             <a href="/ai-host-helper">AI Host Helper</a>
             <a href="/pricing">Pricing</a>
-            <a href="/#demo">Book a Demo</a>
+            <a href="/book-a-demo">Book a Demo</a>
           </div>
           <div class="footer__nav-col">
-            <a href="/features">All Features</a>
-            <a href="/guest-marketing">Guest Marketing</a>
-            <a href="/manage-reviews">Manage Reviews</a>
-            <a href="/private-events-catering">Private Events & Catering</a>
+            <p class="footer__heading">Tempo</p>
+            <a href="https://www.tempohg.com" rel="noopener">Tempo Hospitality Group</a>
+            <a href="https://www.tempohg.com/contact" rel="noopener">Contact</a>
+          </div>
+          <div class="footer__nav-col">
+            <p class="footer__heading">Legal</p>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+            <a href="/accessibility">Accessibility</a>
           </div>
         </nav>
       </div>
-      <div class="shell footer__base">
-        <p>
-          <a class="footer__corp" href="https://www.tempohg.com" rel="noopener">
-            &copy; {new Date().getFullYear()} Tempo Hospitality Group.
-          </a>
-        </p>
-        <p>All guest moments shown on this site are illustrative.</p>
-      </div>
     </footer>
-
-    <OnboardingPopup />
 
     <script>
       import { initMotion } from "../scripts/motion.js";
@@ -222,9 +171,9 @@ const { title, description, active } = Astro.props;
     position: sticky;
     top: 0;
     z-index: 50;
-    background: color-mix(in oklab, var(--ink-900) 88%, transparent);
+    background: color-mix(in oklab, var(--white) 92%, transparent);
     backdrop-filter: blur(14px);
-    border-bottom: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 10%, transparent);
   }
 
   .masthead__inner {
@@ -251,30 +200,30 @@ const { title, description, active } = Astro.props;
 
   .masthead__nav a {
     text-decoration: none;
-    color: var(--text-mid);
+    color: var(--v3-text-mid);
     padding-block: 0.3rem;
     border-bottom: 2px solid transparent;
     transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
   }
 
   .masthead__nav a:hover {
-    color: var(--text-hi);
-    border-bottom-color: var(--violet-400);
+    color: var(--v3-text);
+    border-bottom-color: var(--allium);
   }
 
   .masthead__nav a[aria-current="page"] {
-    color: var(--text-hi);
-    border-bottom-color: var(--mint-400);
+    color: var(--v3-text);
+    border-bottom-color: var(--eggplant);
   }
 
   .masthead__nav a.masthead__cta {
     padding: 0.6rem 1.15rem;
-    color: var(--ink-900);
+    color: var(--white);
     border-bottom: 0;
   }
 
   .masthead__nav a.masthead__cta:hover {
-    color: var(--ink-900);
+    color: var(--white);
   }
 
   /* Desktop-only "Features ▾" dropdown. The trigger is always visible and
@@ -392,10 +341,27 @@ const { title, description, active } = Astro.props;
   }
 
   .footer {
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 24%, transparent);
-    background: var(--ink-800);
+    background: var(--eggplant);
+    color: var(--white);
     padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
     margin-top: clamp(4rem, 9vw, 7rem);
+  }
+
+  .footer__heading {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--white) 55%, transparent);
+    margin-bottom: 0.4rem;
+  }
+
+  .footer__signature {
+    margin-top: 1.4rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--allium);
   }
 
   .footer__inner {
@@ -411,7 +377,7 @@ const { title, description, active } = Astro.props;
 
   .footer__brand p {
     margin-top: 1.1rem;
-    color: var(--text-mid);
+    color: color-mix(in oklab, var(--white) 72%, transparent);
     max-width: 52ch;
     font-size: 0.875rem;
   }
@@ -441,23 +407,23 @@ const { title, description, active } = Astro.props;
   }
 
   .footer__nav a {
-    color: var(--text-mid);
+    color: color-mix(in oklab, var(--white) 85%, transparent);
     text-decoration: none;
   }
 
   .footer__nav a:hover {
-    color: var(--mint-400);
+    color: var(--allium);
   }
 
   .footer__base {
     margin-top: 3rem;
     padding-top: 1.5rem;
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 16%, transparent);
+    border-top: 1px solid color-mix(in oklab, var(--white) 14%, transparent);
     display: flex;
     flex-wrap: wrap;
     gap: 1rem 2rem;
     justify-content: space-between;
-    color: var(--text-low);
+    color: color-mix(in oklab, var(--white) 60%, transparent);
     font-size: 0.875rem;
   }
 
@@ -469,7 +435,7 @@ const { title, description, active } = Astro.props;
   }
 
   .footer__corp:hover {
-    color: var(--text-mid);
-    border-bottom-color: color-mix(in oklab, var(--violet-400) 55%, transparent);
+    color: var(--white);
+    border-bottom-color: color-mix(in oklab, var(--allium) 55%, transparent);
   }
 </style>
