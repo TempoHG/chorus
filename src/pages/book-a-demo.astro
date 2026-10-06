@@ -1,19 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
 
-// TODO before launch: set to the Chorus demo-request endpoint. Until then the
-// form validates and shows a message instead of sending anything.
-const DEMO_ENDPOINT = "";
-
-const interests = [
-  "Website",
-  "AI Host Helper",
-  "Guest Marketing",
-  "Reviews",
-  "Private Events + Catering",
-  "Guest Communication",
-  "Not sure yet",
-];
+// The existing demo booking calendar. WIDGET_ID must match the id GHL's
+// form_embed.js looks for when it posts the resize message back.
+const GHL_DOMAIN = "https://links.tempohg.com";
+const CALENDAR_ID = "I5Q7FwuP2H7GVLaL1Cai";
+const WIDGET_ID = "yVHkwu10vymju35mIkBW_1786414705061";
 ---
 
 <Base
@@ -30,57 +22,16 @@ const interests = [
     </div>
   </section>
 
-  <section class="form-section" aria-label="Demo request">
+  <section class="booking" aria-label="Pick a time">
     <div class="shell">
-      <form class="demo" data-demo-form data-endpoint={DEMO_ENDPOINT} novalidate>
-        <div class="demo__grid">
-          <label class="field">
-            <span class="field__label">First name <span aria-hidden="true">*</span></span>
-            <input name="first_name" type="text" autocomplete="given-name" required />
-          </label>
-          <label class="field">
-            <span class="field__label">Last name <span aria-hidden="true">*</span></span>
-            <input name="last_name" type="text" autocomplete="family-name" required />
-          </label>
-          <label class="field">
-            <span class="field__label">Restaurant <span aria-hidden="true">*</span></span>
-            <input name="restaurant" type="text" autocomplete="organization" required />
-          </label>
-          <label class="field">
-            <span class="field__label">Website</span>
-            <input name="website" type="url" autocomplete="url" placeholder="https://" />
-          </label>
-          <label class="field">
-            <span class="field__label">Email <span aria-hidden="true">*</span></span>
-            <input name="email" type="email" autocomplete="email" required />
-          </label>
-          <label class="field">
-            <span class="field__label">Phone <span aria-hidden="true">*</span></span>
-            <input name="phone" type="tel" autocomplete="tel" required />
-          </label>
-          <label class="field">
-            <span class="field__label">Number of locations</span>
-            <input name="locations" type="number" min="1" inputmode="numeric" />
-          </label>
-        </div>
-
-        <fieldset class="interest">
-          <legend class="field__label">What would you most like help with?</legend>
-          <div class="interest__options">
-            {interests.map((item) => (
-              <label class="chip-option">
-                <input type="radio" name="interest" value={item} />
-                <span>{item}</span>
-              </label>
-            ))}
-          </div>
-        </fieldset>
-
-        <p class="demo__error" data-form-error role="alert" hidden></p>
-        <p class="demo__status" data-form-status role="status" hidden></p>
-
-        <button class="btn demo__submit" type="submit">Book my demo</button>
-      </form>
+      <iframe
+        class="booking__frame"
+        src={`${GHL_DOMAIN}/widget/booking/${CALENDAR_ID}`}
+        title="Book a Tempo Chorus demo"
+        allow="payment"
+        scrolling="no"
+        id={WIDGET_ID}
+      ></iframe>
     </div>
   </section>
 </Base>
@@ -110,162 +61,14 @@ const interests = [
     color: var(--v3-text-mid);
   }
 
-  .demo {
-    max-width: 52rem;
-    display: grid;
-    gap: clamp(2rem, 4vw, 2.75rem);
-  }
-
-  .demo__grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.5rem clamp(1.5rem, 3vw, 2.5rem);
-  }
-
-  .field {
-    display: grid;
-    gap: 0.45rem;
-  }
-
-  .field__label {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--eggplant);
-  }
-
-  .field input {
-    font: inherit;
-    font-size: 1rem;
-    color: var(--eggplant);
-    background: var(--white);
-    border: 1px solid color-mix(in oklab, var(--eggplant) 22%, transparent);
-    border-radius: 3px;
-    padding: 0.8rem 0.9rem;
-  }
-
-  .field input:focus-visible {
-    outline: 3px solid var(--allium);
-    outline-offset: 2px;
-  }
-
-  .interest {
+  .booking__frame {
+    display: block;
+    width: 100%;
+    min-height: 720px;
     border: 0;
-    padding: 0;
-    margin: 0;
-    min-width: 0;
-  }
-
-  .interest legend {
-    margin-bottom: 0.9rem;
-    padding: 0;
-  }
-
-  .interest__options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-
-  .chip-option {
-    position: relative;
-    cursor: pointer;
-  }
-
-  .chip-option input {
-    position: absolute;
-    opacity: 0;
-    inset: 0;
-    margin: 0;
-    cursor: pointer;
-  }
-
-  .chip-option span {
-    display: inline-block;
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: var(--eggplant);
-    border: 1px solid color-mix(in oklab, var(--eggplant) 22%, transparent);
-    border-radius: 999px;
-    padding: 0.5rem 1rem;
-    background: var(--white);
-  }
-
-  .chip-option input:checked + span {
-    background: var(--eggplant);
-    border-color: var(--eggplant);
-    color: var(--white);
-  }
-
-  .chip-option input:focus-visible + span {
-    outline: 3px solid var(--allium);
-    outline-offset: 2px;
-  }
-
-  .demo__error {
-    font-size: 0.95rem;
-    color: #8a1f2d;
-  }
-
-  .demo__status {
-    font-size: 1rem;
-    font-family: var(--font-display);
-    font-weight: 600;
-    color: var(--grape);
-  }
-
-  .demo__submit {
-    justify-self: start;
-  }
-
-  @media (max-width: 40rem) {
-    .demo__grid {
-      grid-template-columns: 1fr;
-    }
+    background: transparent;
   }
 </style>
 
-<script>
-  const form = document.querySelector("[data-demo-form]");
-  const errorEl = form?.querySelector("[data-form-error]");
-  const statusEl = form?.querySelector("[data-form-status]");
+<script is:inline src={`${GHL_DOMAIN}/js/form_embed.js`}></script>
 
-  form?.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    if (!errorEl || !statusEl) return;
-    errorEl.hidden = true;
-    statusEl.hidden = true;
-
-    const required = ["first_name", "last_name", "restaurant", "email", "phone"];
-    const missing = required.filter((name) => !form.elements.namedItem(name)?.value.trim());
-    if (missing.length) {
-      errorEl.textContent = "Please fill in your first name, last name, restaurant, email and phone.";
-      errorEl.hidden = false;
-      form.querySelector(`[name="${missing[0]}"]`)?.focus();
-      return;
-    }
-
-    const endpoint = form.getAttribute("data-endpoint");
-    if (!endpoint) {
-      errorEl.textContent = "Demo requests aren't connected yet. Please try again shortly.";
-      errorEl.hidden = false;
-      return;
-    }
-
-    const data = Object.fromEntries(new FormData(form).entries());
-    try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) throw new Error(String(response.status));
-      form.reset();
-      statusEl.textContent = "Thanks. We'll be in touch to set up your demo.";
-      statusEl.hidden = false;
-    } catch {
-      errorEl.textContent = "That didn't go through. Please try again.";
-      errorEl.hidden = false;
-    }
-  });
-</script>
