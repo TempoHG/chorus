@@ -8,13 +8,11 @@ interface Props {
   description: string;
   active?:
     | "home"
-    | "features"
-    | "guest-marketing"
-    | "manage-reviews"
-    | "private-events"
+    | "product"
     | "websites"
     | "ai-host-helper"
-    | "pricing";
+    | "pricing"
+    | "book-a-demo";
 }
 const { title, description, active } = Astro.props;
 ---
