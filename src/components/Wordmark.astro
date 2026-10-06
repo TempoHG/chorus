@@ -6,8 +6,8 @@ interface Props {
 }
 const { height = 40, tone = "light-ground", class: className = "" } = Astro.props;
 const isWordmark = tone === "dark-ground";
-const src = isWordmark ? "/brand/chorus-wordmark.svg" : "/brand/chorus-lockup.png";
-const ratio = isWordmark ? 320.34 / 54 : 1360 / 420;
+const src = isWordmark ? "/brand/chorus-lockup-reversed.png" : "/brand/chorus-lockup.png";
+const ratio = 1360 / 420;
 ---
 
 <img
