@@ -168,7 +168,7 @@ const sites = [
   <section class="websites" aria-labelledby="websites-title">
     <div class="shell">
       <h2 class="section-title" id="websites-title">One system.<br />No templates.</h2>
-      <p class="lede">Your restaurant doesn't look like every other restaurant. Your website shouldn't either.</p>
+      <p class="lede">Your restaurant doesn't look like every other restaurant.<br class="lede__break" /> Your website shouldn't either.</p>
       <ul class="websites__grid">
         {sites.map((s) => (
           <li class="websites__item">
@@ -231,6 +231,16 @@ const sites = [
     font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
     color: var(--v3-text-mid);
     max-width: 52ch;
+  }
+
+  .lede__break {
+    display: inline;
+  }
+
+  @media (max-width: 40rem) {
+    .lede__break {
+      display: none;
+    }
   }
 
   .text-link {
