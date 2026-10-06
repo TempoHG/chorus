@@ -1,0 +1,123 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Accessibility — Tempo Chorus"
+  description="Tempo Hospitality Group's commitment to making the Tempo Chorus website and services usable by as many people as possible."
+>
+  <article class="legal">
+    <div class="shell legal__inner">
+      <h1 class="legal__title">Accessibility</h1>
+      <p class="legal__updated">Last Updated: October 6, 2026</p>
+
+      <p>Tempo Hospitality Group is committed to making Tempo Chorus and our website usable by as many people as possible, including people with disabilities.</p>
+      <p>Accessibility is an ongoing effort. As Chorus evolves, we will continue working to improve the accessibility and usability of our digital experiences.</p>
+
+      <h2>Our Approach</h2>
+      <p>We aim to design and develop our website with recognized accessibility practices in mind, including the Web Content Accessibility Guidelines (WCAG).</p>
+      <p>Our accessibility efforts may include:</p>
+      <ul>
+        <li>Clear page structure and heading hierarchy</li>
+        <li>Keyboard-accessible navigation</li>
+        <li>Visible keyboard focus states</li>
+        <li>Appropriate text contrast</li>
+        <li>Alternative text for meaningful images</li>
+        <li>Clear labels and instructions for forms</li>
+        <li>Descriptive links and buttons</li>
+        <li>Support for screen readers and other assistive technologies</li>
+        <li>Responsive layouts that work across different screen sizes</li>
+        <li>Captions or text alternatives for meaningful video content where appropriate</li>
+        <li>Avoiding unnecessary motion or providing appropriate controls where possible</li>
+      </ul>
+      <p>We consider accessibility during the design, development, and ongoing improvement of the Tempo Chorus website.</p>
+
+      <h2>Third-Party Services</h2>
+      <p>Tempo Chorus may use or connect to third-party services, including scheduling tools, forms, chat, maps, video, reservation systems, ordering platforms, social networks, and other restaurant technologies.</p>
+      <p>While we work to choose and configure these services thoughtfully, Tempo may not control the accessibility of every third-party platform or embedded component.</p>
+      <p>If a third-party feature creates a barrier, please let us know and we will make reasonable efforts to help you access the information or service another way.</p>
+
+      <h2>Restaurant Websites</h2>
+      <p>Tempo also builds and supports websites for restaurant customers.</p>
+      <p>We incorporate accessibility considerations into our website design and development process. Restaurants remain responsible for the content and third-party services they choose to publish or connect to their websites.</p>
+      <p>Accessibility requirements can vary by business, location, content, and applicable law. Restaurants should consult qualified accessibility or legal professionals regarding their specific obligations when appropriate.</p>
+
+      <h2>Need Help?</h2>
+      <p>If you experience difficulty accessing any part of the Tempo Chorus website, or if you need information provided in a different format, please contact us.</p>
+      <p>When possible, tell us:</p>
+      <ul>
+        <li>The page or feature you were trying to use</li>
+        <li>The problem you experienced</li>
+        <li>Your browser or device</li>
+        <li>The assistive technology you were using, if applicable</li>
+        <li>The best way for us to contact you</li>
+      </ul>
+      <p>This information can help us identify and address the issue more effectively.</p>
+
+      <h2>Contact Us</h2>
+      <p>For accessibility assistance or to report an accessibility barrier:</p>
+      <p>
+        Tempo Hospitality Group, LLC<br />
+        Tempo Chorus<br />
+        Email: maria@tempohg.com<br />
+        Address: 30 South 9th Street, 7th Floor, Minneapolis, MN 55402
+      </p>
+      <p>We welcome feedback about accessibility and will make reasonable efforts to provide the information, product assistance, or service you need through an accessible alternative when possible.</p>
+
+      <h2>Ongoing Improvement</h2>
+      <p>Technology and accessibility standards continue to evolve.</p>
+      <p>We view accessibility as an ongoing responsibility rather than a one-time project and will continue reviewing and improving the Tempo Chorus experience as our website and services develop.</p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .legal {
+    padding-top: clamp(4rem, 9vw, 7rem);
+    padding-bottom: clamp(4rem, 8vw, 6rem);
+    color: var(--eggplant);
+  }
+
+  .legal__inner {
+    max-width: 46rem;
+    margin-inline: 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .legal__title {
+    font-size: clamp(2.4rem, 1.2rem + 4vw, 4rem);
+    letter-spacing: -0.04em;
+    color: var(--eggplant);
+  }
+
+  .legal__updated {
+    font-family: var(--font-system);
+    font-size: 0.85rem;
+    color: var(--v3-text-low);
+  }
+
+  .legal h2 {
+    margin-top: 2rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 1rem + 0.6vw, 1.55rem);
+    letter-spacing: -0.02em;
+    color: var(--eggplant);
+  }
+
+  .legal p,
+  .legal li {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--v3-text-mid);
+  }
+
+  .legal ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.25rem;
+  }
+</style>
