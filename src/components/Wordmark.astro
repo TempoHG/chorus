@@ -1,14 +1,16 @@
 ---
 interface Props {
   height?: number;
+  tone?: "light-ground" | "dark-ground";
   class?: string;
 }
-const { height = 40, class: className = "" } = Astro.props;
+const { height = 40, tone = "light-ground", class: className = "" } = Astro.props;
+const src = tone === "dark-ground" ? "/brand/chorus-logo-light.svg" : "/brand/chorus-logo.svg";
 ---
 
 <img
   class={`wordmark ${className}`}
-  src="/brand/chorus-logo.svg"
+  src={src}
   alt="Tempo Chorus"
   width={Math.round((height * 65.18) / 19.81)}
   height={height}
