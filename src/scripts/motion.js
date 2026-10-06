@@ -516,7 +516,7 @@ function initAgentCards() {
         track("agent_widget_lead_failed");
         if (formError) {
           formError.innerHTML =
-            'That didn\'t go through. <a href="/#demo">Book a live walkthrough</a> instead and we\'ll show you the agent in person.';
+            'That didn\'t go through. <a href="/book-a-demo">Book a live walkthrough</a> instead and we\'ll show you the agent in person.';
           formError.hidden = false;
         }
         if (submitBtn) submitBtn.disabled = false;
