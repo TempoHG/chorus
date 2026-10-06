@@ -1,1070 +1,329 @@
 ---
 import Base from "../layouts/Base.astro";
-import Wordmark from "../components/Wordmark.astro";
 
-const plan = {
-  name: "Chorus",
-  price: "$397",
-  tagline: "Bring everything together.",
-  includesLabel: "Includes",
-  groups: [
-    {
-      name: "Get Found",
-      items: [
-        {
-          name: "Website Tools",
-          desc: "Build and manage restaurant web experiences, pages and content.",
-        },
-        {
-          name: "Landing Pages",
-          desc: "Create focused pages for promotions, events, catering, hiring and campaigns.",
-        },
-        {
-          name: "Forms & Lead Capture",
-          desc: "Capture guest inquiries and information directly into Chorus.",
-        },
-        {
-          name: "Google Business Connection",
-          desc: "Connect your Google Business Profile with your restaurant's guest and reputation tools.",
-        },
-        {
-          name: "Social Planning & Publishing",
-          desc: "Plan, schedule and publish social content from one place.",
-        },
-      ],
-    },
-    {
-      name: "Stay Connected",
-      items: [
-        {
-          name: "Unified Guest Inbox",
-          desc: "Bring guest conversations together so your team has one place to respond.",
-        },
-        {
-          name: "Email",
-          desc: "Communicate directly with guests from Chorus.",
-        },
-        {
-          name: "Text Messaging",
-          desc: "Send and receive guest SMS conversations, with AI automatically handling common questions.",
-        },
-        {
-          name: "Phone",
-          desc: "Manage restaurant calls and guest communication through Chorus, with AI answering and handling common questions when the team can't get to the phone.",
-        },
-        {
-          name: "Missed-Call Text Back",
-          desc: "Automatically text guests when your team can't answer the phone.",
-        },
-        {
-          name: "Website Live Chat",
-          desc: "Let website visitors start a conversation directly with your restaurant, with AI automatically handling common questions.",
-        },
-        {
-          name: "Facebook & Instagram Messaging",
-          desc: "Bring social conversations into your guest communication system.",
-        },
-        {
-          name: "Guest Database",
-          desc: "Keep guest contact information, conversations, activity and relationships connected.",
-        },
-      ],
-    },
-    {
-      name: "Bring Guests Back",
-      items: [
-        {
-          name: "Email Campaigns",
-          desc: "Send promotions, announcements, newsletters and restaurant updates.",
-        },
-        {
-          name: "SMS Campaigns",
-          desc: "Reach opted-in guests with timely offers, events and messages.",
-        },
-        {
-          name: "Review Requests",
-          desc: "Automatically ask guests for reviews and make it easy to leave one.",
-        },
-        {
-          name: "Reputation Management",
-          desc: "Monitor and manage guest reviews from Chorus, with AI helping generate and manage responses.",
-        },
-        {
-          name: "Birthday Club",
-          desc: "Capture birthdays and automatically bring guests back around their birthday.",
-        },
-        {
-          name: "Win-Back Campaigns",
-          desc: "Re-engage guests who haven't visited or interacted recently.",
-        },
-        {
-          name: "Promotions & Offers",
-          desc: "Create campaigns around specials, events and other reasons to return.",
-        },
-        {
-          name: "Automated Guest Follow-Up",
-          desc: "Keep conversations and opportunities moving without relying on someone to remember every follow-up.",
-        },
-        {
-          name: "Guest Segmentation",
-          desc: "Build targeted audiences based on guest information and behavior.",
-        },
-        {
-          name: "Private Event Follow-Up",
-          desc: "Capture, organize and follow up with private-event inquiries.",
-        },
-        {
-          name: "Catering Follow-Up",
-          desc: "Turn catering inquiries into an organized follow-up process.",
-        },
-        {
-          name: "Guest Recovery",
-          desc: "Route poor guest experiences to the restaurant team so problems can be addressed quickly.",
-        },
-      ],
-    },
-    {
-      name: "Save Time",
-      items: [
-        {
-          name: "Marketing Automations",
-          desc: "Automate repetitive marketing and guest communication tasks.",
-        },
-        {
-          name: "Social Scheduling",
-          desc: "Plan content ahead and keep the restaurant's social calendar moving.",
-        },
-        {
-          name: "Calendars & Scheduling",
-          desc: "Manage appointments, meetings and scheduled interactions.",
-        },
-        {
-          name: "Internal Notifications",
-          desc: "Alert the right team member when a guest or opportunity needs attention.",
-        },
-        {
-          name: "Automated Responses",
-          desc: "Give guests an immediate response while the team handles the next step.",
-        },
-        {
-          name: "Marketing Calendar",
-          desc: "Organize campaigns and communication around one schedule.",
-        },
-        {
-          name: "Workflow Automation",
-          desc: "Build multi-step processes around inquiries, guest activity and follow-up. A lead gets tagged, routed to the right person and followed up with automatically.",
-        },
-        {
-          name: "AI Restaurant Assistant",
-          desc: "AI-powered guest conversations and assistance across phone, chat, text and reviews — plus help drafting content and messages faster for your team.",
-        },
-        {
-          name: "Reporting",
-          desc: "See activity and performance across Chorus in one place — calls answered, messages sent, reviews requested and more — instead of checking a handful of different tools.",
-        },
-        {
-          name: "Campaign Reporting",
-          desc: "Understand how email, SMS and other campaigns are performing.",
-        },
-        {
-          name: "Guest Reporting",
-          desc: "Better understand the audience being built inside Chorus.",
-        },
-        {
-          name: "Advertising Tools",
-          desc: "Organize and manage digital advertising activity.",
-        },
-      ],
-    },
-  ],
-  plus: "White-glove onboarding, training and support — included with every setup.",
-  usageNote: "Standard usage-based rates apply for email, phone, SMS, workflow automations, AI and other volume-based platform usage beyond normal levels.",
-};
-
-const additionalLocationPrice = "+$149";
-
-const onboarding = {
-  title: "White-Glove Onboarding",
-  subtitle: "We Set It Up. You Start Using It.",
-  intro: "Chorus isn't another platform you're expected to configure on your own. Tempo works with you to set up the platform around your restaurant, connect the essentials, build your core workflows, and get your team ready to use it.",
-  fee: "$497",
-  feeNote: "one-time onboarding fee",
-  includes: "Your onboarding includes platform configuration, guest communication setup, core workflows and automations, reputation setup, team training, and launch support.",
-  saveCallout: "Save $497!",
-  commitTitle: "Commit for 3 Months. We'll Waive the Fee.",
-  commitBody: "Start with a 3-month Chorus commitment and we'll waive the entire $497 onboarding fee.",
-  commitNote: "After your first three months, Chorus simply continues month-to-month.",
-  commitPrice: "$397/month",
-  commitPriceNote: "$0 onboarding with 3-month commitment",
-  cta: "Yes, I want to save $497!",
-  // Same offer/campaign as the homepage popup's CTA, but its own utm_source
-  // so the two entry points can be told apart — plus a plain promo code a
-  // sales rep can read straight off the lead's landing URL in GHL (there's
-  // no self-serve coupon-redemption step on this site; it's a marker for
-  // the human follow-up to apply the waiver against).
-  ctaHref:
-    "/?utm_source=pricing_page&utm_medium=site&utm_campaign=onboarding_fee_waiver&promo=SAVE497#demo",
-};
-
-const managed = [
-  {
-    name: "Managed Social Media",
-    note: "Planning, content creation, scheduling and ongoing social management.",
-  },
-  {
-    name: "Managed Email & SMS",
-    note: "Campaign strategy, copy, calendar and execution.",
-  },
-  {
-    name: "Managed Advertising",
-    note: "Paid media creation, launch and optimization. Ad spend is separate.",
-  },
-  {
-    name: "Managed SEO",
-    note: "Strategy, optimization, content and ongoing search improvement.",
-  },
-  {
-    name: "Restaurant Marketing",
-    note: "Broader outsourced strategy, creative, campaigns and execution.",
-  },
+const included = [
+  "Chorus platform",
+  "Guest marketing",
+  "Reputation",
+  "Guest relations",
+  "Private events + catering",
+  "Menus Made for the Web",
+  "AI Host Helper*",
+  "Tempo support",
 ];
 
-const care = [
-  "White-glove onboarding included with every plan.",
-  "Restaurant-specific configuration, not an empty account.",
-  "Essential workflows and campaigns configured during onboarding.",
-  "Team training included.",
-  "A support-ticket link inside Chorus, triaged to the right person.",
-  "Ongoing platform updates and restaurant-specific improvements.",
+const locations = [
+  { label: "1 concept, 1 location", total: "$397" },
+  { label: "1 concept, 3 locations", total: "$695" },
+  { label: "1 concept, 5 locations", total: "$993" },
 ];
 
-const faqs = [
-  {
-    q: "How quickly will I see results?",
-    a: "Most restaurants start seeing measurable wins inside the first 14 days — captured calls, fewer no-shows, and more 5-star reviews.",
-  },
-  {
-    q: "Is there really no contract?",
-    a: "Correct. Month-to-month. Cancel in one click. 14-day money-back guarantee if it's not a fit.",
-  },
-  {
-    q: "Is there a free trial?",
-    a: "We offer a free consultation for your restaurant, and may provide a free trial for certain offerings.",
-  },
-  {
-    q: "How fast is setup, and when will my system go live?",
-    a: "It typically goes live in 7–10 business days from the moment we receive all your onboarding requirements (brand assets, business info, integration credentials). Each launch includes automation workflows, a nurture email campaign, and AI caller + chatbot — all fully preconfigured and ready to take leads. If we're building your website too, we'll confirm your timeline after onboarding, but that's typically about 20 business days.",
-  },
-  {
-    q: "Does this replace my POS or reservation system?",
-    a: "No. It works alongside Toast, Square, Clover, Resy, OpenTable, Tock, and similar tools.",
-  },
-  {
-    q: "What POS and reservation systems can you integrate with?",
-    a: "Toast, Square, Clover, Lightspeed, Resy, OpenTable, and Tock via documented webhooks. Other systems can be connected through a custom build — we audit what you have on the demo call.",
-  },
-  {
-    q: "What happens if I have an existing website?",
-    list: [
-      "You can keep it — we'll integrate into your current site.",
-      "Or we can rebuild it on our platform (included).",
-    ],
-  },
-  {
-    q: "How does the AI caller work when we have a busy night?",
-    a: "It answers every call on the second ring — even when every line is ringing and the floor is slammed. It books the table or captures the order, sends an SMS confirmation, and logs the call. Calls after close get answered too, instead of going to voicemail.",
-  },
-  {
-    q: "Is the SMS automation TCPA and A2P 10DLC compliant?",
-    a: "Yes. Every workflow ships with TCPA-correct opt-in language, STOP/HELP keyword routing, A2P 10DLC brand-and-campaign registration support, and audit-friendly opt-out logging. We have a compliance guide with this information.",
-  },
-  {
-    q: "How is this different from a generic CRM or marketing toolkit?",
-    a: "A CRM gives you a database. A toolkit gives you pieces to assemble yourself. Tempo Chorus is a done-for-you system with AI receptionist, industry-specific websites, prebuilt workflows, and AI-generated SEO content — all included and tuned for you, out of the box.",
-  },
-  {
-    q: "What if I have multiple locations?",
-    a: "Not a problem — we have configurations for multiple locations and franchises that make it easy to set up and manage all of your stores. Just give us a shout and we'll be glad to assist.",
-  },
-  {
-    q: "Do you charge per location?",
-    a: "Yes — $397/mo for the first location, then a flat $149/mo for each additional one. A few add-ons, like AI Unlimited and Local SEO, scale per location too — exact pricing gets confirmed on the demo call.",
-  },
+const concepts = [
+  { label: "Concept A, 3 locations", detail: "$397 + $149 + $149", total: "$695" },
+  { label: "Concept B, 1 location", detail: "$397", total: "$397" },
 ];
 ---
 
 <Base
-  title="Tempo Chorus pricing — one plan, complete platform"
-  description="One plan at $397/mo — everything included, with a short list of add-ons for AI, advanced marketing and multi-location scale."
+  title="Pricing — Tempo Chorus"
+  description="Simple pricing that grows with you. Plans start at $397/month for your first concept and location, with $149/month for each additional location."
   active="pricing"
 >
   <section class="lead">
     <div class="shell">
-      <h1 class="lead__title">
-        Simple pricing.<br />
-        <span class="lead__accent">Complete platform.</span>
-      </h1>
-      <p class="lead__sub">
-        One connected platform for your restaurant's marketing, guest
-        communication, reputation, customer relationships, and automation.
-      </p>
+      <h1 class="lead__title">Simple pricing that grows with you.</h1>
+      <p class="lede lead__sub">Start with your concept. Add locations as you grow.</p>
     </div>
   </section>
 
-  <section class="tiers">
-    <div class="shell">
-      <div class="tier">
-        <Wordmark height={40} class="tier__logo" />
-        <p class="tier__tagline">{plan.tagline}</p>
-        <div class="tier__top">
-          <div class="tier__prices">
-            <p class="tier__price">
-              {plan.price}
-              <span>/mo</span>
-            </p>
-            <p class="tier__price-extra">
-              {additionalLocationPrice}<span>/mo</span> each additional location
-            </p>
-          </div>
-          <a class="btn tier__cta" href="/#demo">Book a demo</a>
-        </div>
-        <p class="tier__includes-label">{plan.includesLabel}</p>
-        {
-          plan.groups.map((group) => (
-            <div class="tier__group">
-              <p class="tier__group-name">{group.name}</p>
-              <ul class="tier__list">
-                {group.items.map((item) => (
-                  <li>
-                    <span class="dot" aria-hidden="true" />
-                    <div>
-                      <p class="tier__item-name">{item.name}</p>
-                      <p class="tier__item-desc">{item.desc}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        }
-        <p class="tier__plus">{plan.plus}</p>
-        <p class="tier__usage-note">{plan.usageNote}</p>
+  <section class="plan" aria-labelledby="plan-title">
+    <div class="shell plan__inner">
+      <div class="plan__price">
+        <p class="eyebrow" id="plan-title">First concept + first location</p>
+        <p class="plan__amount">$397<span>/month</span></p>
+        <a class="btn plan__cta" href="/book-a-demo">Book a Demo</a>
       </div>
+      <ul class="plan__included">
+        {included.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="locations" aria-labelledby="locations-title">
+    <div class="shell">
+      <p class="eyebrow">Additional locations</p>
+      <h2 class="section-title" id="locations-title">+$149/month per additional location of the same concept.</h2>
+      <ul class="math">
+        {locations.map((l) => (
+          <li class="math__row">
+            <span class="math__label">{l.label}</span>
+            <span class="math__total">{l.total}<span>/mo</span></span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="brands" aria-labelledby="brands-title">
+    <div class="shell brands__inner">
+      <div class="brands__say">
+        <p class="eyebrow">More than one restaurant brand?</p>
+        <h2 class="section-title" id="brands-title">Each distinct concept starts its own Chorus subscription.</h2>
+      </div>
+      <ul class="math">
+        {concepts.map((c) => (
+          <li class="math__row">
+            <span class="math__label">
+              {c.label}
+              <span class="math__detail">{c.detail}</span>
+            </span>
+            <span class="math__total">{c.total}<span>/mo</span></span>
+          </li>
+        ))}
+        <li class="math__row math__row--total">
+          <span class="math__label">Combined total</span>
+          <span class="math__total">$1,092<span>/mo</span></span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="concept" aria-labelledby="concept-title">
+    <div class="shell concept__inner">
+      <p class="eyebrow">What's a concept?</p>
+      <h2 class="section-title" id="concept-title">A concept is a distinct restaurant brand.</h2>
+      <p class="lede">
+        Three locations of the same restaurant are one concept with three locations. Two different restaurant
+        brands are two concepts, even when they share the same ownership group.
+      </p>
     </div>
   </section>
 
   <section class="onboarding" aria-labelledby="onboarding-title">
-    <div class="shell onboarding__grid">
-      <div class="onboarding__say">
-        <h2 class="eyeless-h2 onboarding__title" id="onboarding-title">
-          {onboarding.title}
-        </h2>
-        <p class="onboarding__subtitle">{onboarding.subtitle}</p>
-        <p class="lede onboarding__intro">{onboarding.intro}</p>
-      </div>
-      <div class="onboarding__panel">
-        <p class="onboarding__fee">
-          {onboarding.fee}
-          <span>{onboarding.feeNote}</span>
-        </p>
-        <p class="onboarding__includes">{onboarding.includes}</p>
-        <div class="onboarding__commit">
-          <p class="onboarding__save">{onboarding.saveCallout}</p>
-          <p class="onboarding__commit-title">{onboarding.commitTitle}</p>
-          <p class="onboarding__commit-body">{onboarding.commitBody}</p>
-          <p class="onboarding__commit-note">{onboarding.commitNote}</p>
-          <p class="onboarding__commit-price">
-            {onboarding.commitPrice}
-            <span>{onboarding.commitPriceNote}</span>
-          </p>
-          <a class="btn onboarding__cta" href={onboarding.ctaHref}>{onboarding.cta}</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="managed" aria-labelledby="managed-title">
-    <div class="shell managed__inner">
-      <div class="managed__say">
-        <h2 class="eyeless-h2 managed__title" id="managed-title">
-          Want us to do it for you?
-        </h2>
-        <p class="lede managed__lede">
-          Chorus gives you the tools. Tempo can also provide the team.
-        </p>
-        <a
-          class="hero__link"
-          href="https://links.tempohg.com/widget/booking/hS2oh8e23QoVCAjR4WgK"
-          target="_blank"
-          rel="noopener"
-        >
-          Talk to us about managed services →
-        </a>
-        <p class="managed__note">
-          Need a website? That's its own fixed price —
-          <a href="/websites">see Websites & Menus →</a>
-        </p>
-      </div>
-      <ul class="managed__list">
-        {
-          managed.map((m) => (
-            <li>
-              <span class="dot" aria-hidden="true" />
-              <div>
-                <p class="managed__item-name">{m.name}</p>
-                <p class="managed__item-desc">{m.note}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <section class="care" aria-labelledby="care-title">
-    <div class="shell">
-      <h2 class="eyeless-h2 care__title" id="care-title">
-        Onboarding and support,<br /> on every plan.
-      </h2>
-      <ul class="care__list" data-reveal>
-        {
-          care.map((c, i) => (
-            <li style={`--i:${i}`}>
-              <span class="dot" aria-hidden="true" />
-              {c}
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <section class="faq" aria-labelledby="faq-title">
-    <div class="shell">
-      <h2 class="eyeless-h2 faq__title" id="faq-title">Questions, answered.</h2>
-      <div class="faq__list" data-reveal>
-        {
-          faqs.map((f, i) => (
-            <details class="faq__item" style={`--i:${i}`}>
-              <summary class="faq__q">
-                {f.q}
-                <span class="faq__toggle" aria-hidden="true" />
-              </summary>
-              <div class="faq__a">
-                {f.list ? (
-                  <ul class="faq__a-list">
-                    {f.list.map((item) => (
-                      <li>
-                        <span class="dot" aria-hidden="true" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>{f.a}</p>
-                )}
-              </div>
-            </details>
-          ))
-        }
-      </div>
-      <p class="faq__more">
-        Still have questions? <a href="/#demo">Book a 30-minute demo</a> or email us.
+    <div class="shell onboarding__inner">
+      <p class="eyebrow">White-glove onboarding</p>
+      <h2 class="section-title" id="onboarding-title">$497 one-time.</h2>
+      <p class="lede">
+        Commit to the first three months of Chorus and the onboarding fee is waived. After the initial three
+        months, Chorus continues month-to-month.
       </p>
+      <a class="text-link" href="/book-a-demo">Book a Demo →</a>
     </div>
   </section>
 
-  <section class="close">
+  <section class="close" aria-labelledby="close-title">
     <div class="shell close__inner">
-      <h2 class="close__title">
-        Not sure which features you need?<br />
-        <span class="close__accent">We'll help you out.</span>
-      </h2>
-      <p class="close__sub">
-        A personalized walkthrough, built around your restaurant — not a
-        generic software tour.
-      </p>
-      <a class="btn" href="/#demo">Book a demo</a>
+      <h2 class="close__title" id="close-title">See how Chorus could work for your restaurant.</h2>
+      <a class="btn btn--light" href="/book-a-demo">Book a Demo</a>
+      <p class="close__note">*AI Host Helper usage allowance to be confirmed before launch.</p>
     </div>
   </section>
 </Base>
 
 <style>
-  .lead {
-    padding-block: clamp(4rem, 10vw, 7.5rem) clamp(3rem, 7vw, 5rem);
+  section {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
   }
 
-  .lead__title {
-    font-size: clamp(2.75rem, 1.1rem + 6vw, 5.6rem);
-    letter-spacing: -0.045em;
-  }
-
-  .lead__accent {
-    color: var(--mint-400);
-  }
-
-  .lead__sub {
-    margin-top: 1.75rem;
-    max-width: 58ch;
-    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
-    line-height: 1.5;
-    color: var(--text-mid);
-  }
-
-  /* ---------- Tiers ---------- */
-
-  .tiers {
-    padding-block: clamp(2rem, 5vw, 3.5rem) clamp(4.5rem, 10vw, 8rem);
-  }
-
-  .tier {
-    position: relative;
-    max-width: 68rem;
-    margin-inline: auto;
-    background: var(--ink-700);
-    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
-    border-radius: 5px;
-    padding: clamp(1.75rem, 4vw, 3rem);
-    box-shadow: 0 18px 38px -24px rgb(0 0 0 / 0.9);
-  }
-
-  .tier__logo {
-    display: block;
-  }
-
-  .tier__tagline {
-    margin-top: 0.75rem;
-    color: var(--text-mid);
-  }
-
-  .tier__top {
-    margin-top: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-  }
-
-  .tier__prices {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0.9rem;
-  }
-
-  .tier__price {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 2.6rem;
-    letter-spacing: -0.04em;
-    color: var(--mint-300);
-  }
-
-  .tier__price span {
-    font-size: 1.05rem;
+  .eyebrow {
+    font-family: var(--font-body);
     font-weight: 600;
-    color: var(--text-low);
-  }
-
-  .tier__price-extra {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--text-mid);
-  }
-
-  .tier__price-extra span {
-    font-weight: 500;
-    color: var(--text-low);
-  }
-
-  .tier__cta {
-    padding-inline: 2rem;
-  }
-
-  .tier__includes-label {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-low);
+    color: var(--v3-text-low);
   }
 
-  .tier__group {
-    margin-top: 1.75rem;
-  }
-
-  .tier__group-name {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.92rem;
-    letter-spacing: -0.01em;
-    color: var(--violet-400);
-  }
-
-  .tier__list {
-    list-style: none;
-    margin: 0.85rem 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.35rem 1.75rem;
-  }
-
-  .tier__list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.7rem;
-  }
-
-  .tier__list .dot {
-    margin-top: 0.55em;
-    color: var(--mint-400);
-  }
-
-  .tier__item-name {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.98rem;
-    color: var(--text-hi);
-  }
-
-  .tier__item-desc {
-    margin-top: 0.3rem;
-    font-size: 0.88rem;
-    line-height: 1.5;
-    color: var(--text-mid);
-  }
-
-  .tier__plus {
-    margin-top: 1.75rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 22%, transparent);
-    font-size: 0.88rem;
-    color: var(--text-low);
-  }
-
-  .tier__usage-note {
-    margin-top: 0.5rem;
-    font-size: 0.78rem;
-    line-height: 1.5;
-    color: var(--text-low);
-  }
-
-  @media (max-width: 56rem) {
-    .tier__list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (max-width: 40rem) {
-    .tier__list {
-      grid-template-columns: 1fr;
-    }
-
-    .tier__top {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .tier__cta {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-
-  /* ---------- Onboarding ---------- */
-
-  .onboarding {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
-  }
-
-  .onboarding__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: start;
-  }
-
-  .onboarding__subtitle {
+  .section-title {
     margin-top: 0.75rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.3rem, 1.1rem + 1vw, 1.75rem);
-    letter-spacing: -0.02em;
-    color: var(--text-hi);
+    font-size: clamp(2rem, 1.2rem + 3.4vw, 3.4rem);
+    letter-spacing: -0.035em;
+    color: var(--eggplant);
+    max-width: 24ch;
   }
 
-  .onboarding__intro {
+  .lede {
     margin-top: 1.25rem;
-    color: var(--text-mid);
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+    color: var(--v3-text-mid);
+    max-width: 50ch;
   }
 
-  .onboarding__panel {
-    background: var(--ink-700);
-    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
-    border-radius: 5px;
-    padding: clamp(1.75rem, 4vw, 2.5rem);
-    box-shadow: 0 18px 38px -24px rgb(0 0 0 / 0.9);
-  }
-
-  .onboarding__fee {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 2rem;
-    letter-spacing: -0.03em;
-    color: var(--text-hi);
-  }
-
-  .onboarding__fee span {
-    margin-left: 0.5rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--text-low);
-  }
-
-  .onboarding__includes {
-    margin-top: 0.9rem;
-    color: var(--text-mid);
-    font-size: 0.95rem;
-    line-height: 1.55;
-  }
-
-  .onboarding__commit {
-    margin-top: 1.75rem;
-    padding-top: 1.75rem;
-    border-top: 1px solid color-mix(in oklab, var(--mint-400) 30%, transparent);
-  }
-
-  .onboarding__save {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(2.25rem, 1.9rem + 1.4vw, 2.75rem);
-    letter-spacing: -0.03em;
-    color: var(--mint-300);
-  }
-
-  .onboarding__commit-title {
-    margin-top: 0.5rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.25rem;
-    color: var(--mint-300);
-  }
-
-  .onboarding__commit-body {
-    margin-top: 0.6rem;
-    color: var(--text-mid);
-    font-size: 0.95rem;
-    line-height: 1.55;
-  }
-
-  .onboarding__commit-note {
-    margin-top: 0.5rem;
-    color: var(--text-low);
-    font-size: 0.85rem;
-  }
-
-  .onboarding__commit-price {
-    margin-top: 1.1rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: var(--mint-300);
-  }
-
-  .onboarding__commit-price span {
-    margin-left: 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-low);
-  }
-
-  .onboarding__cta {
-    margin-top: 1.5rem;
-    width: 100%;
-    justify-content: center;
-  }
-
-  @media (max-width: 56rem) {
-    .onboarding__grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* ---------- Managed services ---------- */
-
-  .managed {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
-    background: var(--ink-800);
-  }
-
-  .managed__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: start;
-  }
-
-  .managed__lede {
-    margin-top: 1.25rem;
-    color: var(--text-mid);
-    max-width: 46ch;
-  }
-
-  .managed__note {
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
-    color: var(--text-low);
-  }
-
-  .managed__note a {
-    color: var(--violet-400);
-  }
-
-  .managed__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-  }
-
-  .managed__list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.8rem;
-  }
-
-  .managed__list .dot {
-    margin-top: 0.55em;
-    color: var(--violet-400);
-  }
-
-  .managed__item-name {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--text-hi);
-  }
-
-  .managed__item-desc {
-    margin-top: 0.25rem;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: var(--text-mid);
-  }
-
-  .hero__link {
+  .text-link {
     display: inline-block;
     margin-top: 2rem;
     font-family: var(--font-display);
     font-weight: 600;
-    color: var(--violet-400);
+    color: var(--eggplant);
     text-decoration: none;
-    border-bottom: 1px solid color-mix(in oklab, var(--violet-400) 45%, transparent);
-    padding-bottom: 2px;
-    transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+    border-bottom: 2px solid var(--allium);
+    padding-bottom: 0.15rem;
   }
 
-  .hero__link:hover {
-    color: var(--text-hi);
-    border-bottom-color: var(--text-hi);
+  /* Lead */
+  .lead {
+    padding-top: clamp(5rem, 12vw, 9rem);
+    padding-bottom: clamp(3rem, 6vw, 4.5rem);
   }
 
-  @media (max-width: 56rem) {
-    .managed__inner {
-      grid-template-columns: 1fr;
-    }
+  .lead__title {
+    font-size: clamp(2.6rem, 1.2rem + 5.4vw, 5.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    color: var(--eggplant);
+    max-width: 16ch;
   }
 
-  /* ---------- Care ---------- */
-
-  .care {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
-  }
-
-  .care__list {
-    list-style: none;
-    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
-    padding: 0;
+  /* The one price */
+  .plan__inner {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem clamp(2rem, 6vw, 5rem);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
   }
 
-  .care__list li {
-    display: flex;
-    align-items: baseline;
-    gap: 0.85rem;
-    padding-block: 0.6rem;
-    color: var(--text-hi);
-    font-size: 1.02rem;
-  }
-
-  .care__list .dot {
-    color: var(--mint-400);
-  }
-
-  @media (max-width: 56rem) {
-    .care__list {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* ---------- FAQ ---------- */
-
-  .faq {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
-  }
-
-  .faq__list {
-    margin-top: clamp(2.5rem, 6vw, 4rem);
-    max-width: 52rem;
-  }
-
-  .faq__item {
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
-  }
-
-  .faq__item:first-child {
-    border-top: 0;
-  }
-
-  .faq__q {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    padding-block: 1.35rem;
-    list-style: none;
-    cursor: pointer;
+  .plan__amount {
+    margin-top: 0.75rem;
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(1.02rem, 0.98rem + 0.3vw, 1.15rem);
-    color: var(--text-hi);
-    transition: color 0.2s var(--ease-out);
+    font-weight: 700;
+    font-size: clamp(4rem, 2rem + 6vw, 7rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--eggplant);
   }
 
-  .faq__q::-webkit-details-marker {
-    display: none;
+  .plan__amount span {
+    font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem);
+    letter-spacing: 0;
+    color: var(--v3-text-mid);
   }
 
-  .faq__q:hover {
-    color: var(--mint-300);
+  .plan__cta {
+    margin-top: 2rem;
   }
 
-  .faq__toggle {
-    position: relative;
-    width: 1rem;
-    height: 1rem;
-    flex: none;
-  }
-
-  .faq__toggle::before,
-  .faq__toggle::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background: currentColor;
-    transform: translate(-50%, -50%);
-    transition: transform 0.25s var(--ease-out);
-  }
-
-  .faq__toggle::before {
-    width: 100%;
-    height: 1.5px;
-  }
-
-  .faq__toggle::after {
-    width: 1.5px;
-    height: 100%;
-  }
-
-  .faq__item[open] .faq__toggle::after {
-    transform: translate(-50%, -50%) rotate(90deg) scaleY(0);
-  }
-
-  .faq__a {
-    padding-bottom: 1.5rem;
-    padding-right: clamp(0rem, 4vw, 3rem);
-    color: var(--text-mid);
-    font-size: 0.98rem;
-    line-height: 1.62;
-    max-width: 62ch;
-  }
-
-  .faq__a-list {
-    list-style: none;
+  .plan__included {
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+    list-style: none;
+    display: grid;
+    gap: 0;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--eggplant);
+    border-top: 2px solid var(--eggplant);
   }
 
-  .faq__a-list li {
+  .plan__included li {
+    padding: 0.95rem 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 12%, transparent);
+  }
+
+  @media (max-width: 52rem) {
+    .plan__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Shared math list */
+  .locations {
+    background: var(--sand);
+  }
+
+  .math {
+    margin: clamp(2rem, 5vw, 3rem) 0 0;
+    padding: 0;
+    list-style: none;
+    max-width: 44rem;
+  }
+
+  .math__row {
     display: flex;
+    justify-content: space-between;
     align-items: baseline;
-    gap: 0.75rem;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-top: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+    color: var(--eggplant);
   }
 
-  .faq__a-list .dot {
-    color: var(--mint-400);
+  .math__row:last-child {
+    border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
   }
 
-  .faq__more {
-    margin-top: clamp(2rem, 5vw, 3rem);
-    padding-top: 1.75rem;
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 26%, transparent);
-    max-width: 52rem;
-    color: var(--text-mid);
+  .math__detail {
+    display: block;
+    margin-top: 0.2rem;
+    font-family: var(--font-system);
+    font-size: 0.8rem;
+    color: var(--v3-text-low);
   }
 
-  .faq__more a {
-    font-weight: 600;
-    color: var(--violet-400);
-    text-decoration: none;
-    border-bottom: 1px solid color-mix(in oklab, var(--violet-400) 45%, transparent);
-    padding-bottom: 1px;
-    transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+  .math__total {
+    font-weight: 700;
+    white-space: nowrap;
   }
 
-  .faq__more a:hover {
-    color: var(--text-hi);
-    border-bottom-color: var(--text-hi);
+  .math__total span {
+    font-weight: 500;
+    color: var(--v3-text-low);
   }
 
-  /* ---------- Close ---------- */
+  .math__row--total {
+    border-top: 2px solid var(--eggplant);
+  }
 
+  /* Brands */
+  .brands__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  @media (max-width: 52rem) {
+    .brands__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Concept + onboarding */
+  /* Close */
   .close {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
-    background: var(--ink-800);
+    background: var(--eggplant);
+    color: var(--white);
+  }
+
+  .close__inner {
+    text-align: center;
   }
 
   .close__title {
-    font-size: clamp(2.1rem, 1.1rem + 3.2vw, 3.5rem);
-    letter-spacing: -0.04em;
-  }
-
-  .close__accent {
-    color: var(--mint-400);
-  }
-
-  .close__sub {
-    margin-top: 1.6rem;
-    max-width: 56ch;
-    color: var(--text-mid);
-    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+    font-size: clamp(2rem, 1.2rem + 3.6vw, 3.6rem);
+    letter-spacing: -0.035em;
+    max-width: 22ch;
+    margin: 0 auto;
+    color: var(--white);
   }
 
   .close__inner .btn {
-    margin-top: 2.4rem;
+    margin-top: 2.25rem;
+  }
+
+  .close__note {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: color-mix(in oklab, var(--white) 60%, transparent);
+  }
+
+  .btn--light {
+    --btn-bg: var(--white);
+    --btn-fg: var(--eggplant);
+  }
+
+  .btn--light:hover {
+    --btn-bg: var(--allium);
   }
 </style>
