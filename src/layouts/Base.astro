@@ -236,6 +236,7 @@ const { title, description, active } = Astro.props;
   }
 
   .masthead__dropdown summary {
+    white-space: nowrap;
     cursor: pointer;
     color: var(--text-mid);
     padding-block: 0.3rem;
@@ -288,20 +289,8 @@ const { title, description, active } = Astro.props;
     background: color-mix(in oklab, var(--violet-600) 22%, transparent);
   }
 
-  .masthead__mobile-only {
-    display: none;
-  }
-
-  /* Phones get the whole site, not a hidden menu: the bar becomes two rows. */
+  /* Phones keep the whole nav visible: the bar becomes two rows. */
   @media (max-width: 46rem) {
-    .masthead__dropdown {
-      display: none;
-    }
-
-    .masthead__mobile-only {
-      display: block;
-    }
-
     .masthead__inner {
       flex-wrap: wrap;
       gap: 0.5rem 1rem;
@@ -312,7 +301,7 @@ const { title, description, active } = Astro.props;
       order: 3;
       width: 100%;
       gap: 1.35rem;
-      border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
+      border-top: 1px solid color-mix(in oklab, var(--eggplant) 10%, transparent);
       padding-block: 0.15rem;
       overflow-x: auto;
       scrollbar-width: none;

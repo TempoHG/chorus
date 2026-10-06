@@ -1,1420 +1,696 @@
 ---
 import Base from "../layouts/Base.astro";
-import ProductMocks from "../components/ProductMocks.astro";
-import FeatureArt from "../components/FeatureArt.astro";
-import JobIcon from "../components/JobIcon.astro";
-import PhotoSection from "../components/PhotoSection.astro";
 
-const stories = [
+const scenarios = [
   {
-    id: "website",
-    kind: "graphic" as const,
-    src: "/img/home/websites-devices.html",
-    alt: "Three real restaurant websites shown on desktop, tablet and phone — a fine-dining coastal grill, a neighborhood Italian restaurant, and a fast-casual bar, each dramatically different from the others.",
-    eyebrow: "01 / Your Restaurant Website",
-    title: "Your website. Your way.",
-    body: "Already have one you like? Keep it. Need something better? Tempo can build a modern restaurant website around your brand, menu, reservations, ordering and events. WordPress or Tempo Managed — $500 one-time + $15/month hosting.",
-    cta: { label: "Explore Websites & Menus →", href: "/websites-menus" },
+    label: "Dinner rush",
+    title: "The phone rings.",
+    body: "Your host is taking care of the guests in front of them.",
+    lines: ["AI Host Helper answered ✓", "Reservation captured ✓"],
   },
   {
-    id: "host-helper",
-    kind: "widget" as const,
-    eyebrow: "02 / Tempo AI Host Helper",
-    title: "Your host stand could use another set of hands.",
-    body: "When your team can't answer, Tempo AI Host Helper can — handling everyday questions, reservations, private events, catering and more. Built around your restaurant. Your menu. Your hours. Your policies.",
-    cta: { label: "Meet AI Host Helper →", href: "/ai-host-helper" },
+    label: "After hours",
+    title: "A private-event inquiry comes in.",
+    body: "42 guests. December 14. Private dining.",
+    lines: ["Opportunity captured ✓", "Manager notified ✓", "Follow-up scheduled ✓"],
   },
   {
-    id: "communication",
-    kind: "mock" as const,
-    art: "inbox" as const,
-    eyebrow: "03 / Guest Communication",
-    title: "Every conversation. One place.",
-    body: "Calls. Texts. Email. Website chat. Instagram. Facebook. Chorus brings conversations together so your team knows who's reaching out, what they need and what happened before.",
-    cta: { label: "Explore All Features →", href: "/features" },
+    label: "After the visit",
+    title: "A guest leaves a great review.",
+    body: "★★★★★",
+    lines: ["Response ready ✓"],
   },
   {
-    id: "marketing",
-    kind: "mock" as const,
-    art: "marketing-calendar" as const,
-    eyebrow: "04 / Guest Marketing",
-    title: "Give guests a reason to come back.",
-    body: "Email. Text. Social. Birthdays. Promotions. Win-backs. Some campaigns you plan. Some things Chorus simply remembers to do.",
-    cta: { label: "Explore Guest Marketing →", href: "/guest-marketing" },
-  },
-  {
-    id: "reviews",
-    kind: "mock" as const,
-    art: "reviews" as const,
-    eyebrow: "05 / Manage Reviews",
-    title: "Turn good experiences into great reviews.",
-    body: "Ask for reviews. Monitor feedback. Manage responses. And when the experience isn't great, make sure the right person knows.",
-    cta: { label: "Explore Review Management →", href: "/manage-reviews" },
-  },
-  {
-    id: "events",
-    kind: "photo" as const,
-    src: "/img/home/private-dining.jpg",
-    alt: "A long private-dining table set for an evening event, with white roses, taper candles and warm pendant lighting.",
-    eyebrow: "06 / Private Events & Catering",
-    title: "Don't let your best leads disappear into an inbox.",
-    body: "Capture inquiries, organize the details, alert your team and keep the follow-up moving.",
-    cta: { label: "Explore Events & Catering →", href: "/private-events-catering" },
-  },
-];
-
-// GoHighLevel booking calendar, served from the Tempo whitelabel domain — NOT
-// api.leadconnectorhq.com, which does not serve this calendar. WIDGET_ID is the
-// id GHL's form_embed.js looks for when it posts the resize message back, so it
-// must stay exactly as GHL generated it. The widget's own look is set in GHL
-// (Calendars → Customise), not here; this page only frames it.
-const GHL_DOMAIN = "https://links.tempohg.com";
-const CALENDAR_ID = "I5Q7FwuP2H7GVLaL1Cai";
-const WIDGET_ID = "yVHkwu10vymju35mIkBW_1786414705061";
-
-const jobs = [
-  {
-    name: "Get Found",
-    line: "Help more guests discover and choose the restaurant.",
-    mark: "found",
-  },
-  {
-    name: "Stay Connected",
-    line: "Make it easier for guests to reach the restaurant, and the team to respond.",
-    mark: "connected",
-  },
-  {
-    name: "Bring Guests Back",
-    line: "Build repeat visits and stronger relationships.",
-    mark: "back",
-  },
-  {
-    name: "Save Time",
-    line: "Automate the repetitive marketing and communication work.",
-    mark: "time",
-  },
-];
-
-const vignettes = [
-  {
-    marker: "11:47 PM · Tuesday",
-    trigger: "The phone rings twenty minutes after you locked the door.",
-    response:
-      "Tempo Chorus picks up, answers the question about Saturday, holds a table for six, and texts the confirmation before they've put the phone down.",
-    weight: "wide",
-    media: { type: "image", src: "/img/vignettes/closed.jpg", alt: "A \"Closed\" sign hanging in a restaurant's front window at night." },
-  },
-  {
-    marker: "9:12 AM · Sunday",
-    trigger: "Someone messages your Facebook page asking if you do gluten-free.",
-    response:
-      "Tempo Chorus answers in the same minute, in your words, and drops the conversation into the same place as every call and text.",
-    weight: "normal",
-    media: { type: "image", src: "/img/vignettes/glutenfree.jpg", alt: "A guest checking their phone for a reply." },
-  },
-  {
-    marker: "Table 14 · 9:40 PM",
-    trigger: "Four people just had the best meal they've had all month.",
-    response:
-      "The next morning Tempo Chorus thanks them and asks for the review — while it's still the best meal they've had all month.",
-    weight: "normal",
-    media: { type: "video", src: "/video/vignettes/bestmeal.mp4" },
-  },
-  {
-    marker: "Last visit · 11 March",
-    trigger: "A regular quietly stopped being a regular. Nobody noticed.",
-    response:
-      "Tempo Chorus noticed, and reached out with the kind of message that sounds like it came from you — because you wrote it once, and it's been waiting.",
-    weight: "wide",
-    media: { type: "image", src: "/img/vignettes/missingregular.jpg", alt: "An empty seat at a restaurant counter." },
-  },
-  {
-    marker: "Inquiry · 40 people, December",
-    trigger: "A private event lead lands while you're on the line.",
-    response:
-      "Tempo Chorus captures it, replies immediately, and keeps politely following up until a human on your side picks it up.",
-    weight: "normal",
-    media: { type: "image", src: "/img/vignettes/privateevent.jpg", alt: "A group celebrating together at a private event." },
-  },
-  {
-    marker: "Birthday · in 3 days",
-    trigger: "A regular's birthday is coming up, and nobody was going to mention it.",
-    response:
-      "Tempo Chorus already knows the date. The invitation goes out on time, personalized, without anyone adding it to a list.",
-    weight: "normal",
-    media: { type: "video", src: "/video/vignettes/birthday.mp4" },
+    label: "90 days later",
+    title: "A regular hasn't been back.",
+    body: "Chorus remembers.",
+    lines: ["Win-back sent ✓", "Guest returning ✓"],
   },
 ];
 
 const systems = [
-  { name: "Private Events", benefit: "Capture inquiries, respond immediately, organize opportunities, automate follow-up and keep every potential event moving toward a booking." },
-  { name: "Catering", benefit: "Capture catering leads, qualify requests, track follow-up and keep opportunities organized." },
-  { name: "Missed Call Recovery", benefit: "Automatically start a text conversation when the restaurant cannot answer." },
-  { name: "Guest Reviews", benefit: "Request reviews at the right time, centralize review activity and make responses easier." },
-  { name: "Guest Recovery", benefit: "Route negative feedback to the right person and create a consistent recovery process." },
-  { name: "Birthday & Celebrations", benefit: "Collect important dates and automate timely, personalized reasons to return." },
-  { name: "Guest Win-Back", benefit: "Reconnect with guests who have not visited recently." },
-  { name: "VIP & Regulars", benefit: "Segment and communicate differently with the restaurant's most valuable guests." },
-  { name: "Restaurant Events", benefit: "Promote special dinners, tastings, live music, holiday events and other experiences." },
-  { name: "Hiring", benefit: "Collect applications, organize candidates, schedule interviews and automate candidate communication." },
-  { name: "Donation Requests", benefit: "Collect and route community/donation requests through a consistent process." },
-  { name: "Guest Inquiries", benefit: "Bring website, social, text and other inquiries into a more manageable workflow." },
+  {
+    name: "Guest Relations",
+    body: "Give guests a better place to discover, explore and connect with your restaurant. Help answer calls and guest questions when your team can't.",
+    items: "Website · AI Host Helper",
+  },
+  {
+    name: "Guest Marketing",
+    body: "Give guests a reason to come back.",
+    items: "Email, text, social, birthdays, promotions and win-back campaigns.",
+  },
+  {
+    name: "Reputation",
+    body: "Build it. Protect it.",
+    items: "Generate more reviews, manage responses and catch poor experiences while there's still an opportunity to recover the guest.",
+  },
+  {
+    name: "Opportunities",
+    body: "Don't let good leads disappear.",
+    items: "Capture and follow up on private events, catering and other valuable inquiries.",
+  },
 ];
 
-const care = [
-  "Restaurant-specific setup, not an empty account.",
-  "White-glove onboarding and essential workflows configured for you.",
-  "Team training, so everyone actually uses it.",
-  "A support-ticket link inside Chorus, triaged to the right person.",
-  "Ongoing platform updates and restaurant-specific improvements.",
+const sites = [
+  {
+    name: "Citria Coastal Grill",
+    domain: "citria.net",
+    desc: "Mediterranean fine dining",
+    src: "/img/home/site-citria.jpg",
+    alt: "Citria Coastal Grill's homepage hero: an oceanview patio table set for dinner at sunset.",
+  },
+  {
+    name: "Lou Amari's",
+    domain: "louamaris.com",
+    desc: "Neighborhood Italian restaurant",
+    src: "/img/home/site-lou-amaris.jpg",
+    alt: "Lou Amari's homepage hero: the restaurant's brick storefront lit up at night.",
+  },
+  {
+    name: "Da Wurst",
+    domain: "eatdawurst.com",
+    desc: "Fast casual restaurant & bar",
+    src: "/img/home/site-da-wurst.jpg",
+    alt: "Da Wurst's homepage hero: a lively string-lit beer garden patio at night.",
+  },
 ];
-
-const plan = {
-  name: "Chorus",
-  price: "$397",
-  note: "One complete platform. Add AI, deeper marketing tools or extra locations as you grow.",
-};
 ---
 
 <Base
-  title="Tempo Chorus — everything working together"
-  description="Tempo Chorus brings your restaurant's marketing, guest communication, reputation, customer relationships and automation into one connected platform. Book a demo."
+  title="Tempo Chorus — More guests. More often."
+  description="Everything your restaurant needs to get found, get chosen and bring guests back."
   active="home"
 >
   <section class="hero">
-    <img
-      class="hero__bg"
-      src="/img/home/hero-service.jpg"
-      alt="A restaurant dining room during evening service — a server carrying plates past smiling guests."
-      fetchpriority="high"
-    />
-    <div class="hero__veil" aria-hidden="true"></div>
-    <div class="hero__chips" aria-hidden="true">
-      <img class="hero__chip hero__chip--call" src="/img/home/chips/incoming-call.png" alt="" />
-      <img class="hero__chip hero__chip--review" src="/img/home/chips/google-review.png" alt="" />
-      <img class="hero__chip hero__chip--event" src="/img/home/chips/private-event.png" alt="" />
-    </div>
-    <div class="shell">
-      <div class="hero__say">
-        <h1 class="hero__title">
-          Everything <span class="hero__accent">working together.</span>
-        </h1>
-        <p class="hero__sub">
-          <strong>Your website. Your phone. Your marketing. Your guests.</strong> Tempo Chorus
-          helps restaurants get found, answer guests, build relationships and bring them back —
-          with everything connected in one place.
-        </p>
-        <p class="hero__price">$397/month.</p>
-        <div class="hero__actions">
-          <a class="btn" href="#demo">Book a Demo</a>
-          <a class="hero__link" href="#what-you-get">See What's Included</a>
-        </div>
-        <p class="hero__note">No complicated tiers. No pile of disconnected tools.</p>
+    <div class="shell hero__inner">
+      <h1 class="hero__title">More guests.<br />More often.</h1>
+      <p class="hero__sub">Everything your restaurant needs to get found, get chosen and bring guests back.</p>
+      <div class="hero__actions">
+        <a class="btn" href="/book-a-demo">Book a Demo</a>
+        <a class="hero__link" href="#promise">See how Chorus works ↓</a>
+      </div>
+
+      <div class="call" aria-label="Example: an incoming call is answered and a reservation is captured">
+        <p class="call__head"><span class="call__dot" aria-hidden="true"></span>Incoming call · 7:42 PM</p>
+        <p class="call__quote">“Do you have anything for six Saturday around 7:30?”</p>
+        <p class="call__step call__step--1">AI Host Helper answered ✓</p>
+        <p class="call__step call__step--2">Reservation captured ✓</p>
       </div>
     </div>
-    <div class="hero__floor" />
   </section>
 
-  <section class="journey" aria-labelledby="journey-title">
-    <div class="shell journey__inner">
-      <h2 class="eyeless-h2 journey__title" id="journey-title">
-        Your guests don't think in channels.
-      </h2>
-      <p class="lede journey__lede">
-        Your restaurant has enough systems. Chorus connects the parts that matter. A guest
-        finds you. Visits your website. Calls. Makes a reservation. Joins your list. Leaves a
-        review. Comes back. To them, it's one relationship with your restaurant. Chorus treats
-        it that way, too.
-      </p>
-      <ol class="journey__flow" aria-label="Guest journey">
-        {["Search", "Website", "Call", "Reservation", "Visit", "Review", "Marketing", "Return"].map((step, i, arr) => (
-          <li>
-            <span>{step}</span>
-            {i < arr.length - 1 && <span class="journey__arrow" aria-hidden="true">→</span>}
-          </li>
-        ))}
+  <section class="promise" id="promise" aria-labelledby="promise-title">
+    <div class="shell">
+      <p class="eyebrow">The Chorus Promise</p>
+      <h2 class="section-title" id="promise-title">Get found. Get chosen. Get them back.</h2>
+      <ol class="journey">
+        <li class="journey__step">
+          <p class="journey__label">Get found</p>
+          <p class="journey__head">Be there when guests are looking.</p>
+          <p class="journey__body">Website. Menus. Google. Social. Advertising. Make it easier for new guests to discover your restaurant.</p>
+        </li>
+        <li class="journey__step">
+          <p class="journey__label">Get chosen</p>
+          <p class="journey__head">Turn interest into a visit.</p>
+          <p class="journey__body">Calls. Reservations. Private events. Catering. Guest questions. Capture the opportunities your restaurant is already creating.</p>
+        </li>
+        <li class="journey__step">
+          <p class="journey__label">Get them back</p>
+          <p class="journey__head">The first visit shouldn't be the last.</p>
+          <p class="journey__body">Reviews. Email. Text. Birthdays. Promotions. Guest recovery. Give guests reasons to return.</p>
+        </li>
       </ol>
     </div>
   </section>
 
-  <section class="stories" id="what-you-get" aria-labelledby="stories-title">
+  <section class="operating" aria-labelledby="operating-title">
     <div class="shell">
-      <h2 class="eyeless-h2 stories__title" id="stories-title">What you get.</h2>
-      {
-        stories.map((s, i) => (
-          <article class={`story ${i % 2 === 1 ? "story--flip" : ""}`} id={s.id}>
-            <div class="story__say">
-              <p class="story__eyebrow">{s.eyebrow}</p>
-              <h3 class="story__title">{s.title}</h3>
-              <p class="lede story__body">{s.body}</p>
-              <a class="story__link" href={s.cta.href}>{s.cta.label}</a>
+      <p class="eyebrow">In action</p>
+      <h2 class="section-title" id="operating-title">While you're running the restaurant, Chorus is doing this.</h2>
+      <div class="operating__layout">
+      <figure class="operating__photo">
+        <img src="/img/home/guest-marketing-server.jpg" alt="A server setting the table with tea service in a warm, busy dining room." loading="lazy" decoding="async" />
+      </figure>
+      <ol class="scenarios">
+        {scenarios.map((s) => (
+          <li class="scenario">
+            <p class="scenario__label">{s.label}</p>
+            <div class="scenario__body">
+              <p class="scenario__title">{s.title}</p>
+              <p class="scenario__text">{s.body}</p>
+              <ul class="scenario__lines">
+                {s.lines.map((l) => <li>{l}</li>)}
+              </ul>
             </div>
-            <div class="story__show">
-              {s.kind === "widget" && <FeatureArt kind="agent" />}
-              {s.kind === "mock" && <FeatureArt kind={s.art} />}
-              {s.kind === "photo" && (
-                <PhotoSection treatment="supporting" layout="framed" src={s.src} alt={s.alt} />
-              )}
-              {s.kind === "graphic" && (
-                <iframe
-                  class="story__graphic"
-                  src={s.src}
-                  title={s.alt}
-                  loading="lazy"
-                  sandbox="allow-scripts allow-same-origin"
-                  scrolling="no"
-                />
-              )}
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="jobs" aria-labelledby="jobs-title">
-    <video
-      class="jobs__bg"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto"
-      aria-hidden="true"
-    >
-      <source src="/video/four-jobs-bg.mp4" type="video/mp4" />
-    </video>
-    <div class="jobs__veil" aria-hidden="true"></div>
-    <div class="shell jobs__shell">
-      <p class="jobs__label">Everything Included</p>
-      <h2 class="eyeless-h2 jobs__title" id="jobs-title">Four jobs. One connected platform.</h2>
-      <div class="jobs__grid" data-reveal>
-        {
-          jobs.map((j, i) => (
-            <article class="job" style={`--i:${i}`}>
-              <span class="job__mark" aria-hidden="true">
-                <JobIcon name={j.mark} />
-              </span>
-              <h3 class="job__name">{j.name}</h3>
-              <p class="job__line">{j.line}</p>
-            </article>
-          ))
-        }
+          </li>
+        ))}
+      </ol>
       </div>
-      <a class="jobs__link" href="/features">Explore All Features →</a>
     </div>
   </section>
 
-  <section class="chain" aria-labelledby="chain-title">
+  <section class="system" aria-labelledby="system-title">
     <div class="shell">
-      <h2 class="eyeless-h2 chain__title" id="chain-title">
-        Here is what that<br /> actually means.
-      </h2>
-      <p class="lede chain__lede">
-        Not features. Ordinary moments in a Tuesday.
-      </p>
-    </div>
-
-    <div class="shell chain__list">
-      <div class="chain__spine" aria-hidden="true"></div>
-      {
-        vignettes.map((v) => (
-          <article class={`vignette vignette--${v.weight}`}>
-            <div class="vignette__say">
-              <h3 class="vignette__trigger">{v.trigger}</h3>
-              <p class="vignette__marker">{v.marker}</p>
-              <div class="vignette__rule" aria-hidden="true"></div>
-              <p class="vignette__response">
-                <span class="dot" aria-hidden="true" />
-                <span>{v.response}</span>
-              </p>
-            </div>
-            <div class="vignette__media">
-              {v.media.type === "video" ? (
-                <video
-                  class="vignette__asset"
-                  src={v.media.src}
-                  autoplay
-                  muted
-                  loop
-                  playsinline
-                  preload="metadata"
-                  aria-hidden="true"
-                />
-              ) : (
-                <img
-                  class="vignette__asset"
-                  src={v.media.src}
-                  alt={v.media.alt}
-                  loading="lazy"
-                  decoding="async"
-                />
-              )}
-              <span class="vignette__veil" aria-hidden="true"></span>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-
-    <div class="shell chain__coda">
-      <p>
-        None of those is a big moment. That is exactly the point — they are the
-        small ones, and they are the ones that get dropped.
-      </p>
-    </div>
-  </section>
-
-  <ProductMocks />
-
-  <section class="systems" aria-labelledby="systems-title">
-    <div class="shell">
-      <h2 class="eyeless-h2 systems__title" id="systems-title">
-        Restaurant Systems, not software features.
-      </h2>
-      <p class="lede systems__lede">
-        Ready-to-use workflows built into every plan.
-      </p>
-      <ul class="systems__list" data-reveal>
-        {
-          systems.map((s, i) => (
-            <li class="system" style={`--i:${i}`}>
-              <span class="dot" aria-hidden="true" />
-              <div>
-                <p class="system__name">{s.name}</p>
-                <p class="system__benefit">{s.benefit}</p>
-              </div>
-            </li>
-          ))
-        }
+      <p class="eyebrow">The Chorus System</p>
+      <h2 class="section-title" id="system-title">One system. A lot less to manage.</h2>
+      <ul class="system__list">
+        {systems.map((s) => (
+          <li class="system__item">
+            <p class="system__name">{s.name}</p>
+            <p class="system__head">{s.body}</p>
+            <p class="system__body">{s.items}</p>
+          </li>
+        ))}
       </ul>
+      <a class="text-link" href="/product">Explore Chorus →</a>
     </div>
   </section>
 
-  <section class="why" aria-labelledby="why-title">
-    <div class="shell why__inner">
-      <div class="why__show">
-        <FeatureArt kind="unified" />
-      </div>
-      <div class="why__say">
-        <h2 class="why__title" id="why-title">
-          <span class="why__titletext">Why "Chorus"?</span>
-        </h2>
-        <div class="why__text">
-          <p class="why__lead">
-            A chorus is where individual parts come together to create something
-            stronger than they could on their own.
-          </p>
-          <p>Restaurants work the same way.</p>
-          <p>
-            Your website, guest communications, reviews, marketing, private
-            events, and customer relationships all play an important role. But
-            when they're disconnected, opportunities are missed and the guest
-            experience suffers.
-          </p>
-          <p>
-            Tempo Chorus brings every interaction together into one connected
-            system — so your restaurant delivers a more consistent experience,
-            builds stronger guest relationships, and grows with less effort.
-          </p>
-          <p class="why__close">All together now.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="care" aria-labelledby="care-title">
-    <div class="shell care__inner">
-      <div class="care__say">
-        <h2 class="eyeless-h2 care__title" id="care-title">
-          You won't be handed a login<br /> and left to figure it out.
-        </h2>
-        <p class="lede care__lede">
-          Chorus gives you the tools. Tempo gives you the team behind them.
-        </p>
-      </div>
-      <ul class="care__list">
-        {
-          care.map((c) => (
-            <li>
-              <span class="dot" aria-hidden="true" />
-              {c}
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <section class="pricing-preview" aria-labelledby="pricing-preview-title">
+  <section class="websites" aria-labelledby="websites-title">
     <div class="shell">
-      <h2 class="eyeless-h2 pp__title" id="pricing-preview-title">Simple pricing. Complete platform.</h2>
-      <div class="pp__card pp__card--solo">
-        <p class="pp__name">{plan.name}</p>
-        <p class="pp__price">{plan.price}<span>/mo</span></p>
-        <p class="pp__note">{plan.note}</p>
-      </div>
-      <a class="hero__link pp__more" href="/pricing">See full pricing and what's included →</a>
+      <p class="eyebrow">Restaurant Websites</p>
+      <h2 class="section-title" id="websites-title">One system. No templates. Any website.</h2>
+      <p class="lede">Your restaurant doesn't look like every other restaurant. Your website shouldn't either.</p>
+      <ul class="websites__grid">
+        {sites.map((s) => (
+          <li class="websites__item">
+            <a class="websites__frame" href={`https://${s.domain}`} target="_blank" rel="noopener noreferrer" aria-label={`Visit the ${s.name} website (opens in a new tab)`}>
+              <img src={s.src} alt={s.alt} loading="lazy" decoding="async" />
+            </a>
+            <p class="websites__name">{s.name}</p>
+            <p class="websites__desc">{s.desc}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="websites__note">Already have a website? Keep it. Chorus works with that too.</p>
+      <a class="text-link" href="/websites">See our websites →</a>
     </div>
   </section>
 
-  <section class="demo" id="demo" aria-labelledby="demo-title">
-    <div class="shell demo__inner">
-      <div class="demo__pitch">
-        <h2 class="demo__title" id="demo-title">
-          One Platform.<br /> Configured for the Way You Operate.
-        </h2>
-        <p class="demo__sub">
-          A personalized walkthrough of Tempo Chorus — not a generic software
-          tour. Tell us how your restaurant runs and we'll show you exactly
-          where it fits.
-        </p>
-        <ul class="demo__points">
-          <li><span class="dot" aria-hidden="true" />Around 30 minutes, with someone who has worked in restaurants.</li>
-          <li><span class="dot" aria-hidden="true" />Built around your concept, your locations, your service.</li>
-          <li><span class="dot" aria-hidden="true" />No obligation, and no pretending your current setup is worse than it is.</li>
+  <section class="scale" aria-labelledby="scale-title">
+    <div class="shell">
+      <p class="eyebrow">Tempo + Scale</p>
+      <h2 class="section-title" id="scale-title">Built for restaurants. Built to grow.</h2>
+      <p class="lede">Whether you're running one restaurant, adding locations or managing several restaurant concepts, Chorus can grow with you.</p>
+      <p class="scale__path" aria-label="One restaurant, then one concept with multiple locations, then a restaurant group">
+        <span>One restaurant</span><span aria-hidden="true">→</span><span>One concept, multiple locations</span><span aria-hidden="true">→</span><span>Restaurant group</span>
+      </p>
+      <div class="scale__tempo">
+        <p>And Tempo comes with it.</p>
+        <ul>
+          <li>We set it up. Around your restaurant.</li>
+          <li>We train your team. On what they actually need.</li>
+          <li>We keep helping. You're not handed a login and left to figure it out.</li>
         </ul>
       </div>
-
-      <div class="demo__form">
-        <div class="booking">
-          <p class="booking__heading">Pick a time</p>
-          <div class="booking__widget">
-            <iframe
-              src={`${GHL_DOMAIN}/widget/booking/${CALENDAR_ID}`}
-              title="Book a Tempo Chorus demo"
-              allow="payment"
-              scrolling="no"
-              id={WIDGET_ID}
-            ></iframe>
-          </div>
-          <p class="booking__note">
-            Around 30 minutes. You'll get a confirmation by email and a reminder
-            the day before — sent, as it happens, by Chorus.
-          </p>
-        </div>
-      </div>
+      <p class="scale__price">Plans start at <strong>$397/month</strong>.</p>
+      <a class="text-link" href="/pricing">See pricing →</a>
     </div>
   </section>
 
-  <!-- GoHighLevel's resize script: lets the booking iframe report its own
-       height so the panel grows with the widget instead of scrolling. -->
-  <script is:inline src={`${GHL_DOMAIN}/js/form_embed.js`}></script>
+  <section class="close" aria-labelledby="close-title">
+    <div class="shell close__inner">
+      <p class="close__kicker">All Together Now.</p>
+      <h2 class="close__title" id="close-title">Your website. Your phone. Your marketing. Your guests.</h2>
+      <p class="close__sub">One connected system built around your restaurant.</p>
+      <a class="btn btn--light" href="/book-a-demo">Book a Demo</a>
+    </div>
+  </section>
 </Base>
 
 <style>
-  /* ---------- Hero ---------- */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--v3-text-low);
+  }
 
+  .section-title {
+    margin-top: 0.75rem;
+    font-size: clamp(2rem, 1.2rem + 3.6vw, 3.6rem);
+    letter-spacing: -0.035em;
+    color: var(--eggplant);
+    max-width: 22ch;
+  }
+
+  .lede {
+    margin-top: 1.25rem;
+    font-family: var(--font-body);
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+    color: var(--v3-text-mid);
+    max-width: 52ch;
+  }
+
+  .text-link {
+    display: inline-block;
+    margin-top: 2rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--eggplant);
+    text-decoration: none;
+    border-bottom: 2px solid var(--allium);
+    padding-bottom: 0.15rem;
+  }
+
+  .text-link:hover {
+    color: var(--grape);
+  }
+
+  section {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  /* 01 — Hero: type-only, one interaction as the product evidence. */
   .hero {
-    position: relative;
-    min-height: clamp(32rem, 78vh, 48rem);
-    display: flex;
-    align-items: center;
-    padding-block: clamp(5rem, 12vh, 9rem) clamp(3.5rem, 8vh, 6rem);
-    isolation: isolate;
-    overflow: hidden;
-  }
-
-  /* Real, verified restaurant photography — the v2 hero treatment. A
-     directional scrim (heavier stage-left, where the headline sits;
-     lighter stage-right, where the photo's own baked-in interaction chips
-     already carry their own contrast) rather than DESIGN.md's uniform
-     Ambient wash, since this photo already reads as a finished, composed
-     shot rather than backdrop we're overlaying fresh content onto. */
-  .hero__bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-  }
-
-  .hero__veil {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background:
-      linear-gradient(
-        100deg,
-        color-mix(in oklab, var(--ink-900) 88%, transparent) 0%,
-        color-mix(in oklab, var(--ink-900) 78%, transparent) 28%,
-        color-mix(in oklab, var(--ink-900) 30%, transparent) 55%,
-        color-mix(in oklab, var(--ink-900) 15%, transparent) 75%
-      ),
-      color-mix(in oklab, var(--violet-700) 20%, transparent);
-  }
-
-  /* The horizontal gradient above assumes a wide photo with room to fade
-     out; on a narrow viewport the hero__say column spans nearly the full
-     width, so a vertical wash keeps text legible regardless of what's
-     behind it instead of relying on a left-side scrim alone. */
-  @media (max-width: 48rem) {
-    .hero__veil {
-      background:
-        linear-gradient(
-          180deg,
-          color-mix(in oklab, var(--ink-900) 82%, transparent) 0%,
-          color-mix(in oklab, var(--ink-900) 88%, transparent) 60%,
-          color-mix(in oklab, var(--ink-900) 92%, transparent) 100%
-        ),
-        color-mix(in oklab, var(--violet-700) 20%, transparent);
-    }
-  }
-
-  .hero .shell {
-    position: relative;
-    z-index: 2;
-  }
-
-  /* Real interaction chips (extracted assets, not baked into the photo)
-     laid over the image and its veil — positioned to roughly match where
-     the original composited reference photo placed them. Hidden below
-     56rem: the photo crop and text column don't leave room for them once
-     the hero collapses toward a single, nearly-full-width column. */
-  .hero__chips {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-  }
-
-  .hero__chip {
-    position: absolute;
-    width: clamp(11rem, 19vw, 17rem);
-    filter: drop-shadow(0 18px 34px rgb(0 0 0 / 0.55));
-  }
-
-  .hero__chip--call {
-    top: 14%;
-    left: 61%;
-  }
-
-  .hero__chip--review {
-    top: 49%;
-    left: 76%;
-  }
-
-  .hero__chip--event {
-    top: 67%;
-    left: 53%;
-  }
-
-  @media (max-width: 56rem) {
-    .hero__chips {
-      display: none;
-    }
-  }
-
-  .hero__floor {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    z-index: 3;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      color-mix(in oklab, var(--violet-500) 70%, transparent) 20%,
-      color-mix(in oklab, var(--mint-400) 55%, transparent) 55%,
-      color-mix(in oklab, var(--violet-500) 70%, transparent) 80%,
-      transparent
-    );
-  }
-
-  .hero__say {
-    max-width: 34rem;
+    padding-top: clamp(4.5rem, 12vw, 9rem);
+    padding-bottom: clamp(4rem, 9vw, 6rem);
   }
 
   .hero__title {
-    font-size: clamp(2.3rem, 1.4rem + 4.4vw, 4.6rem);
+    font-size: clamp(3rem, 1.2rem + 7vw, 6.8rem);
+    line-height: 0.98;
     letter-spacing: -0.045em;
-  }
-
-  .hero__accent {
-    color: var(--mint-400);
+    color: var(--eggplant);
   }
 
   .hero__sub {
-    margin-top: 1.6rem;
-    max-width: 46ch;
-    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
-    line-height: 1.5;
-    color: var(--text-mid);
-  }
-
-  .hero__sub strong {
-    color: var(--text-hi);
-    font-weight: 600;
-  }
-
-  .hero__price {
-    margin-top: 1rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--mint-300);
+    margin-top: 1.75rem;
+    font-family: var(--font-body);
+    font-size: clamp(1.1rem, 1rem + 0.6vw, 1.45rem);
+    color: var(--v3-text-mid);
+    max-width: 36ch;
   }
 
   .hero__actions {
-    margin-top: 1.75rem;
+    margin-top: 2.25rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1.5rem 2rem;
-  }
-
-  .hero__note {
-    margin-top: 1.25rem;
-    font-size: 0.85rem;
-    color: var(--text-low);
+    gap: 1.5rem;
   }
 
   .hero__link {
     font-family: var(--font-display);
     font-weight: 600;
-    color: var(--violet-400);
+    color: var(--eggplant);
     text-decoration: none;
-    border-bottom: 1px solid color-mix(in oklab, var(--violet-400) 45%, transparent);
-    padding-bottom: 2px;
-    transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+    border-bottom: 2px solid var(--allium);
+    padding-bottom: 0.15rem;
   }
 
-  .hero__link:hover {
-    color: var(--text-hi);
-    border-bottom-color: var(--text-hi);
+  .call {
+    margin-top: clamp(3rem, 7vw, 5rem);
+    max-width: 34rem;
+    padding: 1.5rem 0 0;
+    border-top: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+    font-family: var(--font-product);
   }
 
-  /* ---------- Guest journey ---------- */
-
-  .journey {
-    padding-block: clamp(4rem, 9vw, 6.5rem);
-    background: var(--ink-800);
-  }
-
-  .journey__inner {
-    max-width: 52rem;
-  }
-
-  .journey__lede {
-    margin-top: 1.25rem;
-    max-width: 62ch;
-  }
-
-  .journey__flow {
-    margin: clamp(2rem, 5vw, 3rem) 0 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .journey__flow li {
+  .call__head {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-  }
-
-  .journey__flow span:first-child {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--text-hi);
-    padding: 0.5rem 0.9rem;
-    background: var(--ink-600);
-    border: 1px solid color-mix(in oklab, var(--violet-500) 40%, transparent);
-    border-radius: 4px;
-  }
-
-  .journey__arrow {
-    color: var(--mint-400);
-    font-weight: 700;
-  }
-
-  /* ---------- What you get (story beats) ---------- */
-
-  .stories {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
-  }
-
-  .stories__title {
-    margin-bottom: clamp(2.5rem, 6vw, 4rem);
-  }
-
-  .story {
-    display: grid;
-    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: center;
-    padding-block: clamp(3rem, 7vw, 5rem);
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
-  }
-
-  .story:first-of-type {
-    border-top: 0;
-    padding-top: 0;
-  }
-
-  .story--flip {
-    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-  }
-
-  .story--flip .story__say {
-    order: 2;
-  }
-
-  .story--flip .story__show {
-    order: 1;
-  }
-
-  .story__eyebrow {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.72rem;
-    letter-spacing: 0.09em;
+    font-family: var(--font-system);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--text-low);
+    color: var(--v3-text-low);
   }
 
-  .story__title {
-    margin-top: 0.6rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.5rem, 1rem + 1.8vw, 2.2rem);
-    letter-spacing: -0.035em;
-    color: var(--text-hi);
-    max-width: 18ch;
+  .call__dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--allium);
   }
 
-  .story__body {
-    margin-top: 1rem;
-    max-width: 46ch;
-  }
-
-  .story__link {
-    display: inline-block;
-    margin-top: 1.25rem;
-    font-family: var(--font-display);
-    font-weight: 600;
-    color: var(--violet-400);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s var(--ease-out);
-  }
-
-  .story__link:hover {
-    border-bottom-color: var(--violet-400);
-  }
-
-  /* A finished, authored graphic (device mockup + real site screenshots) —
-     no PhotoSection wash, unlike raw photography; it's already on-brand. */
-  /* An iframe, not an <img> — the source animates its own scroll position
-     via an inline <script>, and browsers strip script execution from SVGs
-     loaded as plain images, so this is the only way the motion survives. */
-  .story__graphic {
-    display: block;
-    width: 100%;
-    aspect-ratio: 1660 / 1080;
-    border: 0;
-    background: transparent;
-    color-scheme: normal;
-  }
-
-  @media (max-width: 60rem) {
-    .story,
-    .story--flip {
-      grid-template-columns: 1fr;
-    }
-
-    .story--flip .story__say,
-    .story--flip .story__show {
-      order: initial;
-    }
-  }
-
-  /* ---------- Four Jobs ---------- */
-
-  .jobs {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    /* 25% taller than the original clamp(4.5rem,10vw,8rem)/clamp(3rem,7vw,5rem) */
-    padding-block: clamp(5.6rem, 12.5vw, 10rem) clamp(3.75rem, 8.75vw, 6.25rem);
-  }
-
-  .jobs__bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* Knocks the footage back so it reads as ambiance behind the cards, never
-     competing with them — a dark violet wash, not a plain black scrim. */
-  .jobs__veil {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background:
-      linear-gradient(
-        180deg,
-        color-mix(in oklab, var(--ink-900) 55%, transparent),
-        color-mix(in oklab, var(--ink-900) 88%, transparent)
-      ),
-      color-mix(in oklab, var(--violet-700) 55%, transparent);
-  }
-
-  .jobs__shell {
-    position: relative;
-    z-index: 2;
-  }
-
-  .jobs__label {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.72rem;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--text-low);
-    margin-bottom: 0.6rem;
-  }
-
-  .jobs__link {
-    display: inline-block;
-    margin-top: clamp(2rem, 5vw, 3rem);
-    font-family: var(--font-display);
-    font-weight: 600;
-    color: var(--violet-400);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s var(--ease-out);
-  }
-
-  .jobs__link:hover {
-    border-bottom-color: var(--violet-400);
-  }
-
-  .jobs__grid {
-    margin-top: clamp(2.5rem, 6vw, 4rem);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-    gap: 1px;
-    background: color-mix(in oklab, var(--violet-500) 20%, transparent);
-    border: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
-    border-radius: 5px;
-    overflow: hidden;
-  }
-
-  .job {
-    background: var(--ink-800);
-    padding: clamp(1.75rem, 3vw, 2.25rem);
-  }
-
-  .job__mark {
-    display: inline-flex;
-    width: 2.5rem;
-    height: 2.5rem;
-    color: var(--violet-400);
-  }
-
-  .job__mark svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  .job__name {
-    margin-top: 1.25rem;
-    font-size: 1.35rem;
-    letter-spacing: -0.03em;
-    color: var(--text-hi);
-  }
-
-  .job__line {
-    margin-top: 0.65rem;
-    max-width: 26ch;
-    color: var(--text-mid);
-  }
-
-  /* ---------- Vignette chain ---------- */
-
-  .chain {
-    padding-block: clamp(5rem, 11vw, 9rem) clamp(3rem, 7vw, 5rem);
-    background: var(--ink-800);
-  }
-
-  .chain__lede {
-    margin-top: 1.25rem;
-    color: var(--text-low);
-  }
-
-  .chain__list {
-    position: relative;
-    margin-top: clamp(3.5rem, 8vw, 6rem);
-    display: flex;
-    flex-direction: column;
-    gap: clamp(3rem, 7vw, 5.5rem);
-    padding-left: clamp(1.5rem, 4vw, 3.25rem);
-  }
-
-  .chain__spine {
-    position: absolute;
-    left: 0;
-    top: 0.4rem;
-    bottom: 0.4rem;
-    width: 2px;
-    background: linear-gradient(
-      180deg,
-      transparent,
-      color-mix(in oklab, var(--violet-600) 85%, transparent) 4%,
-      color-mix(in oklab, var(--violet-600) 85%, transparent) 92%,
-      transparent
-    );
-  }
-
-  .vignette {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(12rem, 19rem);
-    align-items: center;
-    gap: clamp(1.75rem, 5vw, 3.5rem);
-    max-width: 68rem;
-  }
-
-  .vignette__say {
-    max-width: 54ch;
-  }
-
-  .vignette--wide .vignette__say {
-    max-width: 68ch;
-  }
-
-  .vignette::before {
-    content: "";
-    position: absolute;
-    left: clamp(-3.25rem, -4vw, -1.5rem);
-    top: 0.85rem;
-    width: clamp(1.5rem, 4vw, 3.25rem);
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--violet-500) 78%, transparent),
-      color-mix(in oklab, var(--violet-500) 40%, transparent)
-    );
-  }
-
-  .vignette__media {
-    position: relative;
-    aspect-ratio: 4 / 3;
-    border-radius: 1rem;
-    overflow: hidden;
-    background: var(--ink-700);
-    box-shadow: 0 24px 40px -22px rgb(0 0 0 / 0.7);
-  }
-
-  .vignette__asset {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* A light violet wash to keep photography/video on-brand rather than
-     reading as stock imagery — deliberately lighter than the Four Jobs
-     background treatment, since these sit as small supporting frames rather
-     than a full-bleed backdrop. */
-  .vignette__veil {
-    position: absolute;
-    inset: 0;
-    background: color-mix(in oklab, var(--violet-700) 26%, transparent);
-  }
-
-  @media (max-width: 56rem) {
-    .vignette {
-      grid-template-columns: 1fr;
-    }
-
-    .vignette__media {
-      order: -1;
-      max-width: 22rem;
-    }
-  }
-
-  .vignette__marker {
+  .call__quote {
     margin-top: 0.75rem;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--amber-400);
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+    color: var(--eggplant);
+    line-height: 1.4;
   }
 
-  .vignette__trigger {
-    font-size: clamp(1.3rem, 0.95rem + 1.7vw, 2.1rem);
-    letter-spacing: -0.032em;
-    color: var(--text-hi);
+  .call__step {
+    margin-top: 0.9rem;
+    font-family: var(--font-system);
+    font-size: 0.85rem;
+    color: var(--grape);
+    opacity: 0;
+    animation: call-step 0.5s var(--ease-out) forwards;
   }
 
-  .vignette__rule {
-    margin-top: 1.5rem;
-    height: 1px;
-    width: min(100%, 26rem);
-    background: linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--violet-500) 60%, transparent),
-      transparent
-    );
+  .call__step--1 {
+    animation-delay: 0.8s;
   }
 
-  .vignette__response {
-    margin-top: 1.35rem;
-    display: flex;
-    gap: 0.9rem;
-    color: var(--text-mid);
-    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.05rem);
-    line-height: 1.62;
+  .call__step--2 {
+    animation-delay: 1.8s;
   }
 
-  .vignette__response .dot {
-    color: var(--mint-400);
-    margin-top: 0.62em;
+  @keyframes call-step {
+    to {
+      opacity: 1;
+    }
   }
 
-  .chain__coda {
-    margin-top: clamp(4rem, 9vw, 6.5rem);
-    padding-top: 2.25rem;
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 26%, transparent);
+  @media (prefers-reduced-motion: reduce) {
+    .call__step {
+      opacity: 1;
+      animation: none;
+    }
   }
 
-  .chain__coda p {
-    max-width: 58ch;
-    font-family: var(--font-display);
-    font-size: clamp(1.3rem, 0.95rem + 1vw, 1.65rem);
-    font-weight: 600;
-    line-height: 1.32;
-    letter-spacing: -0.025em;
-    color: var(--text-hi);
-  }
-
-  /* ---------- Restaurant Systems ---------- */
-
-  .systems {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
-  }
-
-  .systems__lede {
-    margin-top: 1.25rem;
-    color: var(--text-low);
-  }
-
-  .systems__list {
-    list-style: none;
+  /* 02 — The promise: one continuous journey, not three cards. */
+  .journey {
     margin: clamp(2.5rem, 6vw, 4rem) 0 0;
     padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(2rem, 4vw, 3.5rem);
+    border-top: 2px solid var(--eggplant);
+    padding-top: 2rem;
+  }
+
+  .journey__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--grape);
+  }
+
+  .journey__head {
+    margin-top: 0.75rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.35rem, 1rem + 1vw, 1.75rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--eggplant);
+  }
+
+  .journey__body {
+    margin-top: 0.9rem;
+    color: var(--v3-text-mid);
+  }
+
+  @media (max-width: 52rem) {
+    .journey {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* 03 — In action: four restaurant moments, hairline-separated. */
+  .operating {
+    background: var(--white);
+  }
+
+  .operating__layout {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+
+  .operating__photo {
+    margin: 0;
+    position: sticky;
+    top: 7rem;
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+  }
+
+  .operating__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 52rem) {
+    .operating__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .operating__photo {
+      position: static;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  .scenarios {
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .scenario {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 2rem;
+    padding-block: clamp(1.75rem, 4vw, 2.5rem);
+    border-top: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+  }
+
+  .scenario__label {
+    font-family: var(--font-system);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--v3-text-low);
+    padding-top: 0.3rem;
+  }
+
+  .scenario__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 1rem + 0.8vw, 1.7rem);
+    letter-spacing: -0.02em;
+    color: var(--eggplant);
+  }
+
+  .scenario__text {
+    margin-top: 0.4rem;
+    color: var(--v3-text-mid);
+  }
+
+  .scenario__lines {
+    margin: 0.9rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-product);
+    font-size: 0.95rem;
+    color: var(--grape);
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  @media (max-width: 52rem) {
+    .scenario {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+
+  /* 04 — The system: four areas, typographic, given room. */
+  .system__list {
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    padding: 0;
+    list-style: none;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 clamp(2rem, 6vw, 5rem);
-  }
-
-  .system {
-    display: flex;
-    gap: 0.9rem;
-    padding-block: 1.15rem;
-    border-top: 1px solid color-mix(in oklab, var(--violet-500) 20%, transparent);
-  }
-
-  .system .dot {
-    margin-top: 0.55em;
-    color: var(--violet-400);
+    gap: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 4rem);
   }
 
   .system__name {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.05rem;
-    letter-spacing: -0.025em;
-    color: var(--text-hi);
-  }
-
-  .system__benefit {
-    margin-top: 0.35rem;
-    max-width: 42ch;
-    font-size: 0.95rem;
-    color: var(--text-mid);
-  }
-
-  @media (max-width: 56rem) {
-    .systems__list {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* ---------- Why Chorus ---------- */
-
-  .why {
-    position: relative;
-    padding-block: clamp(4rem, 9vw, 7rem);
-    overflow: hidden;
-  }
-
-  .why__inner {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: stretch;
-  }
-
-  .why__show {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @media (max-width: 62rem) {
-    .why__inner {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .why__say {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1.5rem, 4vw, 2rem);
-  }
-
-  .why__title {
-    position: relative;
-    font-size: clamp(2.1rem, 1.4rem + 4.2vw, 4.4rem);
-    letter-spacing: -0.05em;
-    color: var(--violet-400);
-  }
-
-  .why__text {
-    max-width: 52ch;
-    display: flex;
-    flex-direction: column;
-    gap: 1.35rem;
-    color: var(--text-mid);
-    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
-    line-height: 1.62;
-  }
-
-  .why__lead {
-    font-family: var(--font-display);
-    font-size: clamp(1.3rem, 0.95rem + 1.7vw, 2.1rem);
+    font-family: var(--font-body);
     font-weight: 600;
-    line-height: 1.24;
-    letter-spacing: -0.03em;
-    color: var(--text-hi);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grape);
   }
 
-  .why__close {
+  .system__head {
+    margin-top: 0.7rem;
     font-family: var(--font-display);
-    font-size: clamp(1.65rem, 1rem + 2.2vw, 2.75rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: var(--mint-400);
-    margin-top: 0.75rem;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 1rem + 1vw, 1.9rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--eggplant);
   }
 
-  /* ---------- White-glove care ---------- */
-
-  .care {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
-    background: var(--ink-800);
+  .system__body {
+    margin-top: 0.8rem;
+    color: var(--v3-text-mid);
+    max-width: 40ch;
   }
 
-  .care__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: start;
-  }
-
-  .care__lede {
-    margin-top: 1.25rem;
-    color: var(--text-mid);
-  }
-
-  .care__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-  }
-
-  .care__list li {
-    display: flex;
-    align-items: baseline;
-    gap: 0.85rem;
-    font-size: 1.05rem;
-    color: var(--text-hi);
-  }
-
-  .care__list .dot {
-    color: var(--mint-400);
-  }
-
-  @media (max-width: 62rem) {
-    .care__inner {
+  @media (max-width: 46rem) {
+    .system__list {
       grid-template-columns: 1fr;
     }
   }
 
-  /* ---------- Pricing preview ---------- */
-
-  .pricing-preview {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
+  /* 05 — Websites: three real sites, shown at scale. */
+  .websites {
+    background: var(--sand);
   }
 
-  .pp__card {
-    position: relative;
-    margin-top: clamp(2.5rem, 6vw, 4rem);
-    background: var(--ink-700);
-    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
-    border-radius: 5px;
-    padding: clamp(1.5rem, 3vw, 2rem);
-    box-shadow: 0 18px 38px -24px rgb(0 0 0 / 0.9);
-  }
-
-  .pp__card--solo {
-    max-width: 26rem;
-  }
-
-  .pp__name {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.15rem;
-    letter-spacing: -0.025em;
-    color: var(--text-hi);
-  }
-
-  .pp__price {
-    margin-top: 0.6rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 2.25rem;
-    letter-spacing: -0.03em;
-    color: var(--mint-300);
-  }
-
-  .pp__price span {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-low);
-  }
-
-  .pp__note {
-    margin-top: 0.5rem;
-    color: var(--text-mid);
-  }
-
-  .pp__more {
-    display: inline-block;
-    margin-top: clamp(2rem, 4vw, 2.5rem);
-  }
-
-  /* ---------- Demo ---------- */
-
-  .demo {
-    padding-block: clamp(5rem, 11vw, 8.5rem);
-    scroll-margin-top: 5rem;
-  }
-
-  .demo__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap: clamp(2.5rem, 6vw, 5rem);
-    align-items: start;
-  }
-
-  .demo__title {
-    font-size: clamp(2.1rem, 1.1rem + 3.2vw, 3.5rem);
-    letter-spacing: -0.04em;
-  }
-
-  .demo__sub {
-    margin-top: 1.5rem;
-    max-width: 46ch;
-    color: var(--text-mid);
-    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
-  }
-
-  .demo__points {
-    list-style: none;
-    margin: 2rem 0 0;
+  .websites__grid {
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    color: var(--text-mid);
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
   }
 
-  .demo__points li {
-    display: flex;
-    gap: 0.85rem;
-    align-items: baseline;
-  }
-
-  .demo__points .dot {
-    color: var(--violet-400);
-  }
-
-  .booking {
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-    padding: clamp(1.75rem, 4vw, 2.5rem);
-    background: var(--ink-700);
-    border: 1px solid color-mix(in oklab, var(--violet-500) 30%, transparent);
-    border-radius: 4px;
-    box-shadow: 0 28px 60px -34px rgb(0 0 0 / 0.85);
-  }
-
-  .booking__heading {
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    color: var(--text-hi);
-    margin-bottom: 0.35rem;
-  }
-
-  /* The GHL widget renders its own interface inside the iframe and cannot be
-     restyled from here. Transparent, so whatever the widget paints is the
-     only background there is; set backgroundColor to --ink-700 in GHL
-     (Calendars → Customise) and the seam disappears entirely. */
-  .booking__widget {
-    background: transparent;
-    border-radius: 3px;
-    overflow: hidden;
-    min-height: 44rem;
-  }
-
-  .booking__widget iframe {
+  .websites__frame {
     display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .websites__frame img {
     width: 100%;
-    min-height: 44rem;
-    border: 0;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s var(--ease-out);
   }
 
-  .booking__note {
-    font-size: 0.875rem;
-    color: var(--text-low);
-    line-height: 1.5;
+  .websites__frame:hover img,
+  .websites__frame:focus-visible img {
+    transform: scale(1.04);
   }
 
-  @media (max-width: 62rem) {
-    .demo__inner {
+  .websites__name {
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--eggplant);
+  }
+
+  .websites__desc {
+    margin-top: 0.2rem;
+    font-size: 0.92rem;
+    color: var(--v3-text-mid);
+  }
+
+  .websites__note {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--eggplant);
+  }
+
+  @media (max-width: 52rem) {
+    .websites__grid {
       grid-template-columns: 1fr;
+      max-width: 28rem;
     }
   }
 
+  /* 06 — Scale + Tempo + price. */
+  .scale__path {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1rem;
+    align-items: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--eggplant);
+  }
+
+  .scale__path span:nth-child(odd) {
+    padding: 0.5rem 0.9rem;
+    border: 1px solid color-mix(in oklab, var(--eggplant) 22%, transparent);
+    border-radius: 999px;
+  }
+
+  .scale__tempo {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    max-width: 40rem;
+  }
+
+  .scale__tempo p {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 1rem + 0.8vw, 1.7rem);
+    color: var(--eggplant);
+  }
+
+  .scale__tempo ul {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+    color: var(--v3-text-mid);
+  }
+
+  .scale__price {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 1rem + 1vw, 1.9rem);
+    color: var(--eggplant);
+  }
+
+  .scale__price strong {
+    color: var(--grape);
+  }
+
+  /* 07 — The one dark moment. */
+  .close {
+    background: var(--eggplant);
+    color: var(--white);
+  }
+
+  .close__inner {
+    text-align: center;
+  }
+
+  .close__kicker {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--allium);
+  }
+
+  .close__title {
+    margin: 1rem auto 0;
+    font-size: clamp(2.2rem, 1.2rem + 4vw, 4rem);
+    letter-spacing: -0.04em;
+    max-width: 20ch;
+    color: var(--white);
+  }
+
+  .close__sub {
+    margin-top: 1.25rem;
+    font-family: var(--font-body);
+    color: color-mix(in oklab, var(--white) 72%, transparent);
+  }
+
+  .close__inner .btn {
+    margin-top: 2.25rem;
+  }
+
+  .btn--light {
+    --btn-bg: var(--white);
+    --btn-fg: var(--eggplant);
+  }
+
+  .btn--light:hover {
+    --btn-bg: var(--allium);
+  }
 </style>
