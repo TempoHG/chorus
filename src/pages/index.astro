@@ -83,11 +83,13 @@ const sites = [
 >
   <section class="hero">
     <div class="shell hero__inner">
+      <div class="hero__copy">
       <h1 class="hero__title">More guests.<br />More often.</h1>
       <p class="hero__sub">Everything your restaurant needs to get found, get chosen and bring guests back.</p>
       <div class="hero__actions">
         <a class="btn" href="/book-a-demo">Book a Demo</a>
         <a class="hero__link" href="#promise">See how Chorus works ↓</a>
+      </div>
       </div>
 
       <div class="call" aria-label="Example: an incoming call is answered and a reservation is captured">
@@ -267,6 +269,7 @@ const sites = [
   .hero {
     padding-top: clamp(4.5rem, 12vw, 9rem);
     padding-bottom: clamp(4rem, 9vw, 6rem);
+    background: var(--white);
   }
 
   .hero__title {
@@ -301,12 +304,29 @@ const sites = [
     padding-bottom: 0.15rem;
   }
 
+  .hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  @media (max-width: 52rem) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .call {
-    margin-top: clamp(3rem, 7vw, 5rem);
-    max-width: 34rem;
-    padding: 1.5rem 0 0;
-    border-top: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+    max-width: 30rem;
+    justify-self: end;
+    width: 100%;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--mist);
+    border: 1px solid color-mix(in oklab, var(--eggplant) 8%, transparent);
+    border-radius: 8px;
     font-family: var(--font-product);
+    animation: call-in 0.7s var(--ease-out) both;
   }
 
   .call__head {
@@ -321,17 +341,20 @@ const sites = [
   }
 
   .call__dot {
+    position: relative;
     width: 0.55rem;
     height: 0.55rem;
     border-radius: 50%;
     background: var(--allium);
+    animation: call-pulse 1.8s ease-out infinite;
   }
 
   .call__quote {
-    margin-top: 0.75rem;
+    margin-top: 0.85rem;
     font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
     color: var(--eggplant);
     line-height: 1.4;
+    animation: call-in 0.6s var(--ease-out) 0.4s both;
   }
 
   .call__step {
@@ -340,26 +363,48 @@ const sites = [
     font-size: 0.85rem;
     color: var(--grape);
     opacity: 0;
-    animation: call-step 0.5s var(--ease-out) forwards;
+    animation: call-in 0.5s var(--ease-out) forwards;
   }
 
   .call__step--1 {
-    animation-delay: 0.8s;
+    animation-delay: 1.4s;
   }
 
   .call__step--2 {
-    animation-delay: 1.8s;
+    animation-delay: 2.3s;
   }
 
-  @keyframes call-step {
+  @keyframes call-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
     to {
       opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes call-pulse {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--allium) 60%, transparent);
+    }
+    70%,
+    100% {
+      box-shadow: 0 0 0 9px transparent;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .call,
+    .call__quote,
     .call__step {
       opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .call__dot {
       animation: none;
     }
   }
