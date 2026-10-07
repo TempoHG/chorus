@@ -1,31 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
 
-const scenarios = [
-  {
-    label: "Dinner rush",
-    title: "The phone rings.",
-    body: "Your host is taking care of the guests in front of them.",
-    lines: ["AI Host Helper answered ✓", "Reservation captured ✓"],
-  },
-  {
-    label: "After hours",
-    title: "A private-event inquiry comes in.",
-    body: "42 guests. December 14. Private dining.",
-    lines: ["Opportunity captured ✓", "Manager notified ✓", "Follow-up scheduled ✓"],
-  },
-  {
-    label: "After the visit",
-    title: "A guest leaves a great review.",
-    body: "★★★★★",
-    lines: ["Response ready ✓"],
-  },
-  {
-    label: "90 days later",
-    title: "A regular hasn't been back.",
-    body: "Chorus remembers.",
-    lines: ["Win-back sent ✓", "Guest returning ✓"],
-  },
+/* "Chorus in Action" — editorial copy only. The outcome of each moment now
+   lives entirely inside its product demonstration (see the markup below),
+   per the brief: no outcome appears in both the copy and the UI. */
+const moments = [
+  { label: "Dinner rush", title: "The phone rings.", body: "Your host is taking care of the guests in front of them." },
+  { label: "After hours", title: "A private-event inquiry comes in.", body: "42 guests. December 14. Private dining." },
+  { label: "After the visit", title: "A guest leaves a great review." },
+  { label: "90 days later", title: "A regular hasn't been back.", body: "Chorus remembers." },
 ];
 
 const systems = [
@@ -130,25 +113,91 @@ const sites = [
   <section class="operating" aria-labelledby="operating-title">
     <div class="shell">
       <h2 class="section-title" id="operating-title">While you're running the restaurant, Chorus is doing this.</h2>
-      <div class="operating__layout">
-      <figure class="operating__photo">
-        <img src="/img/home/guest-marketing-server.jpg" alt="A server setting the table with tea service in a warm, busy dining room." loading="lazy" decoding="async" />
-      </figure>
-      <ol class="scenarios">
-        {scenarios.map((s) => (
-          <li class="scenario">
-            <p class="scenario__label">{s.label}</p>
-            <div class="scenario__body">
-              <p class="scenario__title">{s.title}</p>
-              <p class="scenario__text">{s.body}</p>
-              <ul class="scenario__lines">
-                {s.lines.map((l) => <li>{l}</li>)}
-              </ul>
+      <ol class="moments">
+        <li class="moment">
+          <p class="moment__label">{moments[0].label}</p>
+          <div class="moment__story">
+            <p class="moment__title">{moments[0].title}</p>
+            <p class="moment__text">{moments[0].body}</p>
+          </div>
+          <div class="moment__demo">
+            <div class="demo demo--call" data-moment-demo>
+              <p class="demo__meta"><span class="demo__pulse" aria-hidden="true"></span>Incoming call · 7:42 PM</p>
+              <p class="demo__quote" data-demo-step>"Do you have anything for six Saturday around 7:30?"</p>
+              <p class="demo__processing" data-demo-step><span class="demo__label">AI Host Helper</span> Checking availability…</p>
+              <div class="demo__detail" data-demo-step>
+                <p>Saturday · 7:30 PM</p>
+                <p>Party of 6</p>
+              </div>
+              <p class="demo__outcome" data-demo-step>Reservation captured <span aria-hidden="true">✓</span></p>
             </div>
-          </li>
-        ))}
+          </div>
+        </li>
+
+        <li class="moment">
+          <p class="moment__label">{moments[1].label}</p>
+          <div class="moment__story">
+            <p class="moment__title">{moments[1].title}</p>
+            <p class="moment__text">{moments[1].body}</p>
+          </div>
+          <div class="moment__demo">
+            <div class="demo demo--event" data-moment-demo>
+              <p class="demo__meta" data-demo-step>New private event</p>
+              <div class="demo__body" data-demo-step>
+                <p class="demo__name">Sarah Mitchell</p>
+                <p class="demo__name-sub">Holiday Dinner</p>
+                <div class="demo__detail">
+                  <p>Dec 14 · 42 guests</p>
+                  <p>6:30 PM · Private dining</p>
+                </div>
+              </div>
+              <p class="demo__outcome" data-demo-step>Manager notified <span aria-hidden="true">✓</span></p>
+              <p class="demo__outcome" data-demo-step>Follow-up scheduled <span aria-hidden="true">✓</span></p>
+            </div>
+          </div>
+        </li>
+
+        <li class="moment">
+          <p class="moment__label">{moments[2].label}</p>
+          <div class="moment__story">
+            <p class="moment__title">{moments[2].title}</p>
+          </div>
+          <div class="moment__demo">
+            <div class="demo demo--review" data-moment-demo>
+              <p class="demo__stars" data-demo-step aria-label="5 out of 5 stars">★★★★★</p>
+              <p class="demo__quote" data-demo-step>"Great dinner. Our server was fantastic and the food was excellent."</p>
+              <p class="demo__source">Sarah M. · Google</p>
+              <p class="demo__outcome" data-demo-step>Response ready <span aria-hidden="true">✓</span></p>
+            </div>
+          </div>
+        </li>
+
+        <li class="moment">
+          <p class="moment__label">{moments[3].label}</p>
+          <div class="moment__story">
+            <p class="moment__title">{moments[3].title}</p>
+            <p class="moment__text">{moments[3].body}</p>
+          </div>
+          <div class="moment__demo">
+            <div class="demo demo--winback" data-moment-demo>
+              <p class="demo__meta">Sarah Mitchell</p>
+              <ul class="demo__timeline" data-demo-step>
+                <li>Apr 12 · Dinner</li>
+                <li>May 03 · Dinner</li>
+                <li>Jun 18 · Dinner</li>
+                <li>Jul 08 · Dinner</li>
+              </ul>
+              <p class="demo__threshold" data-demo-step>90 days</p>
+              <div class="demo__winback" data-demo-step>
+                <p class="demo__name-sub">Haven't seen you lately</p>
+                <p class="demo__quote">Come back this week and let us take care of dinner.</p>
+              </div>
+              <p class="demo__outcome" data-demo-step>Win-back sent <span aria-hidden="true">✓</span></p>
+              <p class="demo__outcome demo__outcome--final" data-demo-step>Oct 12 · Reservation <span aria-hidden="true">✓</span></p>
+            </div>
+          </div>
+        </li>
       </ol>
-      </div>
     </div>
   </section>
 
@@ -515,61 +564,32 @@ const sites = [
     }
   }
 
-  /* 03 — In action: four restaurant moments, hairline-separated. */
+  /* 03 — Chorus in Action: four restaurant moments, each paired with a
+     compact product demonstration that shows Chorus reaching the outcome
+     instead of a checkmark list repeating it. Rows stay hairline-separated
+     and typographic — the grid below is the brief's 20/32/48 desktop split
+     (moment label / restaurant story / demonstration); mobile stacks the
+     same three pieces in reading order per row. */
   .operating {
     background: var(--white);
   }
 
-  .operating__layout {
-    margin-top: clamp(2.5rem, 6vw, 4rem);
-    display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-    gap: clamp(2rem, 5vw, 4.5rem);
-    align-items: start;
-  }
-
-  .operating__photo {
-    margin: 0;
-    position: sticky;
-    top: 7rem;
-    border-radius: 4px;
-    overflow: hidden;
-    aspect-ratio: 4 / 5;
-  }
-
-  .operating__photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  @media (max-width: 52rem) {
-    .operating__layout {
-      grid-template-columns: 1fr;
-    }
-
-    .operating__photo {
-      position: static;
-      aspect-ratio: 16 / 10;
-    }
-  }
-
-  .scenarios {
+  .moments {
     margin: clamp(2.5rem, 6vw, 4rem) 0 0;
     padding: 0;
     list-style: none;
   }
 
-  .scenario {
+  .moment {
     display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: 2rem;
-    padding-block: clamp(1.75rem, 4vw, 2.5rem);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 8fr) minmax(0, 12fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    align-items: start;
+    padding-block: clamp(2rem, 4.5vw, 3rem);
     border-top: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
   }
 
-  .scenario__label {
+  .moment__label {
     font-family: var(--font-system);
     font-size: 0.8rem;
     letter-spacing: 0.04em;
@@ -578,7 +598,7 @@ const sites = [
     padding-top: 0.3rem;
   }
 
-  .scenario__title {
+  .moment__title {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: clamp(1.25rem, 1rem + 0.8vw, 1.7rem);
@@ -586,26 +606,202 @@ const sites = [
     color: var(--eggplant);
   }
 
-  .scenario__text {
+  .moment__text {
     margin-top: 0.4rem;
     color: var(--v3-text-mid);
   }
 
-  .scenario__lines {
-    margin: 0.9rem 0 0;
-    padding: 0;
-    list-style: none;
-    font-family: var(--font-product);
-    font-size: 0.95rem;
-    color: var(--grape);
-    display: grid;
-    gap: 0.35rem;
+  .moment__demo {
+    display: flex;
+    justify-content: flex-start;
   }
 
   @media (max-width: 52rem) {
-    .scenario {
+    .moment {
       grid-template-columns: 1fr;
-      gap: 0.75rem;
+      gap: 1rem;
+    }
+  }
+
+  /* ---- The demonstration itself: one small, purpose-built interface
+     object per moment — not a screenshot, not a device frame. Each gets its
+     own surface tint from the Chorus palette and its own component
+     language on purpose; these are deliberately not four identical cards
+     with the copy swapped. Public Sans carries guest-facing content, Google
+     Sans Code carries metadata/status — the product speaking, not the
+     marketing page. ---- */
+
+  .demo {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 4px;
+    padding: 1.05rem 1.2rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .demo--call {
+    background: var(--sky);
+  }
+
+  .demo--event {
+    background: var(--sand);
+  }
+
+  .demo--review {
+    background: var(--mist);
+  }
+
+  .demo--winback {
+    background: color-mix(in oklab, var(--allium) 24%, var(--white));
+  }
+
+  .demo__meta {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-system);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--grape);
+  }
+
+  .demo__pulse {
+    position: relative;
+    display: inline-block;
+    flex: none;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.55em;
+    border-radius: 50%;
+    background: var(--grape);
+  }
+
+  .demo__pulse.is-pulsing::after {
+    content: "";
+    position: absolute;
+    inset: -0.35em;
+    border-radius: 50%;
+    border: 1px solid var(--grape);
+    animation: demo-pulse 0.9s ease-out 3;
+  }
+
+  @keyframes demo-pulse {
+    from {
+      opacity: 0.85;
+      transform: scale(0.6);
+    }
+    to {
+      opacity: 0;
+      transform: scale(1.9);
+    }
+  }
+
+  .demo__quote {
+    font-family: var(--font-product);
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: var(--eggplant);
+  }
+
+  .demo__processing {
+    font-family: var(--font-product);
+    font-size: 0.9rem;
+    color: var(--v3-text-mid);
+  }
+
+  .demo__label {
+    margin-right: 0.5em;
+    font-family: var(--font-system);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--grape);
+  }
+
+  .demo__detail {
+    display: grid;
+    gap: 0.15rem;
+    font-family: var(--font-system);
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    color: var(--v3-text-mid);
+  }
+
+  .demo__detail p {
+    margin: 0;
+  }
+
+  .demo__outcome {
+    font-family: var(--font-system);
+    font-weight: 500;
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--grape);
+  }
+
+  .demo__outcome--final {
+    color: var(--eggplant);
+  }
+
+  .demo__name {
+    font-family: var(--font-product);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--eggplant);
+  }
+
+  .demo__name-sub {
+    margin-top: 0.1rem;
+    font-family: var(--font-product);
+    font-size: 0.9rem;
+    color: var(--v3-text-mid);
+  }
+
+  .demo__stars {
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    color: var(--eggplant);
+  }
+
+  .demo__source {
+    font-family: var(--font-system);
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    color: var(--v3-text-low);
+  }
+
+  .demo__timeline {
+    display: grid;
+    gap: 0.15rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-system);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    color: var(--v3-text-mid);
+  }
+
+  .demo__threshold {
+    font-family: var(--font-system);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--grape);
+  }
+
+  .demo__winback {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .demo__pulse.is-pulsing::after {
+      animation: none;
+      opacity: 0;
     }
   }
 

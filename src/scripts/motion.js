@@ -280,6 +280,40 @@ function vignetteTimeline() {
   });
 }
 
+/* Homepage "Chorus in Action" section: each row's compact product
+   interaction plays once, in sequence, as the row nears the center of the
+   viewport, then settles in its completed state — never a loop. Every
+   animated beat inside a demo is just marked [data-demo-step] in DOM order,
+   so one driver handles all four (differently shaped) demonstrations. The
+   call demo's pulse indicator gets a bounded CSS animation (see
+   demo-pulse in index.astro) toggled on only for the sequence's active
+   window, per the brief's "stop when the sequence completes" rule. */
+function momentDemos() {
+  gsap.utils.toArray("[data-moment-demo]").forEach((demo) => {
+    const steps = gsap.utils.toArray(demo.querySelectorAll("[data-demo-step]"));
+    if (!steps.length) return;
+
+    gsap.set(steps, { opacity: 0, y: 10 });
+    const pulse = demo.querySelector(".demo__pulse");
+    const row = demo.closest(".moment") || demo;
+
+    ScrollTrigger.create({
+      trigger: row,
+      start: "top 65%",
+      once: true,
+      onEnter: () => {
+        pulse?.classList.add("is-pulsing");
+        const tl = gsap.timeline({
+          onComplete: () => pulse?.classList.remove("is-pulsing"),
+        });
+        steps.forEach((step, i) => {
+          tl.to(step, { opacity: 1, y: 0, duration: 0.45, ease: EASE }, i * 0.45);
+        });
+      },
+    });
+  });
+}
+
 /* Reduced motion: put every animated target in its final, static state and
    skip GSAP entirely. Mirrors the guarantee the old CSS media queries gave. */
 function settleForReducedMotion() {
@@ -298,6 +332,7 @@ function settleForReducedMotion() {
   const spine = document.querySelector(".chain__spine");
   if (spine) gsap.set(spine, { scaleY: 1 });
   gsap.set(".vignette", { opacity: 1, y: 0 });
+  gsap.set("[data-demo-step]", { opacity: 1, y: 0 });
 
   settleOrbitForReducedMotion();
   settleHeroForReducedMotion();
@@ -647,5 +682,6 @@ export function initMotion() {
   orbitReveals();
   countUps();
   vignetteTimeline();
+  momentDemos();
   initReviewLoop();
 }
