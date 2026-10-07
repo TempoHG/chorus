@@ -82,6 +82,30 @@ const included = [
     </div>
   </section>
 
+  <section class="website-addon" aria-labelledby="website-addon-title">
+    <div class="shell">
+      <div class="website-addon__inner">
+        <div class="website-addon__say">
+          <p class="eyebrow">Add-on · Website</p>
+          <h2 class="section-title" id="website-addon-title">Need a new website too?</h2>
+          <p class="lede">Add a custom restaurant website built around your brand and connected to Chorus.</p>
+        </div>
+        <ul class="website-addon__list">
+          <li class="website-addon__item">
+            <p class="website-addon__price">$500<span>one time</span></p>
+            <p class="website-addon__label">Website design and setup</p>
+          </li>
+          <li class="website-addon__item">
+            <p class="website-addon__price">$15<span>per month</span></p>
+            <p class="website-addon__label">Hosting and ongoing website service</p>
+          </li>
+        </ul>
+      </div>
+      <p class="website-addon__note">Already have a website? Keep it. Chorus works with that too.</p>
+      <a class="btn" href="/book-a-demo">Add a Website</a>
+    </div>
+  </section>
+
   <section class="close" aria-labelledby="close-title">
     <div class="shell close__inner">
       <h2 class="close__title" id="close-title">See how Chorus could work for your restaurant.</h2>
@@ -246,6 +270,66 @@ const included = [
 
   @media (max-width: 52rem) {
     .managed__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Website add-on */
+  .website-addon__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .website-addon__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .website-addon__item {
+    padding: 1.1rem 0;
+    border-top: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+  }
+
+  .website-addon__item:last-child {
+    border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+  }
+
+  .website-addon__price {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 1rem + 1vw, 1.7rem);
+    letter-spacing: -0.02em;
+    color: var(--eggplant);
+  }
+
+  .website-addon__price span {
+    margin-left: 0.5rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--v3-text-low);
+  }
+
+  .website-addon__label {
+    margin-top: 0.3rem;
+    color: var(--v3-text-mid);
+  }
+
+  .website-addon__note {
+    margin-top: 2.5rem;
+    font-size: 0.85rem;
+    color: var(--v3-text-low);
+  }
+
+  .website-addon .btn {
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: 52rem) {
+    .website-addon__inner {
       grid-template-columns: 1fr;
     }
   }
