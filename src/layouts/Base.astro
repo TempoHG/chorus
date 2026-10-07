@@ -15,6 +15,7 @@ interface Props {
     | "book-a-demo";
 }
 const { title, description, active } = Astro.props;
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -138,6 +139,9 @@ const { title, description, active } = Astro.props;
             <a href="/accessibility">Accessibility</a>
           </div>
         </nav>
+      </div>
+      <div class="shell footer__base">
+        <p>© {year} Tempo Hospitality Group. All rights reserved.</p>
       </div>
     </footer>
 
