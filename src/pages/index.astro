@@ -7,7 +7,7 @@ import Base from "../layouts/Base.astro";
 const moments = [
   { label: "Dinner rush", title: "The phone rings.", body: "Your host is taking care of the guests in front of them." },
   { label: "After hours", title: "A private-event inquiry comes in.", body: "42 guests. December 14. Private dining." },
-  { label: "After the visit", title: "A guest leaves a great review." },
+  { label: "After the visit", title: "A guest leaves a great review.", body: "Automate the response—or escalate it when a personal touch matters." },
   { label: "90 days later", title: "A regular hasn't been back.", body: "Chorus remembers." },
 ];
 
@@ -188,6 +188,7 @@ const sites = [
             </p>
             <div class="moment__story">
               <p class="moment__title">{moments[2].title}</p>
+              <p class="moment__text">{moments[2].body}</p>
             </div>
           </div>
           <div class="moment__demo">
