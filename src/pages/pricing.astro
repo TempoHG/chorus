@@ -12,16 +12,6 @@ const included = [
   "Tempo support",
 ];
 
-const locations = [
-  { label: "1 concept, 1 location", total: "$397" },
-  { label: "1 concept, 3 locations", total: "$695" },
-  { label: "1 concept, 5 locations", total: "$993" },
-];
-
-const concepts = [
-  { label: "Concept A, 3 locations", detail: "$397 + $149 + $149", total: "$695" },
-  { label: "Concept B, 1 location", detail: "$397", total: "$397" },
-];
 ---
 
 <Base
@@ -49,56 +39,6 @@ const concepts = [
     </div>
   </section>
 
-  <section class="locations" aria-labelledby="locations-title">
-    <div class="shell">
-      <p class="eyebrow">Additional locations</p>
-      <h2 class="section-title" id="locations-title">+$149/month per additional location of the same concept.</h2>
-      <ul class="math">
-        {locations.map((l) => (
-          <li class="math__row">
-            <span class="math__label">{l.label}</span>
-            <span class="math__total">{l.total}<span>/mo</span></span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
-  <section class="brands" aria-labelledby="brands-title">
-    <div class="shell brands__inner">
-      <div class="brands__say">
-        <p class="eyebrow">More than one restaurant brand?</p>
-        <h2 class="section-title" id="brands-title">Each distinct concept starts its own Chorus subscription.</h2>
-      </div>
-      <ul class="math">
-        {concepts.map((c) => (
-          <li class="math__row">
-            <span class="math__label">
-              {c.label}
-              <span class="math__detail">{c.detail}</span>
-            </span>
-            <span class="math__total">{c.total}<span>/mo</span></span>
-          </li>
-        ))}
-        <li class="math__row math__row--total">
-          <span class="math__label">Combined total</span>
-          <span class="math__total">$1,092<span>/mo</span></span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="concept" aria-labelledby="concept-title">
-    <div class="shell concept__inner">
-      <p class="eyebrow">What's a concept?</p>
-      <h2 class="section-title" id="concept-title">A concept is a distinct restaurant brand.</h2>
-      <p class="lede">
-        Three locations of the same restaurant are one concept with three locations. Two different restaurant
-        brands are two concepts, even when they share the same ownership group.
-      </p>
-    </div>
-  </section>
-
   <section class="onboarding" aria-labelledby="onboarding-title">
     <div class="shell onboarding__inner">
       <p class="eyebrow">White-glove onboarding</p>
@@ -108,6 +48,37 @@ const concepts = [
         months, Chorus continues month-to-month.
       </p>
       <a class="text-link" href="/book-a-demo">Book a Demo →</a>
+    </div>
+  </section>
+
+  <section class="managed" aria-labelledby="managed-title">
+    <div class="shell">
+      <div class="managed__inner">
+        <div class="managed__say">
+          <p class="eyebrow">Add-on · Tempo Managed Services</p>
+          <h2 class="section-title" id="managed-title">Want us to run it for you?</h2>
+          <p class="lede">
+            Chorus gives your team the system. If you want more hands-on support, Tempo can build a custom
+            service package to manage your marketing and operate Chorus for you.
+          </p>
+        </div>
+        <ul class="managed__list">
+          <li class="managed__item">
+            <p class="managed__name">We build the plan.</p>
+            <p class="managed__text">Marketing shaped around your restaurant, goals and calendar.</p>
+          </li>
+          <li class="managed__item">
+            <p class="managed__name">We run the work.</p>
+            <p class="managed__text">Campaigns, automations and guest follow-up handled for you.</p>
+          </li>
+          <li class="managed__item">
+            <p class="managed__name">We keep improving.</p>
+            <p class="managed__text">Ongoing support and adjustments as your business changes.</p>
+          </li>
+        </ul>
+      </div>
+      <p class="managed__note">Tempo Managed is a separately priced add-on and is not included with Chorus plans.</p>
+      <a class="btn" href="/book-a-demo">Ask about Tempo Managed</a>
     </div>
   </section>
 
@@ -224,71 +195,61 @@ const concepts = [
     }
   }
 
-  /* Shared math list */
-  .locations {
+  /* Tempo Managed Services add-on */
+  .managed {
     background: var(--sand);
   }
 
-  .math {
-    margin: clamp(2rem, 5vw, 3rem) 0 0;
-    padding: 0;
-    list-style: none;
-    max-width: 44rem;
-  }
-
-  .math__row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 1.1rem 0;
-    border-top: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
-    font-family: var(--font-display);
-    font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
-    color: var(--eggplant);
-  }
-
-  .math__row:last-child {
-    border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
-  }
-
-  .math__detail {
-    display: block;
-    margin-top: 0.2rem;
-    font-family: var(--font-system);
-    font-size: 0.8rem;
-    color: var(--v3-text-low);
-  }
-
-  .math__total {
-    font-weight: 700;
-    white-space: nowrap;
-  }
-
-  .math__total span {
-    font-weight: 500;
-    color: var(--v3-text-low);
-  }
-
-  .math__row--total {
-    border-top: 2px solid var(--eggplant);
-  }
-
-  /* Brands */
-  .brands__inner {
+  .managed__inner {
     display: grid;
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     gap: clamp(2.5rem, 6vw, 5rem);
     align-items: start;
   }
 
+  .managed__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .managed__item {
+    padding: 1.1rem 0;
+    border-top: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+  }
+
+  .managed__item:last-child {
+    border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+  }
+
+  .managed__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+    color: var(--eggplant);
+  }
+
+  .managed__text {
+    margin-top: 0.3rem;
+    color: var(--v3-text-mid);
+  }
+
+  .managed__note {
+    margin-top: 2.5rem;
+    font-size: 0.85rem;
+    color: var(--v3-text-low);
+  }
+
+  .managed .btn {
+    margin-top: 1.25rem;
+  }
+
   @media (max-width: 52rem) {
-    .brands__inner {
+    .managed__inner {
       grid-template-columns: 1fr;
     }
   }
 
-  /* Concept + onboarding */
   /* Close */
   .close {
     background: var(--eggplant);
