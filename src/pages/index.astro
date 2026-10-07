@@ -120,7 +120,12 @@ const sites = [
       <ol class="moments">
         <li class="moment">
           <div class="moment__intro">
-            <p class="moment__label">{moments[0].label}</p>
+            <p class="moment__label">
+              <svg class="moment__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
+              </svg>
+              {moments[0].label}
+            </p>
             <div class="moment__story">
               <p class="moment__title">{moments[0].title}</p>
               <p class="moment__text">{moments[0].body}</p>
@@ -142,7 +147,15 @@ const sites = [
 
         <li class="moment">
           <div class="moment__intro">
-            <p class="moment__label">{moments[1].label}</p>
+            <p class="moment__label">
+              <svg class="moment__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+              {moments[1].label}
+            </p>
             <div class="moment__story">
               <p class="moment__title">{moments[1].title}</p>
               <p class="moment__text">{moments[1].body}</p>
@@ -167,7 +180,12 @@ const sites = [
 
         <li class="moment">
           <div class="moment__intro">
-            <p class="moment__label">{moments[2].label}</p>
+            <p class="moment__label">
+              <svg class="moment__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M12 2.5l3.09 6.26L22 9.77l-5 4.87L18.18 21.5 12 18.27 5.82 21.5 7 14.64l-5-4.87 6.91-1.01Z" />
+              </svg>
+              {moments[2].label}
+            </p>
             <div class="moment__story">
               <p class="moment__title">{moments[2].title}</p>
             </div>
@@ -184,7 +202,13 @@ const sites = [
 
         <li class="moment">
           <div class="moment__intro">
-            <p class="moment__label">{moments[3].label}</p>
+            <p class="moment__label">
+              <svg class="moment__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="M22 6.5 12 13 2 6.5" />
+              </svg>
+              {moments[3].label}
+            </p>
             <div class="moment__story">
               <p class="moment__title">{moments[3].title}</p>
               <p class="moment__text">{moments[3].body}</p>
@@ -645,11 +669,21 @@ const sites = [
   }
 
   .moment__label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-family: var(--font-system);
     font-size: 0.8rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--v3-text-low);
+  }
+
+  .moment__icon {
+    width: 0.95rem;
+    height: 0.95rem;
+    flex: none;
+    color: var(--grape);
   }
 
   .moment__title {
