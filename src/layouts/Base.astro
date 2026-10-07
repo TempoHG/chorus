@@ -116,7 +116,6 @@ const year = new Date().getFullYear();
         <div class="footer__brand">
           <Wordmark height={34} tone="dark-ground" />
           <p class="footer__signature">All Together Now.</p>
-          <p>A <a class="footer__brand-link" href="https://www.tempohg.com" rel="noopener">Tempo Hospitality Group</a> product.</p>
         </div>
         <nav class="footer__nav" aria-label="Footer">
           <div class="footer__nav-col">
@@ -371,23 +370,6 @@ const year = new Date().getFullYear();
 
   .footer__brand {
     flex: 1 1 22rem;
-  }
-
-  .footer__brand p {
-    margin-top: 1.1rem;
-    color: color-mix(in oklab, var(--white) 72%, transparent);
-    max-width: 52ch;
-    font-size: 0.875rem;
-  }
-
-  .footer__brand-link {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s var(--ease-out);
-  }
-
-  .footer__brand-link:hover {
-    color: var(--text-hi);
   }
 
   .footer__nav {
