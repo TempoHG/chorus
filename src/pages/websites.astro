@@ -234,9 +234,16 @@ const categories = [
 
   .work__frame {
     display: block;
+    width: 70%;
     aspect-ratio: 16 / 9;
     border-radius: 4px;
     overflow: hidden;
+  }
+
+  @media (max-width: 52rem) {
+    .work__frame {
+      width: 100%;
+    }
   }
 
   .work__frame img {
