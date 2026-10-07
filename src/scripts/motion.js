@@ -108,6 +108,42 @@ function initReviewLoop() {
   });
 }
 
+/* Product page "Guest Relations" ranking graphic: a search query types in,
+   then the local-result stack rises in with the restaurant's own row
+   settled at #1, holds, fades, resets and repeats — same bounded-loop
+   shape as initReviewLoop() above. The query's type-in uses a literal
+   per-character steps() ease (GSAP's built-in SteppedEase, no plugin
+   needed) over a clip-path reveal rather than real DOM text insertion,
+   since the full string is already correct markup/content either way. */
+function initRankLoop() {
+  const rank = document.querySelector("[data-rank]");
+  if (!rank) return;
+
+  const query = rank.querySelector("[data-rank-query]");
+  const rows = gsap.utils.toArray(rank.querySelectorAll("[data-rank-row]"));
+  if (!query || !rows.length) return;
+
+  const charCount = query.textContent.trim().length;
+
+  gsap.set(query, { clipPath: "inset(0 100% 0 0)" });
+  gsap.set(rows, { opacity: 0, y: 10 });
+
+  const tl = gsap.timeline({ repeat: -1, paused: true, repeatDelay: 0.6 });
+  tl.to(query, { clipPath: "inset(0 0% 0 0)", duration: 0.9, ease: `steps(${charCount})` })
+    .to(rows, { opacity: 1, y: 0, duration: 0.5, ease: EASE, stagger: 0.12 }, "+=0.25")
+    .to({}, { duration: 2.4 })
+    .to(rows, { opacity: 0, duration: 0.4, ease: EASE })
+    .set(rows, { y: 10 })
+    .set(query, { clipPath: "inset(0 100% 0 0)" });
+
+  ScrollTrigger.create({
+    trigger: rank,
+    start: "top 85%",
+    once: true,
+    onEnter: () => tl.play(),
+  });
+}
+
 /* The "Why Chorus" orbit graphic: six channel tags spring out from behind
    the Chorus node, orbit it clockwise, retract back behind it, then loop.
    Position is driven by polar coordinates (radius, angle) recomputed into
@@ -333,6 +369,8 @@ function settleForReducedMotion() {
   if (spine) gsap.set(spine, { scaleY: 1 });
   gsap.set(".vignette", { opacity: 1, y: 0 });
   gsap.set("[data-demo-step]", { opacity: 1, y: 0 });
+  gsap.set("[data-rank-query]", { clipPath: "inset(0 0% 0 0)" });
+  gsap.set("[data-rank-row]", { opacity: 1, y: 0 });
 
   settleOrbitForReducedMotion();
   settleHeroForReducedMotion();
@@ -683,5 +721,6 @@ export function initMotion() {
   countUps();
   vignetteTimeline();
   momentDemos();
+  initRankLoop();
   initReviewLoop();
 }

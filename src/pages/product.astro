@@ -66,13 +66,67 @@ const nextSteps = [
   {areas.map((a) => (
     <section class="area" id={a.id} aria-labelledby={`${a.id}-title`}>
       <div class="shell area__inner">
-        <p class="eyebrow">{a.name}</p>
-        <h2 class="section-title" id={`${a.id}-title`}>{a.head}</h2>
-        <ul class="area__items">
-          {a.items.map((item) => (
-            <li>{item}</li>
-          ))}
-        </ul>
+        {a.id === "guest-relations" ? (
+          <div class="area__split">
+            <div class="area__copy">
+              <p class="eyebrow">{a.name}</p>
+              <h2 class="section-title" id={`${a.id}-title`}>{a.head}</h2>
+              <ul class="area__items">
+                {a.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div class="area__visual">
+              <div class="rank" data-rank aria-hidden="true">
+                <div class="rank__search">
+                  <svg class="rank__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m21 21-4.3-4.3" />
+                  </svg>
+                  <span class="rank__query" data-rank-query>Pasta near me</span>
+                  <span class="rank__caret"></span>
+                </div>
+                <ul class="rank__results">
+                  <li class="rank__result rank__result--you" data-rank-row>
+                    <span class="rank__badge">1</span>
+                    <span class="rank__thumb"></span>
+                    <div class="rank__lines">
+                      <p class="rank__name">Lou Amari's</p>
+                      <p class="rank__meta">★★★★★ · Italian · 0.4 mi</p>
+                    </div>
+                  </li>
+                  <li class="rank__result rank__result--ghost" data-rank-row>
+                    <span class="rank__badge">2</span>
+                    <span class="rank__thumb rank__thumb--ghost"></span>
+                    <div class="rank__lines">
+                      <span class="rank__bar rank__bar--wide"></span>
+                      <span class="rank__bar rank__bar--narrow"></span>
+                    </div>
+                  </li>
+                  <li class="rank__result rank__result--ghost" data-rank-row>
+                    <span class="rank__badge">3</span>
+                    <span class="rank__thumb rank__thumb--ghost"></span>
+                    <div class="rank__lines">
+                      <span class="rank__bar rank__bar--wide"></span>
+                      <span class="rank__bar rank__bar--narrow"></span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <>
+            <p class="eyebrow">{a.name}</p>
+            <h2 class="section-title" id={`${a.id}-title`}>{a.head}</h2>
+            <ul class="area__items">
+              {a.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     </section>
   ))}
@@ -212,6 +266,176 @@ const nextSteps = [
   @media (max-width: 36rem) {
     .area__items {
       grid-template-columns: 1fr;
+    }
+  }
+
+  /* Guest Relations only: copy on the left, a search-ranking graphic on
+     the right — the item list narrows from 3 columns to 2 in this half-
+     width context. */
+  .area__split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .area__copy .area__items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 52rem) {
+    .area__split {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---- The ranking graphic: a generic local-search result stack, your
+     restaurant surfacing to #1. Query types in, results rise in, hold,
+     reset, loop — see initRankLoop() in motion.js. Kept deliberately
+     generic (skeleton bars, no literal photography) below Lou Amari's. ---- */
+
+  .rank {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background: var(--sky);
+    border-radius: 8px;
+  }
+
+  .rank__search {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.1rem;
+    background: var(--white);
+    border-radius: 999px;
+    box-shadow: 0 10px 24px -18px color-mix(in oklab, var(--eggplant) 60%, transparent);
+  }
+
+  .rank__search-icon {
+    width: 1.05rem;
+    height: 1.05rem;
+    flex: none;
+    color: var(--v3-text-low);
+  }
+
+  .rank__query {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: var(--font-system);
+    font-size: 0.92rem;
+    color: var(--eggplant);
+  }
+
+  .rank__caret {
+    width: 1px;
+    height: 1em;
+    background: var(--grape);
+    animation: rank-caret-blink 1s step-end infinite;
+  }
+
+  @keyframes rank-caret-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .rank__results {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .rank__result {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.7rem 0.85rem;
+    border-radius: 6px;
+  }
+
+  .rank__result--you {
+    background: var(--white);
+    box-shadow: 0 10px 24px -18px color-mix(in oklab, var(--eggplant) 60%, transparent);
+  }
+
+  .rank__result--ghost {
+    background: color-mix(in oklab, var(--white) 55%, transparent);
+  }
+
+  .rank__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.3rem;
+    height: 1.3rem;
+    flex: none;
+    border-radius: 50%;
+    font-family: var(--font-system);
+    font-size: 0.68rem;
+    font-weight: 500;
+  }
+
+  .rank__result--you .rank__badge {
+    background: var(--grape);
+    color: var(--white);
+  }
+
+  .rank__result--ghost .rank__badge {
+    background: color-mix(in oklab, var(--eggplant) 10%, transparent);
+    color: var(--v3-text-low);
+  }
+
+  .rank__thumb {
+    width: 2.1rem;
+    height: 2.1rem;
+    flex: none;
+    border-radius: 5px;
+    background: var(--allium);
+  }
+
+  .rank__thumb--ghost {
+    background: color-mix(in oklab, var(--eggplant) 10%, transparent);
+  }
+
+  .rank__lines {
+    display: grid;
+    gap: 0.3rem;
+    min-width: 0;
+  }
+
+  .rank__name {
+    font-family: var(--font-product);
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--eggplant);
+  }
+
+  .rank__meta {
+    font-family: var(--font-system);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    color: var(--v3-text-low);
+  }
+
+  .rank__bar {
+    height: 0.5rem;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--eggplant) 10%, transparent);
+  }
+
+  .rank__bar--wide {
+    width: 85%;
+  }
+
+  .rank__bar--narrow {
+    width: 55%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rank__caret {
+      animation: none;
+      opacity: 0;
     }
   }
 
