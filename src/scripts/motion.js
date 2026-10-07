@@ -108,39 +108,62 @@ function initReviewLoop() {
   });
 }
 
-/* Product page "Guest Relations" ranking graphic: a search query types in,
-   then the local-result stack rises in with the restaurant's own row
-   settled at #1, holds, fades, resets and repeats — same bounded-loop
-   shape as initReviewLoop() above. The query's type-in uses a literal
-   per-character steps() ease (GSAP's built-in SteppedEase, no plugin
-   needed) over a clip-path reveal rather than real DOM text insertion,
-   since the full string is already correct markup/content either way. */
-function initRankLoop() {
-  const rank = document.querySelector("[data-rank]");
-  if (!rank) return;
-
-  const query = rank.querySelector("[data-rank-query]");
-  const rows = gsap.utils.toArray(rank.querySelectorAll("[data-rank-row]"));
-  if (!query || !rows.length) return;
-
+/* Product page area graphics (Guest Relations/Marketing/Reputation/
+   Opportunities): each [data-panel] plays its own "intro" beat — a typed
+   query/trigger (clip-path reveal on a literal per-character steps() ease,
+   GSAP's built-in SteppedEase, no plugin needed) or a live-notification
+   pulse — then its result rows rise in, hold, fade, reset and repeat.
+   Same bounded-loop shape as initReviewLoop() above; the row-sequencing
+   part is shared via buildPanelLoop() since all four repeat it exactly,
+   while each intro stays its own small function for clarity. */
+function typeIntro(panel) {
+  const query = panel.querySelector("[data-type-text]");
+  if (!query) return null;
   const charCount = query.textContent.trim().length;
+  return {
+    setup: () => gsap.set(query, { clipPath: "inset(0 100% 0 0)" }),
+    play: (tl) => tl.to(query, { clipPath: "inset(0 0% 0 0)", duration: 0.9, ease: `steps(${charCount})` }),
+    reset: (tl) => tl.set(query, { clipPath: "inset(0 100% 0 0)" }),
+  };
+}
 
-  gsap.set(query, { clipPath: "inset(0 100% 0 0)" });
+function pulseIntro(panel) {
+  const pulse = panel.querySelector("[data-pulse]");
+  if (!pulse) return null;
+  return {
+    play: (tl) => tl.call(() => pulse.classList.add("is-pulsing")),
+    reset: (tl) => tl.call(() => pulse.classList.remove("is-pulsing")),
+  };
+}
+
+function buildPanelLoop(panel, intro) {
+  const rows = gsap.utils.toArray(panel.querySelectorAll("[data-row]"));
+  if (!rows.length) return;
+
   gsap.set(rows, { opacity: 0, y: 10 });
+  intro?.setup?.();
 
   const tl = gsap.timeline({ repeat: -1, paused: true, repeatDelay: 0.6 });
-  tl.to(query, { clipPath: "inset(0 0% 0 0)", duration: 0.9, ease: `steps(${charCount})` })
-    .to(rows, { opacity: 1, y: 0, duration: 0.5, ease: EASE, stagger: 0.12 }, "+=0.25")
+  if (intro?.play) intro.play(tl);
+  tl.to(rows, { opacity: 1, y: 0, duration: 0.5, ease: EASE, stagger: 0.12 }, intro?.play ? "+=0.25" : 0)
     .to({}, { duration: 2.4 })
     .to(rows, { opacity: 0, duration: 0.4, ease: EASE })
-    .set(rows, { y: 10 })
-    .set(query, { clipPath: "inset(0 100% 0 0)" });
+    .set(rows, { y: 10 });
+  if (intro?.reset) intro.reset(tl);
 
   ScrollTrigger.create({
-    trigger: rank,
+    trigger: panel,
     start: "top 85%",
     once: true,
     onEnter: () => tl.play(),
+  });
+}
+
+function initProductPanels() {
+  gsap.utils.toArray("[data-panel]").forEach((panel) => {
+    const type = panel.getAttribute("data-panel");
+    const intro = type === "rank" || type === "campaign" ? typeIntro(panel) : pulseIntro(panel);
+    buildPanelLoop(panel, intro);
   });
 }
 
@@ -369,8 +392,9 @@ function settleForReducedMotion() {
   if (spine) gsap.set(spine, { scaleY: 1 });
   gsap.set(".vignette", { opacity: 1, y: 0 });
   gsap.set("[data-demo-step]", { opacity: 1, y: 0 });
-  gsap.set("[data-rank-query]", { clipPath: "inset(0 0% 0 0)" });
-  gsap.set("[data-rank-row]", { opacity: 1, y: 0 });
+  gsap.set("[data-type-text]", { clipPath: "inset(0 0% 0 0)" });
+  gsap.set("[data-row]", { opacity: 1, y: 0 });
+  document.querySelectorAll("[data-pulse]").forEach((el) => el.classList.remove("is-pulsing"));
 
   settleOrbitForReducedMotion();
   settleHeroForReducedMotion();
@@ -721,6 +745,6 @@ export function initMotion() {
   countUps();
   vignetteTimeline();
   momentDemos();
-  initRankLoop();
+  initProductPanels();
   initReviewLoop();
 }

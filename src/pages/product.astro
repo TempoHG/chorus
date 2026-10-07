@@ -7,24 +7,28 @@ const areas = [
     name: "Guest Relations",
     head: "Be easy to find, easy to reach.",
     items: ["Website", "AI Host Helper", "Guest communication", "Forms + guest capture", "Google Business Profile", "SEO"],
+    visual: "rank",
   },
   {
     id: "guest-marketing",
     name: "Guest Marketing",
     head: "Give guests a reason to come back.",
     items: ["Email", "Text", "Social", "Birthdays", "Promotions", "Win-back campaigns", "Guest segmentation"],
+    visual: "campaign",
   },
   {
     id: "reputation",
     name: "Reputation",
     head: "Build it. Protect it.",
     items: ["Review requests", "Review monitoring", "Response management", "Guest feedback", "Guest recovery"],
+    visual: "review",
   },
   {
     id: "opportunities",
     name: "Opportunities",
     head: "Don't let good leads disappear.",
     items: ["Private events", "Catering", "Inquiry capture", "Manager notifications", "Follow-up", "Lead tracking"],
+    visual: "lead",
   },
 ];
 
@@ -66,58 +70,8 @@ const nextSteps = [
   {areas.map((a) => (
     <section class="area" id={a.id} aria-labelledby={`${a.id}-title`}>
       <div class="shell area__inner">
-        {a.id === "guest-relations" ? (
-          <div class="area__split">
-            <div class="area__copy">
-              <p class="eyebrow">{a.name}</p>
-              <h2 class="section-title" id={`${a.id}-title`}>{a.head}</h2>
-              <ul class="area__items">
-                {a.items.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div class="area__visual">
-              <div class="rank" data-rank aria-hidden="true">
-                <div class="rank__search">
-                  <svg class="rank__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="7" />
-                    <path d="m21 21-4.3-4.3" />
-                  </svg>
-                  <span class="rank__query" data-rank-query>Pasta near me</span>
-                  <span class="rank__caret"></span>
-                </div>
-                <ul class="rank__results">
-                  <li class="rank__result rank__result--you" data-rank-row>
-                    <span class="rank__badge">1</span>
-                    <span class="rank__thumb"></span>
-                    <div class="rank__lines">
-                      <p class="rank__name">Lou Amari's</p>
-                      <p class="rank__meta">★★★★★ · Italian · 0.4 mi</p>
-                    </div>
-                  </li>
-                  <li class="rank__result rank__result--ghost" data-rank-row>
-                    <span class="rank__badge">2</span>
-                    <span class="rank__thumb rank__thumb--ghost"></span>
-                    <div class="rank__lines">
-                      <span class="rank__bar rank__bar--wide"></span>
-                      <span class="rank__bar rank__bar--narrow"></span>
-                    </div>
-                  </li>
-                  <li class="rank__result rank__result--ghost" data-rank-row>
-                    <span class="rank__badge">3</span>
-                    <span class="rank__thumb rank__thumb--ghost"></span>
-                    <div class="rank__lines">
-                      <span class="rank__bar rank__bar--wide"></span>
-                      <span class="rank__bar rank__bar--narrow"></span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <>
+        <div class="area__split">
+          <div class="area__copy">
             <p class="eyebrow">{a.name}</p>
             <h2 class="section-title" id={`${a.id}-title`}>{a.head}</h2>
             <ul class="area__items">
@@ -125,8 +79,158 @@ const nextSteps = [
                 <li>{item}</li>
               ))}
             </ul>
-          </>
-        )}
+          </div>
+          <div class="area__visual">
+            {a.visual === "rank" && (
+              <div class="panel panel--rank" data-panel="rank" aria-hidden="true">
+                <div class="panel__head">
+                  <svg class="panel__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m21 21-4.3-4.3" />
+                  </svg>
+                  <span class="panel__label" data-type-text>Pasta near me</span>
+                  <span class="panel__caret"></span>
+                </div>
+                <ul class="panel__rows">
+                  <li class="panel__row panel__row--primary" data-row>
+                    <span class="panel__badge">1</span>
+                    <span class="panel__thumb"></span>
+                    <div class="panel__lines">
+                      <p class="panel__name">Lou Amari's</p>
+                      <p class="panel__meta">★★★★★ · Italian · 0.4 mi</p>
+                    </div>
+                  </li>
+                  <li class="panel__row panel__row--ghost" data-row>
+                    <span class="panel__badge">2</span>
+                    <span class="panel__thumb panel__thumb--ghost"></span>
+                    <div class="panel__lines">
+                      <span class="panel__bar panel__bar--wide"></span>
+                      <span class="panel__bar panel__bar--narrow"></span>
+                    </div>
+                  </li>
+                  <li class="panel__row panel__row--ghost" data-row>
+                    <span class="panel__badge">3</span>
+                    <span class="panel__thumb panel__thumb--ghost"></span>
+                    <div class="panel__lines">
+                      <span class="panel__bar panel__bar--wide"></span>
+                      <span class="panel__bar panel__bar--narrow"></span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            )}
+
+            {a.visual === "campaign" && (
+              <div class="panel panel--campaign" data-panel="campaign" aria-hidden="true">
+                <div class="panel__head">
+                  <svg class="panel__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                  <span class="panel__label" data-type-text>Win-back · 90 days</span>
+                  <span class="panel__caret"></span>
+                </div>
+                <ul class="panel__rows">
+                  <li class="panel__row panel__row--primary" data-row>
+                    <span class="panel__badge panel__badge--icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                        <path d="M22 6.5 12 13 2 6.5" />
+                      </svg>
+                    </span>
+                    <div class="panel__lines">
+                      <p class="panel__name">Email</p>
+                      <p class="panel__meta panel__meta--done">Sent ✓ · 182 guests</p>
+                    </div>
+                  </li>
+                  <li class="panel__row panel__row--ghost" data-row>
+                    <span class="panel__badge panel__badge--icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" />
+                      </svg>
+                    </span>
+                    <div class="panel__lines">
+                      <p class="panel__name">Text</p>
+                      <p class="panel__meta">Scheduled</p>
+                    </div>
+                  </li>
+                  <li class="panel__row panel__row--ghost" data-row>
+                    <span class="panel__badge panel__badge--icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3" />
+                        <circle cx="6" cy="12" r="3" />
+                        <circle cx="18" cy="19" r="3" />
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                      </svg>
+                    </span>
+                    <div class="panel__lines">
+                      <p class="panel__name">Social</p>
+                      <p class="panel__meta">Scheduled</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            )}
+
+            {a.visual === "review" && (
+              <div class="panel panel--review" data-panel="review" aria-hidden="true">
+                <div class="panel__head panel__head--notify">
+                  <span class="panel__pulse" data-pulse></span>
+                  <span class="panel__notify-label">New review</span>
+                  <span class="panel__notify-meta">Google · just now</span>
+                </div>
+                <ul class="panel__rows">
+                  <li class="panel__row panel__row--primary" data-row>
+                    <div class="panel__lines">
+                      <p class="panel__stars" aria-label="5 out of 5 stars">★★★★★</p>
+                      <p class="panel__quote">"Great dinner. Our server was fantastic."</p>
+                      <p class="panel__meta">Sarah M. · Google</p>
+                    </div>
+                  </li>
+                  <li class="panel__row panel__row--ghost" data-row>
+                    <div class="panel__lines">
+                      <p class="panel__meta">Response drafted</p>
+                    </div>
+                  </li>
+                  <li class="panel__row panel__row--ghost" data-row>
+                    <div class="panel__lines">
+                      <p class="panel__meta panel__meta--done">Response sent ✓</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            )}
+
+            {a.visual === "lead" && (
+              <div class="panel panel--lead" data-panel="lead" aria-hidden="true">
+                <div class="panel__head panel__head--notify">
+                  <span class="panel__pulse" data-pulse></span>
+                  <span class="panel__notify-label">New inquiry</span>
+                  <span class="panel__notify-meta">Private event</span>
+                </div>
+                <ul class="panel__rows">
+                  <li class="panel__row panel__row--primary" data-row>
+                    <div class="panel__lines">
+                      <p class="panel__name">Private event · 42 guests</p>
+                      <p class="panel__meta">Dec 14 · 6:30 PM</p>
+                    </div>
+                  </li>
+                  <li class="panel__row panel__row--ghost" data-row>
+                    <div class="panel__lines">
+                      <p class="panel__meta panel__meta--done">Manager notified ✓</p>
+                    </div>
+                  </li>
+                  <li class="panel__row panel__row--ghost" data-row>
+                    <div class="panel__lines">
+                      <p class="panel__meta panel__meta--done">Follow-up scheduled ✓</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   ))}
@@ -289,18 +393,35 @@ const nextSteps = [
     }
   }
 
-  /* ---- The ranking graphic: a generic local-search result stack, your
-     restaurant surfacing to #1. Query types in, results rise in, hold,
-     reset, loop — see initRankLoop() in motion.js. Kept deliberately
-     generic (skeleton bars, no literal photography) below Lou Amari's. ---- */
+  /* ---- The four product-area graphics share one visual grammar — a
+     tinted panel holding a white "head" pill (a typed query/trigger, or a
+     live notification) above a stack of rows that rise in, hold, fade and
+     loop (see initProductPanels() in motion.js). Each area gets its own
+     background tint and row content so the four read as related but not
+     identical — same discipline as the homepage's Chorus in Action demos. ---- */
 
-  .rank {
+  .panel {
     padding: clamp(1.5rem, 3vw, 2rem);
-    background: var(--sky);
     border-radius: 8px;
   }
 
-  .rank__search {
+  .panel--rank {
+    background: var(--sky);
+  }
+
+  .panel--campaign {
+    background: var(--sand);
+  }
+
+  .panel--review {
+    background: var(--mist);
+  }
+
+  .panel--lead {
+    background: color-mix(in oklab, var(--allium) 24%, var(--white));
+  }
+
+  .panel__head {
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -310,14 +431,14 @@ const nextSteps = [
     box-shadow: 0 10px 24px -18px color-mix(in oklab, var(--eggplant) 60%, transparent);
   }
 
-  .rank__search-icon {
+  .panel__icon {
     width: 1.05rem;
     height: 1.05rem;
     flex: none;
     color: var(--v3-text-low);
   }
 
-  .rank__query {
+  .panel__label {
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
@@ -326,19 +447,60 @@ const nextSteps = [
     color: var(--eggplant);
   }
 
-  .rank__caret {
+  .panel__caret {
     width: 1px;
     height: 1em;
     background: var(--grape);
-    animation: rank-caret-blink 1s step-end infinite;
+    animation: panel-caret-blink 1s step-end infinite;
   }
 
-  @keyframes rank-caret-blink {
+  @keyframes panel-caret-blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
 
-  .rank__results {
+  .panel__head--notify {
+    gap: 0.65rem;
+  }
+
+  .panel__notify-label {
+    font-family: var(--font-product);
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--eggplant);
+  }
+
+  .panel__notify-meta {
+    font-family: var(--font-system);
+    font-size: 0.75rem;
+    color: var(--v3-text-low);
+  }
+
+  .panel__pulse {
+    position: relative;
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: none;
+    border-radius: 50%;
+    background: var(--grape);
+  }
+
+  .panel__pulse.is-pulsing::after {
+    content: "";
+    position: absolute;
+    inset: -0.3rem;
+    border-radius: 50%;
+    border: 1px solid var(--grape);
+    animation: panel-pulse-ring 1.4s ease-out infinite;
+  }
+
+  @keyframes panel-pulse-ring {
+    0% { opacity: 0.9; transform: scale(0.6); }
+    100% { opacity: 0; transform: scale(1.8); }
+  }
+
+  .panel__rows {
     margin: 1rem 0 0;
     padding: 0;
     list-style: none;
@@ -346,7 +508,7 @@ const nextSteps = [
     gap: 0.6rem;
   }
 
-  .rank__result {
+  .panel__row {
     display: flex;
     align-items: center;
     gap: 0.7rem;
@@ -354,16 +516,16 @@ const nextSteps = [
     border-radius: 6px;
   }
 
-  .rank__result--you {
+  .panel__row--primary {
     background: var(--white);
     box-shadow: 0 10px 24px -18px color-mix(in oklab, var(--eggplant) 60%, transparent);
   }
 
-  .rank__result--ghost {
+  .panel__row--ghost {
     background: color-mix(in oklab, var(--white) 55%, transparent);
   }
 
-  .rank__badge {
+  .panel__badge {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -376,17 +538,27 @@ const nextSteps = [
     font-weight: 500;
   }
 
-  .rank__result--you .rank__badge {
+  .panel__row--primary .panel__badge {
     background: var(--grape);
     color: var(--white);
   }
 
-  .rank__result--ghost .rank__badge {
+  .panel__row--ghost .panel__badge {
     background: color-mix(in oklab, var(--eggplant) 10%, transparent);
     color: var(--v3-text-low);
   }
 
-  .rank__thumb {
+  .panel__badge--icon {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .panel__badge--icon svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  .panel__thumb {
     width: 2.1rem;
     height: 2.1rem;
     flex: none;
@@ -394,46 +566,68 @@ const nextSteps = [
     background: var(--allium);
   }
 
-  .rank__thumb--ghost {
+  .panel__thumb--ghost {
     background: color-mix(in oklab, var(--eggplant) 10%, transparent);
   }
 
-  .rank__lines {
+  .panel__lines {
     display: grid;
     gap: 0.3rem;
     min-width: 0;
   }
 
-  .rank__name {
+  .panel__name {
     font-family: var(--font-product);
     font-weight: 600;
     font-size: 0.92rem;
     color: var(--eggplant);
   }
 
-  .rank__meta {
+  .panel__meta {
     font-family: var(--font-system);
     font-size: 0.72rem;
     letter-spacing: 0.02em;
     color: var(--v3-text-low);
   }
 
-  .rank__bar {
+  .panel__meta--done {
+    color: var(--grape);
+  }
+
+  .panel__stars {
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    color: var(--eggplant);
+  }
+
+  .panel__quote {
+    font-family: var(--font-product);
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: var(--eggplant);
+  }
+
+  .panel__bar {
     height: 0.5rem;
     border-radius: 999px;
     background: color-mix(in oklab, var(--eggplant) 10%, transparent);
   }
 
-  .rank__bar--wide {
+  .panel__bar--wide {
     width: 85%;
   }
 
-  .rank__bar--narrow {
+  .panel__bar--narrow {
     width: 55%;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .rank__caret {
+    .panel__caret {
+      animation: none;
+      opacity: 0;
+    }
+
+    .panel__pulse.is-pulsing::after {
       animation: none;
       opacity: 0;
     }
