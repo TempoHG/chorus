@@ -325,6 +325,14 @@ const { title, description, active } = Astro.props;
     .masthead__inner {
       position: relative;
     }
+
+    /* Three nav columns side by side overflow the shell on phones (the
+       "AI Host Helper" / "Tempo Hospitality Group" link text alone is
+       wider than a third of a 375px viewport) — stack them instead. */
+    .footer__nav {
+      flex-direction: column;
+      gap: 2rem;
+    }
   }
 
   .footer {
