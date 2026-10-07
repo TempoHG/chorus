@@ -6,7 +6,7 @@ const areas = [
     id: "guest-relations",
     name: "Guest Relations",
     head: "Be easy to find, easy to reach.",
-    items: ["Website", "AI Host Helper", "Guest communication", "Forms + guest capture"],
+    items: ["Website", "AI Host Helper", "Guest communication", "Forms + guest capture", "Google Business Profile", "SEO"],
   },
   {
     id: "guest-marketing",
@@ -73,12 +73,6 @@ const nextSteps = [
             <li>{item}</li>
           ))}
         </ul>
-        {a.id === "guest-relations" && (
-          <div class="menus" id="menus">
-            <p class="menus__label">Menus Made for the Web</p>
-            <p class="menus__text">Turn an existing menu into a fast, mobile-friendly experience that's easier to browse and keep current.</p>
-          </div>
-        )}
       </div>
     </section>
   ))}
@@ -207,24 +201,6 @@ const nextSteps = [
   .area__items li {
     padding-bottom: 0.7rem;
     border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 10%, transparent);
-  }
-
-  .menus {
-    margin-top: clamp(2.5rem, 5vw, 3.5rem);
-    padding: 1.5rem 0 0 0;
-    border-top: 1px solid color-mix(in oklab, var(--allium) 60%, transparent);
-    max-width: 42rem;
-  }
-
-  .menus__label {
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: var(--eggplant);
-  }
-
-  .menus__text {
-    margin-top: 0.5rem;
-    color: var(--v3-text-mid);
   }
 
   @media (max-width: 52rem) {
