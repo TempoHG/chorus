@@ -22,14 +22,13 @@ const included = [
   <section class="lead">
     <div class="shell">
       <h1 class="lead__title">Simple pricing that grows with you.</h1>
-      <p class="lede lead__sub">Start with your concept. Add locations as you grow.</p>
     </div>
   </section>
 
   <section class="plan" aria-labelledby="plan-title">
     <div class="shell plan__inner">
       <div class="plan__price">
-        <p class="eyebrow" id="plan-title">First concept + first location</p>
+        <p class="eyebrow" id="plan-title">Single location</p>
         <p class="plan__amount">$397<span>/month</span></p>
         <a class="btn plan__cta" href="/book-a-demo">Book a Demo</a>
       </div>
@@ -205,12 +204,16 @@ const included = [
     font-family: var(--font-body);
     font-size: 1.1rem;
     color: var(--eggplant);
-    border-top: 2px solid var(--eggplant);
   }
 
   .plan__included li {
     padding: 0.95rem 0;
     border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 12%, transparent);
+  }
+
+  .plan__included li:nth-child(1),
+  .plan__included li:nth-child(2) {
+    font-weight: 700;
   }
 
   @media (max-width: 52rem) {
