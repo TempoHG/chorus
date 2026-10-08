@@ -211,9 +211,10 @@ const included = [
     border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 12%, transparent);
   }
 
-  .plan__included li:nth-child(1),
-  .plan__included li:nth-child(2) {
+  .plan__included li:first-child {
     font-weight: 700;
+    text-transform: uppercase;
+    border-bottom-width: 2px;
   }
 
   @media (max-width: 52rem) {
