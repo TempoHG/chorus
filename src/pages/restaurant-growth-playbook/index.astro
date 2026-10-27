@@ -1,0 +1,604 @@
+---
+import Funnel from "../../layouts/Funnel.astro";
+
+// Real GHL form widget for this funnel, supplied directly (not fabricated).
+// Embedded the same way /book-a-demo embeds its GHL calendar: an iframe plus
+// GHL's own resize script. As configured in GHL today this form asks for
+// First Name, Last Name, Email and Restaurant (Restaurant is required there,
+// not optional, and it carries two SMS-consent checkboxes rather than the
+// brief's single email-consent line) — flagged to Dan; adjust the GHL form
+// itself to tighten the field set if wanted, rather than rebuilding a parallel
+// custom form that wouldn't actually deliver leads anywhere.
+const GHL_DOMAIN = "https://links.tempohg.com";
+const FORM_ID = "L5FmpkhN8pqgyVTjAAQL";
+
+const journey = [
+  { n: "01", label: "Discovery", body: "Get discovered" },
+  { n: "02", label: "Decision", body: "Make the decision easy" },
+  { n: "03", label: "Action", body: "Take action" },
+  { n: "04", label: "Experience", body: "Deliver the experience" },
+  { n: "05", label: "Return", body: "Bring guests back" },
+];
+
+const modules = [
+  { n: "01", title: "Websites That Convert", body: "Build focused landing pages that help guests reserve, order, or inquire." },
+  { n: "02", title: "Content That Attracts", body: "Plan better restaurant photography, videos, social posts, and guest emails." },
+  { n: "03", title: "Advertising That Works", body: "Understand practical approaches to Meta and Google Ads." },
+  { n: "04", title: "Follow-Up That Converts", body: "Keep inquiries moving and create opportunities for repeat visits." },
+  { n: "05", title: "Measure What Matters", body: "Track meaningful outcomes instead of relying on clicks and impressions alone." },
+  { n: "06", title: "Your First 30 Days", body: "Put the system into action with a clear launch plan and checklist." },
+];
+---
+
+<Funnel
+  title="Free Restaurant Growth Playbook | Tempo Chorus"
+  description="Download the free Restaurant Growth Playbook. Learn how to connect websites, social content, advertising, guest follow-up, and measurement into one restaurant growth plan."
+  path="/restaurant-growth-playbook"
+>
+  <!-- 01 — Hero -->
+  <section class="hero">
+    <div class="shell hero__inner">
+      <div class="hero__copy">
+        <p class="eyebrow">Free Restaurant Growth Guide</p>
+        <h1 class="hero__title">More Guests. More Visits. One Connected Plan.</h1>
+        <p class="hero__sub">
+          A practical guide to building restaurant marketing that works together—from websites and social
+          content to paid advertising, guest follow-up, and repeat visits.
+        </p>
+        <p class="hero__value">
+          Get the free 30-page Restaurant Growth Playbook, including practical worksheets, campaign
+          examples, a 30-day action plan, and a launch checklist.
+        </p>
+      </div>
+
+      <div class="hero__right">
+        <div class="hero__mockup" aria-hidden="true">
+          <img class="hero__page hero__page--back" src="/img/playbook/page-20.jpg" alt="" loading="eager" decoding="async" />
+          <img class="hero__page hero__page--mid" src="/img/playbook/page-04.jpg" alt="" loading="eager" decoding="async" />
+          <img class="hero__page hero__page--cover" src="/img/playbook/cover.jpg" alt="The Restaurant Growth Playbook cover" loading="eager" decoding="async" />
+        </div>
+
+        <div class="form-card" id="lead-form">
+          <p class="form-card__title">Download the Free Playbook</p>
+          <iframe
+            class="form-card__frame"
+            data-playbook-form
+            src={`${GHL_DOMAIN}/widget/form/${FORM_ID}`}
+            title="Download the Restaurant Growth Playbook"
+            scrolling="no"
+            id="chorusPlaybookForm"
+          ></iframe>
+          <p class="form-card__micro">
+            Free download. Practical restaurant insights. No obligation.<br />
+            We'll email you the guide and occasional relevant restaurant growth insights. Unsubscribe anytime.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 — The problem -->
+  <section class="problem">
+    <div class="shell">
+      <h2 class="section-title">Your Marketing Should Work Together.</h2>
+      <p class="lede">
+        Your website, social media, advertising, guest communications, and follow-up shouldn't operate as
+        separate efforts.
+      </p>
+      <p class="lede">
+        When they aren't connected, restaurants can spend time and money creating attention without a clear
+        path to actual business.
+      </p>
+      <p class="lede">This playbook shows you how to connect those pieces around a measurable restaurant outcome.</p>
+
+      <ol class="journey">
+        {journey.map((j, i) => (
+          <li class="journey__step">
+            <p class="journey__n">{j.n}</p>
+            <p class="journey__label">{j.label}</p>
+            <p class="journey__body">{j.body}</p>
+            {i < journey.length - 1 && <span class="journey__arrow" aria-hidden="true">→</span>}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 03 — What you'll learn -->
+  <section class="learn">
+    <div class="shell">
+      <h2 class="section-title">Everything You Need to Build a More Connected Growth Plan.</h2>
+      <p class="lede">
+        From the first impression to the next reservation, the playbook connects the essential parts of
+        restaurant marketing into one practical system.
+      </p>
+      <ul class="learn__grid">
+        {modules.map((m) => (
+          <li class="learn__card">
+            <p class="learn__n">{m.n}</p>
+            <p class="learn__title">{m.title}</p>
+            <p class="learn__body">{m.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 04 — Practical tools -->
+  <section class="tools">
+    <div class="shell">
+      <h2 class="section-title">Built to Be Used, Not Just Read.</h2>
+      <p class="lede">
+        The Restaurant Growth Playbook goes beyond ideas and advice. It includes practical worksheets,
+        planning tools, and checklists you can use to put the system to work.
+      </p>
+
+      <div class="tools__grid">
+        <article class="tools__item tools__item--brief">
+          <img class="tools__img" src="/img/playbook/page-07.jpg" alt="Restaurant Marketing Brief worksheet page from the Restaurant Growth Playbook." loading="lazy" decoding="async" />
+          <p class="tools__n">01</p>
+          <p class="tools__title">Restaurant Marketing Brief</p>
+          <p class="tools__body">Define your guest, offer, occasion, operating limits, and the next action you want them to take.</p>
+        </article>
+
+        <article class="tools__item tools__item--30days">
+          <img class="tools__img" src="/img/playbook/page-28.jpg" alt="Your First 30 Days launch calendar page from the Restaurant Growth Playbook." loading="lazy" decoding="async" />
+          <p class="tools__n">02</p>
+          <p class="tools__title">Your First 30 Days</p>
+          <p class="tools__body">Move from planning and content development through campaign launch, measurement, and improvement.</p>
+        </article>
+
+        <article class="tools__item tools__item--scorecard">
+          <div class="tools__stack" aria-hidden="true">
+            <img class="tools__img tools__img--support" src="/img/playbook/page-29.jpg" alt="" loading="lazy" decoding="async" />
+            <img class="tools__img tools__img--primary" src="/img/playbook/page-27.jpg" alt="Weekly scorecard and launch checklist pages from the Restaurant Growth Playbook." loading="lazy" decoding="async" />
+          </div>
+          <p class="tools__n">03</p>
+          <p class="tools__title">Weekly Scorecard + Launch Checklist</p>
+          <p class="tools__body">Know what to measure, what to verify before launch, and what to improve next.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 — Target audience -->
+  <section class="audience">
+    <div class="shell audience__inner">
+      <h2 class="section-title">Whether You Run One Restaurant or Twenty.</h2>
+      <p class="lede">
+        Whether you're building demand for one restaurant, finding new growth opportunities for an
+        established concept, or coordinating marketing across multiple locations, this playbook provides a
+        practical framework for bringing the pieces together.
+      </p>
+    </div>
+  </section>
+
+  <!-- 06 — Final CTA -->
+  <section class="close">
+    <div class="shell close__inner">
+      <h2 class="close__title">Stop Running Disconnected Marketing. Start Building a System.</h2>
+      <p class="close__sub">
+        Get the practical framework, campaign examples, and worksheets to turn attention into meaningful
+        restaurant growth.
+      </p>
+      <a class="btn" href="#lead-form" data-playbook-cta>Get the Free Restaurant Growth Playbook</a>
+    </div>
+  </section>
+</Funnel>
+
+<style>
+  section {
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grape);
+  }
+
+  .section-title {
+    margin-top: 0.75rem;
+    font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem);
+    letter-spacing: -0.03em;
+    color: var(--eggplant);
+    max-width: 24ch;
+  }
+
+  .lede {
+    margin-top: 1.1rem;
+    font-size: clamp(1.02rem, 1rem + 0.3vw, 1.18rem);
+    color: var(--v3-text-mid);
+    max-width: 58ch;
+  }
+
+  /* ---- 01 Hero ---- */
+  .hero {
+    padding-top: clamp(3rem, 7vw, 5rem);
+    background: var(--mist);
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+    align-items: start;
+  }
+
+  .hero__title {
+    margin-top: 0.75rem;
+    font-size: clamp(2.1rem, 1.2rem + 3.6vw, 3.4rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    color: var(--eggplant);
+    max-width: 16ch;
+  }
+
+  .hero__sub {
+    margin-top: 1.25rem;
+    font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+    color: var(--v3-text-mid);
+    max-width: 46ch;
+  }
+
+  .hero__value {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: var(--v3-text-low);
+    max-width: 46ch;
+  }
+
+  .hero__right {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .hero__mockup {
+    position: relative;
+    aspect-ratio: 5 / 4;
+    margin-inline: auto;
+    width: min(100%, 26rem);
+  }
+
+  .hero__page {
+    position: absolute;
+    border-radius: 4px;
+    box-shadow: 0 20px 40px -20px color-mix(in oklab, var(--eggplant) 55%, transparent);
+    width: 62%;
+    object-fit: cover;
+  }
+
+  .hero__page--back {
+    top: 4%;
+    right: 2%;
+    transform: rotate(8deg);
+    aspect-ratio: 0.773;
+  }
+
+  .hero__page--mid {
+    top: 10%;
+    left: 4%;
+    transform: rotate(-6deg);
+    aspect-ratio: 0.773;
+    width: 60%;
+  }
+
+  .hero__page--cover {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 58%;
+    aspect-ratio: 0.773;
+    box-shadow: 0 28px 50px -18px color-mix(in oklab, var(--eggplant) 65%, transparent);
+  }
+
+  .form-card {
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 16px 40px -24px color-mix(in oklab, var(--eggplant) 55%, transparent);
+  }
+
+  .form-card__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--eggplant);
+  }
+
+  .form-card__frame {
+    display: block;
+    width: 100%;
+    min-height: 480px;
+    margin-top: 1rem;
+    border: 0;
+    background: transparent;
+  }
+
+  .form-card__micro {
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--v3-text-low);
+  }
+
+  @media (max-width: 58rem) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    /* DOM order already reads copy → mockup → form, matching the brief's
+       mobile order — no `order` override needed (an earlier version of this
+       rule set `order` on .hero__mockup/.form-card, which are grandchildren
+       of .hero__inner, not direct grid items of it, so it did nothing there
+       and instead the stray order:1 left on .hero__copy put it last). */
+    .hero__mockup {
+      width: min(100%, 20rem);
+      aspect-ratio: 5 / 3.6;
+      margin-top: 1rem;
+    }
+  }
+
+  /* ---- 02 Problem / journey ---- */
+  .problem {
+    background: var(--white);
+  }
+
+  .journey {
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .journey__step {
+    position: relative;
+    padding: 1rem 1.1rem;
+    background: var(--mist);
+    border-radius: 6px;
+  }
+
+  .journey__n {
+    font-family: var(--font-system);
+    font-size: 0.72rem;
+    color: var(--v3-text-low);
+  }
+
+  .journey__label {
+    margin-top: 0.3rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--eggplant);
+  }
+
+  .journey__body {
+    margin-top: 0.25rem;
+    font-size: 0.82rem;
+    color: var(--v3-text-mid);
+  }
+
+  .journey__arrow {
+    display: none;
+  }
+
+  @media (max-width: 58rem) {
+    .journey {
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+    }
+  }
+
+  /* ---- 03 Learn grid ---- */
+  .learn {
+    background: var(--sky);
+  }
+
+  .learn__grid {
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .learn__card {
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: 6px;
+  }
+
+  .learn__n {
+    font-family: var(--font-system);
+    font-size: 0.78rem;
+    color: var(--grape);
+  }
+
+  .learn__title {
+    margin-top: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--eggplant);
+  }
+
+  .learn__body {
+    margin-top: 0.4rem;
+    font-size: 0.92rem;
+    color: var(--v3-text-mid);
+  }
+
+  @media (max-width: 58rem) {
+    .learn__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .learn__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---- 04 Practical tools ---- */
+  .tools {
+    background: var(--white);
+  }
+
+  .tools__grid {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(2rem, 4vw, 2.5rem);
+  }
+
+  .tools__img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 0.773;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 18px 36px -22px color-mix(in oklab, var(--eggplant) 55%, transparent);
+  }
+
+  .tools__stack {
+    position: relative;
+    aspect-ratio: 0.9;
+  }
+
+  .tools__img--support {
+    position: absolute;
+    top: 8%;
+    right: 0;
+    width: 78%;
+    transform: rotate(4deg);
+    aspect-ratio: 0.773;
+  }
+
+  .tools__img--primary {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 78%;
+    aspect-ratio: 0.773;
+  }
+
+  .tools__n {
+    margin-top: 1.25rem;
+    font-family: var(--font-system);
+    font-size: 0.78rem;
+    color: var(--grape);
+  }
+
+  .tools__title {
+    margin-top: 0.4rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--eggplant);
+  }
+
+  .tools__body {
+    margin-top: 0.4rem;
+    font-size: 0.92rem;
+    color: var(--v3-text-mid);
+  }
+
+  @media (max-width: 58rem) {
+    .tools__grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .tools__stack {
+      max-width: 22rem;
+    }
+  }
+
+  /* ---- 05 Audience ---- */
+  .audience {
+    background: var(--sand);
+  }
+
+  .audience__inner {
+    max-width: 50rem;
+  }
+
+  /* ---- 06 Close ---- */
+  .close {
+    background: var(--eggplant);
+    color: var(--white);
+  }
+
+  .close__inner {
+    text-align: center;
+  }
+
+  .close__title {
+    font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem);
+    letter-spacing: -0.03em;
+    max-width: 24ch;
+    margin: 0 auto;
+    color: var(--white);
+  }
+
+  .close__sub {
+    margin: 1.1rem auto 0;
+    max-width: 48ch;
+    font-size: clamp(1.02rem, 1rem + 0.3vw, 1.18rem);
+    color: color-mix(in oklab, var(--white) 75%, transparent);
+  }
+
+  .close__inner .btn {
+    margin-top: 2rem;
+  }
+</style>
+
+<script>
+  import { track } from "@vercel/analytics";
+
+  track("playbook_page_view");
+
+  const form = document.querySelector("[data-playbook-form]");
+  if (form) {
+    let started = false;
+    form.addEventListener(
+      "focus",
+      () => {
+        if (started) return;
+        started = true;
+        track("playbook_form_start");
+      },
+      true,
+    );
+
+    // GHL's embedded widgets post a message from inside the iframe when
+    // something happens — the booking calendar's shape is confirmed
+    // (see initDemoBookedTracking in motion.js), but this form's message
+    // shape isn't publicly documented and hasn't been verified against a
+    // real submission (that would mean seeding a test lead into the live
+    // CRM). Best-effort: anything other than an iframeResizer height ping
+    // from this form's own window is treated as a submit signal. If GHL's
+    // real shape differs this just silently misses the event rather than
+    // reporting a false one — tighten once a real submission is confirmed.
+    window.addEventListener("message", (event) => {
+      if (event.source !== form.contentWindow) return;
+      const data = event.data;
+      const isResizePing = data && typeof data === "object" && "iframeResizer" in data;
+      if (isResizePing) return;
+      track("playbook_form_submit");
+    });
+  }
+
+  document.querySelectorAll("[data-playbook-cta]").forEach((el) => {
+    el.addEventListener("click", () => track("playbook_form_start"));
+  });
+</script>
+
+<script is:inline src="https://links.tempohg.com/js/form_embed.js"></script>

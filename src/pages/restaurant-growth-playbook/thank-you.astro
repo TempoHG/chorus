@@ -1,0 +1,188 @@
+---
+import Funnel from "../../layouts/Funnel.astro";
+
+// Same GHL calendar already embedded on /book-a-demo — confirmed by Dan as
+// the right one for this "free 20-minute call" offer, so reused as-is.
+const GHL_DOMAIN = "https://links.tempohg.com";
+const CALENDAR_ID = "I5Q7FwuP2H7GVLaL1Cai";
+const WIDGET_ID = "yVHkwu10vymju35mIkBW_1786414705061";
+
+const PDF_URL = "/downloads/chorus-restaurant-growth-playbook.pdf";
+---
+
+<Funnel
+  title="Your Playbook Is Ready | Tempo Chorus"
+  description="Your Restaurant Growth Playbook is ready to download, and on its way to your inbox."
+  path="/restaurant-growth-playbook/thank-you"
+>
+  <section class="ready">
+    <div class="shell ready__inner">
+      <h1 class="ready__title">Your Playbook Is Ready.</h1>
+      <p class="ready__body">
+        Thanks for downloading the Restaurant Growth Playbook. Your copy is ready below, and we've also
+        sent a link to your email so you can return to it anytime.
+      </p>
+      <a class="btn ready__cta" href={PDF_URL} download data-playbook-download>Download Your Playbook</a>
+
+      <div class="ready__cover" aria-hidden="true">
+        <img src="/img/playbook/cover.jpg" alt="" loading="eager" decoding="async" />
+      </div>
+    </div>
+  </section>
+
+  <section class="consult">
+    <div class="shell consult__inner">
+      <div class="consult__say">
+        <p class="eyebrow">A second way we can help</p>
+        <h2 class="consult__title">Want to See What We'd Do for Your Restaurant?</h2>
+        <p class="consult__body">
+          Book a free 20-minute call. We'll review your restaurant's website or account and show you the
+          first three ads we'd recommend running for your restaurant.
+        </p>
+        <p class="consult__note">Free, whether you work with us or not.</p>
+      </div>
+
+      <div class="consult__booking" data-playbook-consult>
+        <iframe
+          class="consult__frame"
+          src={`${GHL_DOMAIN}/widget/booking/${CALENDAR_ID}`}
+          title="Book my free 20-minute call"
+          allow="payment"
+          scrolling="no"
+          id={WIDGET_ID}
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</Funnel>
+
+<style>
+  section {
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grape);
+  }
+
+  /* ---- Ready / primary download ---- */
+  .ready {
+    padding-top: clamp(4rem, 9vw, 6.5rem);
+    background: var(--mist);
+    text-align: center;
+  }
+
+  .ready__inner {
+    max-width: 36rem;
+    margin-inline: auto;
+  }
+
+  .ready__title {
+    font-size: clamp(2.2rem, 1.2rem + 4vw, 3.6rem);
+    letter-spacing: -0.035em;
+    color: var(--eggplant);
+  }
+
+  .ready__body {
+    margin-top: 1.25rem;
+    font-size: clamp(1.02rem, 1rem + 0.3vw, 1.2rem);
+    color: var(--v3-text-mid);
+  }
+
+  .ready__cta {
+    margin-top: 2rem;
+  }
+
+  .ready__cover {
+    margin: 3rem auto 0;
+    width: min(100%, 14rem);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 24px 44px -20px color-mix(in oklab, var(--eggplant) 55%, transparent);
+  }
+
+  .ready__cover img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 0.773;
+    object-fit: cover;
+  }
+
+  /* ---- Consultation (secondary) ---- */
+  .consult {
+    background: var(--white);
+  }
+
+  .consult__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+    align-items: start;
+  }
+
+  .consult__title {
+    margin-top: 0.75rem;
+    font-size: clamp(1.8rem, 1.2rem + 2.6vw, 2.6rem);
+    letter-spacing: -0.03em;
+    color: var(--eggplant);
+    max-width: 18ch;
+  }
+
+  .consult__body {
+    margin-top: 1.1rem;
+    font-size: 1.02rem;
+    color: var(--v3-text-mid);
+    max-width: 42ch;
+  }
+
+  .consult__note {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--v3-text-low);
+  }
+
+  .consult__frame {
+    display: block;
+    width: 100%;
+    min-height: 680px;
+    border: 0;
+    background: transparent;
+  }
+
+  @media (max-width: 58rem) {
+    .consult__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  import { track } from "@vercel/analytics";
+
+  track("playbook_page_view");
+
+  document.querySelectorAll("[data-playbook-download]").forEach((el) => {
+    el.addEventListener("click", () => track("playbook_download"));
+  });
+
+  const consult = document.querySelector("[data-playbook-consult]");
+  if (consult) {
+    let clicked = false;
+    consult.addEventListener(
+      "focus",
+      () => {
+        if (clicked) return;
+        clicked = true;
+        track("playbook_consultation_click");
+      },
+      true,
+    );
+  }
+</script>
+
+<script is:inline src="https://links.tempohg.com/js/form_embed.js"></script>
