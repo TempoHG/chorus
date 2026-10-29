@@ -49,30 +49,28 @@ const modules = [
           Get the free 30-page Restaurant Growth Playbook, including practical worksheets, campaign
           examples, a 30-day action plan, and a launch checklist.
         </p>
-      </div>
 
-      <div class="hero__right">
         <div class="hero__mockup" aria-hidden="true">
           <img class="hero__page hero__page--back" src="/img/playbook/page-20.jpg" alt="" loading="eager" decoding="async" />
           <img class="hero__page hero__page--mid" src="/img/playbook/page-04.jpg" alt="" loading="eager" decoding="async" />
           <img class="hero__page hero__page--cover" src="/img/playbook/cover.jpg" alt="The Restaurant Growth Playbook cover" loading="eager" decoding="async" />
         </div>
+      </div>
 
-        <div class="form-card" id="lead-form">
-          <p class="form-card__title">Download the Free Playbook</p>
-          <iframe
-            class="form-card__frame"
-            data-playbook-form
-            src={`${GHL_DOMAIN}/widget/form/${FORM_ID}`}
-            title="Download the Restaurant Growth Playbook"
-            scrolling="no"
-            id="chorusPlaybookForm"
-          ></iframe>
-          <p class="form-card__micro">
-            Free download. Practical restaurant insights. No obligation.<br />
-            We'll email you the guide and occasional relevant restaurant growth insights. Unsubscribe anytime.
-          </p>
-        </div>
+      <div class="form-card" id="lead-form">
+        <p class="form-card__title">Download the Free Playbook</p>
+        <iframe
+          class="form-card__frame"
+          data-playbook-form
+          src={`${GHL_DOMAIN}/widget/form/${FORM_ID}`}
+          title="Download the Restaurant Growth Playbook"
+          scrolling="no"
+          id="chorusPlaybookForm"
+        ></iframe>
+        <p class="form-card__micro">
+          Free download. Practical restaurant insights. No obligation.<br />
+          We'll email you the guide and occasional relevant restaurant growth insights. Unsubscribe anytime.
+        </p>
       </div>
     </div>
   </section>
@@ -251,16 +249,17 @@ const modules = [
     max-width: 46ch;
   }
 
-  .hero__right {
-    display: grid;
-    gap: 2rem;
-  }
-
+  /* The mockup lives in the copy column, not stacked above the form — the
+     real GHL form (two full consent paragraphs, four fields) renders much
+     taller than the brief's minimal spec once embedded, so pairing it with
+     plain copy left the right column towering over a mostly-empty left one.
+     Copy + mockup together make a left column close enough in height to the
+     form that the row doesn't read as lopsided. */
   .hero__mockup {
     position: relative;
-    aspect-ratio: 5 / 4;
-    margin-inline: auto;
-    width: min(100%, 26rem);
+    aspect-ratio: 5 / 3.4;
+    margin: 2.5rem auto 0;
+    width: min(100%, 22rem);
   }
 
   .hero__page {
@@ -326,19 +325,15 @@ const modules = [
   }
 
   @media (max-width: 58rem) {
+    /* DOM order already reads copy (mockup included) → form, matching the
+       brief's mobile order — no `order` override needed. */
     .hero__inner {
       grid-template-columns: 1fr;
     }
 
-    /* DOM order already reads copy → mockup → form, matching the brief's
-       mobile order — no `order` override needed (an earlier version of this
-       rule set `order` on .hero__mockup/.form-card, which are grandchildren
-       of .hero__inner, not direct grid items of it, so it did nothing there
-       and instead the stray order:1 left on .hero__copy put it last). */
     .hero__mockup {
       width: min(100%, 20rem);
       aspect-ratio: 5 / 3.6;
-      margin-top: 1rem;
     }
   }
 
