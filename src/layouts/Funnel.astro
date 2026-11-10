@@ -110,6 +110,25 @@ const year = new Date().getFullYear();
 </html>
 
 <style is:global>
+  /* Off-screen until keyboard-focused, same pattern as Base.astro's
+     masthead — Funnel never inherited this rule, so the link was
+     rendering as plain visible text at the top of the page. */
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--allium);
+    color: var(--eggplant);
+    padding: 0.75rem 1.25rem;
+    font-weight: 700;
+    z-index: 100;
+  }
+
+  .skip:focus {
+    left: 1rem;
+    top: 1rem;
+  }
+
   .funnel__header {
     padding-block: 1.25rem;
     border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 10%, transparent);
