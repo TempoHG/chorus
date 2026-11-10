@@ -1,0 +1,990 @@
+---
+import Funnel from "../layouts/Funnel.astro";
+
+// Real GHL form widget for this campaign, supplied directly. Embedded the
+// same way /book-a-demo and the Playbook page embed their own GHL widgets —
+// an iframe plus GHL's shared resize script — not a parallel custom form
+// that wouldn't actually tag/pipeline a lead anywhere.
+const GHL_DOMAIN = "https://links.tempohg.com";
+const FORM_ID = "VeZvidft7yLwEMU9Nrbw";
+
+// Same calendar already embedded on /book-a-demo and the Playbook
+// thank-you page.
+const CALENDAR_ID = "I5Q7FwuP2H7GVLaL1Cai";
+const WIDGET_ID = "yVHkwu10vymju35mIkBW_1786414705061";
+
+const pricingRows = [
+  { item: "Custom restaurant website build", standard: "$600", campaign: "$0" },
+  { item: "Website hosting, first six months", standard: "$90", campaign: "$0" },
+  { item: "Chorus onboarding", standard: "$497", campaign: "$0" },
+  { item: "Tempo Chorus subscription", standard: "$397/month", campaign: "$397/month" },
+];
+
+const posLogos = ["Toast", "Square", "Clover"];
+
+const stages = [
+  { n: "01", title: "Get found.", body: "Give guests a better way to discover your restaurant, explore your menu and find what they're looking for." },
+  { n: "02", title: "Get chosen.", body: "Capture calls, private-event inquiries, catering opportunities and guest questions—even when your team is busy." },
+  { n: "03", title: "Bring them back.", body: "Stay connected through guest marketing, reviews, timely follow-ups and win-back campaigns." },
+];
+
+const steps = [
+  { n: "01", title: "Let's talk about your restaurant.", body: "We'll review your current website, understand your goals and determine how Chorus can support your business." },
+  { n: "02", title: "We build your website and set up Chorus.", body: "Tempo handles the website build and helps configure the Chorus tools that make sense for your restaurant." },
+  { n: "03", title: "Launch and start growing.", body: "Your website goes live, Chorus starts working, and Tempo helps your team get comfortable with the system." },
+];
+
+const exclusions = [
+  { title: "Domain registration and renewals", body: "Domain purchases, transfers and renewal fees are separate. Your domain remains yours." },
+  { title: "Photography and video", body: "Professional food photography, restaurant photography, video production and editing are not included." },
+  { title: "Branding and creative development", body: "Logo design, brand identity, positioning, packaging and other custom creative services are quoted separately." },
+  { title: "Third-party subscriptions", body: "POS, online ordering, reservations, delivery, payment processing and other third-party platform charges remain the restaurant's responsibility." },
+  { title: "Advanced integrations", body: "Specialized connections, custom API development and third-party integration costs may require additional fees." },
+  { title: "Additional custom work", body: "Extensive content development, specialized website features, major revisions beyond the agreed scope and ongoing design work may be quoted separately." },
+];
+---
+
+<Funnel
+  title="Free Restaurant Website with Tempo Chorus | Six-Month Offer"
+  description="Get a custom restaurant website and six months of hosting at no additional charge with a six-month Tempo Chorus commitment. Plans start at $397/month."
+  path="/free-restaurant-website"
+  ogImage="/img/home/site-lou-amaris-homepage.jpg"
+>
+  <!-- 01 — Hero -->
+  <section class="hero">
+    <div class="shell hero__inner">
+      <div class="hero__copy">
+        <p class="eyebrow">Free Restaurant Website Offer</p>
+        <h1 class="hero__title">Your next restaurant website is on us.</h1>
+        <p class="hero__sub">
+          Get a custom restaurant website, six months of hosting, and the tools to attract more guests and
+          bring them back. All with a six-month Tempo Chorus commitment.
+        </p>
+        <a class="btn hero__cta" href="#get-started" data-campaign-cta>Get My Free Website</a>
+        <p class="hero__note">Website build and first six months of hosting included. Chorus starts at $397/month.</p>
+      </div>
+
+      <div class="hero__devices" aria-hidden="true">
+        <svg viewBox="0 0 1660 1080" class="devices__svg">
+          <defs>
+            <linearGradient id="fw-case" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#31353b" /><stop offset=".45" stop-color="#171a1e" /><stop offset="1" stop-color="#272b31" /></linearGradient>
+            <linearGradient id="fw-edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#697079" /><stop offset=".12" stop-color="#30353b" /><stop offset=".8" stop-color="#171a1e" /><stop offset="1" stop-color="#626a73" /></linearGradient>
+            <linearGradient id="fw-stand" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#282c31" /><stop offset=".5" stop-color="#646a72" /><stop offset="1" stop-color="#25292e" /></linearGradient>
+            <filter id="fw-shadow" x="-30%" y="-30%" width="170%" height="180%"><feGaussianBlur in="SourceAlpha" stdDeviation="14" /><feOffset dy="14" dx="3" result="o" /><feComponentTransfer><feFuncA type="linear" slope=".32" /></feComponentTransfer><feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+            <filter id="fw-soft" x="-25%" y="-25%" width="150%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="9" /><feOffset dy="10" dx="2" result="o" /><feComponentTransfer><feFuncA type="linear" slope=".3" /></feComponentTransfer><feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+            <clipPath id="fw-dclip"><rect x="256" y="74" width="1086" height="688" rx="5" /></clipPath>
+            <clipPath id="fw-tclip"><rect x="924" y="492" width="642" height="479" rx="10" /></clipPath>
+            <clipPath id="fw-pclip"><rect x="86" y="504" width="208" height="458" rx="18" /></clipPath>
+          </defs>
+
+          <!-- Monitor: Citria -->
+          <path d="M760 780 L838 780 L874 862 Q879 875 865 876 L733 876 Q720 875 725 862 Z" fill="url(#fw-stand)" filter="url(#fw-soft)" />
+          <path d="M653 876 Q650 871 664 870 L930 870 Q942 871 945 878 L951 894 Q954 900 940 901 L649 901 Q634 900 640 894 Z" fill="url(#fw-edge)" filter="url(#fw-soft)" />
+          <g filter="url(#fw-shadow)"><rect x="238" y="56" width="1122" height="724" rx="23" fill="url(#fw-edge)" /><rect x="241" y="59" width="1116" height="718" rx="21" fill="url(#fw-case)" /></g>
+          <g clip-path="url(#fw-dclip)"><image x="256" y="74" width="1086" height="716" preserveAspectRatio="xMidYMin slice" href="/img/home/site-citria-homepage.jpg" /></g>
+          <rect x="256" y="74" width="1086" height="688" rx="5" fill="none" stroke="#89919a" stroke-opacity=".28" />
+
+          <!-- Tablet: Da Wurst -->
+          <g filter="url(#fw-shadow)"><rect x="900" y="468" width="690" height="527" rx="35" fill="url(#fw-edge)" /><rect x="903" y="471" width="684" height="521" rx="33" fill="url(#fw-case)" /></g>
+          <g clip-path="url(#fw-tclip)"><image x="924" y="492" width="642" height="562" preserveAspectRatio="xMidYMin slice" href="/img/home/site-da-wurst-homepage.jpg" /></g>
+          <rect x="924" y="492" width="642" height="479" rx="10" fill="none" stroke="#89919a" stroke-opacity=".34" />
+
+          <!-- Phone: Lou Amari's -->
+          <g filter="url(#fw-shadow)"><rect x="70" y="488" width="240" height="490" rx="37" fill="url(#fw-edge)" /><rect x="73" y="491" width="234" height="484" rx="35" fill="url(#fw-case)" /></g>
+          <g clip-path="url(#fw-pclip)"><image x="86" y="504" width="208" height="537" preserveAspectRatio="xMidYMin slice" href="/img/home/site-lou-amaris-homepage.jpg" /></g>
+          <rect x="86" y="504" width="208" height="458" rx="18" fill="none" stroke="#89919a" stroke-opacity=".3" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 — Website showcase -->
+  <section class="showcase">
+    <div class="shell">
+      <p class="eyebrow">Your restaurant. Your website.</p>
+      <h2 class="section-title">Built for your restaurant. Not from a template.</h2>
+      <p class="lede">
+        Your restaurant has its own personality. Your website should reflect it. Tempo builds custom
+        restaurant websites designed around your brand, your menu, and the experience you want guests to
+        have.
+      </p>
+      <p class="lede">
+        From finding your hours to exploring the menu, making reservations or planning a private event, we
+        make it easier for guests to take the next step.
+      </p>
+
+      <div class="showcase__grid">
+        <a class="showcase__featured" href="https://louamaris.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the Lou Amari's website (opens in a new tab)">
+          <img src="/img/home/site-lou-amaris-homepage.jpg" alt="Lou Amari's homepage: the restaurant's brick storefront lit up at night." loading="lazy" decoding="async" />
+          <span class="showcase__tag">Lou Amari's</span>
+        </a>
+        <a class="showcase__minor" href="https://citria.net" target="_blank" rel="noopener noreferrer" aria-label="Visit the Citria Coastal Grill website (opens in a new tab)">
+          <img src="/img/home/site-citria-homepage.jpg" alt="Citria Coastal Grill's homepage: an oceanview patio table set for dinner at sunset." loading="lazy" decoding="async" />
+          <span class="showcase__tag">Citria Coastal Grill</span>
+        </a>
+        <a class="showcase__minor" href="https://eatdawurst.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the Da Wurst website (opens in a new tab)">
+          <img src="/img/home/site-da-wurst-homepage.jpg" alt="Da Wurst's homepage: a lively string-lit beer garden patio at night." loading="lazy" decoding="async" />
+          <span class="showcase__tag">Da Wurst</span>
+        </a>
+      </div>
+
+      <p class="showcase__note">Designed for restaurants. Built to help guests take action.</p>
+    </div>
+  </section>
+
+  <!-- 03 — POS / technology compatibility -->
+  <section class="compat">
+    <div class="shell">
+      <p class="eyebrow">Built to work with what you have</p>
+      <h2 class="section-title">Keep the systems you already use.</h2>
+      <p class="lede">
+        Running Toast, Square, Clover or another restaurant POS? You don't need to start over. Chorus can
+        work alongside many of the systems restaurants already rely on, helping connect your website, guest
+        communications, marketing and more.
+      </p>
+
+      <ul class="compat__logos">
+        {posLogos.map((name) => <li class="compat__logo">{name}</li>)}
+      </ul>
+
+      <p class="compat__sub">Already have a system you love? We'll help determine how it can work with Chorus.</p>
+      <p class="compat__disclosure">
+        Integration capabilities vary by provider, subscription and available connections. Some
+        integrations may require additional services or fees.
+      </p>
+    </div>
+  </section>
+
+  <!-- 04 — Chorus value proposition -->
+  <section class="value">
+    <div class="shell">
+      <p class="eyebrow">A better website is just the beginning</p>
+      <h2 class="section-title">More guests. More often.</h2>
+      <p class="lede">
+        A great website helps guests discover your restaurant. Chorus helps you turn that interest into
+        lasting relationships.
+      </p>
+
+      <ol class="stages">
+        <li class="stage">
+          <p class="stage__n">01</p>
+          <div class="stage__story">
+            <p class="stage__title">Get found.</p>
+            <p class="stage__text">Give guests a better way to discover your restaurant, explore your menu and find what they're looking for.</p>
+          </div>
+          <div class="stage__demo">
+            <div class="demo demo--rank">
+              <div class="demo__search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>Pasta near me</div>
+              <div class="demo__row demo__row--primary">
+                <span class="demo__badge">1</span>
+                <div class="demo__lines"><p class="demo__name">Lou Amari's</p><p class="demo__meta">★★★★★ · Italian · 0.4 mi</p></div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="stage">
+          <p class="stage__n">02</p>
+          <div class="stage__story">
+            <p class="stage__title">Get chosen.</p>
+            <p class="stage__text">Capture calls, private-event inquiries, catering opportunities and guest questions—even when your team is busy.</p>
+          </div>
+          <div class="stage__demo">
+            <div class="demo demo--event">
+              <p class="demo__meta-line">New private event</p>
+              <p class="demo__name">Sarah Mitchell · Holiday Dinner</p>
+              <p class="demo__outcome">Manager notified ✓</p>
+              <p class="demo__outcome">Follow-up scheduled ✓</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="stage">
+          <p class="stage__n">03</p>
+          <div class="stage__story">
+            <p class="stage__title">Bring them back.</p>
+            <p class="stage__text">Stay connected through guest marketing, reviews, timely follow-ups and win-back campaigns.</p>
+          </div>
+          <div class="stage__demo">
+            <div class="demo demo--winback">
+              <p class="demo__meta-line">90 days since last visit</p>
+              <p class="demo__quote">Come back this week and let us take care of dinner.</p>
+              <p class="demo__outcome">Win-back sent ✓</p>
+              <p class="demo__outcome demo__outcome--final">Oct 12 · Reservation ✓</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 05 — The offer -->
+  <section class="offer">
+    <div class="shell">
+      <p class="eyebrow">A better start with Chorus</p>
+      <h2 class="section-title">The website is on us. The growth system is yours.</h2>
+      <p class="lede">
+        We'll build your custom restaurant website and include the first six months of hosting at no
+        additional charge when you commit to six months of Tempo Chorus.
+      </p>
+      <p class="lede">
+        Your Chorus subscription gives you access to a connected set of tools designed to help your
+        restaurant reach more guests and build stronger relationships.
+      </p>
+
+      <ul class="offer__table">
+        <li class="offer__row offer__row--head"><span>Item</span><span>Standard</span><span>With Chorus</span></li>
+        {pricingRows.map((r) => (
+          <li class="offer__row">
+            <span class="offer__item">{r.item}</span>
+            <span class="offer__standard">{r.standard}</span>
+            <span class="offer__campaign">{r.campaign}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="offer__terms">Six-month commitment. One concept and one location.</p>
+
+      <a class="btn offer__cta" href="#get-started" data-campaign-cta>Get My Free Website</a>
+    </div>
+  </section>
+
+  <!-- 06 — How it works -->
+  <section class="how">
+    <div class="shell">
+      <p class="eyebrow">Simple from the start</p>
+      <h2 class="section-title">Three steps to a better online presence.</h2>
+      <ol class="how__list">
+        {steps.map((s) => (
+          <li class="how__item">
+            <p class="how__n">{s.n}</p>
+            <p class="how__title">{s.title}</p>
+            <p class="how__body">{s.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 07 — What's not included -->
+  <section class="details">
+    <div class="shell">
+      <p class="eyebrow">The details</p>
+      <h2 class="section-title">A few things to know.</h2>
+      <p class="lede">
+        Your custom website build and first six months of hosting are included with your six-month Chorus
+        commitment. Here's what falls outside the offer.
+      </p>
+
+      <ul class="details__list">
+        {exclusions.map((e) => (
+          <li class="details__item">
+            <p class="details__title">{e.title}</p>
+            <p class="details__body">{e.body}</p>
+          </li>
+        ))}
+      </ul>
+
+      <p class="details__disclosure">
+        The promotion includes a standard restaurant website build. The exact scope and deliverables will
+        be confirmed before work begins. Hosting is included for the first six months and is $15/month
+        afterward if you continue hosting with Tempo. Your website and domain remain yours; features
+        dependent on Chorus require an active subscription.
+      </p>
+    </div>
+  </section>
+
+  <!-- 08 — Final conversion -->
+  <section class="close" id="get-started">
+    <div class="shell close__inner">
+      <p class="close__kicker">Let's get started</p>
+      <h2 class="close__title">Let's build something better for your restaurant.</h2>
+      <p class="close__sub">
+        Tell us a little about your restaurant. We'll show you how the free website offer works and what
+        Chorus could do for your business.
+      </p>
+
+      <div class="close__grid">
+        <div class="close-card">
+          <p class="close-card__title">Get started with Tempo Chorus</p>
+          <iframe
+            class="close-card__frame"
+            data-campaign-form
+            src={`${GHL_DOMAIN}/widget/form/${FORM_ID}`}
+            title="Get my free restaurant website"
+            scrolling="no"
+            id="chorusFreeWebsiteForm"
+          ></iframe>
+          <p class="close-card__micro">
+            Six-month Chorus commitment required. Offer subject to eligibility and agreed website scope.
+          </p>
+        </div>
+
+        <div class="close-card">
+          <p class="close-card__title">Or pick a time to talk now</p>
+          <iframe
+            class="close-card__frame"
+            data-campaign-booking
+            src={`${GHL_DOMAIN}/widget/booking/${CALENDAR_ID}`}
+            title="Book a Tempo Chorus demo"
+            allow="payment"
+            scrolling="no"
+            id={WIDGET_ID}
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</Funnel>
+
+<style>
+  section {
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grape);
+  }
+
+  .section-title {
+    margin-top: 0.75rem;
+    font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem);
+    letter-spacing: -0.03em;
+    color: var(--eggplant);
+    max-width: 24ch;
+  }
+
+  .lede {
+    margin-top: 1.1rem;
+    font-size: clamp(1.02rem, 1rem + 0.3vw, 1.18rem);
+    color: var(--v3-text-mid);
+    max-width: 58ch;
+  }
+
+  /* ---- 01 Hero ---- */
+  .hero {
+    padding-top: clamp(3rem, 7vw, 5rem);
+    background: var(--mist);
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+    align-items: center;
+  }
+
+  .hero__title {
+    margin-top: 0.75rem;
+    font-size: clamp(2.2rem, 1.2rem + 3.8vw, 3.6rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    color: var(--eggplant);
+    max-width: 14ch;
+  }
+
+  .hero__sub {
+    margin-top: 1.25rem;
+    font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+    color: var(--v3-text-mid);
+    max-width: 42ch;
+  }
+
+  .hero__cta {
+    margin-top: 1.75rem;
+  }
+
+  .hero__note {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--v3-text-low);
+  }
+
+  .hero__devices {
+    width: 100%;
+  }
+
+  .devices__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 58rem) {
+    /* Copy (and the primary CTA) come first on mobile — the brief asks to
+       keep the CTA visible early, which a device mockup above it would
+       push well down the page. */
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---- 02 Showcase ---- */
+  .showcase {
+    background: var(--white);
+  }
+
+  .showcase__grid {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  .showcase__featured {
+    grid-row: 1 / 3;
+    position: relative;
+    display: block;
+    aspect-ratio: 3 / 4;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .showcase__minor {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 10;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .showcase__featured img,
+  .showcase__minor img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .showcase__featured:hover img,
+  .showcase__minor:hover img {
+    transform: scale(1.03);
+  }
+
+  .showcase__tag {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    padding: 0.4rem 0.75rem;
+    background: color-mix(in oklab, var(--eggplant) 80%, transparent);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-radius: 4px;
+  }
+
+  .showcase__note {
+    margin-top: 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--grape);
+  }
+
+  @media (max-width: 52rem) {
+    .showcase__grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    .showcase__featured {
+      grid-row: auto;
+    }
+  }
+
+  /* ---- 03 Compatibility ---- */
+  .compat {
+    background: var(--sand);
+  }
+
+  .compat__logos {
+    margin: clamp(2rem, 4vw, 2.75rem) 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .compat__logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 1rem + 1vw, 1.7rem);
+    letter-spacing: -0.02em;
+    color: var(--eggplant);
+  }
+
+  .compat__sub {
+    margin-top: 2rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--grape);
+  }
+
+  .compat__disclosure {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--v3-text-low);
+    max-width: 60ch;
+  }
+
+  /* ---- 04 Value stages ---- */
+  .value {
+    background: var(--white);
+  }
+
+  .stages {
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .stage {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 7fr);
+    gap: clamp(1.25rem, 3vw, 2rem);
+    align-items: start;
+    padding-block: clamp(1.75rem, 4vw, 2.5rem);
+    border-top: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+  }
+
+  .stage:last-child {
+    border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+  }
+
+  .stage__n {
+    font-family: var(--font-system);
+    font-size: 0.8rem;
+    color: var(--v3-text-low);
+    padding-top: 0.3rem;
+  }
+
+  .stage__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.2rem, 1rem + 0.6vw, 1.5rem);
+    color: var(--eggplant);
+  }
+
+  .stage__text {
+    margin-top: 0.4rem;
+    color: var(--v3-text-mid);
+  }
+
+  .stage__demo {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 58rem) {
+    .stage {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+
+  /* Compact product demos — same restrained visual grammar as the homepage
+     Chorus in Action section and the Product page panels. */
+  .demo {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 6px;
+    padding: 0.95rem 1.1rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .demo--rank { background: var(--sky); }
+  .demo--event { background: var(--sand); }
+  .demo--winback { background: color-mix(in oklab, var(--allium) 24%, var(--white)); }
+
+  .demo__search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.85rem;
+    background: var(--white);
+    border-radius: 999px;
+    font-family: var(--font-system);
+    font-size: 0.85rem;
+    color: var(--eggplant);
+  }
+
+  .demo__search svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    flex: none;
+    color: var(--v3-text-low);
+  }
+
+  .demo__row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.75rem;
+    border-radius: 5px;
+  }
+
+  .demo__row--primary {
+    background: var(--white);
+  }
+
+  .demo__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.2rem;
+    height: 1.2rem;
+    flex: none;
+    border-radius: 50%;
+    background: var(--grape);
+    color: var(--white);
+    font-family: var(--font-system);
+    font-size: 0.65rem;
+  }
+
+  .demo__lines {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .demo__name {
+    font-family: var(--font-product);
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--eggplant);
+  }
+
+  .demo__meta,
+  .demo__meta-line {
+    font-family: var(--font-system);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    color: var(--v3-text-low);
+  }
+
+  .demo__meta-line {
+    text-transform: uppercase;
+  }
+
+  .demo__quote {
+    font-family: var(--font-product);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--eggplant);
+  }
+
+  .demo__outcome {
+    font-family: var(--font-system);
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--grape);
+  }
+
+  .demo__outcome--final {
+    color: var(--eggplant);
+  }
+
+  /* ---- 05 Offer ---- */
+  .offer {
+    background: var(--sky);
+  }
+
+  .offer__table {
+    margin: clamp(2rem, 4vw, 2.75rem) 0 0;
+    padding: 0;
+    list-style: none;
+    max-width: 44rem;
+    background: var(--white);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .offer__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.8fr) minmax(0, 0.8fr);
+    gap: 0.75rem;
+    padding: 0.9rem 1.1rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 10%, transparent);
+    font-size: 0.92rem;
+  }
+
+  .offer__row:last-child {
+    border-bottom: 0;
+  }
+
+  .offer__row--head {
+    font-family: var(--font-system);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--v3-text-low);
+    background: var(--mist);
+  }
+
+  .offer__item {
+    color: var(--eggplant);
+  }
+
+  .offer__standard {
+    color: var(--v3-text-low);
+    text-decoration: line-through;
+  }
+
+  .offer__row--head .offer__standard {
+    text-decoration: none;
+  }
+
+  .offer__campaign {
+    font-weight: 700;
+    color: var(--grape);
+  }
+
+  .offer__terms {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--v3-text-low);
+  }
+
+  .offer__cta {
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 36rem) {
+    .offer__row {
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      font-size: 0.82rem;
+    }
+  }
+
+  /* ---- 06 How it works ---- */
+  .how {
+    background: var(--white);
+  }
+
+  .how__list {
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .how__n {
+    font-family: var(--font-system);
+    font-size: 0.8rem;
+    color: var(--grape);
+  }
+
+  .how__title {
+    margin-top: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--eggplant);
+  }
+
+  .how__body {
+    margin-top: 0.4rem;
+    color: var(--v3-text-mid);
+  }
+
+  @media (max-width: 52rem) {
+    .how__list {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  /* ---- 07 Details / exclusions ---- */
+  .details {
+    background: var(--sand);
+  }
+
+  .details__list {
+    margin: clamp(2rem, 4vw, 2.75rem) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .details__item {
+    padding: 1.1rem 1.5rem 1.1rem 0;
+    border-top: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+  }
+
+  .details__item:nth-last-child(-n+2) {
+    border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+  }
+
+  .details__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--eggplant);
+  }
+
+  .details__body {
+    margin-top: 0.3rem;
+    font-size: 0.92rem;
+    color: var(--v3-text-mid);
+  }
+
+  .details__disclosure {
+    margin-top: 2rem;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--v3-text-low);
+    max-width: 64ch;
+  }
+
+  @media (max-width: 48rem) {
+    .details__list {
+      grid-template-columns: 1fr;
+    }
+
+    .details__item:nth-last-child(-n+2) {
+      border-bottom: 0;
+    }
+
+    .details__item:last-child {
+      border-bottom: 1px solid color-mix(in oklab, var(--eggplant) 14%, transparent);
+    }
+  }
+
+  /* ---- 08 Close ---- */
+  .close {
+    background: var(--eggplant);
+    color: var(--white);
+  }
+
+  .close__inner {
+    text-align: center;
+  }
+
+  .close__kicker {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--allium);
+  }
+
+  .close__title {
+    margin-top: 0.75rem;
+    font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem);
+    letter-spacing: -0.03em;
+    max-width: 22ch;
+    margin-inline: auto;
+    color: var(--white);
+  }
+
+  .close__sub {
+    margin: 1.1rem auto 0;
+    max-width: 48ch;
+    font-size: clamp(1.02rem, 1rem + 0.3vw, 1.18rem);
+    color: color-mix(in oklab, var(--white) 75%, transparent);
+  }
+
+  .close__grid {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2rem);
+    text-align: left;
+  }
+
+  .close-card {
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--white);
+    border-radius: 8px;
+  }
+
+  .close-card__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--eggplant);
+  }
+
+  .close-card__frame {
+    display: block;
+    width: 100%;
+    min-height: 480px;
+    margin-top: 1rem;
+    border: 0;
+    background: transparent;
+  }
+
+  .close-card__micro {
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--v3-text-low);
+  }
+
+  @media (max-width: 58rem) {
+    .close__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  import { track } from "@vercel/analytics";
+
+  track("free_website_page_view");
+
+  document.querySelectorAll("[data-campaign-cta]").forEach((el) => {
+    el.addEventListener("click", () => track("free_website_cta_click"));
+  });
+
+  const form = document.querySelector("[data-campaign-form]");
+  if (form) {
+    let started = false;
+    form.addEventListener(
+      "focus",
+      () => {
+        if (started) return;
+        started = true;
+        track("free_website_form_start");
+      },
+      true,
+    );
+
+    // Same best-effort heuristic as the Playbook page: GHL's form message
+    // shape isn't publicly documented or verified here, unlike the booking
+    // calendar's confirmed "msgsndr-booking-complete" shape below. Treat
+    // anything from this iframe that isn't an iframeResizer height ping as
+    // a submit signal.
+    window.addEventListener("message", (event) => {
+      if (event.source !== form.contentWindow) return;
+      const data = event.data;
+      const isResizePing = data && typeof data === "object" && "iframeResizer" in data;
+      if (isResizePing) return;
+      track("free_website_form_submit");
+    });
+  }
+
+  // Confirmed message shape (see initDemoBookedTracking in motion.js) —
+  // reliable, not a guess.
+  window.addEventListener("message", (event) => {
+    const data = event.data;
+    if (!Array.isArray(data) || data[0] !== "msgsndr-booking-complete") return;
+    track("free_website_demo_booked");
+  });
+</script>
+
+<script is:inline src="https://links.tempohg.com/js/form_embed.js"></script>
