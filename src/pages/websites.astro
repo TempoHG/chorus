@@ -67,6 +67,20 @@ const categories = [
     </div>
   </section>
 
+  <section class="promo">
+    <div class="shell">
+      <a class="promo__banner" href="/free-restaurant-website">
+        <p class="promo__kicker">Limited-Time Offer</p>
+        <p class="promo__title">Your next restaurant website is on us.</p>
+        <p class="promo__body">
+          Get a custom restaurant website ($600 value) plus six months of hosting at no additional charge
+          with a six-month Tempo Chorus commitment.
+        </p>
+        <span class="promo__cta">Explore the Free Website Offer →</span>
+      </a>
+    </div>
+  </section>
+
   <section class="work" id="work" aria-label="Restaurant websites built by Tempo">
     <div class="shell">
       <ul class="work__list">
@@ -152,9 +166,18 @@ const categories = [
   <section class="price" aria-labelledby="price-title">
     <div class="shell price__inner">
       <p class="eyebrow">Website pricing</p>
-      <h2 class="section-title" id="price-title">$600 one-time fee + $15/month hosting.</h2>
-      <p class="lede">Already have a site? Keep it.</p>
+      <h2 class="section-title" id="price-title">Custom restaurant websites. Simple pricing.</h2>
+      <p class="lede">A custom website built around your restaurant, starting at $600, with hosting at $15/month.</p>
       <a class="btn price__cta" href="/book-a-demo">Talk to Tempo about a website</a>
+
+      <div class="price__offer">
+        <p class="price__offer-kicker">Or get your website built at no additional charge.</p>
+        <p class="price__offer-body">
+          With a six-month Tempo Chorus commitment, we'll include your website build and first six months
+          of hosting.
+        </p>
+        <a class="text-link price__offer-link" href="/free-restaurant-website">See the Free Website Offer →</a>
+      </div>
     </div>
   </section>
 </Base>
@@ -461,6 +484,85 @@ const categories = [
 
   .price__cta {
     margin-top: 2.25rem;
+  }
+
+  .price__offer {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid color-mix(in oklab, var(--white) 18%, transparent);
+    max-width: 48ch;
+  }
+
+  .price__offer-kicker {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--allium);
+  }
+
+  .price__offer-body {
+    margin-top: 0.5rem;
+    color: color-mix(in oklab, var(--white) 75%, transparent);
+  }
+
+  .price__offer-link {
+    margin-top: 1rem;
+    color: var(--white);
+    border-bottom-color: var(--allium);
+  }
+
+  /* Promo banner */
+  .promo {
+    padding-top: 0;
+    padding-bottom: clamp(2rem, 5vw, 3rem);
+  }
+
+  .promo__banner {
+    display: block;
+    margin-top: clamp(1rem, 3vw, 2rem);
+    padding: clamp(1.5rem, 4vw, 2.25rem) clamp(1.5rem, 4vw, 2.5rem);
+    background: var(--grape);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.25s var(--ease-out);
+  }
+
+  .promo__banner:hover {
+    background: color-mix(in oklab, var(--grape) 85%, black);
+  }
+
+  .promo__kicker {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--allium);
+  }
+
+  .promo__title {
+    margin-top: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 1rem + 1.4vw, 2rem);
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+
+  .promo__body {
+    margin-top: 0.5rem;
+    color: color-mix(in oklab, var(--white) 80%, transparent);
+    max-width: 60ch;
+  }
+
+  .promo__cta {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--white);
+    border-bottom: 2px solid var(--allium);
+    padding-bottom: 0.1rem;
   }
 </style>
 
